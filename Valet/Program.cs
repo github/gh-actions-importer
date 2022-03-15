@@ -2,18 +2,18 @@
 
 using CommandLine;
 using Valet.Models;
+using Valet.Services;
 
 static void WithNotParsed(IEnumerable<Error> e, string[] args)
 {
+    
     Console.WriteLine(string.Join(' ', args));
-}
-
-static void Update(UpdateOptions o)
-{
-    Console.WriteLine("Updating Valet");
 }
 
 // TODO: Utilize help menu from Valet itself
 Parser.Default.ParseArguments<UpdateOptions>(args)
-    .WithParsed<UpdateOptions>(Update)
-    .WithNotParsed(e => WithNotParsed(e, args));
+    .WithParsed<UpdateOptions>(async o =>
+    {
+        var updateService = new UpdateService();
+        var result = await updateService.UpdateValetAsync();
+    }).WithNotParsed(e => WithNotParsed(e, args));
