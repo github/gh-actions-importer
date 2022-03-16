@@ -11,8 +11,17 @@ var app = new App(
 );
 
 // TODO: Utilize help menu from Valet itself
-await Parser.Default.ParseArguments<UpdateOptions>(args)
+await Parser.Default.ParseArguments<UpdateOptions, ExecuteOptions>(args)
     .MapResult(
-        (UpdateOptions opts) => app.UpdateValetAsync(opts.Username, opts.Password),
-        _ => app.ExecuteValetAsync(args)
-    );
+        (UpdateOptions opts) =>
+        {
+            return app.UpdateValetAsync(opts.Username, opts.Password);
+        },
+        (ExecuteOptions opts) =>
+        {
+            return Task.FromResult(1);
+        },
+        _ =>
+        {
+            return app.ExecuteValetAsync(args);
+        });

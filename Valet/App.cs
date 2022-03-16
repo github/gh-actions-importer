@@ -4,8 +4,8 @@ namespace Valet;
 
 public class App
 {
-    const string VALET_IMAGE_LOCATION = "ghcr.io/valet-customers/valet-cli:latest";
-    private const string VALET_CONTAINER_REGISTRY = "ghcr.io";
+    const string ValetImage = "valet-customers/valet-cli";
+    const string ValetContainerRegistry = "ghcr.io";
 
     private readonly IDockerService _dockerService;
     private readonly IAuthenticationService _authenticationService;
@@ -29,8 +29,9 @@ public class App
         }
         
         var result = await _dockerService.UpdateImageAsync(
-            VALET_IMAGE_LOCATION,
-            VALET_CONTAINER_REGISTRY,
+            ValetImage,
+            ValetContainerRegistry,
+            "latest",
             username,
             password
         );
@@ -38,9 +39,11 @@ public class App
         return result ? 0 : 1;
     }
 
-    public Task<int> ExecuteValetAsync(string[] args)
+    public async Task<int> ExecuteValetAsync(string[] args)
     {
         Console.WriteLine(string.Join(' ', args));
-        return Task.FromResult(1);
+
+        await _dockerService.ExecuteCommandAsync($"{ValetContainerRegistry}/{ValetImage}:latest", args);
+        return 1;
     }
 }
