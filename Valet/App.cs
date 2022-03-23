@@ -41,9 +41,7 @@ public class App
 
     public async Task<int> ExecuteValetAsync(string[] args)
     {
-        Console.WriteLine(string.Join(' ', args));
-
-        await _dockerService.ExecuteCommandAsync($"{ValetContainerRegistry}/{ValetImage}:latest", args);
-        return 1;
+        var result = await _dockerService.ExecuteCommandAsync($"{ValetContainerRegistry}/{ValetImage}:latest", args);
+        return result ? 0 : 1;
     }
 }

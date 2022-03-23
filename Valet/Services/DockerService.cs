@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Text;
 using Docker.DotNet;
 using Docker.DotNet.Models;
 using Valet.Interfaces;
@@ -8,8 +10,10 @@ namespace Valet.Services;
 public class DockerService : IDockerService
 {
     private readonly DockerClient _client;
+    private readonly IProcessService _processService;
 
-    private readonly string[] _valetEnvVars = {
+    private readonly string[] _valetEnvVars =
+    {
         "GH_ACCESS_TOKEN", "GH_INSTANCE_URL", "GITHUB_ACCESS_TOKEN", "GITHUB_INSTANCE_URL",
         "JENKINSFILE_ACCESS_TOKEN", "JENKINS_USERNAME", "JENKINS_ACCESS_TOKEN", "JENKINS_INSTANCE_URL",
         "TRAVIS_CI_ACCESS_TOKEN", "TRAVIS_CI_INSTANCE_URL", "TRAVIS_CI_SOURCE_GITHUB_ACCESS_TOKEN", "TRAVIS_CI_SOURCE_GITHUB_INSTANCE_URL", "TRAVIS_CI_ORGANIZATION",
@@ -18,9 +22,11 @@ public class DockerService : IDockerService
         "AZURE_DEVOPS_ACCESS_TOKEN", "AZURE_DEVOPS_PROJECT", "AZURE_DEVOPS_ORGANIZATION", "AZURE_DEVOPS_INSTANCE_URL",
         "YAML_VERBOSITY", "HTTP_PROXY", "HTTPS_PROXY", "NO_PROXY", "OCTOKIT_PROXY", "OCTOKIT_SSL_VERIFY_MODE",
     };
-    
-    public DockerService()
+
+    public DockerService(IProcessService processService)
     {
+        _processService = processService;
+
         // TODO: Raise error if docker daemon not started
         _client = new DockerClientConfiguration()
             .CreateClient();
@@ -47,65 +53,47 @@ public class DockerService : IDockerService
 
     public async Task<bool> ExecuteCommandAsync(string image, params string[] arguments)
     {
-        // MSYS_NO_PATHCONV=1 docker run --rm $dockerArgs --env INSTALLATION_ID="$INSTALLATION_ID" $DOCKER_OPTIONS -v "$VALET_LOCAL_FOLDER"":/data" "$VALET_IMAGE":"$VALET_IMAGE_VERSION" "$@"
-        var container = await _client.Containers.CreateContainerAsync(
-            new CreateContainerParameters
-            {
-                Image = image,
-                HostConfig = new HostConfig
-                {
-                    Binds = new[] { $"{Directory.GetCurrentDirectory()}:/data" },
-                    AutoRemove = true,
-                },
-                Env = GetEnvironmentVariables().ToArray()
-            }
-        ).ConfigureAwait(false);
+        var valetArguments = new List<string>();
+        valetArguments.Add("run --rm");
+        valetArguments.AddRange(GetEnvironmentVariableArguments());
+        valetArguments.Add($"-v \"{Directory.GetCurrentDirectory()}\":/data");
+        valetArguments.Add(image);
+        valetArguments.AddRange(arguments);
 
-        await _client.Containers.StartContainerAsync(
-            container.ID,
-            new ContainerStartParameters()
+        Debug.WriteLine(string.Join(' ', valetArguments));
+
+        var result = await _processService.RunAsync(
+            "docker",
+            string.Join(' ', valetArguments),
+            Directory.GetCurrentDirectory(),
+            new[] { ("MSYS_NO_PATHCONV", "1") }
         );
-        
-        
-        return true;
+
+        return result;
     }
 
-    private IEnumerable<string> GetEnvironmentVariables()
+    private IEnumerable<string> GetEnvironmentVariableArguments()
     {
         if (File.Exists(".env.local"))
         {
-            foreach (var line in File.ReadAllLines(".env.local"))
-            {
-                var parts = line.Split('=', StringSplitOptions.RemoveEmptyEntries);
-
-                if (parts.Length != 2)
-                    continue;
-
-                yield return $"{parts[0]}={parts[1]}";
-            }
+            yield return "--env-file .env.local";
         }
+
+        var installationId = Environment.GetEnvironmentVariable("INSTALLATION_ID") ?? "get_from_client";
+        yield return $"--env INSTALLATION_ID={installationId}";
 
         foreach (var env in _valetEnvVars)
         {
             var value = Environment.GetEnvironmentVariable(env);
 
-            if (!string.IsNullOrWhiteSpace(value))
-            {
-                var key = env;
-                // TODO: This can probably be cleaner
-                if (key.StartsWith("GH_"))
-                    key = key.Replace("GH_", "GITHUB_");
-                    
-                yield return $"{key}={value}";
-            }
-        }
+            if (string.IsNullOrWhiteSpace(value)) continue;
 
-        var installationId = Environment.GetEnvironmentVariable("INSTALLATION_ID");
-        if (installationId == null)
-        {
-            installationId = "get_from_client";
-        }
+            var key = env;
+            // TODO: This can probably be cleaner
+            if (key.StartsWith("GH_"))
+                key = key.Replace("GH_", "GITHUB_");
 
-        yield return $"INSTALLATION_ID={installationId}";
+            yield return $"--env {key}={value}";
+        }
     }
 }
