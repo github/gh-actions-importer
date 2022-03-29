@@ -1,9 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using CommandLine;
-using CommandLine.Text;
+using System.CommandLine;
 using Valet;
-using Valet.Models;
+using Valet.Commands;
 using Valet.Services;
 
 var processService = new ProcessService();
@@ -13,31 +12,18 @@ var app = new App(
     new AuthenticationService()
 );
 
+var command = new RootCommand
+{
+    new UpdateCommand().Command(app),
+    new AuditCommand(args).Command(app)
+};
 
-var parser = new Parser(with => with.HelpWriter = null);
-var parserResult = parser.ParseArguments<UpdateOptions, ExecuteOptions>(args);
-
-// TODO: Utilize help menu from Valet itself
-await parserResult.WithNotParsedAsync(errs =>
+command.AddGlobalOption(
+    new Option<DirectoryInfo>(new[] { "--output-dir", "-o" })
     {
-        return app.ExecuteValetAsync(args);
-    });
+        IsRequired = true,
+        Description = "The location for any output files."
+    }
+);
 
-await parserResult.WithParsedAsync<UpdateOptions>(options => app.UpdateValetAsync(options.Username, options.Password)); 
-    
-    
-        // (UpdateOptions opts) => app.UpdateValetAsync(opts.Username, opts.Password),
-        // (ExecuteOptions opts) => Task.FromResult(1),
-        // _ =>
-        // {
-        //     var helpText = new HelpText
-        //     {
-        //         Heading = "Tool tool usage",
-        //         AdditionalNewLineAfterOption = false,
-        //         AddDashesToOption = true
-        //     };
-        //
-        //     Console.Error.WriteLine(helpText);
-        //     
-        //     return app.ExecuteValetAsync(args);
-        // });
+await command.InvokeAsync(args);
