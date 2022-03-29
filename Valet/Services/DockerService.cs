@@ -72,6 +72,12 @@ public class DockerService : IDockerService
         return result;
     }
 
+    public Task<bool> IsDockerRunningAsync()
+    {
+        // TODO: Make cross platform
+        return _processService.RunAsync("command", "-v docker");
+    }
+
     private IEnumerable<string> GetEnvironmentVariableArguments()
     {
         if (File.Exists(".env.local"))
