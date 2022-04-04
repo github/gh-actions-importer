@@ -15,7 +15,7 @@ var app = new App(
 var command = new RootCommand
 {
     new UpdateCommand().Command(app),
-    new AuditCommand(args).Command(app)
+    new Audit(args).Command(app)
 };
 
 command.AddGlobalOption(

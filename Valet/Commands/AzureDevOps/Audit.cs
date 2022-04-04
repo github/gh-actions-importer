@@ -1,12 +1,10 @@
 using System.CommandLine;
-using Valet.Commands.Common;
-using Valet.Handlers;
 
-namespace Valet.Commands.Audit;
+namespace Valet.Commands.AzureDevOps;
 
-public class AzureDevOpsCommand : ContainerCommand
+public class Audit : ContainerCommand
 {
-    public AzureDevOpsCommand(string[] args)
+    public Audit(string[] args)
         : base(args)
     {
     }
@@ -16,9 +14,9 @@ public class AzureDevOpsCommand : ContainerCommand
 
     protected override List<Option> Options => new()
     {
-        AzureDevOps.Organization,
-        AzureDevOps.Project,
-        AzureDevOps.InstanceUrl,
-        AzureDevOps.AccessToken
+        Common.Organization,
+        Common.Project,
+        Common.InstanceUrl,
+        Common.AccessToken
     };
 }

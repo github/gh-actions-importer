@@ -1,13 +1,11 @@
 using System.CommandLine;
-using Valet.Commands.Audit;
-
 namespace Valet.Commands;
 
-public class AuditCommand : BaseCommand
+public class Audit : BaseCommand
 {
     private readonly string[] _args;
     
-    public AuditCommand(string[] args)
+    public Audit(string[] args)
     {
         _args = args;
     }
@@ -26,11 +24,11 @@ public class AuditCommand : BaseCommand
         var command = base.GenerateCommand(app);
     
         command.AddGlobalOption(FoldersOption);
-        command.AddCommand(new AzureDevOpsCommand(_args).Command(app));
-        command.AddCommand(new CircleCommand(_args).Command(app));
-        command.AddCommand(new GitLabCommand(_args).Command(app));
-        command.AddCommand(new JenkinsCommand(_args).Command(app));
-        command.AddCommand(new TravisCommand(_args).Command(app));
+        command.AddCommand(new AzureDevOps.Audit(_args).Command(app));
+        command.AddCommand(new Circle.Audit(_args).Command(app));
+        command.AddCommand(new GitLab.Audit(_args).Command(app));
+        command.AddCommand(new Jenkins.Audit(_args).Command(app));
+        command.AddCommand(new Travis.Audit(_args).Command(app));
 
         return command;
     }

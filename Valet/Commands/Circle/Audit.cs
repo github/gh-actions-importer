@@ -1,11 +1,10 @@
 using System.CommandLine;
-using Valet.Commands.Common;
 
-namespace Valet.Commands.Audit;
+namespace Valet.Commands.Circle;
 
-public class CircleCommand : ContainerCommand
+public class Audit : ContainerCommand
 {
-    public CircleCommand(string[] args) : base(args)
+    public Audit(string[] args) : base(args)
     {
     }
     
@@ -20,11 +19,11 @@ public class CircleCommand : ContainerCommand
     
     protected override List<Option> Options => new()
     {
-        Circle.InstanceUrl,
-        Circle.AccessToken,
-        Circle.Organization,
-        Circle.SourceGitHubAccessToken,
-        Circle.SourceGitHubInstanceUrl,
+        Common.InstanceUrl,
+        Common.AccessToken,
+        Common.Organization,
+        Common.SourceGitHubAccessToken,
+        Common.SourceGitHubInstanceUrl,
         ConfigFilePath
     };
 }

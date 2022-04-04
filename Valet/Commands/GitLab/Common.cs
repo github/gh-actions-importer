@@ -1,8 +1,8 @@
 using System.CommandLine;
 
-namespace Valet.Commands.Common;
+namespace Valet.Commands.GitLab;
 
-public static class GitLab
+public static class Common
 {
     public static readonly Option<string> InstanceUrl = new("--gitlab-instance-url")
     {

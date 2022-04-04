@@ -1,11 +1,10 @@
 using System.CommandLine;
-using Valet.Commands.Common;
 
-namespace Valet.Commands.Audit;
+namespace Valet.Commands.Jenkins;
 
-public class JenkinsCommand : ContainerCommand
+public class Audit : ContainerCommand
 {
-    public JenkinsCommand(string[] args) : base(args)
+    public Audit(string[] args) : base(args)
     {
     }
     
@@ -20,10 +19,10 @@ public class JenkinsCommand : ContainerCommand
     
     protected override List<Option> Options => new()
     {
-        Jenkins.InstanceUrl,
-        Jenkins.Username,
-        Jenkins.AccessToken,
-        Jenkins.JenkinsfileAccessToken,
+        Common.InstanceUrl,
+        Common.Username,
+        Common.AccessToken,
+        Common.JenkinsfileAccessToken,
         ConfigFilePath
     };
 }

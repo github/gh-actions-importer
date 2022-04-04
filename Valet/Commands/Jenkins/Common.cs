@@ -1,8 +1,8 @@
 using System.CommandLine;
 
-namespace Valet.Commands.Common;
+namespace Valet.Commands.Jenkins;
 
-public static class Jenkins
+public static class Common
 {
     public static readonly Option<string> InstanceUrl = new(new[] {"-u", "--jenkins-instance-url"})
     {

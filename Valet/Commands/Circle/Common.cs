@@ -1,8 +1,8 @@
 using System.CommandLine;
 
-namespace Valet.Commands.Common;
+namespace Valet.Commands.Circle;
 
-public static class Circle
+public static class Common
 {
     public static readonly Option<string> InstanceUrl = new(new[] {"-u", "--circle-ci-instance-url"})
     {

@@ -1,11 +1,10 @@
 using System.CommandLine;
-using Valet.Commands.Common;
 
-namespace Valet.Commands.Audit;
+namespace Valet.Commands.Travis;
 
-public class TravisCommand : ContainerCommand
+public class Audit : ContainerCommand
 {
-    public TravisCommand(string[] args) : base(args)
+    public Audit(string[] args) : base(args)
     {
     }
     
@@ -25,11 +24,11 @@ public class TravisCommand : ContainerCommand
     
     protected override List<Option> Options => new()
     {
-        Travis.InstanceUrl,
-        Travis.AccessToken,
-        Travis.Organization,
-        Travis.SourceGitHubInstanceUrl,
-        Travis.SourceGitHubAccessToken,
+        Travis.Common.InstanceUrl,
+        Travis.Common.AccessToken,
+        Travis.Common.Organization,
+        Travis.Common.SourceGitHubInstanceUrl,
+        Travis.Common.SourceGitHubAccessToken,
         ConfigFilePath,
         AllowInactiveRepositories
     };

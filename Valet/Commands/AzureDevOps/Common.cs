@@ -1,8 +1,8 @@
 using System.CommandLine;
 
-namespace Valet.Commands.Common;
+namespace Valet.Commands.AzureDevOps;
 
-public static class AzureDevOps
+public static class Common
 {
     public static readonly Option<string> InstanceUrl = new(new[] { "-u", "--azure-devops-instance-url" })
     {

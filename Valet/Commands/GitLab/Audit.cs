@@ -1,12 +1,10 @@
 using System.CommandLine;
-using Valet.Commands.Common;
-using Valet.Handlers;
 
-namespace Valet.Commands.Audit;
+namespace Valet.Commands.GitLab;
 
-public class GitLabCommand : ContainerCommand
+public class Audit : ContainerCommand
 {
-    public GitLabCommand(string[] args) : base(args)
+    public Audit(string[] args) : base(args)
     {
     }
     
@@ -21,9 +19,9 @@ public class GitLabCommand : ContainerCommand
     
     protected override List<Option> Options => new()
     {
-        GitLab.InstanceUrl,
-        GitLab.AccessToken,
-        GitLab.Namespace,
+        Common.InstanceUrl,
+        Common.AccessToken,
+        Common.Namespace,
         ConfigFilePath
     };
 }
