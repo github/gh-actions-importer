@@ -1,4 +1,5 @@
 using System.CommandLine;
+using Valet.Commands.Audit;
 
 namespace Valet.Commands;
 
@@ -25,8 +26,12 @@ public class AuditCommand : BaseCommand
         var command = base.GenerateCommand(app);
     
         command.AddGlobalOption(FoldersOption);
-        command.AddCommand(new Audit.AzureDevOpsCommand(_args).Command(app));
-        
+        command.AddCommand(new AzureDevOpsCommand(_args).Command(app));
+        command.AddCommand(new CircleCommand(_args).Command(app));
+        command.AddCommand(new GitLabCommand(_args).Command(app));
+        command.AddCommand(new JenkinsCommand(_args).Command(app));
+        command.AddCommand(new TravisCommand(_args).Command(app));
+
         return command;
     }
 }
