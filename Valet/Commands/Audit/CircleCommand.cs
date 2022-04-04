@@ -20,11 +20,11 @@ public class CircleCommand : ContainerCommand
     
     protected override List<Option> Options => new()
     {
-        Circle.CircleInstanceUrl,
-        Circle.CircleAccessToken,
-        Circle.CircleOrganization,
-        Circle.CircleSourceGitHubAccessToken,
-        Circle.CircleSourceGitHubInstanceUrl,
+        Circle.InstanceUrl,
+        Circle.AccessToken,
+        Circle.Organization,
+        Circle.SourceGitHubAccessToken,
+        Circle.SourceGitHubInstanceUrl,
         ConfigFilePath
     };
 }

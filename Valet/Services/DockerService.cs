@@ -60,8 +60,10 @@ public class DockerService : IDockerService
         valetArguments.Add(image);
         valetArguments.AddRange(arguments);
 
-        Debug.WriteLine(string.Join(' ', valetArguments));
+        Console.WriteLine(string.Join(' ', valetArguments));
 
+        return true;
+        
         var result = await _processService.RunAsync(
             "docker",
             string.Join(' ', valetArguments),
@@ -84,9 +86,6 @@ public class DockerService : IDockerService
         {
             yield return "--env-file .env.local";
         }
-
-        var installationId = Environment.GetEnvironmentVariable("INSTALLATION_ID") ?? "get_from_client";
-        yield return $"--env INSTALLATION_ID={installationId}";
 
         foreach (var env in _valetEnvVars)
         {

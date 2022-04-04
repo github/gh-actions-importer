@@ -25,11 +25,11 @@ public class TravisCommand : ContainerCommand
     
     protected override List<Option> Options => new()
     {
-        Travis.TravisInstanceUrl,
-        Travis.TravisAccessToken,
-        Travis.TravisOrganization,
-        Travis.TravisSourceGitHubInstanceUrl,
-        Travis.TravisSourceGitHubAccessToken,
+        Travis.InstanceUrl,
+        Travis.AccessToken,
+        Travis.Organization,
+        Travis.SourceGitHubInstanceUrl,
+        Travis.SourceGitHubAccessToken,
         ConfigFilePath,
         AllowInactiveRepositories
     };

@@ -21,8 +21,8 @@ public class GitLabCommand : ContainerCommand
     
     protected override List<Option> Options => new()
     {
-        GitLab.GitLabInstanceUrl,
-        GitLab.GitLabAccessToken,
+        GitLab.InstanceUrl,
+        GitLab.AccessToken,
         GitLab.Namespace,
         ConfigFilePath
     };

@@ -16,9 +16,9 @@ public class AzureDevOpsCommand : ContainerCommand
 
     protected override List<Option> Options => new()
     {
-        AzureDevOps.AzureDevOpsOrganization,
-        AzureDevOps.AzureDevOpsProject,
-        AzureDevOps.AzureDevOpsInstanceUrl,
-        AzureDevOps.AzureDevOpsAccessToken
+        AzureDevOps.Organization,
+        AzureDevOps.Project,
+        AzureDevOps.InstanceUrl,
+        AzureDevOps.AccessToken
     };
 }

@@ -20,9 +20,9 @@ public class JenkinsCommand : ContainerCommand
     
     protected override List<Option> Options => new()
     {
-        Jenkins.JenkinsInstanceUrl,
-        Jenkins.JenkinsUsername,
-        Jenkins.JenkinsAccessToken,
+        Jenkins.InstanceUrl,
+        Jenkins.Username,
+        Jenkins.AccessToken,
         Jenkins.JenkinsfileAccessToken,
         ConfigFilePath
     };
