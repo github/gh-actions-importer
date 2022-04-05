@@ -12,7 +12,8 @@
 .DS_STORE
 output/
 dist/
-
+gh-valet
+.env.*local
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

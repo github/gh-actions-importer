@@ -1,8 +1,6 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using CommandLine;
-using CommandLine.Text;
+﻿using System.CommandLine;
 using Valet;
+using Valet.Commands;
 using Valet.Models;
 using Valet.Services;
 
@@ -13,31 +11,86 @@ var app = new App(
     new AuthenticationService()
 );
 
+var command = new RootCommand
+{
+    new Update().Command(app),
+    new Audit(args).Command(app),
+    new DryRun(args).Command(app),
+    new Migrate(args).Command(app),
+    new Forecast(args).Command(app)
+};
 
-var parser = new Parser(with => with.HelpWriter = null);
-var parserResult = parser.ParseArguments<UpdateOptions, ExecuteOptions>(args);
-
-// TODO: Utilize help menu from Valet itself
-await parserResult.WithNotParsedAsync(errs =>
+command.AddGlobalOption(
+    new Option<DirectoryInfo>(new[] { "--output-dir", "-o" })
     {
-        return app.ExecuteValetAsync(args);
-    });
+        IsRequired = true,
+        Description = "The location for any output files."
+    }
+);
 
-await parserResult.WithParsedAsync<UpdateOptions>(options => app.UpdateValetAsync(options.Username, options.Password)); 
-    
-    
-        // (UpdateOptions opts) => app.UpdateValetAsync(opts.Username, opts.Password),
-        // (ExecuteOptions opts) => Task.FromResult(1),
-        // _ =>
-        // {
-        //     var helpText = new HelpText
-        //     {
-        //         Heading = "Tool tool usage",
-        //         AdditionalNewLineAfterOption = false,
-        //         AddDashesToOption = true
-        //     };
-        //
-        //     Console.Error.WriteLine(helpText);
-        //     
-        //     return app.ExecuteValetAsync(args);
-        // });
+command.AddGlobalOption(
+    new Option<string[]>(new[] { "--allowed-actions" })
+    {
+        Description = "An allowed list of GitHub actions to map to."
+    }
+);
+
+command.AddGlobalOption(
+    new Option<bool>(new[] { "--allow-verified-actions" })
+    {
+        Description = "Boolean value to only allow verified actions."
+    }
+);
+
+
+command.AddGlobalOption(
+    new Option<bool>(new[] { "--allow-github-created-actions" })
+    {
+        Description = "Boolean value allowing only GitHub created actions."
+    }
+);
+
+command.AddGlobalOption(
+    new Option<YamlVerbosity>(new[] { "--yaml-verbosity" })
+    {
+        Description = "YAML verbosity level."
+    }
+);
+
+command.AddGlobalOption(
+    new Option<FileInfo[]>(new[] { "--custom-transformers" })
+    {
+        Description = "Paths to custom transformers."
+    }
+);
+
+command.AddGlobalOption(
+    new Option<string>(new[] { "--credentials-file" })
+    {
+        Description = "The file containing the credentials to use."
+    }
+);
+
+command.AddGlobalOption(
+    new Option<bool>(new[] { "--no-telemetry" })
+    {
+        Description = "Boolean value to disallow telemetry."
+    }
+);
+
+command.AddGlobalOption(
+    new Option<bool>(new[] { "--no-ssl-verify" })
+    {
+        Description = "Disable ssl certificate verification."
+    }
+);
+
+// TODO: Add in enum values
+command.AddGlobalOption(
+    new Option<string>(new[] { "--features" })
+    {
+        Description = "Features to enable in transformed workflows."
+    }
+);
+
+await command.InvokeAsync(args);

@@ -60,7 +60,7 @@ public class DockerService : IDockerService
         valetArguments.Add(image);
         valetArguments.AddRange(arguments);
 
-        Debug.WriteLine(string.Join(' ', valetArguments));
+        Console.WriteLine(string.Join(' ', valetArguments));
 
         var result = await _processService.RunAsync(
             "docker",
@@ -85,9 +85,6 @@ public class DockerService : IDockerService
             yield return "--env-file .env.local";
         }
 
-        var installationId = Environment.GetEnvironmentVariable("INSTALLATION_ID") ?? "get_from_client";
-        yield return $"--env INSTALLATION_ID={installationId}";
-
         foreach (var env in _valetEnvVars)
         {
             var value = Environment.GetEnvironmentVariable(env);
@@ -95,7 +92,6 @@ public class DockerService : IDockerService
             if (string.IsNullOrWhiteSpace(value)) continue;
 
             var key = env;
-            // TODO: This can probably be cleaner
             if (key.StartsWith("GH_"))
                 key = key.Replace("GH_", "GITHUB_");
 
