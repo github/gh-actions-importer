@@ -1,6 +1,7 @@
 ﻿using System.CommandLine;
 using Valet;
 using Valet.Commands;
+using Valet.Models;
 using Valet.Services;
 
 var processService = new ProcessService();
@@ -27,16 +28,69 @@ command.AddGlobalOption(
     }
 );
 
-// TODO: Add global options to command
-// class_option :allowed_actions,              type: :array,   desc: "An allowed list of GitHub actions to map to."
-// class_option :allow_verified_actions,       type: :boolean, desc: "Boolean value to only allow verified actions."
-// class_option :allow_github_created_actions, type: :boolean, desc: "Boolean value allowing only GitHub created actions."
-// class_option :yaml_verbosity,               type: :string,  desc: "YAML verbosity level.", enum: [Valet::YamlVerbosity::QUIET, Valet::YamlVerbosity::MINIMAL, Valet::YamlVerbosity::INFO]
-// class_option :custom_transformers,          type: :array,   desc: "Paths to custom transformers."
-// class_option :output_dir, aliases: :o,      type: :string,  desc: "The location for any output files."
-// class_option :credentials_file,             type: :string,  desc: "The file containing the credentials to use."
-// class_option :no_telemetry,                 type: :boolean, desc: "Boolean value to disallow telemetry."
-// class_option :ssl_verify,                   type: :boolean, default: true, desc: "Verify ssl certificates."
-// class_option :features,                     type: :string,  desc: "Features to enable in transformed workflows.", enum: Features::VERSION_MAP.keys, default: "all"
+command.AddGlobalOption(
+    new Option<string[]>(new[] { "--allowed-actions" })
+    {
+        Description = "An allowed list of GitHub actions to map to."
+    }
+);
+
+command.AddGlobalOption(
+    new Option<bool>(new[] { "--allow-verified-actions" })
+    {
+        Description = "Boolean value to only allow verified actions."
+    }
+);
+
+
+command.AddGlobalOption(
+    new Option<bool>(new[] { "--allow-github-created-actions" })
+    {
+        Description = "Boolean value allowing only GitHub created actions."
+    }
+);
+
+command.AddGlobalOption(
+    new Option<YamlVerbosity>(new[] { "--yaml-verbosity" })
+    {
+        Description = "YAML verbosity level."
+    }
+);
+
+command.AddGlobalOption(
+    new Option<FileInfo[]>(new[] { "--custom-transformers" })
+    {
+        Description = "Paths to custom transformers."
+    }
+);
+
+command.AddGlobalOption(
+    new Option<string>(new[] { "--credentials-file" })
+    {
+        Description = "The file containing the credentials to use."
+    }
+);
+
+command.AddGlobalOption(
+    new Option<bool>(new[] { "--no-telemetry" })
+    {
+        Description = "Boolean value to disallow telemetry."
+    }
+);
+
+command.AddGlobalOption(
+    new Option<bool>(new[] { "--no-ssl-verify" })
+    {
+        Description = "Disable ssl certificate verification."
+    }
+);
+
+// TODO: Add in enum values
+command.AddGlobalOption(
+    new Option<string>(new[] { "--features" })
+    {
+        Description = "Features to enable in transformed workflows."
+    }
+);
 
 await command.InvokeAsync(args);

@@ -92,7 +92,6 @@ public class DockerService : IDockerService
             if (string.IsNullOrWhiteSpace(value)) continue;
 
             var key = env;
-            // TODO: This can probably be cleaner
             if (key.StartsWith("GH_"))
                 key = key.Replace("GH_", "GITHUB_");
 
