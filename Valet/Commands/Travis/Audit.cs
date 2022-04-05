@@ -24,11 +24,11 @@ public class Audit : ContainerCommand
     
     protected override List<Option> Options => new()
     {
-        Travis.Common.InstanceUrl,
-        Travis.Common.AccessToken,
-        Travis.Common.Organization,
-        Travis.Common.SourceGitHubInstanceUrl,
-        Travis.Common.SourceGitHubAccessToken,
+        Common.Organization,
+        Common.InstanceUrl,
+        Common.AccessToken,
+        Common.SourceGitHubInstanceUrl,
+        Common.SourceGitHubAccessToken,
         ConfigFilePath,
         AllowInactiveRepositories
     };

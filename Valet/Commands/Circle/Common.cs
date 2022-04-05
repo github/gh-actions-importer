@@ -21,6 +21,12 @@ public static class Common
         Description = "The Circle CI organization name.",
         IsRequired = false,
     };
+
+    public static readonly Option<string> Provider = new(new[] {"--circle-ci-provider"})
+    {
+        Description = "The version control system provider for the pipeline.",
+        IsRequired = false,
+    };
     
     public static readonly Option<string> SourceGitHubAccessToken = new(new[] {"-s", "--circle-ci--srouce-github-access-token"})
     {
