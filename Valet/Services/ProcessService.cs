@@ -9,7 +9,11 @@ using System.Threading.Tasks;
 
 public class ProcessService : IProcessService
 {
-    public Task<bool> RunAsync(string filename, string arguments, string? cwd = null, IEnumerable<(string, string)>? environmentVariables = null)
+    public Task<bool> RunAsync(
+        string filename, 
+        string arguments, 
+        string? cwd = null, 
+        IEnumerable<(string, string)>? environmentVariables = null)
     {
         var tcs = new TaskCompletionSource<bool>();
         var startInfo = new ProcessStartInfo
@@ -33,9 +37,9 @@ public class ProcessService : IProcessService
         var process = new Process
         {
             StartInfo = startInfo,
-            EnableRaisingEvents = true
+            EnableRaisingEvents = true,
         };
-
+        
         void OnProcessExited(object? sender, EventArgs args)
         {
             process.Exited -= OnProcessExited;
@@ -47,7 +51,6 @@ public class ProcessService : IProcessService
             }
             else
             {
-                // TODO: Verify works
                 var error = process.StandardError.ReadToEnd();
                 tcs.TrySetException(new Exception(error));
             }
@@ -57,7 +60,9 @@ public class ProcessService : IProcessService
 
         void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-            Console.WriteLine(e.Data);
+            // TODO: Include output color
+            // Console.WriteLine(e.Data);
+            Console.WriteLine(process.StandardOutput.ReadToEnd());
         }
 
         process.OutputDataReceived += OnOutputDataReceived;

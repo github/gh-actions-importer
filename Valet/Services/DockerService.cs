@@ -62,8 +62,6 @@ public class DockerService : IDockerService
 
         Console.WriteLine(string.Join(' ', valetArguments));
 
-        return true;
-        
         var result = await _processService.RunAsync(
             "docker",
             string.Join(' ', valetArguments),
