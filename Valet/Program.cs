@@ -17,7 +17,8 @@ var command = new RootCommand
     new Update().Command(app),
     new Audit(args).Command(app),
     new DryRun(args).Command(app),
-    new Migrate(args).Command(app)
+    new Migrate(args).Command(app),
+    new Forecast(args).Command(app)
 };
 
 command.AddGlobalOption(
