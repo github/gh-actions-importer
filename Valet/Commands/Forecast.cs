@@ -4,12 +4,12 @@ namespace Valet.Commands;
 public class Forecast : BaseCommand
 {
     private readonly string[] _args;
-    
+
     public Forecast(string[] args)
     {
         _args = args;
     }
-    
+
     protected override string Name => "forecast";
     protected override string Description => "Forecasts GitHub actions usage from historical pipeline utilization.";
 
@@ -18,34 +18,34 @@ public class Forecast : BaseCommand
         Description = "The start date of the forecast analysis in YYYY-MM-DD format.",
         IsRequired = false,
     };
-    
+
     private static readonly Option<DateTime> EndDate = new("--end-date", getDefaultValue: () => DateTime.Now)
     {
         Description = "The end date of the forecast analysis in YYYY-MM-DD format.",
         IsRequired = false,
     };
-    
+
     private static readonly Option<int> TimeSlice = new("--time-slice", getDefaultValue: () => 60)
     {
         Description = "The time slice in seconds to use for computing concurrency metrics.",
         IsRequired = false,
     };
-    
+
     private static readonly Option<FileInfo[]> SourceFilePath = new("--source-file-path")
     {
         Description = "The file path(s) to existing jobs data.",
         IsRequired = false,
     };
-    
+
     protected override Command GenerateCommand(App app)
     {
         var command = base.GenerateCommand(app);
-        
+
         command.AddGlobalOption(StartDate);
         command.AddGlobalOption(EndDate);
         command.AddGlobalOption(TimeSlice);
         command.AddGlobalOption(SourceFilePath);
-        
+
         command.AddCommand(new AzureDevOps.Forecast(_args).Command(app));
 
         return command;

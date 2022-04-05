@@ -11,7 +11,7 @@ public abstract class ContainerCommand : BaseCommand
     {
         _args = args;
     }
-    
+
     protected abstract List<Option> Options { get; }
 
     protected override Command GenerateCommand(App app)
@@ -22,9 +22,9 @@ public abstract class ContainerCommand : BaseCommand
         {
             command.AddOption(option);
         }
-        
+
         command.SetHandler(new ContainerHandler(app).Run(_args));
-        
+
         return command;
     }
 }

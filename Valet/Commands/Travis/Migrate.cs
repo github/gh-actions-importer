@@ -7,7 +7,7 @@ public class Migrate : ContainerCommand
     public Migrate(string[] args) : base(args)
     {
     }
-    
+
     protected override string Name => "travis-ci";
     protected override string Description => "Convert a Travis CI pipeline to a GitHub Actions workflow and and open a pull request with the changes.";
 

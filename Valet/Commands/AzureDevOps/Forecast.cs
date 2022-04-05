@@ -8,7 +8,7 @@ public class Forecast : ContainerCommand
         : base(args)
     {
     }
-    
+
     protected override string Name => "azure-devops";
     protected override string Description => "Forecasts GitHub Actions usage from historical Azure DevOps pipeline utilization.";
 

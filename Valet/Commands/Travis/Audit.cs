@@ -7,10 +7,10 @@ public class Audit : ContainerCommand
     public Audit(string[] args) : base(args)
     {
     }
-    
+
     protected override string Name => "travis-ci";
     protected override string Description => "An audit will output a list of data used in a Travis CI instance.";
-    
+
     private static readonly Option<FileInfo> ConfigFilePath = new("--config-file-path")
     {
         Description = "The file path corresponding to the Travis CI configuration file.",
@@ -21,7 +21,7 @@ public class Audit : ContainerCommand
         Description = "Include inactive travis repositories.",
         IsRequired = false
     };
-    
+
     protected override List<Option> Options => new()
     {
         Common.Organization,

@@ -4,12 +4,12 @@ namespace Valet.Commands;
 public class Audit : BaseCommand
 {
     private readonly string[] _args;
-    
+
     public Audit(string[] args)
     {
         _args = args;
     }
-    
+
     protected override string Name => "audit";
     protected override string Description => "An audit will output a list of data used in a CI/CD instance.";
 
@@ -18,11 +18,11 @@ public class Audit : BaseCommand
         Description = "Folders to audit in the instance",
         IsRequired = false
     };
-    
+
     protected override Command GenerateCommand(App app)
     {
         var command = base.GenerateCommand(app);
-    
+
         command.AddGlobalOption(FoldersOption);
         command.AddCommand(new AzureDevOps.Audit(_args).Command(app));
         command.AddCommand(new Circle.Audit(_args).Command(app));

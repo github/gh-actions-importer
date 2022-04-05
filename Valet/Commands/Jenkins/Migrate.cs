@@ -7,7 +7,7 @@ public class Migrate : ContainerCommand
     public Migrate(string[] args) : base(args)
     {
     }
-    
+
     protected override string Name => "jenkins";
     protected override string Description => "Convert a Jenkins job to a GitHub Actions workflow and open a pull request with the changes.";
 

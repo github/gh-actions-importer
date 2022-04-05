@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 public class ProcessService : IProcessService
 {
     public Task<bool> RunAsync(
-        string filename, 
-        string arguments, 
-        string? cwd = null, 
+        string filename,
+        string arguments,
+        string? cwd = null,
         IEnumerable<(string, string)>? environmentVariables = null)
     {
         var tcs = new TaskCompletionSource<bool>();
@@ -33,13 +33,13 @@ public class ProcessService : IProcessService
                 startInfo.EnvironmentVariables.Add(key, value);
             }
         }
-            
+
         var process = new Process
         {
             StartInfo = startInfo,
             EnableRaisingEvents = true,
         };
-        
+
         void OnProcessExited(object? sender, EventArgs args)
         {
             process.Exited -= OnProcessExited;

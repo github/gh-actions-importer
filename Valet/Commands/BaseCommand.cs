@@ -10,8 +10,8 @@ public abstract class BaseCommand
     {
         return new Command(Name, Description);
     }
-    
+
     protected abstract string Name { get; }
-    
+
     protected abstract string Description { get; }
 }
