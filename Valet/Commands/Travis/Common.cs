@@ -33,4 +33,16 @@ public static class Common
         Description = "The URL of the source GitHub instance.",
         IsRequired = false,
     };
+    
+    public static readonly Option<FileInfo> SourceFilePath = new("--source-file-path")
+    {
+        Description = "The file path corresponding to the Travis CI pipeline file.",
+        IsRequired = false,
+    };
+
+    public static readonly Option<string> Repository = new(new[] { "--travis-ci-repository", "-r" })
+    {
+        Description = "The Travis CI repository name.",
+        IsRequired = true,
+    };
 }

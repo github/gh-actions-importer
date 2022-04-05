@@ -27,4 +27,10 @@ public static class Common
         Description = "Access token for the Azure DevOps instance.",
         IsRequired = false,
     };
+    
+    public static readonly Option<int> PipelineId = new(new[] { "--pipeline-id", "-i" })
+    {
+        Description = "The Azure DevOps pipeline id.",
+        IsRequired = true,
+    };
 }

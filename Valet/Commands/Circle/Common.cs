@@ -39,4 +39,16 @@ public static class Common
         Description = "The URL of the source GitHub instance.",
         IsRequired = false,
     };
+    
+    public static readonly Option<string> Project = new(new[] {"--circle-ci-project", "-p"})
+    {
+        Description = "The Circle CI project name.",
+        IsRequired = false,
+    };
+    
+    public static readonly Option<FileInfo> SourceFilePath = new("--source-file-path")
+    {
+        Description = "The file path corresponding to the Circle CI workflow file.",
+        IsRequired = false,
+    };
 }

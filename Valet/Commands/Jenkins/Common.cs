@@ -27,4 +27,16 @@ public static class Common
         Description = "Access token for the GitHub repo containing the job's Jenkinsfile for a pipeline.",
         IsRequired = false,
     };
+    
+    public static readonly Option<FileInfo> SourceFilePath = new("--source-file-path")
+    {
+        Description = "The file path corresponding to the Jenkinsfile.",
+        IsRequired = false,
+    };
+    
+    public static readonly Option<string> SourceUrl = new(new[] {"--source-url", "-s"})
+    {
+        Description = "The URL of the Jenkins job to migrate.",
+        IsRequired = true,
+    };
 }
