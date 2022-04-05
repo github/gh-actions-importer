@@ -61,8 +61,7 @@ public class ProcessService : IProcessService
         void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
         {
             // TODO: Include output color
-            // Console.WriteLine(e.Data);
-            Console.WriteLine(process.StandardOutput.ReadToEnd());
+            Console.WriteLine(e.Data);
         }
 
         process.OutputDataReceived += OnOutputDataReceived;
