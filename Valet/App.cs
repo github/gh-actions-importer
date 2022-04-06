@@ -29,9 +29,9 @@ public class App
         username ??= Environment.GetEnvironmentVariable("GHCR_USERNAME");
         password ??= Environment.GetEnvironmentVariable("GHCR_PASSWORD");
 
-        if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+        if (string.IsNullOrWhiteSpace(password))
         {
-            (username, password) = await _authenticationService.GetAccessTokenAsync();
+            password = await _authenticationService.GetAccessTokenAsync();
         }
 
         var result = await _dockerService.UpdateImageAsync(

@@ -41,6 +41,14 @@ public class Forecast : BaseCommand
     {
         var command = base.GenerateCommand(app);
 
+        command.AddGlobalOption(
+            new Option<DirectoryInfo>(new[] { "--output-dir", "-o" })
+            {
+                IsRequired = true,
+                Description = "The location for any output files."
+            }
+        );
+        
         command.AddGlobalOption(StartDate);
         command.AddGlobalOption(EndDate);
         command.AddGlobalOption(TimeSlice);
