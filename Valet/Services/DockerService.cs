@@ -28,40 +28,32 @@ public class DockerService : IDockerService
             .CreateClient();
     }
 
-    public async Task<bool> UpdateImageAsync(string image, string server, string version, string? username, string password)
+    public async Task<bool> UpdateImageAsync(string image, string server, string version, string? username, string? password)
     {
-        // await _client.Images.CreateImageAsync(
-        //     new ImagesCreateParameters
-        //     {
-        //         FromImage = $"{server}/{image}:{version}"
-        //     },
-        //     new AuthConfig
-        //     {
-        //         Username = username,
-        //         Password = password,
-        //         ServerAddress = server
-        //     },
-        //     progress: new Progress()
-        // ).ConfigureAwait(false);
-        
-        var arguments = new List<string>();
-        arguments.Add($"login {server}");
-        arguments.Add($"--password {password}");
-        if (!string.IsNullOrWhiteSpace(username))
+        if (!string.IsNullOrWhiteSpace(username) && string.IsNullOrWhiteSpace(password))
         {
-            arguments.Add($"--username {username}");
+            var arguments = new List<string>
+            {
+                $"login {server}",
+                $"--password {password}",
+                $"--username {username}"
+            };
+
+            var authenticated = await _processService.RunAsync(
+                "docker",
+                string.Join(' ', arguments)
+            ).ConfigureAwait(false);
+
+            if (!authenticated)
+            {
+                return false;
+            }
+        }
+        else
+        {
+            Console.WriteLine("No GHCR credentials provided.");
         }
 
-        var authenticated = await _processService.RunAsync(
-            "docker",
-            string.Join(' ', arguments)
-        );
-
-        if (!authenticated)
-        {
-            return false;
-        }
-        
         return await _processService.RunAsync(
             "docker",
             $"pull {server}/{image}:{version}"
@@ -89,10 +81,19 @@ public class DockerService : IDockerService
         return result;
     }
 
-    public Task<bool> IsDockerRunningAsync()
+    public async Task VerifyDockerRunningAsync()
     {
         // TODO: Make cross platform
-        return _processService.RunAsync("command", "-v docker");
+        var result = await _processService.RunAsync(
+            "command",
+            "-v docker", 
+            output: false
+            );
+
+        if (!result)
+        {
+            throw new Exception("Please ensure docker is installed and the docker daemon is running");
+        }
     }
 
     private IEnumerable<string> GetEnvironmentVariableArguments()

@@ -6,7 +6,7 @@ namespace Valet.Services;
 public class AuthenticationService : BaseHttpService, IAuthenticationService
 {
     private const string GitHubInstanceUrl = "https://github.com";
-    private const string ClientId = "44e647121433c49e8c11";
+    private const string ClientId = "bd7d84be69a1f2ca085d";
     
     public AuthenticationService(HttpMessageHandler? handler = null) 
         : base(GitHubInstanceUrl, handler)

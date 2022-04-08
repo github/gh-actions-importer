@@ -20,19 +20,10 @@ public class App
 
     public async Task<int> UpdateValetAsync(string? username = null, string? password = null)
     {
-        var dockerIsRunning = await _dockerService.IsDockerRunningAsync().ConfigureAwait(false);
-        if (!dockerIsRunning)
-        {
-            throw new Exception("Please ensure docker is installed and the docker daemon is running");
-        }
+        await _dockerService.VerifyDockerRunningAsync().ConfigureAwait(false);
 
         username ??= Environment.GetEnvironmentVariable("GHCR_USERNAME");
         password ??= Environment.GetEnvironmentVariable("GHCR_PASSWORD");
-
-        if (string.IsNullOrWhiteSpace(password))
-        {
-            password = await _authenticationService.GetAccessTokenAsync();
-        }
 
         var result = await _dockerService.UpdateImageAsync(
             ValetImage,
@@ -47,12 +38,7 @@ public class App
 
     public async Task<int> ExecuteValetAsync(string[] args)
     {
-        var dockerIsRunning = await _dockerService.IsDockerRunningAsync().ConfigureAwait(false);
-        if (!dockerIsRunning)
-        {
-            throw new Exception("Please ensure docker is installed and the docker daemon is running");
-        }
-
+        await _dockerService.VerifyDockerRunningAsync().ConfigureAwait(false);
         var result = await _dockerService.ExecuteCommandAsync($"{ValetContainerRegistry}/{ValetImage}:latest", args);
         return result ? 0 : 1;
     }

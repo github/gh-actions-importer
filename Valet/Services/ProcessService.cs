@@ -13,7 +13,8 @@ public class ProcessService : IProcessService
         string filename,
         string arguments,
         string? cwd = null,
-        IEnumerable<(string, string)>? environmentVariables = null)
+        IEnumerable<(string, string)>? environmentVariables = null,
+        bool output = true)
     {
         var tcs = new TaskCompletionSource<bool>();
         var startInfo = new ProcessStartInfo
@@ -60,8 +61,7 @@ public class ProcessService : IProcessService
 
         void OnOutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-            // TODO: Include output color
-            Console.WriteLine(e.Data);
+            if (output) Console.WriteLine(e.Data);
         }
 
         process.OutputDataReceived += OnOutputDataReceived;
