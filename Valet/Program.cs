@@ -1,7 +1,6 @@
 ﻿using System.CommandLine;
 using Valet;
 using Valet.Commands;
-using Valet.Models;
 using Valet.Services;
 
 var processService = new ProcessService();

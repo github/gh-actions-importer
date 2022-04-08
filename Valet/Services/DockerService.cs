@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Docker.DotNet;
 using Valet.Interfaces;
 
@@ -30,7 +31,7 @@ public class DockerService : IDockerService
 
     public async Task<bool> UpdateImageAsync(string image, string server, string version, string? username, string? password)
     {
-        if (!string.IsNullOrWhiteSpace(username) && string.IsNullOrWhiteSpace(password))
+        if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
         {
             var arguments = new List<string>
             {
@@ -69,7 +70,7 @@ public class DockerService : IDockerService
         valetArguments.Add(image);
         valetArguments.AddRange(arguments);
 
-        Console.WriteLine(string.Join(' ', valetArguments));
+        Debug.WriteLine(string.Join(' ', valetArguments));
 
         var result = await _processService.RunAsync(
             "docker",

@@ -10,6 +10,7 @@
     <ItemGroup>
       <PackageReference Include="Docker.DotNet" Version="3.125.5" />
       <PackageReference Include="System.CommandLine" Version="2.0.0-beta3.22114.1" />
+      <PackageReference Include="System.CommandLine.NamingConventionBinder" Version="2.0.0-beta3.22114.1" />
     </ItemGroup>
 
 </Project>
