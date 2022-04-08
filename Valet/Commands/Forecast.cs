@@ -48,7 +48,7 @@ public class Forecast : BaseCommand
                 Description = "The location for any output files."
             }
         );
-        
+
         command.AddGlobalOption(StartDate);
         command.AddGlobalOption(EndDate);
         command.AddGlobalOption(TimeSlice);

@@ -13,10 +13,10 @@ public class UserAuthenticationRequest
 
     [JsonProperty("client_id")]
     public string ClientId { get; set; }
-    
+
     [JsonProperty("device_code")]
     public string DeviceCode { get; set; }
 
-    [JsonProperty("grant_type")] 
+    [JsonProperty("grant_type")]
     public string GrantType { get; } = "urn:ietf:params:oauth:grant-type:device_code";
 }

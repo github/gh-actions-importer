@@ -17,7 +17,7 @@ public class DryRun : BaseCommand
     {
         var command = base.GenerateCommand(app);
         command = Common.AppendCommonOptions(command);
-        
+
         command.AddCommand(new AzureDevOps.DryRun(_args).Command(app));
         command.AddCommand(new Circle.DryRun(_args).Command(app));
         command.AddCommand(new GitLab.DryRun(_args).Command(app));

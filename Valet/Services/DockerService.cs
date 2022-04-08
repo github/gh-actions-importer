@@ -87,7 +87,7 @@ public class DockerService : IDockerService
         // TODO: Make cross platform
         var result = await _processService.RunAsync(
             "command",
-            "-v docker", 
+            "-v docker",
             output: false
             );
 

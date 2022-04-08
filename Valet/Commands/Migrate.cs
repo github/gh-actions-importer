@@ -35,7 +35,7 @@ public class Migrate : BaseCommand
     {
         var command = base.GenerateCommand(app);
         command = Common.AppendCommonOptions(command);
-        
+
         command.AddGlobalOption(TargetUrl);
         command.AddGlobalOption(GitHubInstanceUrl);
         command.AddGlobalOption(GitHubAccessToken);

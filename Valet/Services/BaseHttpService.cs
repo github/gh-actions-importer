@@ -10,7 +10,7 @@ public abstract class BaseHttpService
     private readonly HttpClient _httpClient;
     private readonly JsonSerializer _serializer;
     private readonly string _baseAddress;
-    
+
     protected BaseHttpService(string baseAddress, HttpMessageHandler? handler)
     {
         _httpClient = handler != null ? new HttpClient(handler) : new HttpClient();

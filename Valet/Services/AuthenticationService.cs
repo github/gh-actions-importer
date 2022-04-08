@@ -7,16 +7,16 @@ public class AuthenticationService : BaseHttpService, IAuthenticationService
 {
     private const string GitHubInstanceUrl = "https://github.com";
     private const string ClientId = "bd7d84be69a1f2ca085d";
-    
-    public AuthenticationService(HttpMessageHandler? handler = null) 
+
+    public AuthenticationService(HttpMessageHandler? handler = null)
         : base(GitHubInstanceUrl, handler)
     {
     }
-    
+
     public async Task<string> GetAccessTokenAsync()
     {
         var deviceCode = await GetDeviceCodeAsync().ConfigureAwait(false);
-        
+
         Console.WriteLine($"Please authenticate at '{deviceCode.VerificationUri}' using code: {deviceCode.UserCode}");
 
         var startTime = DateTime.Now;
@@ -31,7 +31,7 @@ public class AuthenticationService : BaseHttpService, IAuthenticationService
             {
                 throw new Exception("Authentication failed: access denied");
             }
-            
+
             if (!string.IsNullOrWhiteSpace(userAuthenticated.AccessToken))
             {
                 Console.WriteLine("Authenticated");

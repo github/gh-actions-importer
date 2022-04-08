@@ -23,7 +23,7 @@ public class Audit : BaseCommand
     {
         var command = base.GenerateCommand(app);
         command = Common.AppendCommonOptions(command);
-        
+
         command.AddGlobalOption(FoldersOption);
         command.AddCommand(new AzureDevOps.Audit(_args).Command(app));
         command.AddCommand(new Circle.Audit(_args).Command(app));

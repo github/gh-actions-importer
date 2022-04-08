@@ -13,10 +13,10 @@ public class UserAuthenticationResponse
     }
     [JsonProperty("access_token")]
     public string? AccessToken { get; set; }
-    
+
     [JsonProperty("message")]
     public string? Message { get; set; }
-    
+
     [JsonProperty("error")]
     public string? Error { get; set; }
 }
