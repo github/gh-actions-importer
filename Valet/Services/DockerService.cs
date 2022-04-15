@@ -1,12 +1,10 @@
 using System.Diagnostics;
-using Docker.DotNet;
 using Valet.Interfaces;
 
 namespace Valet.Services;
 
 public class DockerService : IDockerService
 {
-    private readonly DockerClient _client;
     private readonly IProcessService _processService;
 
     private readonly string[] _valetEnvVars =
@@ -23,10 +21,6 @@ public class DockerService : IDockerService
     public DockerService(IProcessService processService)
     {
         _processService = processService;
-
-        // TODO: Raise error if docker daemon not started
-        _client = new DockerClientConfiguration()
-            .CreateClient();
     }
 
     public async Task<bool> UpdateImageAsync(string image, string server, string version, string? username, string? password)
