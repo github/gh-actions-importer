@@ -1,5 +1,4 @@
 using System.CommandLine;
-using Valet.Handlers;
 
 namespace Valet.Commands.AzureDevOps;
 
@@ -25,8 +24,8 @@ public class DryRun : BaseCommand
         command.AddGlobalOption(Common.Project);
         command.AddGlobalOption(Common.AccessToken);
 
-        command.AddCommand(new Pipeline.DryRun(_args).Command(app));
-        command.AddCommand(new Release.DryRun(_args).Command(app));
+        command.AddCommand(new Valet.Commands.AzureDevOps.Pipeline.DryRun(_args).Command(app));
+        command.AddCommand(new Valet.Commands.AzureDevOps.Release.DryRun(_args).Command(app));
 
         return command;
     }
