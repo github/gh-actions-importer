@@ -13,7 +13,7 @@ jobs:
           dotnet tool install -g dotnet-format --version "5.1.*" --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json
       - name: lint
         run: |
-          dotnet format src/ --verify-no-changes
+          dotnet format --verify-no-changes
 
   unit-test:
     runs-on: ubuntu-latest

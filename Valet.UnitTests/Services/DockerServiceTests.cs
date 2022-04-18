@@ -12,8 +12,8 @@ namespace Valet.UnitTests.Services;
 [TestFixture]
 public class DockerServiceTests
 {
-    private DockerService _dockerService;
-    private Mock<IProcessService> _processService;
+    private DockerService? _dockerService;
+    private Mock<IProcessService>? _processService;
 
     [SetUp]
     public void BeforeEachTest()
@@ -155,18 +155,18 @@ public class DockerServiceTests
         Assert.IsTrue(result);
         _processService.VerifyAll();
     }
-    
+
     [Test]
     public async Task ExecuteCommandAsync_InvokesDocker_WithEnvironmentVariables_ReturnsTrue()
     {
         // Arrange
         var image = "ghcr.io/valet-customers/valet-cli:latest";
         var arguments = new[] { "run", "this", "command" };
-        
+
         Environment.SetEnvironmentVariable("GH_ACCESS_TOKEN", "foo");
         Environment.SetEnvironmentVariable("GH_INSTANCE_URL", "https://github.fabrikam.com");
         Environment.SetEnvironmentVariable("JENKINS_ACCESS_TOKEN", "bar");
-        
+
         _processService.Setup(handler =>
             handler.RunAsync(
                 "docker",
