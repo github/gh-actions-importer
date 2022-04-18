@@ -12,8 +12,10 @@ namespace Valet.UnitTests.Services;
 [TestFixture]
 public class DockerServiceTests
 {
-    private DockerService? _dockerService;
-    private Mock<IProcessService>? _processService;
+#pragma warning disable CS8618
+    private DockerService _dockerService;
+    private Mock<IProcessService> _processService;
+#pragma warning restore CS8618
 
     [SetUp]
     public void BeforeEachTest()
