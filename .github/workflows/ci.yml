@@ -14,7 +14,7 @@ jobs:
       - name: install dotnet-format
         run: dotnet tool install -g dotnet-format --version "5.1.*" --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json
       - name: lint
-        run: dotnet format --verify-no-changes
+        run: dotnet format src/ --verify-no-changes
 
   unit-test:
     runs-on: ubuntu-latest
@@ -24,8 +24,8 @@ jobs:
         with:
           dotnet-version: "6.0.x"
       - name: dotnet restore
-        run: dotnet restore Valet.sln
+        run: dotnet restore src/Valet.sln
       - name: dotnet build
-        run: dotnet build Valet.sln
+        run: dotnet build src/Valet.sln
       - name: dotnet test
-        run: dotnet test Valet.UnitTests --no-build --no-restore --logger "trx;LogFileName=test-results.trx"
+        run: dotnet test src/Valet.UnitTests --no-build --no-restore --logger "trx;LogFileName=test-results.trx"
