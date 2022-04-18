@@ -3,17 +3,17 @@ using Valet.Handlers;
 
 namespace Valet.Commands.AzureDevOps;
 
-public class DryRun : BaseCommand
+public class Migrate : BaseCommand
 {
     private readonly string[] _args;
 
-    public DryRun(string[] args)
+    public Migrate(string[] args)
     {
         _args = args;
     }
 
     protected override string Name => "azure-devops";
-    protected override string Description => "Convert an Azure DevOps pipeline to a GitHub Actions workflow and output it's yaml file.";
+    protected override string Description => "Convert an Azure DevOps pipeline to a GitHub Actions workflow and open a pull request with the changes.";
 
     protected override Command GenerateCommand(App app)
     {
@@ -25,8 +25,8 @@ public class DryRun : BaseCommand
         command.AddGlobalOption(Common.Project);
         command.AddGlobalOption(Common.AccessToken);
 
-        command.AddCommand(new Pipeline.DryRun(_args).Command(app));
-        command.AddCommand(new Release.DryRun(_args).Command(app));
+        command.AddCommand(new Valet.Commands.AzureDevOps.BuildPipeline.Migrate(_args).Command(app));
+        command.AddCommand(new Valet.Commands.AzureDevOps.ReleasePipeline.Migrate(_args).Command(app));
 
         return command;
     }

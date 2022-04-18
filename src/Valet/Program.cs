@@ -6,8 +6,7 @@ using Valet.Services;
 var processService = new ProcessService();
 
 var app = new App(
-    new DockerService(processService),
-    new AuthenticationService()
+    new DockerService(processService)
 );
 
 var command = new RootCommand

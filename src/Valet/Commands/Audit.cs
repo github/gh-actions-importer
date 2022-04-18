@@ -13,7 +13,7 @@ public class Audit : BaseCommand
     protected override string Name => "audit";
     protected override string Description => "An audit will output a list of data used in a CI/CD instance.";
 
-    private static readonly Option<string[]> FoldersOption = new Option<string[]>(new[] { "-f", "--folders" })
+    private static readonly Option<string[]> FoldersOption = new(new[] { "-f", "--folders" })
     {
         Description = "Folders to audit in the instance",
         IsRequired = false

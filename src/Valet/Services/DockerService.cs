@@ -27,16 +27,9 @@ public class DockerService : IDockerService
     {
         if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
         {
-            var arguments = new List<string>
-            {
-                $"login {server}",
-                $"--password {password}",
-                $"--username {username}"
-            };
-
             var authenticated = await _processService.RunAsync(
                 "docker",
-                string.Join(' ', arguments)
+                $"login {server} --password {password} --username {username}"
             ).ConfigureAwait(false);
 
             if (!authenticated)
@@ -55,10 +48,12 @@ public class DockerService : IDockerService
         );
     }
 
-    public async Task<bool> ExecuteCommandAsync(string image, params string[] arguments)
+    public Task<bool> ExecuteCommandAsync(string image, params string[] arguments)
     {
-        var valetArguments = new List<string>();
-        valetArguments.Add("run --rm");
+        var valetArguments = new List<string>
+        {
+            "run --rm"
+        };
         valetArguments.AddRange(GetEnvironmentVariableArguments());
         valetArguments.Add($"-v \"{Directory.GetCurrentDirectory()}\":/data");
         valetArguments.Add(image);
@@ -66,24 +61,22 @@ public class DockerService : IDockerService
 
         Debug.WriteLine(string.Join(' ', valetArguments));
 
-        var result = await _processService.RunAsync(
+        return _processService.RunAsync(
             "docker",
             string.Join(' ', valetArguments),
             Directory.GetCurrentDirectory(),
             new[] { ("MSYS_NO_PATHCONV", "1") }
         );
-
-        return result;
     }
 
     public async Task VerifyDockerRunningAsync()
     {
-        // TODO: Make cross platform
+        // TODO: Verify this is cross platform
         var result = await _processService.RunAsync(
-            "command",
-            "-v docker",
+            "docker",
+            "info",
             output: false
-            );
+        );
 
         if (!result)
         {

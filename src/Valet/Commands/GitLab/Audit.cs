@@ -11,7 +11,7 @@ public class Audit : ContainerCommand
     protected override string Name => "gitlab";
     protected override string Description => "An audit will output a list of data used in a GitLab instance.";
 
-    private static readonly Option<FileInfo> ConfigFilePath = new Option<FileInfo>("--config-file-path")
+    private static readonly Option<FileInfo> ConfigFilePath = new("--config-file-path")
     {
         Description = "The file path corresponding to the GitLab configuration file.",
         IsRequired = false,

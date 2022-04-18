@@ -1,0 +1,31 @@
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: "6.0.x"
+      - name: install dotnet-format
+        run: dotnet tool install -g dotnet-format --version "5.1.*" --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json
+      - name: lint
+        run: dotnet format src/ --verify-no-changes
+
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: "6.0.x"
+      - name: dotnet restore
+        run: dotnet restore src/Valet.sln
+      - name: dotnet build
+        run: dotnet build src/Valet.sln
+      - name: dotnet test
+        run: dotnet test src/Valet.UnitTests --no-build --no-restore --logger "trx;LogFileName=test-results.trx"

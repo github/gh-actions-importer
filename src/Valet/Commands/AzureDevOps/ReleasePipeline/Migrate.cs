@@ -1,6 +1,6 @@
 using System.CommandLine;
 
-namespace Valet.Commands.AzureDevOps.Pipeline;
+namespace Valet.Commands.AzureDevOps.ReleasePipeline;
 
 public class Migrate : ContainerCommand
 {
@@ -8,7 +8,7 @@ public class Migrate : ContainerCommand
     {
     }
 
-    protected override string Name => "pipeline";
-    protected override string Description => "Target a designer or YAML pipeline";
+    protected override string Name => "release";
+    protected override string Description => "Target a release pipeline";
     protected override List<Option> Options => new();
 }

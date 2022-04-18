@@ -8,14 +8,10 @@ public class App
     const string ValetContainerRegistry = "ghcr.io";
 
     private readonly IDockerService _dockerService;
-    private readonly IAuthenticationService _authenticationService;
 
-    public App(
-        IDockerService dockerService,
-        IAuthenticationService authenticationService)
+    public App(IDockerService dockerService)
     {
         _dockerService = dockerService;
-        _authenticationService = authenticationService;
     }
 
     public async Task<int> UpdateValetAsync(string? username = null, string? password = null)
