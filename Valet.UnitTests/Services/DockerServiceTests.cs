@@ -186,7 +186,7 @@ public class DockerServiceTests
     }
 
     [Test]
-    public async Task VerifyDockerRunningAsync_IsRunning_NoException()
+    public void VerifyDockerRunningAsync_IsRunning_NoException()
     {
         // Arrange
         _processService.Setup(handler =>
@@ -204,7 +204,7 @@ public class DockerServiceTests
     }
 
     [Test]
-    public async Task VerifyDockerRunningAsync_NotRunning_ThrowsException()
+    public void VerifyDockerRunningAsync_NotRunning_ThrowsException()
     {
         // Arrange
         _processService.Setup(handler =>
