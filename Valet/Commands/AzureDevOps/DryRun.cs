@@ -24,7 +24,7 @@ public class DryRun : BaseCommand
         command.AddGlobalOption(Common.Project);
         command.AddGlobalOption(Common.AccessToken);
 
-        command.AddCommand(new Valet.Commands.AzureDevOps.Pipeline.DryRun(_args).Command(app));
+        command.AddCommand(new Valet.Commands.AzureDevOps.BuildPipeline.DryRun(_args).Command(app));
         command.AddCommand(new Valet.Commands.AzureDevOps.ReleasePipeline.DryRun(_args).Command(app));
 
         return command;

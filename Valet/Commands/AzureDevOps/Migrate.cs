@@ -25,7 +25,7 @@ public class Migrate : BaseCommand
         command.AddGlobalOption(Common.Project);
         command.AddGlobalOption(Common.AccessToken);
 
-        command.AddCommand(new Valet.Commands.AzureDevOps.Pipeline.Migrate(_args).Command(app));
+        command.AddCommand(new Valet.Commands.AzureDevOps.BuildPipeline.Migrate(_args).Command(app));
         command.AddCommand(new Valet.Commands.AzureDevOps.ReleasePipeline.Migrate(_args).Command(app));
 
         return command;

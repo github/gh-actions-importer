@@ -1,6 +1,6 @@
 using System.CommandLine;
 
-namespace Valet.Commands.AzureDevOps.Pipeline;
+namespace Valet.Commands.AzureDevOps.BuildPipeline;
 
 public class Migrate : ContainerCommand
 {
