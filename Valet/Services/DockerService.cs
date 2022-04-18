@@ -50,8 +50,10 @@ public class DockerService : IDockerService
 
     public Task<bool> ExecuteCommandAsync(string image, params string[] arguments)
     {
-        var valetArguments = new List<string>();
-        valetArguments.Add("run --rm");
+        var valetArguments = new List<string>
+        {
+            "run --rm"
+        };
         valetArguments.AddRange(GetEnvironmentVariableArguments());
         valetArguments.Add($"-v \"{Directory.GetCurrentDirectory()}\":/data");
         valetArguments.Add(image);
