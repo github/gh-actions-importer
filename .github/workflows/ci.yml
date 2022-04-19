@@ -76,12 +76,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: executables
-      - run: ls -al
-      # - name: create release
-      #   uses: softprops/action-gh-release@v1
-      #   with:
-      #     draft: true
-      #     files: |
-      #       dist/valet-windows-amd64.exe
-      #       dist/valet-linux-amd64
-      #       dist/valet-darwin-amd64
+      - name: create release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: true
+          files: |
+            valet-windows-amd64.exe
+            valet-linux-amd64
+            valet-darwin-amd64
