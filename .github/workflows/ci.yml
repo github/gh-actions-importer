@@ -65,3 +65,17 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           path: ${{ runner.temp }}/staging
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: build
+    # if: github.event_name == "push" && github.ref == "refs/heads/main"
+    steps:
+      - name: download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: dist/
+      - name: create release
+        with:
+          files: dist/*
+          draft: true
