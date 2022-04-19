@@ -76,6 +76,7 @@ jobs:
         with:
           path: dist/
       - name: create release
+        uses: softprops/action-gh-release@v1
         with:
           files: dist/*
           draft: true
