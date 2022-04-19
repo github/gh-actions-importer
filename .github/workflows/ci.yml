@@ -64,6 +64,7 @@ jobs:
       - name: publish artifacts
         uses: actions/upload-artifact@v3
         with:
+          name: executables
           path: ${{ runner.temp }}/staging/*
 
   publish:
@@ -73,6 +74,8 @@ jobs:
     steps:
       - name: download artifacts
         uses: actions/download-artifact@v3
+        with:
+          name: executables
       - run: ls -al
       # - name: create release
       #   uses: softprops/action-gh-release@v1
