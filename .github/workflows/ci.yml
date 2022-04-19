@@ -73,14 +73,12 @@ jobs:
     steps:
       - name: download artifacts
         uses: actions/download-artifact@v2
-        with:
-          path: dist/
-      - run: ls -al dist/
-      - name: create release
-        uses: softprops/action-gh-release@v1
-        with:
-          draft: true
-          files: |
-            dist/valet-windows-amd64.exe
-            dist/valet-linux-amd64
-            dist/valet-darwin-amd64
+      - run: ls -al
+      # - name: create release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     draft: true
+      #     files: |
+      #       dist/valet-windows-amd64.exe
+      #       dist/valet-linux-amd64
+      #       dist/valet-darwin-amd64
