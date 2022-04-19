@@ -31,7 +31,7 @@ jobs:
       - name: dotnet build
         run: dotnet build src/Valet.sln
       - name: dotnet test
-        run: dotnet test src/Valet.UnitTests//Valet.UnitTests.csproj --no-build --no-restore --logger "junit;LogFilePath=unit-tests.xml"
+        run: dotnet test src/Valet.UnitTests/Valet.UnitTests.csproj --no-build --no-restore --logger "junit;LogFilePath=unit-tests.xml"
       - name: publish test results
         uses: EnricoMi/publish-unit-test-result-action@v1
         with:
