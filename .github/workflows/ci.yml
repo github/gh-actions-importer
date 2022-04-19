@@ -3,6 +3,9 @@ on:
   push:
     branches: [main]
 
+env:
+  DOTNET_VERSION: "6.0.x"
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -10,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: "6.0.x"
+          dotnet-version: ${{ env.DOTNET_VERSION }}
       - name: install dotnet-format
         run: dotnet tool install -g dotnet-format --version "5.1.*" --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json
       - name: lint
@@ -22,10 +25,36 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: "6.0.x"
+          dotnet-version: ${{ env.DOTNET_VERSION }}
       - name: dotnet restore
         run: dotnet restore src/Valet.sln
       - name: dotnet build
         run: dotnet build src/Valet.sln
       - name: dotnet test
-        run: dotnet test src/Valet.UnitTests --no-build --no-restore --logger "trx;LogFileName=test-results.trx"
+        run: dotnet test src/Valet.UnitTests.csproj --no-build --no-restore --logger "junit;LogFilePath=unit-tests.xml"
+      - name: publish test results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        with:
+          files: "**/*-tests.xml"
+          check_name: "Unit Test Results"
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: dotnet restore
+        run: dotnet restore src/Valet.sln
+      - name: dotnet build
+        run: dotnet build src/Valet.sln
+      - name: dotnet publish
+        run: |
+          dotnet publish src/Valet.csproj -c Release -r win10-x64 --self-contained -o dist/win10-x64 --no-restore
+          dotnet publish src/Valet.csproj -c Release -r osx-x64 --self-contained -o dist/osx-x64 --no-restore
+          dotnet publish src/Valet.csproj -c Release -r linux-x64 --self-contained -o dist/linux-x64 --no-restore
+      - name: publish artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          path: dist/
