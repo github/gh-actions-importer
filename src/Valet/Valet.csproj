@@ -6,6 +6,7 @@
     <RuntimeIdentifiers>win10-x64;osx-x64;linux-x64</RuntimeIdentifiers>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyName>gh-valet</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
