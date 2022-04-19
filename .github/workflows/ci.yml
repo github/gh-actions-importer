@@ -62,9 +62,9 @@ jobs:
           cp dist/linux-x64/gh-valet ${{ runner.temp }}/staging/valet-linux-amd64
 
       - name: publish artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          path: ${{ runner.temp }}/staging
+          path: ${{ runner.temp }}/staging/*
 
   publish:
     runs-on: ubuntu-latest
@@ -72,7 +72,7 @@ jobs:
     # if: github.event_name == "push" && github.ref == "refs/heads/main"
     steps:
       - name: download artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
       - run: ls -al
       # - name: create release
       #   uses: softprops/action-gh-release@v1
