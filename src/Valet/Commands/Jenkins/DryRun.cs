@@ -9,7 +9,7 @@ public class DryRun : ContainerCommand
     }
 
     protected override string Name => "jenkins";
-    protected override string Description => "Convert a Jenkins job to a GitHub Actions workflow and output it's yaml file.";
+    protected override string Description => "Convert a Jenkins job to a GitHub Actions workflow and output its yaml file.";
 
     protected override List<Option> Options => new()
     {

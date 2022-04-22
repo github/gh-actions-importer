@@ -40,10 +40,10 @@ public class DockerServiceTests
                 It.IsAny<IEnumerable<(string, string)>?>(),
                 It.IsAny<bool>()
             )
-        ).ReturnsAsync(true);
+        ).Returns(Task.CompletedTask);
 
         // Act
-        var result = await _dockerService.UpdateImageAsync(
+        await _dockerService.UpdateImageAsync(
             image,
             server,
             version,
@@ -52,7 +52,6 @@ public class DockerServiceTests
         );
 
         // Assert
-        Assert.IsTrue(result);
         _processService.VerifyAll();
     }
 
@@ -74,10 +73,10 @@ public class DockerServiceTests
                 It.IsAny<IEnumerable<(string, string)>?>(),
                 It.IsAny<bool>()
             )
-        ).ReturnsAsync(false);
+        ).Returns(Task.CompletedTask);
 
         // Act
-        var result = await _dockerService.UpdateImageAsync(
+        await _dockerService.UpdateImageAsync(
             image,
             server,
             version,
@@ -86,7 +85,6 @@ public class DockerServiceTests
         );
 
         // Assert
-        Assert.IsFalse(result);
         _processService.VerifyAll();
     }
 
@@ -108,7 +106,7 @@ public class DockerServiceTests
                 It.IsAny<IEnumerable<(string, string)>?>(),
                 It.IsAny<bool>()
             )
-        ).ReturnsAsync(true);
+        ).Returns(Task.CompletedTask);
 
         _processService.Setup(handler =>
             handler.RunAsync(
@@ -118,10 +116,10 @@ public class DockerServiceTests
                 It.IsAny<IEnumerable<(string, string)>?>(),
                 It.IsAny<bool>()
             )
-        ).ReturnsAsync(true);
+        ).Returns(Task.CompletedTask);
 
         // Act
-        var result = await _dockerService.UpdateImageAsync(
+        await _dockerService.UpdateImageAsync(
             image,
             server,
             version,
@@ -130,7 +128,6 @@ public class DockerServiceTests
         );
 
         // Assert
-        Assert.IsTrue(result);
         _processService.VerifyAll();
     }
 
@@ -148,13 +145,12 @@ public class DockerServiceTests
                 new[] { new System.ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
                 true
             )
-        ).ReturnsAsync(true);
+        ).Returns(Task.CompletedTask);
 
         // Act
-        var result = await _dockerService.ExecuteCommandAsync(image, arguments);
+        await _dockerService.ExecuteCommandAsync(image, arguments);
 
         // Assert
-        Assert.IsTrue(result);
         _processService.VerifyAll();
     }
 
@@ -177,13 +173,12 @@ public class DockerServiceTests
                 new[] { new System.ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
                 true
             )
-        ).ReturnsAsync(true);
+        ).Returns(Task.CompletedTask);
 
         // Act
-        var result = await _dockerService.ExecuteCommandAsync(image, arguments);
+        await _dockerService.ExecuteCommandAsync(image, arguments);
 
         // Assert
-        Assert.IsTrue(result);
         _processService.VerifyAll();
     }
 
@@ -199,7 +194,7 @@ public class DockerServiceTests
                 It.IsAny<IEnumerable<(string, string)>?>(),
                 It.IsAny<bool>()
             )
-        ).ReturnsAsync(true);
+        ).Returns(Task.CompletedTask);
 
         // Act, Assert
         Assert.DoesNotThrowAsync(() => _dockerService.VerifyDockerRunningAsync());
@@ -217,7 +212,7 @@ public class DockerServiceTests
                 It.IsAny<IEnumerable<(string, string)>?>(),
                 It.IsAny<bool>()
             )
-        ).ReturnsAsync(false);
+        ).ThrowsAsync(new Exception());
 
         // Act, Assert
         Assert.ThrowsAsync<Exception>(() => _dockerService.VerifyDockerRunningAsync());

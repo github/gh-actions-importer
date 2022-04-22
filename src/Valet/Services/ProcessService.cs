@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 public class ProcessService : IProcessService
 {
-    public Task<bool> RunAsync(
+    public Task RunAsync(
         string filename,
         string arguments,
         string? cwd = null,

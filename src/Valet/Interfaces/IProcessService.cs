@@ -2,7 +2,7 @@ namespace Valet.Interfaces;
 
 public interface IProcessService
 {
-    Task<bool> RunAsync(
+    Task RunAsync(
         string filename,
         string arguments,
         string? cwd = null,

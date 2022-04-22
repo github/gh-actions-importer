@@ -21,7 +21,7 @@ public class App
         username ??= Environment.GetEnvironmentVariable("GHCR_USERNAME");
         password ??= Environment.GetEnvironmentVariable("GHCR_PASSWORD");
 
-        var result = await _dockerService.UpdateImageAsync(
+        await _dockerService.UpdateImageAsync(
             ValetImage,
             ValetContainerRegistry,
             "latest",
@@ -29,13 +29,13 @@ public class App
             password
         );
 
-        return result ? 0 : 1;
+        return 0;
     }
 
     public async Task<int> ExecuteValetAsync(string[] args)
     {
         await _dockerService.VerifyDockerRunningAsync().ConfigureAwait(false);
-        var result = await _dockerService.ExecuteCommandAsync($"{ValetContainerRegistry}/{ValetImage}:latest", args);
-        return result ? 0 : 1;
+        await _dockerService.ExecuteCommandAsync($"{ValetContainerRegistry}/{ValetImage}:latest", args);
+        return 0;
     }
 }

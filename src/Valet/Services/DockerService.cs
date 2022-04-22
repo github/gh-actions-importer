@@ -23,32 +23,27 @@ public class DockerService : IDockerService
         _processService = processService;
     }
 
-    public async Task<bool> UpdateImageAsync(string image, string server, string version, string? username, string? password)
+    public async Task UpdateImageAsync(string image, string server, string version, string? username, string? password)
     {
         if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
         {
-            var authenticated = await _processService.RunAsync(
+            await _processService.RunAsync(
                 "docker",
                 $"login {server} --password {password} --username {username}"
             ).ConfigureAwait(false);
-
-            if (!authenticated)
-            {
-                return false;
-            }
         }
         else
         {
             Console.WriteLine("No GHCR credentials provided.");
         }
 
-        return await _processService.RunAsync(
+        await _processService.RunAsync(
             "docker",
             $"pull {server}/{image}:{version}"
         );
     }
 
-    public Task<bool> ExecuteCommandAsync(string image, params string[] arguments)
+    public Task ExecuteCommandAsync(string image, params string[] arguments)
     {
         var valetArguments = new List<string>
         {
@@ -58,8 +53,6 @@ public class DockerService : IDockerService
         valetArguments.Add($"-v \"{Directory.GetCurrentDirectory()}\":/data");
         valetArguments.Add(image);
         valetArguments.AddRange(arguments);
-
-        Debug.WriteLine(string.Join(' ', valetArguments));
 
         return _processService.RunAsync(
             "docker",
@@ -71,14 +64,16 @@ public class DockerService : IDockerService
 
     public async Task VerifyDockerRunningAsync()
     {
-        // TODO: Verify this is cross platform
-        var result = await _processService.RunAsync(
-            "docker",
-            "info",
-            output: false
-        );
-
-        if (!result)
+        try
+        {
+            // TODO: Verify this is cross platform
+            await _processService.RunAsync(
+                "docker",
+                "info",
+                output: false
+            );
+        }
+        catch (Exception)
         {
             throw new Exception("Please ensure docker is installed and the docker daemon is running");
         }

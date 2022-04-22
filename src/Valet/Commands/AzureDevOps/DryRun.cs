@@ -12,7 +12,7 @@ public class DryRun : BaseCommand
     }
 
     protected override string Name => "azure-devops";
-    protected override string Description => "Convert an Azure DevOps pipeline to a GitHub Actions workflow and output it's yaml file.";
+    protected override string Description => "Convert an Azure DevOps pipeline to a GitHub Actions workflow and output its yaml file.";
 
     protected override Command GenerateCommand(App app)
     {

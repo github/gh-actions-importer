@@ -11,7 +11,7 @@ public class DryRun : BaseCommand
     }
 
     protected override string Name => "dry-run";
-    protected override string Description => "Convert a pipeline to a GitHub Actions workflow and output it's yaml file.";
+    protected override string Description => "Convert a pipeline to a GitHub Actions workflow and output its yaml file.";
 
     protected override Command GenerateCommand(App app)
     {

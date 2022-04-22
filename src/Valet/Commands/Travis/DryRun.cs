@@ -9,7 +9,7 @@ public class DryRun : ContainerCommand
     }
 
     protected override string Name => "travis-ci";
-    protected override string Description => "Convert a Travis CI pipeline to a GitHub Actions workflow and output it's yaml file.";
+    protected override string Description => "Convert a Travis CI pipeline to a GitHub Actions workflow and output its yaml file.";
 
     protected override List<Option> Options => new()
     {
