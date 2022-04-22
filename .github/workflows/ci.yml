@@ -7,6 +7,10 @@ on:
 env:
   DOTNET_VERSION: "6.0.x"
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -35,6 +39,7 @@ jobs:
         run: dotnet test src/Valet.UnitTests/Valet.UnitTests.csproj --no-build --no-restore --logger "junit;LogFilePath=unit-tests.xml"
       - name: publish test results
         uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
         with:
           files: "**/*-tests.xml"
           check_name: "Unit Test Results"

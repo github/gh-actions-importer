@@ -47,7 +47,7 @@ public class DockerService : IDockerService
     {
         var valetArguments = new List<string>
         {
-            "run --rm"
+            "run --rm -t"
         };
         valetArguments.AddRange(GetEnvironmentVariableArguments());
         valetArguments.Add($"-v \"{Directory.GetCurrentDirectory()}\":/data");
@@ -66,7 +66,6 @@ public class DockerService : IDockerService
     {
         try
         {
-            // TODO: Verify this is cross platform
             await _processService.RunAsync(
                 "docker",
                 "info",
