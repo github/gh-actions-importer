@@ -20,8 +20,6 @@ Valet currently supports migrating pipelines to GitHub Actions from the followin
 
 Learn more about how Valet works for each of the supported platforms in the documentation [here](https://github.com/valet-customers/distribution/blob/main/README.md).
 
-> Support can be requested by creating an issue in this repository. We'll be available to provide support Monday through Friday between the hours of 9 AM EST and 5 PM PST.
-
 ## Getting started with the Valet CLI
 
 ### Installation
