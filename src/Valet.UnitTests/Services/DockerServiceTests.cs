@@ -135,12 +135,14 @@ public class DockerServiceTests
     public async Task ExecuteCommandAsync_InvokesDocker_ReturnsTrue()
     {
         // Arrange
-        var image = "ghcr.io/valet-customers/valet-cli:latest";
+        var image = "valet-customers/valet-cli";
+        var server = "ghcr.io";
+        var version = "latest";
         var arguments = new[] { "run", "this", "command" };
         _processService.Setup(handler =>
             handler.RunAsync(
                 "docker",
-                $"run --rm -t -v \"{Directory.GetCurrentDirectory()}\":/data {image} {string.Join(' ', arguments)}",
+                $"run --rm -t -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
                 new[] { new System.ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
                 true
@@ -148,7 +150,7 @@ public class DockerServiceTests
         ).Returns(Task.CompletedTask);
 
         // Act
-        await _dockerService.ExecuteCommandAsync(image, arguments);
+        await _dockerService.ExecuteCommandAsync(image, server, version, arguments);
 
         // Assert
         _processService.VerifyAll();
@@ -158,7 +160,9 @@ public class DockerServiceTests
     public async Task ExecuteCommandAsync_InvokesDocker_WithEnvironmentVariables_ReturnsTrue()
     {
         // Arrange
-        var image = "ghcr.io/valet-customers/valet-cli:latest";
+        var image = "valet-customers/valet-cli";
+        var server = "ghcr.io";
+        var version = "latest";
         var arguments = new[] { "run", "this", "command" };
 
         Environment.SetEnvironmentVariable("GH_ACCESS_TOKEN", "foo");
@@ -168,7 +172,7 @@ public class DockerServiceTests
         _processService.Setup(handler =>
             handler.RunAsync(
                 "docker",
-                $"run --rm -t --env GITHUB_ACCESS_TOKEN=foo --env GITHUB_INSTANCE_URL=https://github.fabrikam.com --env JENKINS_ACCESS_TOKEN=bar -v \"{Directory.GetCurrentDirectory()}\":/data {image} {string.Join(' ', arguments)}",
+                $"run --rm -t --env GITHUB_ACCESS_TOKEN=foo --env GITHUB_INSTANCE_URL=https://github.fabrikam.com --env JENKINS_ACCESS_TOKEN=bar -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
                 new[] { new System.ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
                 true
@@ -176,7 +180,7 @@ public class DockerServiceTests
         ).Returns(Task.CompletedTask);
 
         // Act
-        await _dockerService.ExecuteCommandAsync(image, arguments);
+        await _dockerService.ExecuteCommandAsync(image, server, version, arguments);
 
         // Assert
         _processService.VerifyAll();
@@ -216,5 +220,51 @@ public class DockerServiceTests
 
         // Act, Assert
         Assert.ThrowsAsync<Exception>(() => _dockerService.VerifyDockerRunningAsync());
+    }
+
+    [Test]
+    public void VerifyImagePresentAsync_IsPresent_NoException()
+    {
+        // Arrange
+        var image = "valet-customers/valet-cli";
+        var server = "ghcr.io";
+        var version = "latest";
+
+        _processService.Setup(handler =>
+            handler.RunAsync(
+                "docker",
+                $"image inspect {server}/{image}:{version}",
+                It.IsAny<string?>(),
+                It.IsAny<IEnumerable<(string, string)>?>(),
+                It.IsAny<bool>()
+            )
+        ).Returns(Task.CompletedTask);
+
+        // Act, Assert
+        Assert.DoesNotThrowAsync(() => _dockerService.VerifyImagePresentAsync(image, server, version));
+        _processService.VerifyAll();
+    }
+
+    [Test]
+    public void VerifyImagePresentAsync_NotPresent_ThrowsException()
+    {
+        // Arrange
+        var image = "valet-customers/valet-cli";
+        var server = "ghcr.io";
+        var version = "latest";
+
+        _processService.Setup(handler =>
+            handler.RunAsync(
+                "docker",
+                $"image inspect {server}/{image}:{version}",
+                It.IsAny<string?>(),
+                It.IsAny<IEnumerable<(string, string)>?>(),
+                It.IsAny<bool>()
+            )
+        ).ThrowsAsync(new Exception());
+
+        // Act, Assert
+        Assert.ThrowsAsync<Exception>(() => _dockerService.VerifyImagePresentAsync(image, server, version));
+        _processService.VerifyAll();
     }
 }

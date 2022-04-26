@@ -43,7 +43,7 @@ public class DockerService : IDockerService
         );
     }
 
-    public Task ExecuteCommandAsync(string image, params string[] arguments)
+    public Task ExecuteCommandAsync(string image, string server, string version, params string[] arguments)
     {
         var valetArguments = new List<string>
         {
@@ -51,7 +51,7 @@ public class DockerService : IDockerService
         };
         valetArguments.AddRange(GetEnvironmentVariableArguments());
         valetArguments.Add($"-v \"{Directory.GetCurrentDirectory()}\":/data");
-        valetArguments.Add(image);
+        valetArguments.Add($"{server}/{image}:{version}");
         valetArguments.AddRange(arguments);
 
         return _processService.RunAsync(
@@ -75,6 +75,22 @@ public class DockerService : IDockerService
         catch (Exception)
         {
             throw new Exception("Please ensure docker is installed and the docker daemon is running");
+        }
+    }
+
+    public async Task VerifyImagePresentAsync(string image, string server, string version)
+    {
+        try
+        {
+            await _processService.RunAsync(
+                "docker",
+                $"image inspect {server}/{image}:{version}",
+                output: false
+            );
+        }
+        catch (Exception)
+        {
+            throw new Exception("Unable to locate Valet image locally. Please run `gh valet update` to fetch the latest image prior to running this command.");
         }
     }
 

@@ -35,7 +35,18 @@ public class App
     public async Task<int> ExecuteValetAsync(string[] args)
     {
         await _dockerService.VerifyDockerRunningAsync().ConfigureAwait(false);
-        await _dockerService.ExecuteCommandAsync($"{ValetContainerRegistry}/{ValetImage}:latest", args);
+        await _dockerService.VerifyImagePresentAsync(
+            ValetImage,
+            ValetContainerRegistry,
+            "latest"
+        ).ConfigureAwait(false);
+
+        await _dockerService.ExecuteCommandAsync(
+            ValetImage,
+            ValetContainerRegistry,
+            "latest",
+            args
+        );
         return 0;
     }
 }
