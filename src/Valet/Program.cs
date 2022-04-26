@@ -11,7 +11,7 @@ var app = new App(
     new DockerService(processService)
 );
 
-var command = new RootCommand("Valet is a tool to help plan and facilitate migrations to GitHub Actions.")
+var command = new RootCommand("Valet is a tool that facilitates migrations to GitHub Actions.")
 {
     new Update().Command(app),
     new Valet.Commands.Version(args).Command(app),
