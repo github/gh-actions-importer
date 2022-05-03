@@ -57,21 +57,15 @@ jobs:
         run: dotnet build src/Valet.sln
       - name: dotnet publish
         run: |
-          dotnet publish src/Valet/Valet.csproj -c Release -r win-x64 --self-contained -o dist/win-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
-          dotnet publish src/Valet/Valet.csproj -c Release -r win-arm64 --self-contained -o dist/win-arm64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
+          dotnet publish src/Valet/Valet.csproj -c Release -r win10-x64 --self-contained -o dist/win-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
           dotnet publish src/Valet/Valet.csproj -c Release -r osx-x64 --self-contained -o dist/osx-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
-          dotnet publish src/Valet/Valet.csproj -c Release -r osx-arm64 --self-contained -o dist/osx-arm64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
           dotnet publish src/Valet/Valet.csproj -c Release -r linux-x64 --self-contained -o dist/linux-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
-          dotnet publish src/Valet/Valet.csproj -c Release -r linux-arm64 --self-contained -o dist/linux-arm64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
       - name: prepare staging
         run: |
           mkdir -p ${{ runner.temp }}/staging
           cp dist/win-x64/gh-valet.exe ${{ runner.temp }}/staging/valet-windows-amd64.exe
-          cp dist/win-arm64/gh-valet.exe ${{ runner.temp }}/staging/valet-windows-arm64.exe
           cp dist/osx-x64/gh-valet ${{ runner.temp }}/staging/valet-darwin-amd64
-          cp dist/osx-arm64/gh-valet ${{ runner.temp }}/staging/valet-darwin-arm64
           cp dist/linux-x64/gh-valet ${{ runner.temp }}/staging/valet-linux-amd64
-          cp dist/linux-arm64/gh-valet ${{ runner.temp }}/staging/valet-linux-arm64
 
       - name: publish artifacts
         uses: actions/upload-artifact@v3
@@ -113,8 +107,5 @@ jobs:
           fail_on_unmatched_files: true
           files: |
             ${{ runner.temp }}/dist/valet-windows-amd64.exe
-            ${{ runner.temp }}/dist/valet-windows-arm64.exe
             ${{ runner.temp }}/dist/valet-linux-amd64
-            ${{ runner.temp }}/dist/valet-linux-arm64
             ${{ runner.temp }}/dist/valet-darwin-amd64
-            ${{ runner.temp }}/dist/valet-darwin-arm64
