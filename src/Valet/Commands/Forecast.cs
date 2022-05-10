@@ -19,12 +19,6 @@ public class Forecast : BaseCommand
         IsRequired = false,
     };
 
-    private static readonly Option<DateTime> EndDate = new("--end-date", getDefaultValue: () => DateTime.Now)
-    {
-        Description = "The end date of the forecast analysis in YYYY-MM-DD format.",
-        IsRequired = false,
-    };
-
     private static readonly Option<int> TimeSlice = new("--time-slice", getDefaultValue: () => 60)
     {
         Description = "The time slice in seconds to use for computing concurrency metrics.",
@@ -50,11 +44,11 @@ public class Forecast : BaseCommand
         );
 
         command.AddGlobalOption(StartDate);
-        command.AddGlobalOption(EndDate);
         command.AddGlobalOption(TimeSlice);
         command.AddGlobalOption(SourceFilePath);
 
         command.AddCommand(new AzureDevOps.Forecast(_args).Command(app));
+        command.AddCommand(new Jenkins.Forecast(_args).Command(app));
 
         return command;
     }
