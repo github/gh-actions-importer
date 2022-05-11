@@ -22,13 +22,13 @@ public class Migrate : BaseCommand
     private static readonly Option<string> GitHubInstanceUrl = new("--github-instance-url")
     {
         Description = "The URL of the GitHub instance.",
-        IsRequired = true
+        IsRequired = false
     };
 
     private static readonly Option<string> GitHubAccessToken = new("--github-access-token")
     {
         Description = "Access token for the GitHub repo to migrate to.",
-        IsRequired = true
+        IsRequired = false
     };
 
     protected override Command GenerateCommand(App app)
