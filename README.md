@@ -2,7 +2,7 @@
 
 [![.github/workflows/ci.yml](https://github.com/github/gh-valet/actions/workflows/ci.yml/badge.svg)](https://github.com/github/gh-valet/actions/workflows/ci.yml)
 
-Valet helps facilitate the migration of Azure DevOps, Circle CI, GitLab CI, Jenkins, and Travis CI pipelines to GitHub Actions. This repository provides functionality that extends the [GitHub CLI](https://cli.github.com/) to migrate pipelines to GitHub Actions using Valet.
+Valet helps facilitate the migration of Azure DevOps, CircleCI, GitLab CI, Jenkins, and Travis CI pipelines to GitHub Actions. This repository provides functionality that extends the [GitHub CLI](https://cli.github.com/) to migrate pipelines to GitHub Actions using Valet.
 
 > Because Valet is in private preview, customers must be onboarded prior to using the Valet IssueOps workflow. Please reach out to GitHub Sales to inquire about being added to the private preview.
 
@@ -13,7 +13,7 @@ Note: You can request support by creating an issue [here](https://github.com/git
 Valet currently supports migrating pipelines to GitHub Actions from the following platforms:
 
 - Azure DevOps
-- Circle CI
+- CircleCI
 - GitLab CI
 - Jenkins
 - Travis CI
@@ -92,7 +92,7 @@ Usage:
 
 Commands:
   azure-devops  An audit will output a list of data used in an Azure DevOps instance.
-  circle-ci     An audit will output a list of data used in a Circle CI instance.
+  circle-ci     An audit will output a list of data used in a CircleCI instance.
   gitlab        An audit will output a list of data used in a GitLab instance.
   jenkins       An audit will output a list of data used in a Jenkins instance.
   travis-ci     An audit will output a list of data used in a Travis CI instance.

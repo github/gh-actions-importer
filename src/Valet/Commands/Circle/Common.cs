@@ -6,19 +6,19 @@ public static class Common
 {
     public static readonly Option<string> InstanceUrl = new(new[] { "-u", "--circle-ci-instance-url" })
     {
-        Description = "The URL of the Circle CI instance.",
+        Description = "The URL of the CircleCI instance.",
         IsRequired = false,
     };
 
     public static readonly Option<string> AccessToken = new(new[] { "-t", "--circle-ci-access-token" })
     {
-        Description = "Access token for the Circle CI instance.",
+        Description = "Access token for the CircleCI instance.",
         IsRequired = false,
     };
 
     public static readonly Option<string> Organization = new(new[] { "-g", "--circle-ci-organization" })
     {
-        Description = "The Circle CI organization name.",
+        Description = "The CircleCI organization name.",
         IsRequired = false,
     };
 
@@ -42,13 +42,13 @@ public static class Common
 
     public static readonly Option<string> Project = new(new[] { "--circle-ci-project", "-p" })
     {
-        Description = "The Circle CI project name.",
+        Description = "The CircleCI project name.",
         IsRequired = false,
     };
 
     public static readonly Option<FileInfo> SourceFilePath = new("--source-file-path")
     {
-        Description = "The file path corresponding to the Circle CI workflow file.",
+        Description = "The file path corresponding to the CircleCI workflow file.",
         IsRequired = false,
     };
 }
