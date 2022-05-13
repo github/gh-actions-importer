@@ -118,6 +118,8 @@ Usage:
 
 Commands:
   azure-devops  Forecasts GitHub Actions usage from historical Azure DevOps pipeline utilization.
+  jenkins       Forecasts GitHub Actions usage from historical Jenkins pipeline utilization.
+  gitlab        Forecasts GitHub Actions usage from historical GitLab pipeline utilization.
 ```
 
 Detailed documentation about running a forecast with Valet can be found [here](https://github.com/valet-customers/distribution/blob/main/README.md#forecast).
