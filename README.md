@@ -6,7 +6,7 @@ Valet helps facilitate the migration of Azure DevOps, CircleCI, GitLab CI, Jenki
 
 > Because Valet is in private preview, customers must be onboarded prior to using the Valet IssueOps workflow. Please reach out to GitHub Sales to inquire about being added to the private preview.
 
-Note: You can request support by creating an issue [here](https://github.com/github/gh-valet/issues/new). The Valet team responds to support requests Monday through Friday between the hours of 9AM EST and 5PM PST.
+**Note**: You can request support by creating an issue [here](https://github.com/github/gh-valet/issues/new). The Valet team responds to support requests Monday through Friday between the hours of 9AM EST and 5PM PST.
 
 ## Supported platforms
 
@@ -18,7 +18,7 @@ Valet currently supports migrating pipelines to GitHub Actions from the followin
 - Jenkins
 - Travis CI
 
-Learn more about how Valet works for each of the supported platforms in the documentation [here](https://github.com/valet-customers/distribution/blob/main/README.md).
+You can find detailed information about how Valet works for each of the supported platforms in the documentation that is accessible once you are enrolled in the private preview.
 
 ## Getting started with the Valet CLI
 
@@ -51,7 +51,7 @@ Commands:
   audit     An audit will output a list of data used in a CI/CD instance.
   dry-run   Convert a pipeline to a GitHub Actions workflow and output its yaml file.
   migrate   Convert a pipeline to a GitHub Actions workflow and open a pull request with the changes.
-  forecast  Forecasts GitHub actions usage from historical pipeline utilization.
+  forecast  Forecasts GitHub Actions usage from historical pipeline utilization.
 ```
 
 ### Configuration
@@ -68,7 +68,7 @@ $ gh valet update
 $ gh valet update --username $GITHUB_HANDLE --password $GITHUB_TOKEN
 ```
 
-In order for Valet to communicate with your current CI server and GitHub, various credentials must be available for the command. These can be configured using environment variables or a `.env.local` file as described [here](https://github.com/valet-customers/distribution/blob/main/README.md#using-environment-variables).
+In order for Valet to communicate with your current CI server and GitHub, various credentials must be available for the command. These can be configured using environment variables or a `.env.local` file. You can find detailed information about using environment variables in the documentation that is accessible once you are enrolled in the private preview.
 
 ### Usage
 
@@ -98,7 +98,7 @@ Commands:
   travis-ci     An audit will output a list of data used in a Travis CI instance.
 ```
 
-Detailed documentation about running an audit with Valet can be found [here](https://github.com/valet-customers/distribution/blob/main/README.md#audit).
+You can find detailed information about running an audit with Valet in the documentation that is accessible once you are enrolled in the private preview. 
 
 #### Forecast
 
@@ -109,7 +109,7 @@ To run a forecast, use the following command to determine the options that are r
 ```bash
 $ gh valet forecast -h
 Description:
-  Forecasts GitHub actions usage from historical pipeline utilization.
+  Forecasts GitHub Actions usage from historical pipeline utilization.
 
 Usage:
   gh-valet forecast [command] [options]
@@ -122,7 +122,7 @@ Commands:
   gitlab        Forecasts GitHub Actions usage from historical GitLab pipeline utilization.
 ```
 
-Detailed documentation about running a forecast with Valet can be found [here](https://github.com/valet-customers/distribution/blob/main/README.md#forecast).
+You can find detailed information about running a forecast with Valet in the documentation that is accessible once you are enrolled in the private preview. 
 
 #### Dry-run
 
@@ -148,7 +148,7 @@ Commands:
   travis-ci     Convert a Travis CI pipeline to a GitHub Actions workflow and output its yaml file.
 ```
 
-Detailed documentation about running a dry-run with Valet can be found [here](https://github.com/valet-customers/distribution/blob/main/README.md#dry-run).
+You can find detailed information about running a dry-run with Valet in the documentation that is accessible once you are enrolled in the private preview. 
 
 #### Migrate
 
@@ -174,4 +174,4 @@ Commands:
   travis-ci     Convert a Travis CI pipeline to a GitHub Actions workflow and and open a pull request with the changes.
 ```
 
-Detailed documentation about running a migration with Valet can be found [here](https://github.com/valet-customers/distribution/blob/main/README.md#migrate).
+You can find detailed information about running a migration with Valet in the documentation that is accessible once you are enrolled in the private preview.
