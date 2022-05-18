@@ -4,7 +4,7 @@
 
 Valet helps facilitate the migration of Azure DevOps, CircleCI, GitLab CI, Jenkins, and Travis CI pipelines to GitHub Actions. This repository provides functionality that extends the [GitHub CLI](https://cli.github.com/) to migrate pipelines to GitHub Actions using Valet.
 
-> Because Valet is in private preview, customers must be onboarded prior to using the `gh-valet` CLI extension. Please reach out to [GitHub Sales](https://github.com/enterprise/contact) to inquire about being added to the private preview.
+> Valet is currently private and customers must be onboarded prior to using the `gh-valet` CLI extension. Please reach out to [GitHub Sales](https://github.com/enterprise/contact) to inquire about being granted access.
 
 **Note**: You can request support by creating an issue [here](https://github.com/github/gh-valet/issues/new). The Valet team responds to support requests Monday through Friday between the hours of 9AM EST and 5PM PST.
 
