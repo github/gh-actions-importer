@@ -1,0 +1,60 @@
+## Description
+
+name: Bug Report
+description: Request support or help from the Valet team
+title: "[Support]: "
+labels: ["help wanted"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please provide the following information to help us troubleshoot your issue.
+  - type: checkboxes
+    id: os
+    attributes:
+      label: What operating system are you using?
+      options:
+        - label: macOS
+        - label: Linux
+        - label: Windows
+  - type: textarea
+    id: gh-version
+    attributes:
+      label: What version of the `gh` CLI are you using?
+      placeholder: i.e. the output of `gh version`
+    validations:
+      required: true
+  - type: textarea
+    id: gh-version
+    attributes:
+      label: What version of the `gh-valet` extension are you using?
+      placeholder: i.e. the output of `gh extension list | grep valet`
+    validations:
+      required: true
+  - type: textarea
+    id: valet-version
+    attributes:
+      label: What version of the `valet` docker container are you using?
+      placeholder: i.e. the output of `gh valet version`
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please include any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/github/gh-valet/blob/main/CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
