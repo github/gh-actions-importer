@@ -14,8 +14,8 @@ body:
     attributes:
       label: What operating system are you using?
       options:
-        - label: macOS
         - label: Linux
+        - label: macOS
         - label: Windows
   - type: textarea
     id: gh-version
@@ -25,7 +25,7 @@ body:
     validations:
       required: true
   - type: textarea
-    id: gh-version
+    id: gh-valet-version
     attributes:
       label: What version of the `gh-valet` extension are you using?
       placeholder: i.e. the output of `gh extension list | grep valet`
