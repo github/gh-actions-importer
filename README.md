@@ -6,7 +6,7 @@ Valet helps facilitate the migration of Azure DevOps, CircleCI, GitLab CI, Jenki
 
 > Valet is currently private and customers must be onboarded prior to using the `gh-valet` CLI extension. Please reach out to [GitHub Sales](https://github.com/enterprise/contact) to inquire about being granted access.
 
-**Note**: You can request support by creating an issue [here](https://github.com/github/gh-valet/issues/new). The Valet team responds to support requests Monday through Friday between the hours of 9AM EST and 5PM PST.
+**Note**: You can request support by creating an issue [here](https://github.com/github/gh-valet/issues/new?assignees=&labels=help+wanted&template=support.yml&title=%5BSupport%5D%3A+). The Valet team responds to support requests Monday through Friday between the hours of 9AM EST and 5PM PST.
 
 ## Supported platforms
 
