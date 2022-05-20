@@ -69,15 +69,16 @@ public class ProcessService : IProcessService
 
     private void ReadStream(StreamReader reader, bool output, CancellationToken ctx)
     {
-        if (!output) return;
-
         Task.Run(() =>
         {
             while (!ctx.IsCancellationRequested)
             {
                 int current;
                 while ((current = reader.Read()) >= 0)
-                    Console.Write((char)current);
+                {
+                    if (output)
+                        Console.Write((char)current);
+                }
             }
         }, ctx);
     }
