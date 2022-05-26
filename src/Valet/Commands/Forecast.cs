@@ -51,6 +51,7 @@ public class Forecast : BaseCommand
         command.AddCommand(new Jenkins.Forecast(_args).Command(app));
         command.AddCommand(new GitLab.Forecast(_args).Command(app));
         command.AddCommand(new Circle.Forecast(_args).Command(app));
+        command.AddCommand(new Travis.Forecast(_args).Command(app));
 
         return command;
     }
