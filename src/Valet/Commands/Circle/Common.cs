@@ -28,7 +28,7 @@ public static class Common
         IsRequired = false,
     };
 
-    public static readonly Option<string> SourceGitHubAccessToken = new(new[] { "-s", "--circle-ci--srouce-github-access-token" })
+    public static readonly Option<string> SourceGitHubAccessToken = new(new[] { "-s", "--circle-ci-source-github-access-token" })
     {
         Description = "Access token for the source GitHub instance.",
         IsRequired = false,
