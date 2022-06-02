@@ -7,6 +7,7 @@ public interface IProcessService
         string arguments,
         string? cwd = null,
         IEnumerable<(string, string)>? environmentVariables = null,
-        bool output = true
+        bool output = true,
+        string? inputForStdIn = null
     );
 }

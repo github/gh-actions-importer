@@ -14,7 +14,7 @@ public class App
         _dockerService = dockerService;
     }
 
-    public async Task<int> UpdateValetAsync(string? username = null, string? password = null)
+    public async Task<int> UpdateValetAsync(string? username = null, string? password = null, bool passwordStdin = false)
     {
         await _dockerService.VerifyDockerRunningAsync().ConfigureAwait(false);
 
@@ -26,7 +26,8 @@ public class App
             ValetContainerRegistry,
             "latest",
             username,
-            password
+            password,
+            passwordStdin
         );
 
         return 0;

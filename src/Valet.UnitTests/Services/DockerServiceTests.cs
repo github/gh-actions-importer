@@ -38,7 +38,8 @@ public class DockerServiceTests
                 $"pull {server}/{image}:{version}",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>()
+                It.IsAny<bool>(),
+                null
             )
         ).Returns(Task.CompletedTask);
 
@@ -68,10 +69,11 @@ public class DockerServiceTests
         _processService.Setup(handler =>
             handler.RunAsync(
                 "docker",
-                $"login {server} --password {password} --username {username}",
+                $"login {server} --username {username} --password-stdin",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>()
+                It.IsAny<bool>(),
+                password
             )
         ).Returns(Task.CompletedTask);
 
@@ -101,10 +103,11 @@ public class DockerServiceTests
         _processService.Setup(handler =>
             handler.RunAsync(
                 "docker",
-                $"login {server} --password {password} --username {username}",
+                $"login {server} --username {username} --password-stdin",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>()
+                It.IsAny<bool>(),
+                password
             )
         ).Returns(Task.CompletedTask);
 
@@ -114,7 +117,8 @@ public class DockerServiceTests
                 $"pull {server}/{image}:{version}",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>()
+                It.IsAny<bool>(),
+                null
             )
         ).Returns(Task.CompletedTask);
 
@@ -145,7 +149,8 @@ public class DockerServiceTests
                 $"run --rm -t -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
                 new[] { new System.ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
-                true
+                true,
+                null
             )
         ).Returns(Task.CompletedTask);
 
@@ -175,7 +180,8 @@ public class DockerServiceTests
                 $"run --rm -t --env GITHUB_ACCESS_TOKEN=foo --env GITHUB_INSTANCE_URL=https://github.fabrikam.com --env JENKINS_ACCESS_TOKEN=bar -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
                 new[] { new System.ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
-                true
+                true,
+                null
             )
         ).Returns(Task.CompletedTask);
 
@@ -196,7 +202,8 @@ public class DockerServiceTests
                 "info",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>()
+                It.IsAny<bool>(),
+                null
             )
         ).Returns(Task.CompletedTask);
 
@@ -214,7 +221,8 @@ public class DockerServiceTests
                 "info",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>()
+                It.IsAny<bool>(),
+                null
             )
         ).ThrowsAsync(new Exception());
 
@@ -236,7 +244,8 @@ public class DockerServiceTests
                 $"image inspect {server}/{image}:{version}",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>()
+                It.IsAny<bool>(),
+                null
             )
         ).Returns(Task.CompletedTask);
 
@@ -259,7 +268,8 @@ public class DockerServiceTests
                 $"image inspect {server}/{image}:{version}",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>()
+                It.IsAny<bool>(),
+                null
             )
         ).ThrowsAsync(new Exception());
 

@@ -23,18 +23,24 @@ public class DockerService : IDockerService
         _processService = processService;
     }
 
-    public async Task UpdateImageAsync(string image, string server, string version, string? username, string? password)
+    public async Task UpdateImageAsync(string image, string server, string version, string? username, string? password, bool passwordStdin = false)
     {
+        if (passwordStdin && Console.IsInputRedirected)
+        {
+            password = await Console.In.ReadToEndAsync();
+        }
+
         if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
         {
             await _processService.RunAsync(
                 "docker",
-                $"login {server} --password {password} --username {username}"
+                $"login {server} --username {username} --password-stdin",
+                inputForStdIn: password
             ).ConfigureAwait(false);
         }
         else
         {
-            Console.WriteLine("No GHCR credentials provided.");
+            Console.WriteLine("INFO: using cached credentials because no GHCR credentials were provided.");
         }
 
         await _processService.RunAsync(

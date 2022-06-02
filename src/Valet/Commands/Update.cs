@@ -21,14 +21,21 @@ public class Update : BaseCommand
         IsRequired = false,
     };
 
+    private static readonly Option<bool> PasswordStdInOption = new(new[] { "--password-stdin" })
+    {
+        Description = "Access token from standard input to authenticate with GHCR (requires read:packages scope).",
+        IsRequired = false,
+    };
+
     protected override Command GenerateCommand(App app)
     {
         var command = base.GenerateCommand(app);
 
         command.AddOption(UsernameOption);
         command.AddOption(PasswordOption);
+        command.AddOption(PasswordStdInOption);
 
-        command.Handler = CommandHandler.Create((string? username, string? password) => app.UpdateValetAsync(username, password));
+        command.Handler = CommandHandler.Create((string? username, string? password, bool passwordStdin) => app.UpdateValetAsync(username, password, passwordStdin));
 
         return command;
     }

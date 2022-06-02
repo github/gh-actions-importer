@@ -5,14 +5,14 @@ namespace Valet.Services;
 
 public class ProcessService : IProcessService
 {
-    public Task RunAsync(
+    public async Task RunAsync(
         string filename,
         string arguments,
         string? cwd = null,
         IEnumerable<(string, string)>? environmentVariables = null,
-        bool output = true)
+        bool output = true,
+        string? inputForStdIn = null)
     {
-        var tcs = new TaskCompletionSource<bool>();
         var cts = new CancellationTokenSource();
 
         var startInfo = new ProcessStartInfo
@@ -21,6 +21,7 @@ public class ProcessService : IProcessService
             Arguments = arguments,
             RedirectStandardOutput = true,
             RedirectStandardError = true,
+            RedirectStandardInput = true,
             UseShellExecute = false,
             WorkingDirectory = cwd,
             CreateNoWindow = true
@@ -34,37 +35,32 @@ public class ProcessService : IProcessService
             }
         }
 
-        var process = new Process
+        using var process = new Process
         {
             StartInfo = startInfo,
-            EnableRaisingEvents = true,
+            EnableRaisingEvents = true
         };
-
-        void OnProcessExited(object? sender, EventArgs args)
-        {
-            process.Exited -= OnProcessExited;
-
-            cts.Cancel();
-            if (process.ExitCode == 0)
-            {
-                tcs.TrySetResult(true);
-            }
-            else
-            {
-                var error = process.StandardError.ReadToEnd();
-                tcs.TrySetException(new Exception(error));
-            }
-
-            process.Dispose();
-        }
-
-        process.Exited += OnProcessExited;
         process.Start();
+
+        if (!string.IsNullOrWhiteSpace(inputForStdIn))
+        {
+            var writer = process.StandardInput;
+            writer.AutoFlush = true;
+            await writer.WriteAsync(inputForStdIn);
+            writer.Close();
+        }
 
         ReadStream(process.StandardOutput, output, cts.Token);
         ReadStream(process.StandardError, output, cts.Token);
 
-        return tcs.Task;
+        await process.WaitForExitAsync(cts.Token);
+
+        cts.Cancel();
+        if (process.ExitCode != 0)
+        {
+            var error = await process.StandardError.ReadToEndAsync();
+            throw new Exception(error);
+        }
     }
 
     private void ReadStream(StreamReader reader, bool output, CancellationToken ctx)
