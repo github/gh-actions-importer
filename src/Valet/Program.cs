@@ -1,5 +1,6 @@
 ﻿using System.CommandLine;
 using System.CommandLine.Builder;
+using System.CommandLine.Help;
 using System.CommandLine.Parsing;
 using Valet;
 using Valet.Commands;
@@ -10,6 +11,8 @@ var processService = new ProcessService();
 var app = new App(
     new DockerService(processService)
 );
+
+
 
 var command = new RootCommand("Valet is a tool that facilitates migrations to GitHub Actions.")
 {
@@ -22,7 +25,14 @@ var command = new RootCommand("Valet is a tool that facilitates migrations to Gi
 };
 
 var parser = new CommandLineBuilder(command)
-    .UseHelp()
+    .UseHelp(ctx =>
+    {
+        ctx.HelpBuilder.CustomizeLayout(_ =>
+            HelpBuilder.Default
+                .GetLayout()
+                .Skip(2)
+            );
+    })
     .UseEnvironmentVariableDirective()
     .RegisterWithDotnetSuggest()
     .UseSuggestDirective()

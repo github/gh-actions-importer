@@ -47,9 +47,6 @@ $ gh valet -h
 Description:
   Valet is a tool to help plan and facilitate migrations to GitHub Actions.
 
-Usage:
-  gh-valet [command] [options]
-
 Options:
   -?, -h, --help  Show help and usage information
 
@@ -93,9 +90,6 @@ $ gh valet audit -h
 Description:
   An audit will output a list of data used in a CI/CD instance.
 
-Usage:
-  gh-valet audit [command] [options]
-
 <omitted for brevity>
 
 Commands:
@@ -106,7 +100,7 @@ Commands:
   travis-ci     An audit will output a list of data used in a Travis CI instance.
 ```
 
-You can find detailed information about running an audit with Valet in the documentation that is accessible once you are enrolled in the private preview. 
+You can find detailed information about running an audit with Valet in the documentation that is accessible once you are enrolled in the private preview.
 
 #### Forecast
 
@@ -119,9 +113,6 @@ $ gh valet forecast -h
 Description:
   Forecasts GitHub Actions usage from historical pipeline utilization.
 
-Usage:
-  gh-valet forecast [command] [options]
-
 <omitted for brevity>
 
 Commands:
@@ -132,7 +123,7 @@ Commands:
   travis-ci     Forecasts GitHub Actions usage from historical Travis CI pipeline utilization.
 ```
 
-You can find detailed information about running a forecast with Valet in the documentation that is accessible once you are enrolled in the private preview. 
+You can find detailed information about running a forecast with Valet in the documentation that is accessible once you are enrolled in the private preview.
 
 #### Dry-run
 
@@ -145,9 +136,6 @@ $ gh valet dry-run -h
 Description:
   Convert a pipeline to a GitHub Actions workflow and output its yaml file.
 
-Usage:
-  gh-valet dry-run [command] [options]
-
 <omitted for brevity>
 
 Commands:
@@ -158,7 +146,7 @@ Commands:
   travis-ci     Convert a Travis CI pipeline to a GitHub Actions workflow and output its yaml file.
 ```
 
-You can find detailed information about running a dry-run with Valet in the documentation that is accessible once you are enrolled in the private preview. 
+You can find detailed information about running a dry-run with Valet in the documentation that is accessible once you are enrolled in the private preview.
 
 #### Migrate
 
@@ -170,9 +158,6 @@ To run a migration, use the following command to determine the options that are 
 $ gh valet migrate -h
 Description:
   Convert a pipeline to a GitHub Actions workflow and open a pull request with the changes.
-
-Usage:
-  gh-valet migrate [command] [options]
 
 <omitted for brevity>
 
