@@ -18,23 +18,9 @@ body:
         - label: macOS
         - label: Windows
   - type: textarea
-    id: gh-version
-    attributes:
-      label: What version of the `gh` CLI are you using?
-      placeholder: i.e. the output of `gh version`
-    validations:
-      required: true
-  - type: textarea
-    id: gh-valet-version
-    attributes:
-      label: What version of the `gh-valet` extension are you using?
-      placeholder: i.e. the output of `gh extension list | grep valet`
-    validations:
-      required: true
-  - type: textarea
     id: valet-version
     attributes:
-      label: What version of the `valet` docker container are you using?
+      label: What version of the tool are you using?
       placeholder: i.e. the output of `gh valet version`
     validations:
       required: true

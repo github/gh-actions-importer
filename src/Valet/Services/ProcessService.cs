@@ -14,32 +14,7 @@ public class ProcessService : IProcessService
         string? inputForStdIn = null)
     {
         var cts = new CancellationTokenSource();
-
-        var startInfo = new ProcessStartInfo
-        {
-            FileName = filename,
-            Arguments = arguments,
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
-            RedirectStandardInput = true,
-            UseShellExecute = false,
-            WorkingDirectory = cwd,
-            CreateNoWindow = true
-        };
-
-        if (environmentVariables != null)
-        {
-            foreach (var (key, value) in environmentVariables)
-            {
-                startInfo.EnvironmentVariables.Add(key, value);
-            }
-        }
-
-        using var process = new Process
-        {
-            StartInfo = startInfo,
-            EnableRaisingEvents = true
-        };
+        using var process = GetProcess(filename, arguments, cwd, environmentVariables);
         process.Start();
 
         if (!string.IsNullOrWhiteSpace(inputForStdIn))
@@ -61,6 +36,51 @@ public class ProcessService : IProcessService
             var error = await process.StandardError.ReadToEndAsync();
             throw new Exception(error);
         }
+    }
+
+    public async Task<string> RunAndCaptureAsync(string filename, string arguments, string? cwd = null, IEnumerable<(string, string)>? environmentVariables = null, bool throwOnError = true)
+    {
+        using var process = GetProcess(filename, arguments, cwd, environmentVariables);
+        process.Start();
+
+        await process.WaitForExitAsync();
+
+        if (process.ExitCode != 0 && throwOnError)
+        {
+            var error = await process.StandardError.ReadToEndAsync();
+            throw new Exception(error);
+        }
+
+        return await process.StandardOutput.ReadToEndAsync();
+    }
+
+    private Process GetProcess(string filename, string arguments, string? cwd = null, IEnumerable<(string, string)>? environmentVariables = null)
+    {
+        var startInfo = new ProcessStartInfo
+        {
+            FileName = filename,
+            Arguments = arguments,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            RedirectStandardInput = true,
+            UseShellExecute = false,
+            WorkingDirectory = cwd,
+            CreateNoWindow = true
+        };
+
+        if (environmentVariables != null)
+        {
+            foreach (var (key, value) in environmentVariables)
+            {
+                startInfo.EnvironmentVariables.Add(key, value);
+            }
+        }
+
+        return new Process
+        {
+            StartInfo = startInfo,
+            EnableRaisingEvents = true
+        };
     }
 
     private void ReadStream(StreamReader reader, bool output, CancellationToken ctx)

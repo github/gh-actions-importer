@@ -5,20 +5,20 @@ using System.CommandLine.Parsing;
 using Valet;
 using Valet.Commands;
 using Valet.Services;
+using Version = Valet.Commands.Version;
 
 var processService = new ProcessService();
 
 var app = new App(
     new DockerService(processService),
+    processService,
     new ConfigurationService()
 );
-
-
 
 var command = new RootCommand("Valet is a tool that facilitates migrations to GitHub Actions.")
 {
     new Update().Command(app),
-    new Valet.Commands.Version(args).Command(app),
+    new Version().Command(app),
     new Configure().Command(app),
     new Audit(args).Command(app),
     new DryRun(args).Command(app),
