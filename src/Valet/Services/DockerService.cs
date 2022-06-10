@@ -7,17 +7,6 @@ public class DockerService : IDockerService
 {
     private readonly IProcessService _processService;
 
-    private readonly string[] _valetEnvVars =
-    {
-        "GH_ACCESS_TOKEN", "GH_INSTANCE_URL", "GITHUB_ACCESS_TOKEN", "GITHUB_INSTANCE_URL",
-        "JENKINSFILE_ACCESS_TOKEN", "JENKINS_USERNAME", "JENKINS_ACCESS_TOKEN", "JENKINS_INSTANCE_URL",
-        "TRAVIS_CI_ACCESS_TOKEN", "TRAVIS_CI_INSTANCE_URL", "TRAVIS_CI_SOURCE_GITHUB_ACCESS_TOKEN", "TRAVIS_CI_SOURCE_GITHUB_INSTANCE_URL", "TRAVIS_CI_ORGANIZATION",
-        "CIRCLE_CI_ACCESS_TOKEN", "CIRCLE_CI_INSTANCE_URL", "CIRCLE_CI_ORGANIZATION", "CIRCLE_CI_PROVIDER",
-        "GITLAB_INSTANCE_URL", "GITLAB_ACCESS_TOKEN",
-        "AZURE_DEVOPS_ACCESS_TOKEN", "AZURE_DEVOPS_PROJECT", "AZURE_DEVOPS_ORGANIZATION", "AZURE_DEVOPS_INSTANCE_URL",
-        "YAML_VERBOSITY", "HTTP_PROXY", "HTTPS_PROXY", "NO_PROXY", "OCTOKIT_PROXY", "OCTOKIT_SSL_VERIFY_MODE",
-    };
-
     public DockerService(IProcessService processService)
     {
         _processService = processService;
@@ -107,7 +96,7 @@ public class DockerService : IDockerService
             yield return "--env-file .env.local";
         }
 
-        foreach (var env in _valetEnvVars)
+        foreach (var env in Constants.EnvironmentVariables)
         {
             var value = Environment.GetEnvironmentVariable(env);
 

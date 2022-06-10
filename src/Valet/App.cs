@@ -8,10 +8,12 @@ public class App
     const string ValetContainerRegistry = "ghcr.io";
 
     private readonly IDockerService _dockerService;
+    private readonly IConfigurationService _configurationService;
 
-    public App(IDockerService dockerService)
+    public App(IDockerService dockerService, IConfigurationService configurationService)
     {
         _dockerService = dockerService;
+        _configurationService = configurationService;
     }
 
     public async Task<int> UpdateValetAsync(string? username = null, string? password = null, bool passwordStdin = false)
@@ -48,6 +50,17 @@ public class App
             "latest",
             args
         );
+        return 0;
+    }
+
+    public async Task<int> ConfigureAsync()
+    {
+        var currentVariables = await _configurationService.ReadCurrentVariablesAsync().ConfigureAwait(false);
+        var newVariables = _configurationService.GetUserInput();
+        var mergedVariables = _configurationService.MergeVariables(currentVariables, newVariables);
+        await _configurationService.WriteVariablesAsync(mergedVariables);
+
+        Console.WriteLine("Environment variables successfully updated.");
         return 0;
     }
 }

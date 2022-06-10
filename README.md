@@ -18,7 +18,7 @@ Valet currently supports migrating pipelines to GitHub Actions from the followin
 - Jenkins
 - Travis CI
 
-You can find detailed information about how Valet works for each of the supported platforms in the documentation that is accessible once you are enrolled in the private preview.
+You can find detailed information about how Valet works for each of the supported platforms in the documentation that is available once you are granted access.
 
 ## Getting started with the Valet CLI
 
@@ -30,7 +30,7 @@ The following requirements must be met to be able to run Valet:
 
 - The Docker CLI must be [installed](https://docs.docker.com/get-docker/) and running
 - The official [GitHub CLI](https://cli.github.com) must be installed
-- You must have credentials to [authenticate](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-to-the-container-registry) with the GitHub Container Registry after you are enrolled in the private preview.
+- You must have credentials to [authenticate](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#authenticating-to-the-container-registry) with the GitHub Container Registry after you are granted access.
 
 ### Installation
 
@@ -70,10 +70,18 @@ $ gh valet update
 **Note**: You will need to be authenticated with GitHub Container Registery for this command to be successful. Optionally, credentials can be provided to this command that will be used to authenticate on your behalf:
 
 ```bash
-$ gh valet update --username $GITHUB_HANDLE --password $GITHUB_TOKEN
+$ echo $GITHUB_TOKEN | gh valet update --username $GITHUB_HANDLE --password-stdin
 ```
 
-In order for Valet to communicate with your current CI server and GitHub, various credentials must be available for the command. These can be configured using environment variables or a `.env.local` file. You can find detailed information about using environment variables in the documentation that is accessible once you are enrolled in the private preview.
+In order for Valet to communicate with your current CI server and GitHub, various credentials must be available for the command. These can be configured using environment variables or a `.env.local` file. These environment variables can be configured in an interative prompt by running the following command:
+
+```bash
+$ gh valet configure
+? Enter value for 'GITHUB_ACCESS_TOKEN' (leave empty to skip): 
+...
+```
+
+You can find detailed information about using environment variables in the documentation that is available once you are granted access.
 
 ### Usage
 
@@ -100,7 +108,7 @@ Commands:
   travis-ci     An audit will output a list of data used in a Travis CI instance.
 ```
 
-You can find detailed information about running an audit with Valet in the documentation that is accessible once you are enrolled in the private preview.
+You can find detailed information about running an audit with Valet in the documentation that is available once you are granted access.
 
 #### Forecast
 
@@ -123,7 +131,7 @@ Commands:
   travis-ci     Forecasts GitHub Actions usage from historical Travis CI pipeline utilization.
 ```
 
-You can find detailed information about running a forecast with Valet in the documentation that is accessible once you are enrolled in the private preview.
+You can find detailed information about running a forecast with Valet in the documentation that is available once you are granted access.
 
 #### Dry-run
 
@@ -146,7 +154,7 @@ Commands:
   travis-ci     Convert a Travis CI pipeline to a GitHub Actions workflow and output its yaml file.
 ```
 
-You can find detailed information about running a dry-run with Valet in the documentation that is accessible once you are enrolled in the private preview.
+You can find detailed information about running a dry-run with Valet in the documentation that is available once you are granted access.
 
 #### Migrate
 
@@ -169,4 +177,4 @@ Commands:
   travis-ci     Convert a Travis CI pipeline to a GitHub Actions workflow and and open a pull request with the changes.
 ```
 
-You can find detailed information about running a migration with Valet in the documentation that is accessible once you are enrolled in the private preview.
+You can find detailed information about running a migration with Valet in the documentation that is available once you are granted access.
