@@ -5,16 +5,9 @@ namespace Valet.Commands;
 
 public static class Common
 {
-    public static Command AppendCommonOptions(Command command)
-    {
-        command.AddGlobalOption(
-            new Option<DirectoryInfo>(new[] { "--output-dir", "-o" })
-            {
-                IsRequired = true,
-                Description = "The location for any output files."
-            }
-        );
 
+    public static Command AppendTransformerOptions(this Command command)
+    {
         command.AddGlobalOption(
             new Option<string[]>(new[] { "--allowed-actions" })
             {
@@ -29,7 +22,6 @@ public static class Common
                 Description = "Boolean value to only allow verified actions."
             }
         );
-
 
         command.AddGlobalOption(
             new Option<bool>(new[] { "--allow-github-created-actions" })
@@ -54,6 +46,18 @@ public static class Common
         );
 
         command.AddGlobalOption(
+            new Option<string>(new[] { "--features" })
+            {
+                Description = "Features to enable in transformed workflows."
+            }
+        );
+
+        return command;
+    }
+
+    public static Command AppendGeneralOptions(this Command command)
+    {
+        command.AddGlobalOption(
             new Option<string>(new[] { "--credentials-file" })
             {
                 Description = "The file containing the credentials to use."
@@ -74,14 +78,33 @@ public static class Common
             }
         );
 
-        // TODO: Add in enum values
         command.AddGlobalOption(
-            new Option<string>(new[] { "--features" })
+            new Option<bool>(new[] { "--no-http-cache" })
             {
-                Description = "Features to enable in transformed workflows."
+                Description = "Disable caching of http responses."
             }
         );
 
         return command;
+    }
+
+    public static Command AppendGeneralRequiredOptions(this Command command)
+    {
+        command.AddGlobalOption(
+            new Option<DirectoryInfo>(new[] { "--output-dir", "-o" })
+            {
+                IsRequired = true,
+                Description = "The location for any output files."
+            }
+        );
+
+        return command;
+    }
+
+    public static void AppendCommonOptions(this Command command)
+    {
+        command.AppendGeneralRequiredOptions()
+               .AppendTransformerOptions()
+               .AppendGeneralOptions();
     }
 }

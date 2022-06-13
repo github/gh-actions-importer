@@ -23,7 +23,7 @@ public class Audit : BaseCommand
     protected override Command GenerateCommand(App app)
     {
         var command = base.GenerateCommand(app);
-        command = Common.AppendCommonOptions(command);
+        command.AppendCommonOptions();
 
         command.AddGlobalOption(FoldersOption);
         command.AddCommand(new AzureDevOps.Audit(_args).Command(app));

@@ -35,18 +35,13 @@ public class Forecast : BaseCommand
     protected override Command GenerateCommand(App app)
     {
         var command = base.GenerateCommand(app);
-
-        command.AddGlobalOption(
-            new Option<DirectoryInfo>(new[] { "--output-dir", "-o" })
-            {
-                IsRequired = true,
-                Description = "The location for any output files."
-            }
-        );
+        command.AppendGeneralRequiredOptions();
 
         command.AddGlobalOption(StartDate);
         command.AddGlobalOption(TimeSlice);
         command.AddGlobalOption(SourceFilePath);
+
+        command.AppendGeneralOptions();
 
         command.AddCommand(new AzureDevOps.Forecast(_args).Command(app));
         command.AddCommand(new Jenkins.Forecast(_args).Command(app));

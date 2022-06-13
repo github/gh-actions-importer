@@ -34,7 +34,7 @@ public class Migrate : BaseCommand
     protected override Command GenerateCommand(App app)
     {
         var command = base.GenerateCommand(app);
-        command = Common.AppendCommonOptions(command);
+        command.AppendCommonOptions();
 
         command.AddGlobalOption(TargetUrl);
         command.AddGlobalOption(GitHubInstanceUrl);

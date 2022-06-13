@@ -16,7 +16,7 @@ public class DryRun : BaseCommand
     protected override Command GenerateCommand(App app)
     {
         var command = base.GenerateCommand(app);
-        command = Common.AppendCommonOptions(command);
+        command.AppendCommonOptions();
 
         command.AddCommand(new AzureDevOps.DryRun(_args).Command(app));
         command.AddCommand(new Circle.DryRun(_args).Command(app));
