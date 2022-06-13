@@ -16,7 +16,8 @@ public class Audit : BaseCommand
     private static readonly Option<string[]> FoldersOption = new(new[] { "-f", "--folders" })
     {
         Description = "Folders to audit in the instance",
-        IsRequired = false
+        IsRequired = false,
+        AllowMultipleArgumentsPerToken = true
     };
 
     protected override Command GenerateCommand(App app)

@@ -1,4 +1,5 @@
 using Valet.Interfaces;
+using Valet.Models;
 
 namespace Valet;
 
@@ -50,7 +51,7 @@ public class App
             ValetImage,
             ValetContainerRegistry,
             "latest",
-            args
+            args.Select(x => x.EscapeIfNeeded()).ToArray()
         );
         return 0;
     }

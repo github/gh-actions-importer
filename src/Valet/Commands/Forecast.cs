@@ -29,6 +29,7 @@ public class Forecast : BaseCommand
     {
         Description = "The file path(s) to existing jobs data.",
         IsRequired = false,
+        AllowMultipleArgumentsPerToken = true
     };
 
     protected override Command GenerateCommand(App app)

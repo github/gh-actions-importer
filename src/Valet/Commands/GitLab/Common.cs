@@ -10,10 +10,11 @@ public static class Common
         IsRequired = false,
     };
 
-    public static readonly Option<string> Namespace = new("--namespace")
+    public static readonly Option<string[]> Namespace = new("--namespace")
     {
         Description = "The GitLab namespace(s).",
         IsRequired = false,
+        AllowMultipleArgumentsPerToken = true
     };
 
     public static readonly Option<string> AccessToken = new("--gitlab-access-token")

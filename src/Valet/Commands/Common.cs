@@ -18,7 +18,8 @@ public static class Common
         command.AddGlobalOption(
             new Option<string[]>(new[] { "--allowed-actions" })
             {
-                Description = "An allowed list of GitHub actions to map to."
+                Description = "An allowed list of GitHub actions to map to.",
+                AllowMultipleArgumentsPerToken = true
             }
         );
 
@@ -47,7 +48,8 @@ public static class Common
         command.AddGlobalOption(
             new Option<FileInfo[]>(new[] { "--custom-transformers" })
             {
-                Description = "Paths to custom transformers."
+                Description = "Paths to custom transformers.",
+                AllowMultipleArgumentsPerToken = true
             }
         );
 

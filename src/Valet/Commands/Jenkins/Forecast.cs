@@ -14,7 +14,8 @@ public class Forecast : ContainerCommand
     private static readonly Option<string[]> FoldersOption = new(new[] { "-f", "--folders" })
     {
         Description = "Folders to forecast in the instance",
-        IsRequired = false
+        IsRequired = false,
+        AllowMultipleArgumentsPerToken = true
     };
 
     protected override List<Option> Options => new()
