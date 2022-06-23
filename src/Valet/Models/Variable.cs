@@ -2,11 +2,11 @@ namespace Valet.Models;
 
 public readonly struct Variable
 {
-    public Variable(string key, Provider provider, string helpText, string? defaultValue = null)
+    public Variable(string key, Provider provider, string message, string? defaultValue = null)
     {
         Key = key;
         Provider = provider;
-        HelpText = helpText;
+        Message = message;
         DefaultValue = defaultValue;
     }
 
@@ -23,10 +23,10 @@ public readonly struct Variable
     };
 
     public bool IsPassword => Key.EndsWith("ACCESS_TOKEN");
-    public string HelpText { get; }
+    public string Message { get; }
     public string? DefaultValue { get; }
 
-    public string Message => DefaultValue is null ? HelpText : $"{HelpText} ({DefaultValue})";
+    public string? Placeholder => DefaultValue is not null && IsPassword ? $"({DefaultValue})" : null;
 
     private Provider Provider { get; }
 }

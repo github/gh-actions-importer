@@ -58,9 +58,16 @@ public class ConfigurationServiceTests
     }
 
     [Test]
-    public void ReadCurrentVariablesAsync_FileDoesNotExist_ThrowsAsync()
+    public async Task ReadCurrentVariablesAsync_FileDoesNotExist_ReturnsEmptyVariables()
     {
-        Assert.ThrowsAsync<FileNotFoundException>(() => _configurationService.ReadCurrentVariablesAsync("this-does-not-exist"));
+        // Arrange
+        var expectedResult = new Dictionary<string, string>();
+
+        // Act
+        var result = await _configurationService.ReadCurrentVariablesAsync("this-does-not-exist");
+
+        // Assert
+        Assert.AreEqual(expectedResult, result);
     }
 
     [Test]

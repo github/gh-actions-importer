@@ -8,9 +8,13 @@ public class ConfigurationService : IConfigurationService
 {
     public async Task<Dictionary<string, string>> ReadCurrentVariablesAsync(string filePath = ".env.local")
     {
+        var variables = new Dictionary<string, string>();
+
+        if (!File.Exists(filePath))
+            return variables;
+
         var lines = await File.ReadAllLinesAsync(filePath);
 
-        var variables = new Dictionary<string, string>();
         foreach (var line in lines)
         {
             if (string.IsNullOrWhiteSpace(line)) continue;
@@ -44,11 +48,16 @@ public class ConfigurationService : IConfigurationService
 
             foreach (var variable in variables)
             {
-                var value = variable.IsPassword
-                    ? Prompt.Password(variable.Message)
-                    : Prompt.Input<string>(variable.Message);
-
-                var variableValue = value ?? variable.DefaultValue;
+                string? variableValue;
+                if (variable.IsPassword)
+                {
+                    var value = Prompt.Password(variable.Message, placeholder: variable.Placeholder);
+                    variableValue = string.IsNullOrWhiteSpace(value) ? variable.DefaultValue : value;
+                }
+                else
+                {
+                    variableValue = Prompt.Input<string>(variable.Message, variable.DefaultValue);
+                }
 
                 if (string.IsNullOrWhiteSpace(variableValue)) continue;
 

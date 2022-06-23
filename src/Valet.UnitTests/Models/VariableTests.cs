@@ -32,14 +32,17 @@ public class VariableTests
         Assert.AreEqual(isPassword, variable.IsPassword);
     }
 
-    [TestCase("Personal access token for GitHub", null, "Personal access token for GitHub")]
-    [TestCase("Base url of the GitHub instance", "https://github.com", "Base url of the GitHub instance (https://github.com)")]
-    public void Message_ReturnsExpected(string helpText, string? defaultValue, string expectedMessage)
+    [TestCase(false, null, null)]
+    [TestCase(false, "default value", null)]
+    [TestCase(true, null, null)]
+    [TestCase(true, "default value", "(default value)")]
+    public void Placeholder_ReturnsExpected(bool isPassword, string? defaultValue, string expectedPlaceholder)
     {
         // Arrange
-        var variable = new Variable("FOO", Provider.GitHub, helpText, defaultValue);
+        var key = isPassword ? "PERSONAL_ACCESS_TOKEN" : "USERNAME";
+        var variable = new Variable(key, Provider.GitHub, "message", defaultValue);
 
         // Act
-        Assert.AreEqual(expectedMessage, variable.Message);
+        Assert.AreEqual(expectedPlaceholder, variable.Placeholder);
     }
 }
