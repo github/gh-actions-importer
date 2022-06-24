@@ -11,6 +11,13 @@ public class Forecast : ContainerCommand
     protected override string Name => "circle-ci";
     protected override string Description => "Forecasts GitHub Actions usage from historical CircleCI pipeline utilization.";
 
+    private static readonly Option<FileInfo[]> SourceFilePath = new("--source-file-path")
+    {
+        Description = "The file path(s) to existing jobs data.",
+        IsRequired = false,
+        AllowMultipleArgumentsPerToken = true,
+    };
+
     protected override List<Option> Options => new()
     {
         Common.Organization,
@@ -19,6 +26,6 @@ public class Forecast : ContainerCommand
         Common.AccessToken,
         Common.SourceGitHubAccessToken,
         Common.SourceGitHubInstanceUrl,
-        Common.SourceFilePath
+        SourceFilePath
     };
 }

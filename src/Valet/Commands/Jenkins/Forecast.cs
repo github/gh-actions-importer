@@ -18,11 +18,19 @@ public class Forecast : ContainerCommand
         AllowMultipleArgumentsPerToken = true
     };
 
+    private static readonly Option<FileInfo[]> SourceFilePath = new("--source-file-path")
+    {
+        Description = "The file path(s) to existing jobs data.",
+        IsRequired = false,
+        AllowMultipleArgumentsPerToken = true,
+    };
+
     protected override List<Option> Options => new()
     {
         Common.InstanceUrl,
         Common.Username,
         Common.AccessToken,
-        FoldersOption
+        FoldersOption,
+        SourceFilePath
     };
 }

@@ -1,11 +1,11 @@
 using System.CommandLine;
 namespace Valet.Commands;
 
-public class Forecast : BaseCommand
+public class Forecast : ContainerCommand
 {
     private readonly string[] _args;
 
-    public Forecast(string[] args)
+    public Forecast(string[] args) : base(args)
     {
         _args = args;
     }
@@ -28,8 +28,13 @@ public class Forecast : BaseCommand
     private static readonly Option<FileInfo[]> SourceFilePath = new("--source-file-path")
     {
         Description = "The file path(s) to existing jobs data.",
-        IsRequired = false,
+        IsRequired = true,
         AllowMultipleArgumentsPerToken = true
+    };
+
+    protected override List<Option> Options => new()
+    {
+        SourceFilePath
     };
 
     protected override Command GenerateCommand(App app)
@@ -39,7 +44,6 @@ public class Forecast : BaseCommand
 
         command.AddGlobalOption(StartDate);
         command.AddGlobalOption(TimeSlice);
-        command.AddGlobalOption(SourceFilePath);
 
         command.AppendGeneralOptions();
 
