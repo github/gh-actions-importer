@@ -1,5 +1,7 @@
 using System.Diagnostics;
+using System.Text.Json;
 using Valet.Interfaces;
+using Valet.Models.Docker;
 
 namespace Valet.Services;
 
@@ -87,6 +89,21 @@ public class DockerService : IDockerService
         {
             throw new Exception("Unable to locate Valet image locally. Please run `gh valet update` to fetch the latest image prior to running this command.");
         }
+    }
+
+    public async Task<string?> GetLatestImageDigestAsync(string image, string server)
+    {
+        var manifestOutput = await _processService.RunAndCaptureAsync("docker", $"manifest inspect {server}/{image}:latest");
+        Manifest? manifest = JsonSerializer.Deserialize<Manifest>(manifestOutput);
+
+        return manifest?.GetDigest();
+    }
+
+    public async Task<string?> GetCurrentImageDigestAsync(string image, string server)
+    {
+        var digestOutput = await _processService.RunAndCaptureAsync("docker", $"image inspect --format={{{{.Id}}}} {server}/{image}:latest");
+
+        return digestOutput.Split(":").ElementAtOrDefault(1)?.Trim();
     }
 
     private IEnumerable<string> GetEnvironmentVariableArguments()

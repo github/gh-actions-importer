@@ -74,6 +74,30 @@ public class App
         return 0;
     }
 
+    public async Task CheckForUpdatesAsync()
+    {
+        try
+        {
+            var latestImageDigestTask = _dockerService.GetLatestImageDigestAsync(ValetImage, ValetContainerRegistry);
+            var currentImageDigestTask = _dockerService.GetCurrentImageDigestAsync(ValetImage, ValetContainerRegistry);
+
+            await Task.WhenAll(latestImageDigestTask, currentImageDigestTask);
+
+            var latestImageDigest = latestImageDigestTask?.Result;
+            var currentImageDigest = currentImageDigestTask?.Result;
+
+            if (latestImageDigest != null && currentImageDigest != null && !latestImageDigest.Equals(currentImageDigest))
+            {
+                Console.WriteLine("A new version of the Valet CLI is available. Run 'gh valet update' to update.");
+            }
+        }
+        catch (Exception)
+        {
+            // Let's catch and ignore any exceptions here. We don't want to kill Valet if we failed to check for updates
+            // We can add reporting here in the future to alert us of any issues
+        }
+    }
+
     public async Task<int> ConfigureAsync()
     {
         var currentVariables = await _configurationService.ReadCurrentVariablesAsync().ConfigureAwait(false);

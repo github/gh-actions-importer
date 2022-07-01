@@ -9,4 +9,8 @@ public interface IDockerService
     Task VerifyDockerRunningAsync();
 
     Task VerifyImagePresentAsync(string image, string server, string version);
+
+    Task<string?> GetLatestImageDigestAsync(string image, string server);
+
+    Task<string?> GetCurrentImageDigestAsync(string image, string server);
 }
