@@ -24,6 +24,15 @@ public class DockerServiceTests
         _dockerService = new DockerService(_processService.Object);
     }
 
+    [TearDown]
+    public void AfterEachTest()
+    {
+        Environment.SetEnvironmentVariable("DOCKER_ARGS", null);
+        Environment.SetEnvironmentVariable("GH_ACCESS_TOKEN", null);
+        Environment.SetEnvironmentVariable("GH_INSTANCE_URL", null);
+        Environment.SetEnvironmentVariable("JENKINS_ACCESS_TOKEN", null);
+    }
+
     [Test]
     public async Task UpdateImageAsync_NoCredentialsProvided_PullsLatest_ReturnsTrue()
     {
@@ -178,6 +187,35 @@ public class DockerServiceTests
             handler.RunAsync(
                 "docker",
                 $"run --rm -t --env GITHUB_ACCESS_TOKEN=foo --env GITHUB_INSTANCE_URL=https://github.fabrikam.com --env JENKINS_ACCESS_TOKEN=bar -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
+                Directory.GetCurrentDirectory(),
+                new[] { new System.ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
+                true,
+                null
+            )
+        ).Returns(Task.CompletedTask);
+
+        // Act
+        await _dockerService.ExecuteCommandAsync(image, server, version, arguments);
+
+        // Assert
+        _processService.VerifyAll();
+    }
+
+    [Test]
+    public async Task ExecuteCommandAsync_InvokesDocker_WithAdditionalDockerArguments_ReturnsTrue()
+    {
+        // Arrange
+        var image = "valet-customers/valet-cli";
+        var server = "ghcr.io";
+        var version = "latest";
+        var arguments = new[] { "run", "this", "command" };
+
+        Environment.SetEnvironmentVariable("DOCKER_ARGS", "--network=host");
+
+        _processService.Setup(handler =>
+            handler.RunAsync(
+                "docker",
+                $"run --rm -t --network=host -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
                 new[] { new System.ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
                 true,

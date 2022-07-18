@@ -47,6 +47,13 @@ public class DockerService : IDockerService
             "run --rm -t"
         };
         valetArguments.AddRange(GetEnvironmentVariableArguments());
+
+        var dockerArgs = Environment.GetEnvironmentVariable("DOCKER_ARGS");
+        if (dockerArgs is not null)
+        {
+            valetArguments.Add(dockerArgs);
+        }
+
         valetArguments.Add($"-v \"{Directory.GetCurrentDirectory()}\":/data");
         valetArguments.Add($"{server}/{image}:{version}");
         valetArguments.AddRange(arguments);
