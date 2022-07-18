@@ -1,4 +1,4 @@
-namespace Valet.Models;
+﻿namespace Valet.Models;
 
 public readonly struct Variable
 {
@@ -22,7 +22,7 @@ public readonly struct Variable
         _ => throw new ArgumentOutOfRangeException()
     };
 
-    public bool IsPassword => Key.EndsWith("ACCESS_TOKEN");
+    public bool IsPassword => Key.EndsWith("ACCESS_TOKEN", StringComparison.Ordinal);
     public string Message { get; }
     public string? DefaultValue { get; }
 

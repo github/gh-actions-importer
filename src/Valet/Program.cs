@@ -54,6 +54,6 @@ try
 }
 catch (Exception e)
 {
-    Console.Error.Write(e.Message);
+    await Console.Error.WriteAsync(e.Message);
     return 1;
 }

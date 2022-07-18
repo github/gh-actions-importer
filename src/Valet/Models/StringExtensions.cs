@@ -1,9 +1,11 @@
-namespace Valet.Models;
+﻿namespace Valet.Models;
 
 public static class StringExtensions
 {
     public static string EscapeIfNeeded(this string str)
     {
-        return !str.Contains(' ') ? str : $"\"{str}\"";
+        ArgumentNullException.ThrowIfNull(str);
+
+        return !str.Contains(' ', StringComparison.Ordinal) ? str : $"\"{str}\"";
     }
 }

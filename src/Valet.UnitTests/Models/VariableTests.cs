@@ -1,4 +1,4 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Valet.Models;
 
 namespace Valet.UnitTests.Models;

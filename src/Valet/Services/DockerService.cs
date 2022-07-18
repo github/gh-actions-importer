@@ -1,5 +1,4 @@
-using System.Diagnostics;
-using System.Text.Json;
+﻿using System.Text.Json;
 using Valet.Interfaces;
 using Valet.Models.Docker;
 
@@ -113,7 +112,7 @@ public class DockerService : IDockerService
         return digestOutput.Split(":").ElementAtOrDefault(1)?.Trim();
     }
 
-    private IEnumerable<string> GetEnvironmentVariableArguments()
+    private static IEnumerable<string> GetEnvironmentVariableArguments()
     {
         if (File.Exists(".env.local"))
         {
@@ -127,8 +126,8 @@ public class DockerService : IDockerService
             if (string.IsNullOrWhiteSpace(value)) continue;
 
             var key = env;
-            if (key.StartsWith("GH_"))
-                key = key.Replace("GH_", "GITHUB_");
+            if (key.StartsWith("GH_", StringComparison.Ordinal))
+                key = key.Replace("GH_", "GITHUB_", StringComparison.Ordinal);
 
             yield return $"--env {key}={value}";
         }

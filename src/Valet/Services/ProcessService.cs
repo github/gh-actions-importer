@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Valet.Interfaces;
 
 namespace Valet.Services;
@@ -13,7 +13,7 @@ public class ProcessService : IProcessService
         bool output = true,
         string? inputForStdIn = null)
     {
-        var cts = new CancellationTokenSource();
+        using var cts = new CancellationTokenSource();
         using var process = GetProcess(filename, arguments, cwd, environmentVariables);
         process.Start();
 
@@ -54,7 +54,7 @@ public class ProcessService : IProcessService
         return await process.StandardOutput.ReadToEndAsync();
     }
 
-    private Process GetProcess(string filename, string arguments, string? cwd = null, IEnumerable<(string, string)>? environmentVariables = null)
+    private static Process GetProcess(string filename, string arguments, string? cwd = null, IEnumerable<(string, string)>? environmentVariables = null)
     {
         var startInfo = new ProcessStartInfo
         {
@@ -83,7 +83,7 @@ public class ProcessService : IProcessService
         };
     }
 
-    private void ReadStream(StreamReader reader, bool output, CancellationToken ctx)
+    private static void ReadStream(StreamReader reader, bool output, CancellationToken ctx)
     {
         Task.Run(() =>
         {

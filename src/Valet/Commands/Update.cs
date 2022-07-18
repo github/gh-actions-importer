@@ -1,6 +1,5 @@
-using System.CommandLine;
+﻿using System.CommandLine;
 using System.CommandLine.NamingConventionBinder;
-using Valet.Handlers;
 
 namespace Valet.Commands;
 

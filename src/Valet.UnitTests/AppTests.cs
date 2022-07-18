@@ -1,10 +1,9 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
 using Valet.Interfaces;
-using Valet.Services;
 
 namespace Valet.UnitTests;
 
@@ -16,6 +15,7 @@ public class AppTests
     private Mock<IDockerService> _dockerService;
     private Mock<IConfigurationService> _configurationService;
     private App _app;
+    private TextWriter _out;
 #pragma warning restore CS8618
 
     [SetUp]
@@ -25,6 +25,13 @@ public class AppTests
         _processService = new Mock<IProcessService>();
         _configurationService = new Mock<IConfigurationService>();
         _app = new App(_dockerService.Object, _processService.Object, _configurationService.Object);
+        _out = Console.Out;
+    }
+
+    [TearDown]
+    public void AfterEachTest()
+    {
+        Console.SetOut(_out);
     }
 
     [TestCase("4256ea72fd01deac3e967f6b19f907587dcd6f0a976301f1aecc73dc6f146a4a", "4256ea72fd01deac3e967f6b19f907587dcd6f0a976301f1aecc73dc6f146a4a", "")]
@@ -35,7 +42,7 @@ public class AppTests
         var image = "valet-customers/valet-cli";
         var server = "ghcr.io";
 
-        var stringWriter = new StringWriter();
+        using var stringWriter = new StringWriter();
         Console.SetOut(stringWriter);
 
         _dockerService.Setup(handler =>
@@ -61,7 +68,7 @@ public class AppTests
         var image = "valet-customers/valet-cli";
         var server = "ghcr.io";
 
-        var stringWriter = new StringWriter();
+        using var stringWriter = new StringWriter();
         Console.SetOut(stringWriter);
 
         _dockerService.Setup(handler =>

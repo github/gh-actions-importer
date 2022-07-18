@@ -1,5 +1,4 @@
-using System.Collections.Immutable;
-using System.Text;
+﻿using System.Collections.Immutable;
 using Sharprompt;
 using Valet.Interfaces;
 

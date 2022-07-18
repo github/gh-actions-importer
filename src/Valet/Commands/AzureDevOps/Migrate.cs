@@ -1,5 +1,4 @@
-using System.CommandLine;
-using Valet.Handlers;
+﻿using System.CommandLine;
 
 namespace Valet.Commands.AzureDevOps;
 
@@ -25,8 +24,8 @@ public class Migrate : BaseCommand
         command.AddGlobalOption(Common.Project);
         command.AddGlobalOption(Common.AccessToken);
 
-        command.AddCommand(new Valet.Commands.AzureDevOps.BuildPipeline.Migrate(_args).Command(app));
-        command.AddCommand(new Valet.Commands.AzureDevOps.ReleasePipeline.Migrate(_args).Command(app));
+        command.AddCommand(new BuildPipeline.Migrate(_args).Command(app));
+        command.AddCommand(new ReleasePipeline.Migrate(_args).Command(app));
 
         return command;
     }

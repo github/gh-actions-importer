@@ -1,4 +1,4 @@
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 
 namespace Valet.Interfaces;
 
@@ -10,6 +10,9 @@ public interface IConfigurationService
 
     ImmutableDictionary<string, string> MergeVariables(ImmutableDictionary<string, string> currentVariables, ImmutableDictionary<string, string> newVariables)
     {
+        ArgumentNullException.ThrowIfNull(currentVariables);
+        ArgumentNullException.ThrowIfNull(newVariables);
+
         return currentVariables.SetItems(newVariables);
     }
 }

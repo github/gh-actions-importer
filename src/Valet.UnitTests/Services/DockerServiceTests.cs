@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -157,7 +157,7 @@ public class DockerServiceTests
                 "docker",
                 $"run --rm -t -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
-                new[] { new System.ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
+                new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
                 true,
                 null
             )
@@ -188,7 +188,7 @@ public class DockerServiceTests
                 "docker",
                 $"run --rm -t --env GITHUB_ACCESS_TOKEN=foo --env GITHUB_INSTANCE_URL=https://github.fabrikam.com --env JENKINS_ACCESS_TOKEN=bar -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
-                new[] { new System.ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
+                new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
                 true,
                 null
             )
@@ -217,7 +217,7 @@ public class DockerServiceTests
                 "docker",
                 $"run --rm -t --network=host -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
-                new[] { new System.ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
+                new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
                 true,
                 null
             )

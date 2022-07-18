@@ -1,4 +1,4 @@
-using System.CommandLine;
+﻿using System.CommandLine;
 using Valet.Models;
 
 namespace Valet.Commands;
@@ -8,6 +8,8 @@ public static class Common
 
     public static Command AppendTransformerOptions(this Command command)
     {
+        ArgumentNullException.ThrowIfNull(command);
+
         command.AddGlobalOption(
             new Option<string[]>(new[] { "--allowed-actions" })
             {
@@ -57,6 +59,8 @@ public static class Common
 
     public static Command AppendGeneralOptions(this Command command)
     {
+        ArgumentNullException.ThrowIfNull(command);
+
         command.AddGlobalOption(
             new Option<string>(new[] { "--credentials-file" })
             {
@@ -90,6 +94,8 @@ public static class Common
 
     public static Command AppendGeneralRequiredOptions(this Command command)
     {
+        ArgumentNullException.ThrowIfNull(command);
+
         command.AddGlobalOption(
             new Option<DirectoryInfo>(new[] { "--output-dir", "-o" })
             {

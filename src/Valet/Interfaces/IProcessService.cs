@@ -1,4 +1,4 @@
-namespace Valet.Interfaces;
+﻿namespace Valet.Interfaces;
 
 public interface IProcessService
 {

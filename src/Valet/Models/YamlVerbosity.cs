@@ -1,4 +1,4 @@
-namespace Valet.Models;
+﻿namespace Valet.Models;
 
 public enum YamlVerbosity
 {

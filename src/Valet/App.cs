@@ -1,12 +1,12 @@
-using Valet.Interfaces;
+﻿using Valet.Interfaces;
 using Valet.Models;
 
 namespace Valet;
 
 public class App
 {
-    const string ValetImage = "valet-customers/valet-cli";
-    const string ValetContainerRegistry = "ghcr.io";
+    private const string ValetImage = "valet-customers/valet-cli";
+    private const string ValetContainerRegistry = "ghcr.io";
 
     private readonly IDockerService _dockerService;
     private readonly IProcessService _processService;
@@ -64,7 +64,7 @@ public class App
 
         var formattedGhVersion = ghVersion.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault();
         var formattedGhValetVersion = ghValetVersion.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-            .FirstOrDefault(x => x.Contains("github/gh-valet"));
+            .FirstOrDefault(x => x.Contains("github/gh-valet", StringComparison.Ordinal));
         var formattedValetVersion = valetVersion.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault() ?? "unknown";
 
         Console.WriteLine(formattedGhVersion);
@@ -83,10 +83,10 @@ public class App
 
             await Task.WhenAll(latestImageDigestTask, currentImageDigestTask);
 
-            var latestImageDigest = latestImageDigestTask?.Result;
-            var currentImageDigest = currentImageDigestTask?.Result;
+            var latestImageDigest = await latestImageDigestTask;
+            var currentImageDigest = await currentImageDigestTask;
 
-            if (latestImageDigest != null && currentImageDigest != null && !latestImageDigest.Equals(currentImageDigest))
+            if (latestImageDigest != null && currentImageDigest != null && !latestImageDigest.Equals(currentImageDigest, StringComparison.Ordinal))
             {
                 Console.WriteLine("A new version of the Valet CLI is available. Run 'gh valet update' to update.");
             }
