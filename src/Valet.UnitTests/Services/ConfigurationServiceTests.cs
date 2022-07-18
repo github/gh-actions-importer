@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Threading.Tasks;
 using NUnit.Framework;
@@ -25,27 +26,21 @@ public class ConfigurationServiceTests
     public void MergeVariables_OverwritesExisting()
     {
         // Arrange
-        var currentVariables = new Dictionary<string, string>
-        {
-            { "FOO", "current" },
-            { "BAR", "current" },
-            { "BAZ", "current" }
-        };
+        var currentVariables = ImmutableDictionary<string, string>.Empty
+            .Add("FOO", "current")
+            .Add("BAR", "current")
+            .Add("BAZ", "current");
 
-        var newVariables = new Dictionary<string, string>
-        {
-            { "FOO", "new" },
-            { "BAR", "new" },
-            { "BAN", "new" }
-        };
+        var newVariables = ImmutableDictionary<string, string>.Empty
+            .Add("FOO", "new")
+            .Add("BAR", "new")
+            .Add("BAN", "new");
 
-        var expectedVariables = new Dictionary<string, string>
-        {
-            { "FOO", "new" },
-            { "BAR", "new" },
-            { "BAZ", "current" },
-            { "BAN", "new" },
-        };
+        var expectedVariables = ImmutableDictionary<string, string>.Empty
+            .Add("FOO", "new")
+            .Add("BAR", "new")
+            .Add("BAZ", "current")
+            .Add("BAN", "new");
 
         // Act
         var result = _configurationService.MergeVariables(

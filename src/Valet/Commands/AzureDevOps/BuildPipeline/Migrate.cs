@@ -1,3 +1,4 @@
+﻿using System.Collections.Immutable;
 using System.CommandLine;
 
 namespace Valet.Commands.AzureDevOps.BuildPipeline;
@@ -10,5 +11,5 @@ public class Migrate : ContainerCommand
 
     protected override string Name => "pipeline";
     protected override string Description => "Target a designer or YAML pipeline";
-    protected override List<Option> Options => new();
+    protected override ImmutableArray<Option> Options => ImmutableArray<Option>.Empty;
 }

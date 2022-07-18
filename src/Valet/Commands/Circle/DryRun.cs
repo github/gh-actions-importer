@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.CommandLine;
 
 namespace Valet.Commands.Circle;
@@ -11,8 +12,7 @@ public class DryRun : ContainerCommand
     protected override string Name => "circle-ci";
     protected override string Description => "Convert a CircleCI pipeline to GitHub Actions workflows and output the yaml file(s).";
 
-    protected override List<Option> Options => new()
-    {
+    protected override ImmutableArray<Option> Options => ImmutableArray.Create<Option>(
         Common.Organization,
         Common.Project,
         Common.Provider,
@@ -20,6 +20,6 @@ public class DryRun : ContainerCommand
         Common.AccessToken,
         Common.SourceGitHubAccessToken,
         Common.SourceGitHubInstanceUrl,
-        Common.SourceFilePath,
-    };
+        Common.SourceFilePath
+    );
 }

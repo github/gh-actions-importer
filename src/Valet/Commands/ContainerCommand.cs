@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.CommandLine;
 using Valet.Handlers;
 
@@ -12,7 +13,7 @@ public abstract class ContainerCommand : BaseCommand
         _args = args;
     }
 
-    protected abstract List<Option> Options { get; }
+    protected abstract ImmutableArray<Option> Options { get; }
 
     protected override Command GenerateCommand(App app)
     {

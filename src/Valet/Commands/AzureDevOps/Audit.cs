@@ -1,3 +1,4 @@
+﻿using System.Collections.Immutable;
 using System.CommandLine;
 
 namespace Valet.Commands.AzureDevOps;
@@ -12,11 +13,10 @@ public class Audit : ContainerCommand
     protected override string Name => "azure-devops";
     protected override string Description => "An audit will output a list of data used in an Azure DevOps instance.";
 
-    protected override List<Option> Options => new()
-    {
+    protected override ImmutableArray<Option> Options => ImmutableArray.Create<Option>(
         Common.Organization,
         Common.Project,
         Common.InstanceUrl,
         Common.AccessToken
-    };
+    );
 }

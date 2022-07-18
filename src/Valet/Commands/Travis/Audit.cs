@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.CommandLine;
 
 namespace Valet.Commands.Travis;
@@ -22,8 +23,7 @@ public class Audit : ContainerCommand
         IsRequired = false
     };
 
-    protected override List<Option> Options => new()
-    {
+    protected override ImmutableArray<Option> Options => ImmutableArray.Create<Option>(
         Common.Organization,
         Common.InstanceUrl,
         Common.AccessToken,
@@ -31,5 +31,5 @@ public class Audit : ContainerCommand
         Common.SourceGitHubAccessToken,
         ConfigFilePath,
         AllowInactiveRepositories
-    };
+    );
 }

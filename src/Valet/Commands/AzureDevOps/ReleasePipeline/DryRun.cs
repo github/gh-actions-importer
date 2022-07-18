@@ -1,3 +1,4 @@
+﻿using System.Collections.Immutable;
 using System.CommandLine;
 
 namespace Valet.Commands.AzureDevOps.ReleasePipeline;
@@ -10,5 +11,5 @@ public class DryRun : ContainerCommand
 
     protected override string Name => "release";
     protected override string Description => "Target a release pipeline";
-    protected override List<Option> Options => new();
+    protected override ImmutableArray<Option> Options => ImmutableArray<Option>.Empty;
 }

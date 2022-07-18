@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.CommandLine;
 
 namespace Valet.Commands.Travis;
@@ -18,11 +19,10 @@ public class Forecast : ContainerCommand
         AllowMultipleArgumentsPerToken = true,
     };
 
-    protected override List<Option> Options => new()
-    {
+    protected override ImmutableArray<Option> Options => ImmutableArray.Create<Option>(
         Common.Organization,
         Common.InstanceUrl,
         Common.AccessToken,
         SourceFilePath
-    };
+    );
 }

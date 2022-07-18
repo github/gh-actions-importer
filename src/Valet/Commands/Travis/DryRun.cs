@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.CommandLine;
 
 namespace Valet.Commands.Travis;
@@ -11,8 +12,7 @@ public class DryRun : ContainerCommand
     protected override string Name => "travis-ci";
     protected override string Description => "Convert a Travis CI pipeline to a GitHub Actions workflow and output its yaml file.";
 
-    protected override List<Option> Options => new()
-    {
+    protected override ImmutableArray<Option> Options => ImmutableArray.Create<Option>(
         Common.Repository,
         Common.Organization,
         Common.InstanceUrl,
@@ -20,5 +20,5 @@ public class DryRun : ContainerCommand
         Common.SourceGitHubInstanceUrl,
         Common.SourceGitHubAccessToken,
         Common.SourceFilePath
-    };
+    );
 }

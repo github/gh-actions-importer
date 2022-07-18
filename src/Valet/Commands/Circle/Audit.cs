@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.CommandLine;
 
 namespace Valet.Commands.Circle;
@@ -17,13 +18,12 @@ public class Audit : ContainerCommand
         IsRequired = false,
     };
 
-    protected override List<Option> Options => new()
-    {
+    protected override ImmutableArray<Option> Options => ImmutableArray.Create<Option>(
         Common.InstanceUrl,
         Common.AccessToken,
         Common.Organization,
         Common.SourceGitHubAccessToken,
         Common.SourceGitHubInstanceUrl,
         ConfigFilePath
-    };
+    );
 }
