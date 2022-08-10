@@ -22,7 +22,7 @@ public readonly struct Variable
         _ => throw new ArgumentOutOfRangeException()
     };
 
-    public bool IsPassword => Key.EndsWith("ACCESS_TOKEN", StringComparison.Ordinal);
+    public bool IsPassword => Key.EndsWith("ACCESS_TOKEN", StringComparison.Ordinal) || Key.EndsWith("PASSWORD", StringComparison.Ordinal);
     public string Message { get; }
     public string? DefaultValue { get; }
 

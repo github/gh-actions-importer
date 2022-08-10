@@ -23,6 +23,7 @@ public class VariableTests
 
     [TestCase("USERNAME", false)]
     [TestCase("PERSONAL_ACCESS_TOKEN", true)]
+    [TestCase("SOME_PASSWORD", true)]
     public void IsPassword_ReturnsExpected(string key, bool isPassword)
     {
         // Arrange
