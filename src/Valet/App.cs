@@ -23,8 +23,16 @@ public class App
     {
         await _dockerService.VerifyDockerRunningAsync().ConfigureAwait(false);
 
+        var environmentVariables = await _configurationService.ReadCurrentVariablesAsync().ConfigureAwait(false);
+
         username ??= Environment.GetEnvironmentVariable("GHCR_USERNAME");
         password ??= Environment.GetEnvironmentVariable("GHCR_PASSWORD");
+
+        if (username == null)
+            environmentVariables.TryGetValue("GHCR_USERNAME", out username);
+
+        if (password == null)
+            environmentVariables.TryGetValue("GHCR_PASSWORD", out password);
 
         await _dockerService.UpdateImageAsync(
             ValetImage,

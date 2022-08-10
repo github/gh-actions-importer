@@ -6,6 +6,8 @@ public static class Constants
 {
     private static readonly List<Variable> UserInputVariables = new()
     {
+        new Variable("GHCR_USERNAME", Provider.GitHub, "GitHub handle used to authenticate with the GitHub Container Registry"),
+        new Variable("GHCR_PASSWORD", Provider.GitHub, "Personal access token to authenticate with the GitHub Container Registry"),
         new Variable("GITHUB_ACCESS_TOKEN", Provider.GitHub, "Personal access token for GitHub"),
         new Variable("GITHUB_INSTANCE_URL", Provider.GitHub, "Base url of the GitHub instance", "https://github.com"),
         new Variable("AZURE_DEVOPS_ACCESS_TOKEN", Provider.AzureDevOps, "Personal access token for Azure DevOps"),
