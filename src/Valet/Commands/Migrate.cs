@@ -19,15 +19,15 @@ public class Migrate : BaseCommand
         IsRequired = true
     };
 
-    private static readonly Option<string> GitHubInstanceUrl = new("--github-instance-url")
+    private static readonly Option<string> WorkflowFilePrefix = new("--workflow-file-prefix")
     {
-        Description = "The URL of the GitHub instance.",
+        Description = "The prefix for the workflow file names.",
         IsRequired = false
     };
 
-    private static readonly Option<string> GitHubAccessToken = new("--github-access-token")
+    private static readonly Option<string> CommitMessage = new("--commit-message")
     {
-        Description = "Access token for the GitHub repo to migrate to.",
+        Description = "The commit message to use when committing the workflow file.",
         IsRequired = false
     };
 
@@ -37,8 +37,8 @@ public class Migrate : BaseCommand
         command.AppendCommonOptions();
 
         command.AddGlobalOption(TargetUrl);
-        command.AddGlobalOption(GitHubInstanceUrl);
-        command.AddGlobalOption(GitHubAccessToken);
+        command.AddGlobalOption(WorkflowFilePrefix);
+        command.AddGlobalOption(CommitMessage);
 
         command.AddCommand(new AzureDevOps.Migrate(_args).Command(app));
         command.AddCommand(new Circle.Migrate(_args).Command(app));

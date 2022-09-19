@@ -54,6 +54,22 @@ public static class Common
             }
         );
 
+        command.AddGlobalOption(
+             new Option<FileInfo[]>(new[] { "--github-instance-url" })
+             {
+                 Description = "The URL of the GitHub instance.",
+                 IsRequired = false
+             }
+         );
+
+        command.AddGlobalOption(
+            new Option<string>(new[] { "--github-access-token" })
+            {
+                Description = "Access token for the GitHub repo.",
+                IsRequired = false
+            }
+        );
+
         return command;
     }
 
