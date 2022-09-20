@@ -39,7 +39,8 @@ public static class Constants
             var environmentVariables = new List<string>
             {
                 "GH_ACCESS_TOKEN", "GH_INSTANCE_URL",
-                "YAML_VERBOSITY", "HTTP_PROXY", "HTTPS_PROXY", "NO_PROXY", "OCTOKIT_PROXY", "OCTOKIT_SSL_VERIFY_MODE"
+                "YAML_VERBOSITY", "HTTP_PROXY", "HTTPS_PROXY", "NO_PROXY", "OCTOKIT_PROXY", "OCTOKIT_SSL_VERIFY_MODE",
+                "INSTALLATION_TYPE"
             };
             environmentVariables.AddRange(UserInputVariables.Select(x => x.Key));
 
