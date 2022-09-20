@@ -24,7 +24,7 @@ public static class Common
 
     public static readonly Option<string> JenkinsfileAccessToken = new("--jenkinsfile-access-token")
     {
-        Description = "Access token for the GitHub repo containing the job's Jenkinsfile for a pipeline.",
+        Description = "Access token for the GitHub repo containing the job's Jenkinsfile for a pipeline (if different than the `--github-access-token` value).",
         IsRequired = false,
     };
 

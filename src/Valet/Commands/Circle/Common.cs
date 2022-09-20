@@ -30,13 +30,13 @@ public static class Common
 
     public static readonly Option<string> SourceGitHubAccessToken = new(new[] { "-s", "--circle-ci-source-github-access-token" })
     {
-        Description = "Access token for the source GitHub instance.",
+        Description = "Access token for the source GitHub instance (if different than the `--github-access-token` value).",
         IsRequired = false,
     };
 
     public static readonly Option<string> SourceGitHubInstanceUrl = new(new[] { "-i", "--circle-ci-source-github-instance-url" })
     {
-        Description = "The URL of the source GitHub instance.",
+        Description = "The URL of the source GitHub instance (if different than the `--github-instance-rul` value).",
         IsRequired = false,
     };
 
