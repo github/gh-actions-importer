@@ -129,6 +129,7 @@ Commands:
   gitlab        Forecasts GitHub Actions usage from historical GitLab pipeline utilization.
   circle-ci     Forecasts GitHub Actions usage from historical CircleCI pipeline utilization.
   travis-ci     Forecasts GitHub Actions usage from historical Travis CI pipeline utilization.
+  github        Forecasts GitHub Actions usage from historical GitHub pipeline utilization.
 ```
 
 You can find detailed information about running a forecast with Valet in the documentation that is available once you are granted access.

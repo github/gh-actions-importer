@@ -52,6 +52,7 @@ public class Forecast : ContainerCommand
         command.AddCommand(new GitLab.Forecast(_args).Command(app));
         command.AddCommand(new Circle.Forecast(_args).Command(app));
         command.AddCommand(new Travis.Forecast(_args).Command(app));
+        command.AddCommand(new GitHub.Forecast(_args).Command(app));
 
         return command;
     }
