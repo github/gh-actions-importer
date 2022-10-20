@@ -27,8 +27,11 @@ public class ProcessService : IProcessService
             writer.Close();
         }
 
-        ReadStream(process.StandardOutput, output, cts.Token);
-        ReadStream(process.StandardError, output, cts.Token);
+        if (output)
+        {
+            ReadStream(process.StandardOutput, cts.Token);
+            ReadStream(process.StandardError, cts.Token);
+        }
 
         await process.WaitForExitAsync(cts.Token);
 
@@ -85,7 +88,7 @@ public class ProcessService : IProcessService
         };
     }
 
-    private static void ReadStream(StreamReader reader, bool output, CancellationToken ctx)
+    private static void ReadStream(StreamReader reader, CancellationToken ctx)
     {
         Task.Run(() =>
         {
@@ -99,9 +102,11 @@ public class ProcessService : IProcessService
                     {
                         while (current >= 0)
                         {
-                            if (output)
+                            Console.Write((char)current);
+
+                            if (reader.Peek() == -1)
                             {
-                                Console.Write((char)current);
+                                break;
                             }
                             current = reader.Read();
                         }
