@@ -6,7 +6,7 @@ namespace ActionsImporter.Commands;
 public class Version : BaseCommand
 {
     protected override string Name => "version";
-    protected override string Description => "Check the version of the Valet docker container.";
+    protected override string Description => "Display the version of the Actions Importer.";
 
     protected override Command GenerateCommand(App app)
     {

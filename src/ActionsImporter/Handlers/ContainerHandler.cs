@@ -9,5 +9,5 @@ public class ContainerHandler
         _app = app;
     }
 
-    public Func<Task<int>> Run(string[] args) => () => _app.ExecuteValetAsync(args);
+    public Func<Task<int>> Run(string[] args) => () => _app.ExecuteActionsImporterAsync(args);
 }

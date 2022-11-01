@@ -6,7 +6,7 @@ namespace ActionsImporter.Commands;
 public class Update : BaseCommand
 {
     protected override string Name => "update";
-    protected override string Description => "Update to the latest version of Valet";
+    protected override string Description => "Update to the latest version of the Actions Importer.";
 
     private static readonly Option<string> UsernameOption = new(new[] { "--username", "-u" })
     {
@@ -34,7 +34,7 @@ public class Update : BaseCommand
         command.AddOption(PasswordOption);
         command.AddOption(PasswordStdInOption);
 
-        command.Handler = CommandHandler.Create((string? username, string? password, bool passwordStdin) => app.UpdateValetAsync(username, password, passwordStdin));
+        command.Handler = CommandHandler.Create((string? username, string? password, bool passwordStdin) => app.UpdateActionsImporterAsync(username, password, passwordStdin));
 
         return command;
     }

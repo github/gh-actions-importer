@@ -5,8 +5,8 @@ namespace ActionsImporter;
 
 public class App
 {
-    private const string ValetImage = "valet-customers/valet-cli";
-    private const string ValetContainerRegistry = "ghcr.io";
+    private const string ActionsImporterImage = "valet-customers/valet-cli";
+    private const string ActionsImporterContainerRegistry = "ghcr.io";
 
     private readonly IDockerService _dockerService;
     private readonly IProcessService _processService;
@@ -19,7 +19,7 @@ public class App
         _configurationService = configurationService;
     }
 
-    public async Task<int> UpdateValetAsync(string? username = null, string? password = null, bool passwordStdin = false)
+    public async Task<int> UpdateActionsImporterAsync(string? username = null, string? password = null, bool passwordStdin = false)
     {
         await _dockerService.VerifyDockerRunningAsync().ConfigureAwait(false);
 
@@ -35,8 +35,8 @@ public class App
             environmentVariables.TryGetValue("GHCR_PASSWORD", out password);
 
         await _dockerService.UpdateImageAsync(
-            ValetImage,
-            ValetContainerRegistry,
+            ActionsImporterImage,
+            ActionsImporterContainerRegistry,
             "latest",
             username,
             password,
@@ -46,18 +46,18 @@ public class App
         return 0;
     }
 
-    public async Task<int> ExecuteValetAsync(string[] args)
+    public async Task<int> ExecuteActionsImporterAsync(string[] args)
     {
         await _dockerService.VerifyDockerRunningAsync().ConfigureAwait(false);
         await _dockerService.VerifyImagePresentAsync(
-            ValetImage,
-            ValetContainerRegistry,
+            ActionsImporterImage,
+            ActionsImporterContainerRegistry,
             "latest"
         ).ConfigureAwait(false);
 
         await _dockerService.ExecuteCommandAsync(
-            ValetImage,
-            ValetContainerRegistry,
+            ActionsImporterImage,
+            ActionsImporterContainerRegistry,
             "latest",
             args.Select(x => x.EscapeIfNeeded()).ToArray()
         );
@@ -67,17 +67,17 @@ public class App
     public async Task<int> GetVersionAsync()
     {
         var ghVersion = await _processService.RunAndCaptureAsync("gh", "version");
-        var ghValetVersion = await _processService.RunAndCaptureAsync("gh", "extension list");
-        var valetVersion = await _processService.RunAndCaptureAsync("docker", $"run --rm {ValetContainerRegistry}/{ValetImage}:latest version", throwOnError: false);
+        var ghActionsImporterVersion = await _processService.RunAndCaptureAsync("gh", "extension list");
+        var actionsImporterVersion = await _processService.RunAndCaptureAsync("docker", $"run --rm {ActionsImporterContainerRegistry}/{ActionsImporterImage}:latest version", throwOnError: false);
 
         var formattedGhVersion = ghVersion.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault();
-        var formattedGhValetVersion = ghValetVersion.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+        var formattedGhActionsImporterVersion = ghActionsImporterVersion.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
             .FirstOrDefault(x => x.Contains("github/gh-actions-importer", StringComparison.Ordinal));
-        var formattedValetVersion = valetVersion.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault() ?? "unknown";
+        var formattedActionsImporterVersion = actionsImporterVersion.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault() ?? "unknown";
 
         Console.WriteLine(formattedGhVersion);
-        Console.WriteLine(formattedGhValetVersion);
-        Console.WriteLine($"valet-cli\t{formattedValetVersion}");
+        Console.WriteLine(formattedGhActionsImporterVersion);
+        Console.WriteLine($"actions-importer-cli\t{formattedActionsImporterVersion}");
 
         return 0;
     }
@@ -86,8 +86,8 @@ public class App
     {
         try
         {
-            var latestImageDigestTask = _dockerService.GetLatestImageDigestAsync(ValetImage, ValetContainerRegistry);
-            var currentImageDigestTask = _dockerService.GetCurrentImageDigestAsync(ValetImage, ValetContainerRegistry);
+            var latestImageDigestTask = _dockerService.GetLatestImageDigestAsync(ActionsImporterImage, ActionsImporterContainerRegistry);
+            var currentImageDigestTask = _dockerService.GetCurrentImageDigestAsync(ActionsImporterImage, ActionsImporterContainerRegistry);
 
             await Task.WhenAll(latestImageDigestTask, currentImageDigestTask);
 
@@ -96,12 +96,12 @@ public class App
 
             if (latestImageDigest != null && currentImageDigest != null && !latestImageDigest.Equals(currentImageDigest, StringComparison.Ordinal))
             {
-                Console.WriteLine("A new version of the Valet CLI is available. Run 'gh valet update' to update.");
+                Console.WriteLine("A new version of the Actions Importer is available. Run 'gh actions-importer update' to update.");
             }
         }
         catch (Exception)
         {
-            // Let's catch and ignore any exceptions here. We don't want to kill Valet if we failed to check for updates
+            // Let's catch and ignore any exceptions here. We don't want to kill the Actions Importer if we failed to check for updates
             // We can add reporting here in the future to alert us of any issues
         }
     }

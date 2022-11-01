@@ -41,25 +41,25 @@ public class DockerService : IDockerService
 
     public Task ExecuteCommandAsync(string image, string server, string version, params string[] arguments)
     {
-        var valetArguments = new List<string>
+        var actionsImporterArguments = new List<string>
         {
             "run --rm -t"
         };
-        valetArguments.AddRange(GetEnvironmentVariableArguments());
+        actionsImporterArguments.AddRange(GetEnvironmentVariableArguments());
 
         var dockerArgs = Environment.GetEnvironmentVariable("DOCKER_ARGS");
         if (dockerArgs is not null)
         {
-            valetArguments.Add(dockerArgs);
+            actionsImporterArguments.Add(dockerArgs);
         }
 
-        valetArguments.Add($"-v \"{Directory.GetCurrentDirectory()}\":/data");
-        valetArguments.Add($"{server}/{image}:{version}");
-        valetArguments.AddRange(arguments);
+        actionsImporterArguments.Add($"-v \"{Directory.GetCurrentDirectory()}\":/data");
+        actionsImporterArguments.Add($"{server}/{image}:{version}");
+        actionsImporterArguments.AddRange(arguments);
 
         return _processService.RunAsync(
             "docker",
-            string.Join(' ', valetArguments),
+            string.Join(' ', actionsImporterArguments),
             Directory.GetCurrentDirectory(),
             new[] { ("MSYS_NO_PATHCONV", "1") }
         );
@@ -93,7 +93,7 @@ public class DockerService : IDockerService
         }
         catch (Exception)
         {
-            throw new Exception("Unable to locate Valet image locally. Please run `gh valet update` to fetch the latest image prior to running this command.");
+            throw new Exception("Unable to locate Actions Importer image locally. Please run `gh actions-importer update` to fetch the latest image prior to running this command.");
         }
     }
 

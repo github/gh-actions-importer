@@ -15,7 +15,7 @@ var app = new App(
     new ConfigurationService()
 );
 
-var command = new RootCommand("Valet is a tool that facilitates migrations to GitHub Actions.")
+var command = new RootCommand("The GitHub Actions Importer is a tool to help plan and automate your migration to Actions.")
 {
     new Update().Command(app),
     new Version().Command(app),

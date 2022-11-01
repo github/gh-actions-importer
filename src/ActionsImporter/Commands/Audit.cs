@@ -12,7 +12,7 @@ public class Audit : BaseCommand
     }
 
     protected override string Name => "audit";
-    protected override string Description => "An audit will output a list of data used in a CI/CD instance.";
+    protected override string Description => "Plan your CI/CD migration by analyzing your current CI/CD footprint.";
 
     private static readonly Option<string[]> FoldersOption = new(new[] { "-f", "--folders" })
     {
