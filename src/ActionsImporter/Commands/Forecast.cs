@@ -13,7 +13,7 @@ public class Forecast : ContainerCommand
     }
 
     protected override string Name => "forecast";
-    protected override string Description => "Forecast GitHub actions usage from historical pipeline utilization.";
+    protected override string Description => "≈.";
 
     private static readonly Option<DateTime> StartDate = new("--start-date", getDefaultValue: () => DateTime.Now.AddDays(-7))
     {

@@ -6,7 +6,7 @@ namespace ActionsImporter.Commands;
 public class Update : BaseCommand
 {
     protected override string Name => "update";
-    protected override string Description => "Update to the latest version of the Actions Importer.";
+    protected override string Description => "Update to the latest version of the GitHub Actions Importer.";
 
     private static readonly Option<string> UsernameOption = new(new[] { "--username", "-u" })
     {

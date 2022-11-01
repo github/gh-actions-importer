@@ -1,7 +1,7 @@
 ## Description
 
 name: Bug Report
-description: Request support or help from the Actions Importer team
+description: Request support or help from the GitHub Actions Importer team
 title: "[Support]: "
 labels: ["help wanted"]
 body:

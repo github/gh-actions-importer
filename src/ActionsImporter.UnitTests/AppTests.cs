@@ -35,7 +35,7 @@ public class AppTests
     }
 
     [TestCase("4256ea72fd01deac3e967f6b19f907587dcd6f0a976301f1aecc73dc6f146a4a", "4256ea72fd01deac3e967f6b19f907587dcd6f0a976301f1aecc73dc6f146a4a", "")]
-    [TestCase("4256ea72fd01deac3e967f6b19f907587dcd6f0a976301f1aecc73dc6f146a4a", "67eed1493c461efd993be9777598a456562f4e0c6b0bddcb19d819220a06dd4b", "A new version of the Actions Importer is available. Run 'gh actions-importer update' to update.\n")]
+    [TestCase("4256ea72fd01deac3e967f6b19f907587dcd6f0a976301f1aecc73dc6f146a4a", "67eed1493c461efd993be9777598a456562f4e0c6b0bddcb19d819220a06dd4b", "A new version of the GitHub Actions Importer is available. Run 'gh actions-importer update' to update.\n")]
     public async Task CheckForUpdates_NoUpdatesNeeded(string? latestImage, string? currentImage, string result)
     {
         // Arrange

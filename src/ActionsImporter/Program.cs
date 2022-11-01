@@ -15,15 +15,15 @@ var app = new App(
     new ConfigurationService()
 );
 
-var command = new RootCommand("The GitHub Actions Importer is a tool to help plan and automate your migration to Actions.")
+var command = new RootCommand("GitHub Actions Importer is a tool to help plan and automate your migration to Actions.")
 {
     new Update().Command(app),
     new Version().Command(app),
     new Configure().Command(app),
     new Audit(args).Command(app),
+    new Forecast(args).Command(app),
     new DryRun(args).Command(app),
-    new Migrate(args).Command(app),
-    new Forecast(args).Command(app)
+    new Migrate(args).Command(app)
 };
 
 var parser = new CommandLineBuilder(command)

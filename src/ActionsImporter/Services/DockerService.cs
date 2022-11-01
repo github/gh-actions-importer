@@ -93,7 +93,7 @@ public class DockerService : IDockerService
         }
         catch (Exception)
         {
-            throw new Exception("Unable to locate Actions Importer image locally. Please run `gh actions-importer update` to fetch the latest image prior to running this command.");
+            throw new Exception("Unable to locate GitHub Actions Importer image locally. Please run `gh actions-importer update` to fetch the latest image prior to running this command.");
         }
     }
 

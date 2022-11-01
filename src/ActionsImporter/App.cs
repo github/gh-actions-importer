@@ -96,12 +96,12 @@ public class App
 
             if (latestImageDigest != null && currentImageDigest != null && !latestImageDigest.Equals(currentImageDigest, StringComparison.Ordinal))
             {
-                Console.WriteLine("A new version of the Actions Importer is available. Run 'gh actions-importer update' to update.");
+                Console.WriteLine("A new version of the GitHub Actions Importer is available. Run 'gh actions-importer update' to update.");
             }
         }
         catch (Exception)
         {
-            // Let's catch and ignore any exceptions here. We don't want to kill the Actions Importer if we failed to check for updates
+            // Let's catch and ignore any exceptions here. We don't want to kill the importer if we failed to check for updates
             // We can add reporting here in the future to alert us of any issues
         }
     }
