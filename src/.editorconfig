@@ -34,7 +34,7 @@ end_of_line = lf
 indent_size = 2
 
 # The following applies to unit tests directory only.
-[Valet.UnitTests/**.cs]
+[ActionsImporter.UnitTests/**.cs]
 
 # CA1707: Identifiers should not contain underscores
 dotnet_diagnostic.CA1707.severity = none

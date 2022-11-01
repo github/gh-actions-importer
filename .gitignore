@@ -12,7 +12,8 @@
 .DS_STORE
 output/
 dist/
-gh-valet
+gh-actions-importer
+
 .env.*local
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

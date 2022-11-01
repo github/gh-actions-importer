@@ -1,12 +1,12 @@
-# GitHub Valet CLI
+# GitHub Actions Importer CLI
 
-[![.github/workflows/ci.yml](https://github.com/github/gh-valet/actions/workflows/ci.yml/badge.svg)](https://github.com/github/gh-valet/actions/workflows/ci.yml)
+[![.github/workflows/ci.yml](https://github.com/github/gh-actions-importer/actions/workflows/ci.yml/badge.svg)](https://github.com/github/gh-actions-importer/actions/workflows/ci.yml)
 
 Valet helps facilitate the migration of Azure DevOps, CircleCI, GitLab CI, Jenkins, and Travis CI pipelines to GitHub Actions. This repository provides functionality that extends the [GitHub CLI](https://cli.github.com/) to migrate pipelines to GitHub Actions using Valet.
 
-> Valet is currently private and customers must be onboarded prior to using the `gh-valet` CLI extension. Please reach out to [GitHub Sales](https://github.com/enterprise/contact) to inquire about being granted access.
+> Valet is currently private and customers must be onboarded prior to using the `gh-actions-importer` CLI extension. Please reach out to [GitHub Sales](https://github.com/enterprise/contact) to inquire about being granted access.
 
-**Note**: You can request support by creating an issue [here](https://github.com/github/gh-valet/issues/new?assignees=&labels=help+wanted&template=support.yml&title=%5BSupport%5D%3A+). The Valet team responds to support requests Monday through Friday between the hours of 9AM EST and 5PM PST.
+**Note**: You can request support by creating an issue [here](https://github.com/github/gh-actions-importer/issues/new?assignees=&labels=help+wanted&template=support.yml&title=%5BSupport%5D%3A+). The Valet team responds to support requests Monday through Friday between the hours of 9AM EST and 5PM PST.
 
 ## Supported platforms
 
@@ -37,7 +37,7 @@ The following requirements must be met to be able to run Valet:
 Next, the Valet CLI extension can be installed via this command:
 
 ```bash
-$ gh extension install github/gh-valet
+$ gh extension install github/gh-actions-importer
 ```
 
 To verify the extension is installed, run this command:

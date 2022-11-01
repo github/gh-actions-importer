@@ -14,7 +14,7 @@ If you think you've found a bug or have a great idea for new functionality pleas
 
 ## How to provide feedback or ask for help
 
-Use the [Discussions](https://github.com/github/gh-valet/discussions) tab in this repo for more general feedback or any questions/comments on this tooling.
+Use the [Discussions](https://github.com/github/gh-actions-importer/discussions) tab in this repo for more general feedback or any questions/comments on this tooling.
 
 ## Configure your development environment
 
@@ -23,19 +23,19 @@ To get started, you'll need [.NET Core 6.0](https://dotnet.microsoft.com/en-us/d
 The solution can be built using the following command:
 
 ```bash
-$ dotnet build src/Valet.sln
+$ dotnet build src/ActionsImporter.sln
 ```
 
 Unit tests can be run using the following command:
 
 ```bash
-$ dotnet test src/Valet.sln
+$ dotnet test src/ActionsImporter.sln
 ```
 
 Code linting can be run using the following command:
 
 ```bash
-$ dotnet format src/Valet.sln
+$ dotnet format src/ActionsImporter.sln
 ```
 
 ## Submitting a Pull Request

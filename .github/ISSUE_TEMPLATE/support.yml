@@ -1,7 +1,7 @@
 ## Description
 
 name: Bug Report
-description: Request support or help from the Valet team
+description: Request support or help from the Actions Importer team
 title: "[Support]: "
 labels: ["help wanted"]
 body:
@@ -18,10 +18,10 @@ body:
         - label: macOS
         - label: Windows
   - type: textarea
-    id: valet-version
+    id: actions-importer-version
     attributes:
       label: What version of the tool are you using?
-      placeholder: i.e. the output of `gh valet version`
+      placeholder: i.e. the output of `gh actions-importer version`
     validations:
       required: true
   - type: textarea
@@ -40,7 +40,7 @@ body:
     id: terms
     attributes:
       label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/github/gh-valet/blob/main/CODE_OF_CONDUCT.md)
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/github/gh-actions-importer/blob/main/CODE_OF_CONDUCT.md)
       options:
         - label: I agree to follow this project's Code of Conduct
           required: true

@@ -22,7 +22,7 @@ jobs:
       - name: install dotnet-format
         run: dotnet tool install -g dotnet-format --version "5.1.*" --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json
       - name: lint
-        run: dotnet format src/Valet.sln --verify-no-changes
+        run: dotnet format src/ActionsImporter.sln --verify-no-changes
 
   unit-test:
     runs-on: ubuntu-latest
@@ -32,11 +32,11 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       - name: dotnet restore
-        run: dotnet restore src/Valet.sln
+        run: dotnet restore src/ActionsImporter.sln
       - name: dotnet build
-        run: dotnet build src/Valet.sln
+        run: dotnet build src/ActionsImporter.sln
       - name: dotnet test
-        run: dotnet test src/Valet.UnitTests/Valet.UnitTests.csproj --no-build --no-restore --logger "junit;LogFilePath=unit-tests.xml"
+        run: dotnet test src/ActionsImporter.UnitTests/ActionsImporter.UnitTests.csproj --no-build --no-restore --logger "junit;LogFilePath=unit-tests.xml"
       - name: publish test results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
@@ -52,20 +52,20 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       - name: dotnet restore
-        run: dotnet restore src/Valet.sln
+        run: dotnet restore src/ActionsImporter.sln
       - name: dotnet build
-        run: dotnet build src/Valet.sln
+        run: dotnet build src/ActionsImporter.sln
       - name: dotnet publish
         run: |
-          dotnet publish src/Valet/Valet.csproj -c Release -r win10-x64 --self-contained -o dist/win-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
-          dotnet publish src/Valet/Valet.csproj -c Release -r osx-x64 --self-contained -o dist/osx-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
-          dotnet publish src/Valet/Valet.csproj -c Release -r linux-x64 --self-contained -o dist/linux-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
+          dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r win10-x64 --self-contained -o dist/win-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
+          dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r osx-x64 --self-contained -o dist/osx-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
+          dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r linux-x64 --self-contained -o dist/linux-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
       - name: prepare staging
         run: |
           mkdir -p ${{ runner.temp }}/staging
-          cp dist/win-x64/gh-valet.exe ${{ runner.temp }}/staging/valet-windows-amd64.exe
-          cp dist/osx-x64/gh-valet ${{ runner.temp }}/staging/valet-darwin-amd64
-          cp dist/linux-x64/gh-valet ${{ runner.temp }}/staging/valet-linux-amd64
+          cp dist/win-x64/gh-actions-importer.exe ${{ runner.temp }}/staging/actions-importer-windows-amd64.exe
+          cp dist/osx-x64/gh-actions-importer ${{ runner.temp }}/staging/actions-importer-darwin-amd64
+          cp dist/linux-x64/gh-actions-importer ${{ runner.temp }}/staging/actions-importer-linux-amd64
 
       - name: publish artifacts
         uses: actions/upload-artifact@v3
@@ -106,6 +106,6 @@ jobs:
           generate_release_notes: true
           fail_on_unmatched_files: true
           files: |
-            ${{ runner.temp }}/dist/valet-windows-amd64.exe
-            ${{ runner.temp }}/dist/valet-linux-amd64
-            ${{ runner.temp }}/dist/valet-darwin-amd64
+            ${{ runner.temp }}/dist/actions-importer-windows-amd64.exe
+            ${{ runner.temp }}/dist/actions-importer-linux-amd64
+            ${{ runner.temp }}/dist/actions-importer-darwin-amd64
