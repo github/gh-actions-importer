@@ -39,7 +39,7 @@ public class AppTests
     public async Task CheckForUpdates_NoUpdatesNeeded(string? latestImage, string? currentImage, string result)
     {
         // Arrange
-        var image = "valet-customers/valet-cli";
+        var image = "actions-importer/cli";
         var server = "ghcr.io";
 
         using var stringWriter = new StringWriter();
@@ -65,7 +65,7 @@ public class AppTests
     public async Task CheckForUpdates_RaisesCaughtException()
     {
         // Arrange
-        var image = "valet-customers/valet-cli";
+        var image = "actions-importer/cli";
         var server = "ghcr.io";
 
         using var stringWriter = new StringWriter();

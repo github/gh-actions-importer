@@ -5,7 +5,7 @@ namespace ActionsImporter;
 
 public class App
 {
-    private const string ActionsImporterImage = "valet-customers/valet-cli";
+    private const string ActionsImporterImage = "actions-importer/cli";
     private const string ActionsImporterContainerRegistry = "ghcr.io";
 
     private readonly IDockerService _dockerService;
@@ -77,7 +77,7 @@ public class App
 
         Console.WriteLine(formattedGhVersion);
         Console.WriteLine(formattedGhActionsImporterVersion);
-        Console.WriteLine($"actions-importer-cli\t{formattedActionsImporterVersion}");
+        Console.WriteLine($"actions-importer/cli\t{formattedActionsImporterVersion}");
 
         return 0;
     }
