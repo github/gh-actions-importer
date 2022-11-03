@@ -2,7 +2,7 @@
 
 [![.github/workflows/ci.yml](https://github.com/github/gh-actions-importer/actions/workflows/ci.yml/badge.svg)](https://github.com/github/gh-actions-importer/actions/workflows/ci.yml)
 
-GitHub Actions Importer helps you plan and automate the migration of Azure DevOps, CircleCI, GitLab, Jenkins, and Travis CI pipelines to Actions. This repository provides functionality that extends the [GitHub CLI](https://cli.github.com/) to migrate pipelines using the GitHub Actions Importer.
+[GitHub Actions Importer](https://docs.github.com/en/actions/migrating-to-github-actions/automating-migration-with-github-actions-importer) helps plan, forecast, and automate the migration of Azure DevOps, CircleCI, GitLab, Jenkins, and Travis CI pipelines to GitHub Actions. This repository provides functionality that extends the [GitHub CLI](https://cli.github.com/) to migrate pipelines using the GitHub Actions Importer.
 
 > **Note**: Sign up [here](https://github.com/features/actions-importer/signup) to request access to the public preview for the GitHub Actions Importer. Once you are granted access you'll be able to use the `gh-actions-importer` CLI extension
 
@@ -96,7 +96,7 @@ $ gh actions-importer audit -h
 Description:
   Plan your CI/CD migration by analyzing your current CI/CD footprint.
 
-<omitted for brevity>
+[...]
 
 Commands:
   azure-devops  An audit will output a list of data used in an Azure DevOps instance.
@@ -119,7 +119,7 @@ $ gh actions-importer forecast -h
 Description:
   Forecasts GitHub Actions usage from historical pipeline utilization.
 
-<omitted for brevity>
+[...]
 
 Commands:
   azure-devops  Forecasts GitHub Actions usage from historical Azure DevOps pipeline utilization.
@@ -143,7 +143,7 @@ $ gh actions-importer dry-run -h
 Description:
   Convert a pipeline to a GitHub Actions workflow and output its yaml file.
 
-<omitted for brevity>
+[...]
 
 Commands:
   azure-devops  Convert an Azure DevOps pipeline to a GitHub Actions workflow and output its yaml file.
@@ -166,7 +166,7 @@ $ gh actions-importer migrate -h
 Description:
   Convert a pipeline to a GitHub Actions workflow and open a pull request with the changes.
 
-<omitted for brevity>
+[...]
 
 Commands:
   azure-devops  Convert an Azure DevOps pipeline to a GitHub Actions workflow and open a pull request with the changes.
