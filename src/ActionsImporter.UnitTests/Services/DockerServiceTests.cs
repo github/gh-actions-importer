@@ -37,7 +37,7 @@ public class DockerServiceTests
     public async Task UpdateImageAsync_NoCredentialsProvided_PullsLatest_ReturnsTrue()
     {
         // Arrange
-        var image = "valet-customers/valet-cli";
+        var image = "actions-importer/cli";
         var server = "ghcr.io";
         var version = "latest";
 
@@ -69,7 +69,7 @@ public class DockerServiceTests
     public async Task UpdateImageAsync_InvalidCredentialsProvided_ReturnsFalse()
     {
         // Arrange
-        var image = "valet-customers/valet-cli";
+        var image = "actions-importer/cli";
         var server = "ghcr.io";
         var version = "latest";
         var username = "dwight";
@@ -103,7 +103,7 @@ public class DockerServiceTests
     public async Task UpdateImageAsync_ValidCredentialsProvided_ReturnsTrue()
     {
         // Arrange
-        var image = "valet-customers/valet-cli";
+        var image = "actions-importer/cli";
         var server = "ghcr.io";
         var version = "latest";
         var username = "dwight";
@@ -148,7 +148,7 @@ public class DockerServiceTests
     public async Task ExecuteCommandAsync_InvokesDocker_ReturnsTrue()
     {
         // Arrange
-        var image = "valet-customers/valet-cli";
+        var image = "actions-importer/cli";
         var server = "ghcr.io";
         var version = "latest";
         var arguments = new[] { "run", "this", "command" };
@@ -174,7 +174,7 @@ public class DockerServiceTests
     public async Task ExecuteCommandAsync_InvokesDocker_WithEnvironmentVariables_ReturnsTrue()
     {
         // Arrange
-        var image = "valet-customers/valet-cli";
+        var image = "actions-importer/cli";
         var server = "ghcr.io";
         var version = "latest";
         var arguments = new[] { "run", "this", "command" };
@@ -205,7 +205,7 @@ public class DockerServiceTests
     public async Task ExecuteCommandAsync_InvokesDocker_WithAdditionalDockerArguments_ReturnsTrue()
     {
         // Arrange
-        var image = "valet-customers/valet-cli";
+        var image = "actions-importer/cli";
         var server = "ghcr.io";
         var version = "latest";
         var arguments = new[] { "run", "this", "command" };
@@ -272,7 +272,7 @@ public class DockerServiceTests
     public void VerifyImagePresentAsync_IsPresent_NoException()
     {
         // Arrange
-        var image = "valet-customers/valet-cli";
+        var image = "actions-importer/cli";
         var server = "ghcr.io";
         var version = "latest";
 
@@ -296,7 +296,7 @@ public class DockerServiceTests
     public void VerifyImagePresentAsync_NotPresent_ThrowsException()
     {
         // Arrange
-        var image = "valet-customers/valet-cli";
+        var image = "actions-importer/cli";
         var server = "ghcr.io";
         var version = "latest";
 
@@ -320,7 +320,7 @@ public class DockerServiceTests
     public async Task GetCurrentImageDigest_ParsesDigestCorrectly()
     {
         // Arrange
-        var image = "valet-customers/valet-cli";
+        var image = "actions-importer/cli";
         var server = "ghcr.io";
 
         _processService.Setup(handler =>
@@ -345,7 +345,7 @@ public class DockerServiceTests
     public async Task GetLatestImageDigest_ParsesDigestCorrectly()
     {
         // Arrange
-        var image = "valet-customers/valet-cli";
+        var image = "actions-importer/cli";
         var server = "ghcr.io";
         var manifestResult = @"
 {
