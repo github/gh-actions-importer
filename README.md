@@ -6,7 +6,7 @@
 
 > **Note**: Sign up [here](https://github.com/features/actions-importer/signup) to request access to the public preview for the GitHub Actions Importer. Once you are granted access you'll be able to use the `gh-actions-importer` CLI extension
 
-You can request support [here](https://support.github.com/) on a best-effort basis during the public preview period.
+You can request support [here](https://support.github.com/contact?tags=actions_importer_beta) on a best-effort basis during the public preview period.
 
 ## Supported platforms
 
