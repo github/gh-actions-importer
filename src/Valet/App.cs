@@ -66,14 +66,14 @@ public class App
 
     public async Task<int> GetVersionAsync()
     {
-        var ghVersion = await _processService.RunAndCaptureAsync("gh", "version");
+        var (standardOutput, standardError, exitCode) = await _processService.RunAndCaptureAsync("gh", "version");
         var ghValetVersion = await _processService.RunAndCaptureAsync("gh", "extension list");
         var valetVersion = await _processService.RunAndCaptureAsync("docker", $"run --rm {ValetContainerRegistry}/{ValetImage}:latest version", throwOnError: false);
 
-        var formattedGhVersion = ghVersion.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault();
-        var formattedGhValetVersion = ghValetVersion.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+        var formattedGhVersion = standardOutput.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault();
+        var formattedGhValetVersion = ghValetVersion.standardOutput.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
             .FirstOrDefault(x => x.Contains("github/gh-valet", StringComparison.Ordinal));
-        var formattedValetVersion = valetVersion.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault() ?? "unknown";
+        var formattedValetVersion = valetVersion.standardOutput.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault() ?? "unknown";
 
         Console.WriteLine(formattedGhVersion);
         Console.WriteLine(formattedGhValetVersion);

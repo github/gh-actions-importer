@@ -42,15 +42,15 @@ public class DockerServiceTests
         var version = "latest";
 
         _processService.Setup(handler =>
-            handler.RunAsync(
+            handler.RunAndCaptureAsync(
                 "docker",
-                $"pull {server}/{image}:{version}",
+                $"pull {server}/{image}:{version} --quiet",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
                 It.IsAny<bool>(),
                 null
             )
-        ).Returns(Task.CompletedTask);
+        ).ReturnsAsync(("", "", 0));
 
         // Act
         await _dockerService.UpdateImageAsync(
@@ -66,7 +66,7 @@ public class DockerServiceTests
     }
 
     [Test]
-    public async Task UpdateImageAsync_InvalidCredentialsProvided_ReturnsFalse()
+    public void UpdateImageAsync_InvalidScopes_ThrowsUnauthorized()
     {
         // Arrange
         var image = "valet-customers/valet-cli";
@@ -76,31 +76,44 @@ public class DockerServiceTests
         var password = "assistant_regional_manager";
 
         _processService.Setup(handler =>
-            handler.RunAsync(
+            handler.RunAndCaptureAsync(
                 "docker",
                 $"login {server} --username {username} --password-stdin",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>(),
+                false,
                 password
             )
-        ).Returns(Task.CompletedTask);
+        ).ReturnsAsync(("Login Successful", "", 0));
 
-        // Act
-        await _dockerService.UpdateImageAsync(
+        _processService.Setup(handler =>
+            handler.RunAndCaptureAsync(
+                "docker",
+                $"pull {server}/{image}:{version} --quiet",
+                It.IsAny<string?>(),
+                It.IsAny<IEnumerable<(string, string)>?>(),
+                It.IsAny<bool>(),
+                null
+            )
+        ).ReturnsAsync(("", "Error response from daemon: denied", 1));
+
+        // Act/Assert
+        Assert.ThrowsAsync<Exception>(() => _dockerService.UpdateImageAsync(
             image,
             server,
             version,
             username,
             password
-        );
-
-        // Assert
+        ),
+@"You are not authorized to access Valet yet. Please ensure you've completed the following:
+- Requested access to Valet and received onboarding instructions via email.
+- Accepted all of the repository invites sent after being onboarded.
+- The GitHub personal access token used above contains the 'read:packages' scope.");
         _processService.VerifyAll();
     }
 
     [Test]
-    public async Task UpdateImageAsync_ValidCredentialsProvided_ReturnsTrue()
+    public void UpdateImageAsync_InvalidCredentialsProvided_ThrowsUnauthorized()
     {
         // Arrange
         var image = "valet-customers/valet-cli";
@@ -110,7 +123,108 @@ public class DockerServiceTests
         var password = "assistant_to_the_regional_manager";
 
         _processService.Setup(handler =>
-            handler.RunAsync(
+            handler.RunAndCaptureAsync(
+                "docker",
+                $"login {server} --username {username} --password-stdin",
+                It.IsAny<string?>(),
+                It.IsAny<IEnumerable<(string, string)>?>(),
+                false,
+                password
+            )
+        ).ReturnsAsync(("", $"Error response from daemon: Get \"https://{server}/v2/\": denied: denied", 1));
+
+        // Act/Assert
+        Assert.ThrowsAsync<Exception>(() => _dockerService.UpdateImageAsync(
+            image,
+            server,
+            version,
+            username,
+            password
+        ),
+@"You are not authorized to access Valet yet. Please ensure you've completed the following:
+- Requested access to Valet and received onboarding instructions via email.
+- Accepted all of the repository invites sent after being onboarded.");
+        _processService.VerifyAll();
+    }
+
+    [Test]
+    public void UpdateImageAsync_Unauthenticated_ThrowsUnauthorized()
+    {
+        // Arrange
+        var image = "valet-customers/valet-cli";
+        var server = "ghcr.io";
+        var version = "latest";
+
+        _processService.Setup(handler =>
+            handler.RunAndCaptureAsync(
+                "docker",
+                $"pull {server}/{image}:{version} --quiet",
+                It.IsAny<string?>(),
+                It.IsAny<IEnumerable<(string, string)>?>(),
+                It.IsAny<bool>(),
+                null
+            )
+        ).ReturnsAsync(("", $"Error response from daemon: Head \"https://{server}/v2/valet-customers/valet-cli/manifests/latest\": unauthorized", 1));
+
+        // Act/Assert
+        Assert.ThrowsAsync<Exception>(() => _dockerService.UpdateImageAsync(
+            image,
+            server,
+            version,
+            null,
+            null
+        ),
+            @"You are not authorized to access Valet yet. Please ensure you've completed the following:
+- Requested access to Valet and received onboarding instructions via email.
+- Accepted all of the repository invites sent after being onboarded.
+- The GitHub personal access token used above contains the 'read:packages' scope.");
+        _processService.VerifyAll();
+    }
+
+    [Test]
+    public void UpdateImageAsync_InvalidCredentialsProvided_ThrowsUnknownError()
+    {
+        // Arrange
+        var image = "valet-customers/valet-cli";
+        var server = "ghcr.io";
+        var version = "latest";
+        var username = "dwight";
+        var password = "assistant_to_the_regional_manager";
+
+        _processService.Setup(handler =>
+            handler.RunAndCaptureAsync(
+                "docker",
+                $"login {server} --username {username} --password-stdin",
+                It.IsAny<string?>(),
+                It.IsAny<IEnumerable<(string, string)>?>(),
+                false,
+                password
+            )
+        ).ReturnsAsync(("", "Unknown error", 1));
+
+        // Act/Assert
+        Assert.ThrowsAsync<Exception>(() => _dockerService.UpdateImageAsync(
+            image,
+            server,
+            version,
+            username,
+            password
+        ), $"There was an error authenticating with the {server} docker repository.\nError: Unknown error");
+        _processService.VerifyAll();
+    }
+
+    [Test]
+    public async Task UpdateImageAsync_ValidCredentialsProvided_ReturnsSuccessful()
+    {
+        // Arrange
+        var image = "valet-customers/valet-cli";
+        var server = "ghcr.io";
+        var version = "latest";
+        var username = "dwight";
+        var password = "assistant_to_the_regional_manager";
+
+        _processService.Setup(handler =>
+            handler.RunAndCaptureAsync(
                 "docker",
                 $"login {server} --username {username} --password-stdin",
                 It.IsAny<string?>(),
@@ -118,18 +232,18 @@ public class DockerServiceTests
                 It.IsAny<bool>(),
                 password
             )
-        ).Returns(Task.CompletedTask);
+        ).ReturnsAsync(("Login Succeeded", "", 0));
 
         _processService.Setup(handler =>
-            handler.RunAsync(
+            handler.RunAndCaptureAsync(
                 "docker",
-                $"pull {server}/{image}:{version}",
+                $"pull {server}/{image}:{version} --quiet",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
                 It.IsAny<bool>(),
                 null
             )
-        ).Returns(Task.CompletedTask);
+        ).ReturnsAsync(("", "", 0));
 
         // Act
         await _dockerService.UpdateImageAsync(
@@ -158,8 +272,7 @@ public class DockerServiceTests
                 $"run --rm -t -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
                 new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
-                true,
-                null
+                true
             )
         ).Returns(Task.CompletedTask);
 
@@ -189,8 +302,7 @@ public class DockerServiceTests
                 $"run --rm -t --env GITHUB_ACCESS_TOKEN=foo --env GITHUB_INSTANCE_URL=https://github.fabrikam.com --env JENKINS_ACCESS_TOKEN=bar -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
                 new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
-                true,
-                null
+                true
             )
         ).Returns(Task.CompletedTask);
 
@@ -218,8 +330,7 @@ public class DockerServiceTests
                 $"run --rm -t --network=host -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
                 new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
-                true,
-                null
+                true
             )
         ).Returns(Task.CompletedTask);
 
@@ -240,8 +351,7 @@ public class DockerServiceTests
                 "info",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>(),
-                null
+                It.IsAny<bool>()
             )
         ).Returns(Task.CompletedTask);
 
@@ -259,8 +369,7 @@ public class DockerServiceTests
                 "info",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>(),
-                null
+                It.IsAny<bool>()
             )
         ).ThrowsAsync(new Exception());
 
@@ -282,8 +391,7 @@ public class DockerServiceTests
                 $"image inspect {server}/{image}:{version}",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>(),
-                null
+                It.IsAny<bool>()
             )
         ).Returns(Task.CompletedTask);
 
@@ -306,8 +414,7 @@ public class DockerServiceTests
                 $"image inspect {server}/{image}:{version}",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>(),
-                null
+                It.IsAny<bool>()
             )
         ).ThrowsAsync(new Exception());
 
@@ -329,9 +436,10 @@ public class DockerServiceTests
                 $"image inspect --format={{{{.Id}}}} {server}/{image}:latest",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>()
+                It.IsAny<bool>(),
+                null
             )
-        ).ReturnsAsync("sha256:67eed1493c461efd993be9777598a456562f4e0c6b0bddcb19d819220a06dd4b");
+        ).ReturnsAsync(("sha256:67eed1493c461efd993be9777598a456562f4e0c6b0bddcb19d819220a06dd4b", "", 0));
 
         // Act
         var result = await _dockerService.GetCurrentImageDigestAsync(image, server);
@@ -411,9 +519,10 @@ public class DockerServiceTests
                 $"manifest inspect {server}/{image}:latest",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>()
+                It.IsAny<bool>(),
+                null
             )
-        ).ReturnsAsync(manifestResult);
+        ).ReturnsAsync((manifestResult, "", 0));
 
         // Act
         var result = await _dockerService.GetLatestImageDigestAsync(image, server);
