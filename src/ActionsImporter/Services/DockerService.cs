@@ -138,8 +138,8 @@ public class DockerService : IDockerService
         {
             string message = standardError.Trim();
             string? errorMessage = message == $"Error response from daemon: Get \"https://{server}/v2/\": denied: denied"
-                ? @"You are not authorized to access Valet yet. Please ensure you've completed the following:
-- Requested access to Valet and received onboarding instructions via email.
+                ? @"You are not authorized to access GitHub Actions Importer yet. Please ensure you've completed the following:
+- Requested access to GitHub Actions Importer and received onboarding instructions via email.
 - Accepted all of the repository invites sent after being onboarded."
                 : $"There was an error authenticating with the {server} docker repository.\nError: {message}";
 
@@ -164,10 +164,10 @@ public class DockerService : IDockerService
             string errorMessage = $"There was an error pulling the {image}:{version} image from the {server} docker repository.\nError: {message}";
 
             if (message == "Error response from daemon: denied"
-                || message == $"Error response from daemon: Head \"https://{server}/v2/valet-customers/valet-cli/manifests/latest\": unauthorized")
+                || message == $"Error response from daemon: Head \"https://{server}/v2/actions-importer/cli/manifests/latest\": unauthorized")
             {
-                errorMessage = @"You are not authorized to access Valet yet. Please ensure you've completed the following:
-- Requested access to Valet and received onboarding instructions via email.
+                errorMessage = @"You are not authorized to access GitHub Actions Importer yet. Please ensure you've completed the following:
+- Requested access to GitHub Actions Importer and received onboarding instructions via email.
 - Accepted all of the repository invites sent after being onboarded.
 - The GitHub personal access token used above contains the 'read:packages' scope.";
             }
