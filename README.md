@@ -1,32 +1,32 @@
-# GitHub Valet CLI
+# GitHub Actions Importer
 
-[![.github/workflows/ci.yml](https://github.com/github/gh-valet/actions/workflows/ci.yml/badge.svg)](https://github.com/github/gh-valet/actions/workflows/ci.yml)
+[![.github/workflows/ci.yml](https://github.com/github/gh-actions-importer/actions/workflows/ci.yml/badge.svg)](https://github.com/github/gh-actions-importer/actions/workflows/ci.yml)
 
-Valet helps facilitate the migration of Azure DevOps, CircleCI, GitLab CI, Jenkins, and Travis CI pipelines to GitHub Actions. This repository provides functionality that extends the [GitHub CLI](https://cli.github.com/) to migrate pipelines to GitHub Actions using Valet.
+[GitHub Actions Importer](https://docs.github.com/en/actions/migrating-to-github-actions/automating-migration-with-github-actions-importer) helps plan, forecast, and automate the migration of Azure DevOps, CircleCI, GitLab, Jenkins, and Travis CI pipelines to GitHub Actions. This repository provides functionality that extends the [GitHub CLI](https://cli.github.com/) to migrate pipelines using the GitHub Actions Importer.
 
-> Valet is currently private and customers must be onboarded prior to using the `gh-valet` CLI extension. Please reach out to [GitHub Sales](https://github.com/enterprise/contact) to inquire about being granted access.
+> **Note**: Sign up [here](https://github.com/features/actions-importer/signup) to request access to the public preview for the GitHub Actions Importer. Once you are granted access you'll be able to use the `gh-actions-importer` CLI extension
 
-**Note**: You can request support by creating an issue [here](https://github.com/github/gh-valet/issues/new?assignees=&labels=help+wanted&template=support.yml&title=%5BSupport%5D%3A+). The Valet team responds to support requests Monday through Friday between the hours of 9AM EST and 5PM PST.
+You can request support [here](https://support.github.com/contact?tags=actions_importer_beta) on a best-effort basis during the public preview period.
 
 ## Supported platforms
 
-Valet currently supports migrating pipelines to GitHub Actions from the following platforms:
+GitHub Actions Importer currently supports migrating pipelines to GitHub Actions from the following platforms:
 
 - Azure DevOps
 - CircleCI
-- GitLab CI
+- GitLab
 - Jenkins
 - Travis CI
 
-You can find detailed information about how Valet works for each of the supported platforms in the documentation that is available once you are granted access.
+You can find detailed information about how the GitHub Actions Importer works for each of the supported platforms in the documentation that is available once you are granted access.
 
-## Getting started with the Valet CLI
+## Getting started with GitHub Actions Importer
 
-Valet is distributed as a Docker container and this extension to the official [GitHub CLI](https://cli.github.com) to interact with the Docker container.
+GitHub Actions Importer is distributed as a Docker container and this extension to the official [GitHub CLI](https://cli.github.com) to interact with the Docker container.
 
 ### Prerequisites
 
-The following requirements must be met to be able to run Valet:
+The following requirements must be met to be able to use the GitHub Actions Importer:
 
 - The Docker CLI must be [installed](https://docs.docker.com/get-docker/) and running
 - The official [GitHub CLI](https://cli.github.com) must be installed
@@ -34,49 +34,47 @@ The following requirements must be met to be able to run Valet:
 
 ### Installation
 
-Next, the Valet CLI extension can be installed via this command:
+Next, the GitHub Actions Importer CLI extension can be installed via this command:
 
 ```bash
-$ gh extension install github/gh-valet
+$ gh extension install github/gh-actions-importer
 ```
 
 To verify the extension is installed, run this command:
 
 ```bash
-$ gh valet -h
-Description:
-  Valet is a tool to help plan and facilitate migrations to GitHub Actions.
-
+$ gh actions-importer -h
 Options:
   -?, -h, --help  Show help and usage information
 
 Commands:
-  update    Update to the latest version of Valet
-  version   Check the version of the Valet docker container.
-  audit     An audit will output a list of data used in a CI/CD instance.
-  dry-run   Convert a pipeline to a GitHub Actions workflow and output its yaml file.
-  migrate   Convert a pipeline to a GitHub Actions workflow and open a pull request with the changes.
-  forecast  Forecasts GitHub Actions usage from historical pipeline utilization.
+  update     Update to the latest version of the GitHub Actions Importer.
+  version    Display the version of the GitHub Actions Importer.
+  configure  Start an interactive prompt to configure credentials used to authenticate with your CI server(s).
+  audit      Plan your CI/CD migration by analyzing your current CI/CD footprint.
+  forecast   Forecast GitHub Actions usage from historical pipeline utilization.
+  dry-run    Convert a pipeline to a GitHub Actions workflow and output its yaml file.
+  migrate    Convert a pipeline to a GitHub Actions workflow and open a pull request with the changes.
 ```
 
 ### Configuration
 
-New versions of Valet are released on a regular basis. To ensure you're always up to date, the following command should be run often:
+New versions of the GitHub Actions Importer are released on a regular basis. To ensure you're always up to date, the following command should be run often:
 
 ```bash
-$ gh valet update
+$ gh actions-importer update
 ```
 
-**Note**: You will need to be authenticated with GitHub Container Registery for this command to be successful. Optionally, credentials can be provided to this command that will be used to authenticate on your behalf:
+**Note**: You will need to be authenticated with the GitHub Container Registry for this command to be successful. Optionally, credentials can be provided to this command that will be used to authenticate on your behalf:
 
 ```bash
-$ echo $GITHUB_TOKEN | gh valet update --username $GITHUB_HANDLE --password-stdin
+$ echo $GITHUB_TOKEN | gh actions-importer update --username $GITHUB_HANDLE --password-stdin
 ```
 
-In order for Valet to communicate with your current CI server and GitHub, various credentials must be available for the command. These can be configured using environment variables or a `.env.local` file. These environment variables can be configured in an interative prompt by running the following command:
+In order for the GitHub Actions Importer to communicate with your current CI/CD server and GitHub, various credentials must be available for the command. These can be configured using environment variables or a `.env.local` file. These environment variables can be configured in an interactive prompt by running the following command:
 
 ```bash
-$ gh valet configure
+$ gh actions-importer configure
 ? Enter value for 'GITHUB_ACCESS_TOKEN' (leave empty to skip): 
 ...
 ```
@@ -85,20 +83,20 @@ You can find detailed information about using environment variables in the docum
 
 ### Usage
 
-Now that Valet is configured and up-to-date, different subcommands of `gh valet` can be used to facilate a migration to GitHub Actions.
+Now that the GitHub Actions Importer is configured and up-to-date, different subcommands of `gh actions-importer` can be used to migrate to GitHub Actions.
 
 #### Audit
 
-The `audit` subcommand can be used to scan a CI server and output a summary of the current pipelines. This summary can then be used to plan timelines for migrating to GitHub Actions.
+The `audit` subcommand can be used to plan your CI/CD migration by analyzing your current CI/CD footprint. This analysis can then be used to plan timelines for migrating to GitHub Actions.
 
 To run an audit, use the following command to determine the options that are relevant to your use case:
 
 ```bash
-$ gh valet audit -h
+$ gh actions-importer audit -h
 Description:
-  An audit will output a list of data used in a CI/CD instance.
+  Plan your CI/CD migration by analyzing your current CI/CD footprint.
 
-<omitted for brevity>
+[...]
 
 Commands:
   azure-devops  An audit will output a list of data used in an Azure DevOps instance.
@@ -108,20 +106,20 @@ Commands:
   travis-ci     An audit will output a list of data used in a Travis CI instance.
 ```
 
-You can find detailed information about running an audit with Valet in the documentation that is available once you are granted access.
+You can find detailed information about running an audit with the GitHub Actions Importer in the documentation that is available once you are granted access to the public preview.
 
 #### Forecast
 
-The `forecast` subcommand can be used to forecast GitHub Actions usage from historical pipeline usage.
+The `forecast` subcommand can be used to forecast GitHub Actions usage based on historical pipeline usage.
 
-To run a forecast, use the following command to determine the options that are relevant to your use case:
+To run a forecast, use the following command to determine the options that are relevant to you:
 
 ```bash
-$ gh valet forecast -h
+$ gh actions-importer forecast -h
 Description:
   Forecasts GitHub Actions usage from historical pipeline utilization.
 
-<omitted for brevity>
+[...]
 
 Commands:
   azure-devops  Forecasts GitHub Actions usage from historical Azure DevOps pipeline utilization.
@@ -132,20 +130,20 @@ Commands:
   github        Forecasts GitHub Actions usage from historical GitHub pipeline utilization.
 ```
 
-You can find detailed information about running a forecast with Valet in the documentation that is available once you are granted access.
+You can find detailed information about running a forecast with the GitHub Actions Importer in the documentation that is available once you are granted access to the public preview.
 
-#### Dry-run
+#### Dry run
 
 The `dry-run` subcommand can be used to convert a pipeline to its GitHub Actions equivalent and write the workflow to your local filesystem.
 
-To run a dry-run, use the following command to determine the options that are relevant to your use case:
+To run a dry run, use the following command to determine the options that are relevant to you:
 
 ```bash
-$ gh valet dry-run -h
+$ gh actions-importer dry-run -h
 Description:
   Convert a pipeline to a GitHub Actions workflow and output its yaml file.
 
-<omitted for brevity>
+[...]
 
 Commands:
   azure-devops  Convert an Azure DevOps pipeline to a GitHub Actions workflow and output its yaml file.
@@ -155,7 +153,7 @@ Commands:
   travis-ci     Convert a Travis CI pipeline to a GitHub Actions workflow and output its yaml file.
 ```
 
-You can find detailed information about running a dry-run with Valet in the documentation that is available once you are granted access.
+You can find detailed information about running a dry run with the GitHub Actions Importer in the documentation that is available once you are granted access to the public preview.
 
 #### Migrate
 
@@ -164,11 +162,11 @@ The `migrate` subcommand can be used to convert a pipeline to its GitHub Actions
 To run a migration, use the following command to determine the options that are relevant to your use case:
 
 ```bash
-$ gh valet migrate -h
+$ gh actions-importer migrate -h
 Description:
   Convert a pipeline to a GitHub Actions workflow and open a pull request with the changes.
 
-<omitted for brevity>
+[...]
 
 Commands:
   azure-devops  Convert an Azure DevOps pipeline to a GitHub Actions workflow and open a pull request with the changes.
@@ -178,4 +176,4 @@ Commands:
   travis-ci     Convert a Travis CI pipeline to a GitHub Actions workflow and and open a pull request with the changes.
 ```
 
-You can find detailed information about running a migration with Valet in the documentation that is available once you are granted access.
+You can find detailed information about running a migration with the GitHub Actions Importer in the documentation that is available once you are granted access to the public preview.
