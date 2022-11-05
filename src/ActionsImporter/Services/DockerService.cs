@@ -151,7 +151,7 @@ public class DockerService : IDockerService
 
     private async Task DockerPullAsync(string image, string server, string version)
     {
-        Console.WriteLine($"Pulling {image}:{version} from the {server} docker repository...");
+        Console.WriteLine($"Updating {server}/{image}:{version}...");
         var (_, standardError, exitCode) = await _processService.RunAndCaptureAsync(
             "docker",
             $"pull {server}/{image}:{version} --quiet",
@@ -161,7 +161,7 @@ public class DockerService : IDockerService
         if (exitCode != 0)
         {
             string message = standardError.Trim();
-            string errorMessage = $"There was an error pulling the {image}:{version} image from the {server} docker repository.\nError: {message}";
+            string errorMessage = $"There was an error pulling the {server}/{image}:{version}.\nError: {message}";
 
             if (message == "Error response from daemon: denied"
                 || message == $"Error response from daemon: Head \"https://{server}/v2/actions-importer/cli/manifests/latest\": unauthorized")
@@ -174,6 +174,6 @@ public class DockerService : IDockerService
 
             throw new Exception(errorMessage);
         }
-        Console.WriteLine($"Successfully downloaded {image}:{version}");
+        Console.WriteLine($"{server}/{image}:{version} up-to-date");
     }
 }
