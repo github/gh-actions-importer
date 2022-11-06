@@ -12,20 +12,11 @@ public class ProcessService : IProcessService
         string arguments,
         string? cwd = null,
         IEnumerable<(string, string)>? environmentVariables = null,
-        bool output = true,
-        string? inputForStdIn = null)
+        bool output = true)
     {
         using var cts = new CancellationTokenSource();
         using var process = GetProcess(filename, arguments, cwd, environmentVariables);
         process.Start();
-
-        if (!string.IsNullOrWhiteSpace(inputForStdIn))
-        {
-            var writer = process.StandardInput;
-            writer.AutoFlush = true;
-            await writer.WriteAsync(inputForStdIn);
-            writer.Close();
-        }
 
         ReadStream(process.StandardOutput, output, cts.Token);
         ReadStream(process.StandardError, output, cts.Token);
@@ -40,10 +31,24 @@ public class ProcessService : IProcessService
         }
     }
 
-    public async Task<string> RunAndCaptureAsync(string filename, string arguments, string? cwd = null, IEnumerable<(string, string)>? environmentVariables = null, bool throwOnError = true)
+    public async Task<(string, string, int)> RunAndCaptureAsync(
+        string filename,
+        string arguments,
+        string? cwd = null,
+        IEnumerable<(string, string)>? environmentVariables = null,
+        bool throwOnError = true,
+        string? inputForStdIn = null)
     {
         using var process = GetProcess(filename, arguments, cwd, environmentVariables);
         process.Start();
+
+        if (!string.IsNullOrWhiteSpace(inputForStdIn))
+        {
+            var writer = process.StandardInput;
+            writer.AutoFlush = true;
+            await writer.WriteAsync(inputForStdIn);
+            writer.Close();
+        }
 
         await process.WaitForExitAsync();
 
@@ -53,7 +58,7 @@ public class ProcessService : IProcessService
             throw new Exception(error);
         }
 
-        return await process.StandardOutput.ReadToEndAsync();
+        return (await process.StandardOutput.ReadToEndAsync(), await process.StandardError.ReadToEndAsync(), process.ExitCode);
     }
 
     private static Process GetProcess(string filename, string arguments, string? cwd = null, IEnumerable<(string, string)>? environmentVariables = null)

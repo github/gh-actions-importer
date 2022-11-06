@@ -66,14 +66,14 @@ public class App
 
     public async Task<int> GetVersionAsync()
     {
-        var ghVersion = await _processService.RunAndCaptureAsync("gh", "version");
+        var (standardOutput, standardError, exitCode) = await _processService.RunAndCaptureAsync("gh", "version");
         var ghActionsImporterVersion = await _processService.RunAndCaptureAsync("gh", "extension list");
         var actionsImporterVersion = await _processService.RunAndCaptureAsync("docker", $"run --rm {ActionsImporterContainerRegistry}/{ActionsImporterImage}:latest version", throwOnError: false);
 
-        var formattedGhVersion = ghVersion.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault();
-        var formattedGhActionsImporterVersion = ghActionsImporterVersion.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+        var formattedGhVersion = standardOutput.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault();
+        var formattedGhActionsImporterVersion = ghActionsImporterVersion.standardOutput.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
             .FirstOrDefault(x => x.Contains("github/gh-actions-importer", StringComparison.Ordinal));
-        var formattedActionsImporterVersion = actionsImporterVersion.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault() ?? "unknown";
+        var formattedActionsImporterVersion = actionsImporterVersion.standardOutput.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault() ?? "unknown";
 
         Console.WriteLine(formattedGhVersion);
         Console.WriteLine(formattedGhActionsImporterVersion);
@@ -96,7 +96,7 @@ public class App
 
             if (latestImageDigest != null && currentImageDigest != null && !latestImageDigest.Equals(currentImageDigest, StringComparison.Ordinal))
             {
-                Console.WriteLine("A new version of the GitHub Actions Importer is available. Run 'gh actions-importer update' to update.");
+                Console.WriteLine("A new version of GitHub Actions Importer is available. Run 'gh actions-importer update' to update.");
             }
         }
         catch (Exception)

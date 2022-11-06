@@ -7,15 +7,15 @@ public interface IProcessService
         string arguments,
         string? cwd = null,
         IEnumerable<(string, string)>? environmentVariables = null,
-        bool output = true,
-        string? inputForStdIn = null
+        bool output = true
     );
 
-    Task<string> RunAndCaptureAsync(
+    Task<(string standardOutput, string standardError, int exitCode)> RunAndCaptureAsync(
         string filename,
         string arguments,
         string? cwd = null,
         IEnumerable<(string, string)>? environmentVariables = null,
-        bool throwOnError = true
+        bool throwOnError = true,
+        string? inputForStdIn = null
     );
 }
