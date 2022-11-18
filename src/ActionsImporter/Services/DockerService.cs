@@ -121,7 +121,7 @@ public class DockerService : IDockerService
             if (key.StartsWith("GH_", StringComparison.Ordinal))
                 key = key.Replace("GH_", "GITHUB_", StringComparison.Ordinal);
 
-            yield return $"--env {key}={value}";
+            yield return $"--env \"{key}={value}\"";
         }
     }
 
