@@ -4,7 +4,7 @@
 
 [GitHub Actions Importer](https://docs.github.com/en/actions/migrating-to-github-actions/automating-migration-with-github-actions-importer) helps plan, forecast, and automate the migration of Azure DevOps, CircleCI, GitLab, Jenkins, and Travis CI pipelines to GitHub Actions. This repository provides functionality that extends the [GitHub CLI](https://cli.github.com/) to migrate pipelines using the GitHub Actions Importer.
 
-> **Note**: Sign up [here](https://github.com/features/actions-importer/signup) to request access to the public preview for the GitHub Actions Importer. Once you are granted access you'll be able to use the `gh-actions-importer` CLI extension
+> **Note**: Sign up [here](https://github.com/features/actions-importer/signup) to request access to the public preview for GitHub Actions Importer. Once you are granted access you'll be able to use the `gh-actions-importer` CLI extension
 
 You can request support [here](https://support.github.com/contact?tags=actions_importer_beta) on a best-effort basis during the public preview period.
 
