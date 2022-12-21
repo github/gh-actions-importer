@@ -11,5 +11,14 @@ public class DryRun : ContainerCommand
 
     protected override string Name => "pipeline";
     protected override string Description => "Target a designer or YAML pipeline";
-    protected override ImmutableArray<Option> Options => ImmutableArray<Option>.Empty;
+
+    public static readonly Option<int> PipelineId = new(new[] { "--pipeline-id", "-i" })
+    {
+        Description = "The Azure DevOps pipeline id.",
+        IsRequired = false,
+    };
+
+    protected override ImmutableArray<Option> Options => ImmutableArray.Create<Option>(
+        Common.SourceFilePath
+    );
 }
