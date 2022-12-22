@@ -19,6 +19,7 @@ public class DryRun : ContainerCommand
     };
 
     protected override ImmutableArray<Option> Options => ImmutableArray.Create<Option>(
+        PipelineId,
         Common.SourceFilePath
     );
 }
