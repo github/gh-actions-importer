@@ -20,6 +20,7 @@ public class Audit : ContainerCommand
     };
 
     protected override ImmutableArray<Option> Options => ImmutableArray.Create<Option>(
+        ConfigFilePath
         Common.Organization,
         Common.Project,
         Common.InstanceUrl,
