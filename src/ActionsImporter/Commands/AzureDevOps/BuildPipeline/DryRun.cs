@@ -14,7 +14,7 @@ public class DryRun : ContainerCommand
 
     public static readonly Option<int> PipelineId = new(new[] { "-i", "--pipeline-id" })
     {
-        Description = "The Azure DevOps pipeline id.",
+        Description = "The Azure DevOps pipeline ID.",
         IsRequired = false,
     };
 
