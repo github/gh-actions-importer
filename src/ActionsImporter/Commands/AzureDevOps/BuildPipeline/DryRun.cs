@@ -12,14 +12,13 @@ public class DryRun : ContainerCommand
     protected override string Name => "pipeline";
     protected override string Description => "Target a designer or YAML pipeline";
 
-    public static readonly Option<int> PipelineId = new(new[] { "-i", "--pipeline-id" })
+    private static readonly Option<FileInfo> ConfigFilePath = new("--config-file-path")
     {
-        Description = "The Azure DevOps pipeline id.",
+        Description = "The file path corresponding to the Azure DevOps configuration file.",
         IsRequired = false,
     };
 
     protected override ImmutableArray<Option> Options => ImmutableArray.Create<Option>(
-        PipelineId,
-        Common.SourceFilePath
+        ConfigFilePath
     );
 }
