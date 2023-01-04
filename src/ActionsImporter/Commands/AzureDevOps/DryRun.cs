@@ -17,8 +17,7 @@ public class DryRun : BaseCommand
     protected override Command GenerateCommand(App app)
     {
         var command = base.GenerateCommand(app);
-
-        command.AddGlobalOption(Common.PipelineId);
+        
         command.AddGlobalOption(Common.InstanceUrl);
         command.AddGlobalOption(Common.Organization);
         command.AddGlobalOption(Common.Project);
