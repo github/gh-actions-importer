@@ -13,7 +13,14 @@ public class Audit : ContainerCommand
     protected override string Name => "azure-devops";
     protected override string Description => "An audit will output a list of data used in an Azure DevOps instance.";
 
+    private static readonly Option<FileInfo> ConfigFilePath = new("--config-file-path")
+    {
+        Description = "The file path corresponding to the Azure DevOps configuration file.",
+        IsRequired = false,
+    };
+
     protected override ImmutableArray<Option> Options => ImmutableArray.Create<Option>(
+        ConfigFilePath,
         Common.Organization,
         Common.Project,
         Common.InstanceUrl,
