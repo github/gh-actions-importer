@@ -7,10 +7,12 @@ namespace ActionsImporter.Services;
 public class DockerService : IDockerService
 {
     private readonly IProcessService _processService;
+    private readonly IRuntimeService _runtimeService;
 
-    public DockerService(IProcessService processService)
+    public DockerService(IProcessService processService, IRuntimeService runtimeService)
     {
         _processService = processService;
+        _runtimeService = runtimeService;
     }
 
     public async Task UpdateImageAsync(string image, string server, string version, string? username, string? password, bool passwordStdin = false)
@@ -45,6 +47,13 @@ public class DockerService : IDockerService
             actionsImporterArguments.Add(dockerArgs);
         }
 
+        // Forward the current user's UID/GID to the container
+        // to ensure the output files are owned by the current user
+        if (_runtimeService.IsLinux)
+        {
+            actionsImporterArguments.Add("-e USER_ID=$(id -u)");
+            actionsImporterArguments.Add("-e GROUP_ID=$(id -g)");
+        }
         actionsImporterArguments.Add($"-v \"{Directory.GetCurrentDirectory()}\":/data");
         actionsImporterArguments.Add($"{server}/{image}:{version}");
         actionsImporterArguments.AddRange(arguments);
