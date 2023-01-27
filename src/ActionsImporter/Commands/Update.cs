@@ -33,6 +33,7 @@ public class Update : BaseCommand
         command.AddOption(UsernameOption);
         command.AddOption(PasswordOption);
         command.AddOption(PasswordStdInOption);
+        command.AppendPrereleaseOption();
 
         command.Handler = CommandHandler.Create((string? username, string? password, bool passwordStdin) => app.UpdateActionsImporterAsync(username, password, passwordStdin));
 

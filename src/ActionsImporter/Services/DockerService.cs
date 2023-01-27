@@ -102,7 +102,7 @@ public class DockerService : IDockerService
 
     public async Task<string?> GetLatestImageDigestAsync(string image, string server)
     {
-        var (standardOutput, _, _) = await _processService.RunAndCaptureAsync("docker", $"manifest inspect {server}/{image}:latest");
+        var (standardOutput, _, _) = await _processService.RunAndCaptureAsync("docker", $"manifest inspect {server}/{image}");
         Manifest? manifest = JsonSerializer.Deserialize<Manifest>(standardOutput);
 
         return manifest?.GetDigest();
@@ -110,7 +110,7 @@ public class DockerService : IDockerService
 
     public async Task<string?> GetCurrentImageDigestAsync(string image, string server)
     {
-        var (standardOutput, _, _) = await _processService.RunAndCaptureAsync("docker", $"image inspect --format={{{{.Id}}}} {server}/{image}:latest");
+        var (standardOutput, _, _) = await _processService.RunAndCaptureAsync("docker", $"image inspect --format={{{{.Id}}}} {server}/{image}");
 
         return standardOutput.Split(":").ElementAtOrDefault(1)?.Trim();
     }

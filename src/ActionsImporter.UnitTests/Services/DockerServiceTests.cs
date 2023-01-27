@@ -465,13 +465,13 @@ public class DockerServiceTests
     public async Task GetCurrentImageDigest_ParsesDigestCorrectly()
     {
         // Arrange
-        var image = "actions-importer/cli";
+        var image = "actions-importer/cli:latest";
         var server = "ghcr.io";
 
         _processService.Setup(handler =>
             handler.RunAndCaptureAsync(
                 "docker",
-                $"image inspect --format={{{{.Id}}}} {server}/{image}:latest",
+                $"image inspect --format={{{{.Id}}}} {server}/{image}",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
                 It.IsAny<bool>(),
@@ -491,7 +491,7 @@ public class DockerServiceTests
     public async Task GetLatestImageDigest_ParsesDigestCorrectly()
     {
         // Arrange
-        var image = "actions-importer/cli";
+        var image = "actions-importer/cli:latest";
         var server = "ghcr.io";
         var manifestResult = @"
 {
@@ -554,7 +554,7 @@ public class DockerServiceTests
         _processService.Setup(handler =>
             handler.RunAndCaptureAsync(
                 "docker",
-                $"manifest inspect {server}/{image}:latest",
+                $"manifest inspect {server}/{image}",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
                 It.IsAny<bool>(),
