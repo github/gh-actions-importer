@@ -33,7 +33,7 @@ public class DockerService : IDockerService
         await DockerPullAsync(image, server, version);
     }
 
-    public Task ExecuteCommandAsync(string image, string server, string version, params string[] arguments)
+    public async Task ExecuteCommandAsync(string image, string server, string version, params string[] arguments)
     {
         var actionsImporterArguments = new List<string>
         {
@@ -51,14 +51,16 @@ public class DockerService : IDockerService
         // to ensure the output files are owned by the current user
         if (_runtimeService.IsLinux)
         {
-            actionsImporterArguments.Add("-e USER_ID=$(id -u)");
-            actionsImporterArguments.Add("-e GROUP_ID=$(id -g)");
+            var (userId, _, _) = await _processService.RunAndCaptureAsync("id", "-u");
+            var (groupId, _, _) = await _processService.RunAndCaptureAsync("id", "-g");
+            actionsImporterArguments.Add($"-e USER_ID={userId.TrimEnd()}");
+            actionsImporterArguments.Add($"-e GROUP_ID={groupId.TrimEnd()}");
         }
         actionsImporterArguments.Add($"-v \"{Directory.GetCurrentDirectory()}\":/data");
         actionsImporterArguments.Add($"{server}/{image}:{version}");
         actionsImporterArguments.AddRange(arguments);
 
-        return _processService.RunAsync(
+        await _processService.RunAsync(
             "docker",
             string.Join(' ', actionsImporterArguments),
             Directory.GetCurrentDirectory(),

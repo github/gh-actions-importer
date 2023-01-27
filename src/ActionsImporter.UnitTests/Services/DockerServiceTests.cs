@@ -353,10 +353,19 @@ public class DockerServiceTests
         var arguments = new[] { "run", "this", "command" };
 
         _runtimeService.Setup(handler => handler.IsLinux).Returns(true);
+
+        _processService.Setup(handler =>
+          handler.RunAndCaptureAsync("id", "-u", null, null, true, null)
+        ).Returns(Task.FromResult(("50", "", 0)));
+
+        _processService.Setup(handler =>
+          handler.RunAndCaptureAsync("id", "-g", null, null, true, null)
+        ).Returns(Task.FromResult(("100", "", 0)));
+
         _processService.Setup(handler =>
             handler.RunAsync(
                 "docker",
-                $"run --rm -t -e USER_ID=$(id -u) -e GROUP_ID=$(id -g) -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
+                $"run --rm -t -e USER_ID=50 -e GROUP_ID=100 -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
                 new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
                 true
