@@ -84,8 +84,10 @@ public class DockerService : IDockerService
         }
     }
 
-    public async Task VerifyImagePresentAsync(string image, string server, string version)
+    public async Task VerifyImagePresentAsync(string image, string server, string version, bool isPrerelease)
     {
+        var imageName = $"{server}/{image}:{version}";
+        var preReleaseOption = isPrerelease ? " --prerelease" : string.Empty;
         try
         {
             await _processService.RunAsync(
@@ -94,9 +96,10 @@ public class DockerService : IDockerService
                 output: false
             );
         }
+
         catch (Exception)
         {
-            throw new Exception("Unable to locate GitHub Actions Importer image locally. Please run `gh actions-importer update` to fetch the latest image prior to running this command.");
+            throw new Exception($"Unable to locate {imageName} image locally. Please run `gh actions-importer update{preReleaseOption}` to fetch the latest image prior to running this command.");
         }
     }
 

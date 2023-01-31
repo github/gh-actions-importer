@@ -58,7 +58,8 @@ public class App
         await _dockerService.VerifyImagePresentAsync(
             ActionsImporterImage,
             ActionsImporterContainerRegistry,
-            ImageTag
+            ImageTag,
+            IsPrerelease
         ).ConfigureAwait(false);
 
         await _dockerService.ExecuteCommandAsync(

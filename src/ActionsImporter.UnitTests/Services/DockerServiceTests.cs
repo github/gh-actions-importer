@@ -434,7 +434,7 @@ public class DockerServiceTests
         ).Returns(Task.CompletedTask);
 
         // Act, Assert
-        Assert.DoesNotThrowAsync(() => _dockerService.VerifyImagePresentAsync(image, server, version));
+        Assert.DoesNotThrowAsync(() => _dockerService.VerifyImagePresentAsync(image, server, version, false));
         _processService.VerifyAll();
     }
 
@@ -457,7 +457,7 @@ public class DockerServiceTests
         ).ThrowsAsync(new Exception());
 
         // Act, Assert
-        Assert.ThrowsAsync<Exception>(() => _dockerService.VerifyImagePresentAsync(image, server, version));
+        Assert.ThrowsAsync<Exception>(() => _dockerService.VerifyImagePresentAsync(image, server, version, false));
         _processService.VerifyAll();
     }
 
