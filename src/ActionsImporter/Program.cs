@@ -10,7 +10,7 @@ using Version = ActionsImporter.Commands.Version;
 var processService = new ProcessService();
 
 var app = new App(
-    new DockerService(processService),
+    new DockerService(processService, new RuntimeService()),
     processService,
     new ConfigurationService()
 );

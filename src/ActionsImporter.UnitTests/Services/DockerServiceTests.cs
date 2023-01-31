@@ -15,13 +15,15 @@ public class DockerServiceTests
 #pragma warning disable CS8618
     private DockerService _dockerService;
     private Mock<IProcessService> _processService;
+    private Mock<IRuntimeService> _runtimeService;
 #pragma warning restore CS8618
 
     [SetUp]
     public void BeforeEachTest()
     {
         _processService = new Mock<IProcessService>();
-        _dockerService = new DockerService(_processService.Object);
+        _runtimeService = new Mock<IRuntimeService>();
+        _dockerService = new DockerService(_processService.Object, _runtimeService.Object);
     }
 
     [TearDown]
@@ -328,6 +330,42 @@ public class DockerServiceTests
             handler.RunAsync(
                 "docker",
                 $"run --rm -t --network=host -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
+                Directory.GetCurrentDirectory(),
+                new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
+                true
+            )
+        ).Returns(Task.CompletedTask);
+
+        // Act
+        await _dockerService.ExecuteCommandAsync(image, server, version, arguments);
+
+        // Assert
+        _processService.VerifyAll();
+    }
+
+    [Test]
+    public async Task ExecuteCommandAsync_InvokesDocker_OnLinuxOS_ReturnsTrue()
+    {
+        // Arrange
+        var image = "actions-importer/cli";
+        var server = "ghcr.io";
+        var version = "latest";
+        var arguments = new[] { "run", "this", "command" };
+
+        _runtimeService.Setup(handler => handler.IsLinux).Returns(true);
+
+        _processService.Setup(handler =>
+          handler.RunAndCaptureAsync("id", "-u", null, null, true, null)
+        ).Returns(Task.FromResult(("50", "", 0)));
+
+        _processService.Setup(handler =>
+          handler.RunAndCaptureAsync("id", "-g", null, null, true, null)
+        ).Returns(Task.FromResult(("100", "", 0)));
+
+        _processService.Setup(handler =>
+            handler.RunAsync(
+                "docker",
+                $"run --rm -t -e USER_ID=50 -e GROUP_ID=100 -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
                 new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
                 true
