@@ -14,6 +14,8 @@ public class Version : BaseCommand
 
         var command = base.GenerateCommand(app);
 
+        command.AppendPrereleaseOption();
+
         command.Handler = CommandHandler.Create(app.GetVersionAsync);
 
         return command;

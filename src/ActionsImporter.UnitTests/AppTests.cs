@@ -39,7 +39,7 @@ public class AppTests
     public async Task CheckForUpdates_NoUpdatesNeeded(string? latestImage, string? currentImage, string result)
     {
         // Arrange
-        var image = "actions-importer/cli";
+        var image = "actions-importer/cli:latest";
         var server = "ghcr.io";
 
         using var stringWriter = new StringWriter();

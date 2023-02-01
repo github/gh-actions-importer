@@ -43,6 +43,9 @@ var parser = new CommandLineBuilder(command)
     .CancelOnProcessTermination()
     .Build();
 
+
+app.IsPrerelease = parser.Parse(args).HasOption(Common.Prerelease);
+
 try
 {
     if (!Array.Exists(args, x => x == "update"))
