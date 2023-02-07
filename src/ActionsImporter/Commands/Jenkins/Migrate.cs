@@ -18,6 +18,7 @@ public class Migrate : ContainerCommand
         Common.Username,
         Common.AccessToken,
         Common.JenkinsfileAccessToken,
-        Common.SourceFilePath
+        Common.SourceFilePath,
+        Common.ConfigFilePath
     );
 }

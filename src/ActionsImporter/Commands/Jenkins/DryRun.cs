@@ -18,6 +18,7 @@ public class DryRun : ContainerCommand
         Common.Username,
         Common.AccessToken,
         Common.JenkinsfileAccessToken,
-        Common.SourceFilePath
+        Common.SourceFilePath,
+        Common.ConfigFilePath
     );
 }

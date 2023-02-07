@@ -45,4 +45,9 @@ public static class Common
         Description = "The Travis CI repository name.",
         IsRequired = true,
     };
+    public static readonly Option<FileInfo> ConfigFilePath = new("--config-file-path")
+    {
+        Description = "The GitHub Actions Importer configuration file.",
+        IsRequired = false,
+    };
 }

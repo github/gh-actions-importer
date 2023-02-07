@@ -39,4 +39,11 @@ public static class Common
         Description = "The URL of the Jenkins job to migrate.",
         IsRequired = true,
     };
+
+    public static readonly Option<FileInfo> ConfigFilePath = new("--config-file-path")
+    {
+        Description = "The GitHub Actions Importer configuration file.",
+        IsRequired = false,
+    };
+
 }
