@@ -7,10 +7,12 @@ namespace ActionsImporter.Services;
 public class DockerService : IDockerService
 {
     private readonly IProcessService _processService;
+    private readonly IRuntimeService _runtimeService;
 
-    public DockerService(IProcessService processService)
+    public DockerService(IProcessService processService, IRuntimeService runtimeService)
     {
         _processService = processService;
+        _runtimeService = runtimeService;
     }
 
     public async Task UpdateImageAsync(string image, string server, string version, string? username, string? password, bool passwordStdin = false)
@@ -31,7 +33,7 @@ public class DockerService : IDockerService
         await DockerPullAsync(image, server, version);
     }
 
-    public Task ExecuteCommandAsync(string image, string server, string version, params string[] arguments)
+    public async Task ExecuteCommandAsync(string image, string server, string version, params string[] arguments)
     {
         var actionsImporterArguments = new List<string>
         {
@@ -45,11 +47,20 @@ public class DockerService : IDockerService
             actionsImporterArguments.Add(dockerArgs);
         }
 
+        // Forward the current user's UID/GID to the container
+        // to ensure the output files are owned by the current user
+        if (_runtimeService.IsLinux)
+        {
+            var (userId, _, _) = await _processService.RunAndCaptureAsync("id", "-u");
+            var (groupId, _, _) = await _processService.RunAndCaptureAsync("id", "-g");
+            actionsImporterArguments.Add($"-e USER_ID={userId.TrimEnd()}");
+            actionsImporterArguments.Add($"-e GROUP_ID={groupId.TrimEnd()}");
+        }
         actionsImporterArguments.Add($"-v \"{Directory.GetCurrentDirectory()}\":/data");
         actionsImporterArguments.Add($"{server}/{image}:{version}");
         actionsImporterArguments.AddRange(arguments);
 
-        return _processService.RunAsync(
+        await _processService.RunAsync(
             "docker",
             string.Join(' ', actionsImporterArguments),
             Directory.GetCurrentDirectory(),
@@ -73,8 +84,10 @@ public class DockerService : IDockerService
         }
     }
 
-    public async Task VerifyImagePresentAsync(string image, string server, string version)
+    public async Task VerifyImagePresentAsync(string image, string server, string version, bool isPrerelease)
     {
+        var imageName = $"{server}/{image}:{version}";
+        var preReleaseOption = isPrerelease ? " --prerelease" : string.Empty;
         try
         {
             await _processService.RunAsync(
@@ -83,15 +96,16 @@ public class DockerService : IDockerService
                 output: false
             );
         }
+
         catch (Exception)
         {
-            throw new Exception("Unable to locate GitHub Actions Importer image locally. Please run `gh actions-importer update` to fetch the latest image prior to running this command.");
+            throw new Exception($"Unable to locate {imageName} image locally. Please run `gh actions-importer update{preReleaseOption}` to fetch the latest image prior to running this command.");
         }
     }
 
     public async Task<string?> GetLatestImageDigestAsync(string image, string server)
     {
-        var (standardOutput, _, _) = await _processService.RunAndCaptureAsync("docker", $"manifest inspect {server}/{image}:latest");
+        var (standardOutput, _, _) = await _processService.RunAndCaptureAsync("docker", $"manifest inspect {server}/{image}");
         Manifest? manifest = JsonSerializer.Deserialize<Manifest>(standardOutput);
 
         return manifest?.GetDigest();
@@ -99,7 +113,7 @@ public class DockerService : IDockerService
 
     public async Task<string?> GetCurrentImageDigestAsync(string image, string server)
     {
-        var (standardOutput, _, _) = await _processService.RunAndCaptureAsync("docker", $"image inspect --format={{{{.Id}}}} {server}/{image}:latest");
+        var (standardOutput, _, _) = await _processService.RunAndCaptureAsync("docker", $"image inspect --format={{{{.Id}}}} {server}/{image}");
 
         return standardOutput.Split(":").ElementAtOrDefault(1)?.Trim();
     }

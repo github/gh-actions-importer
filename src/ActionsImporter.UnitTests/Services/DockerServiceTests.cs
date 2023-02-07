@@ -15,13 +15,15 @@ public class DockerServiceTests
 #pragma warning disable CS8618
     private DockerService _dockerService;
     private Mock<IProcessService> _processService;
+    private Mock<IRuntimeService> _runtimeService;
 #pragma warning restore CS8618
 
     [SetUp]
     public void BeforeEachTest()
     {
         _processService = new Mock<IProcessService>();
-        _dockerService = new DockerService(_processService.Object);
+        _runtimeService = new Mock<IRuntimeService>();
+        _dockerService = new DockerService(_processService.Object, _runtimeService.Object);
     }
 
     [TearDown]
@@ -342,6 +344,42 @@ public class DockerServiceTests
     }
 
     [Test]
+    public async Task ExecuteCommandAsync_InvokesDocker_OnLinuxOS_ReturnsTrue()
+    {
+        // Arrange
+        var image = "actions-importer/cli";
+        var server = "ghcr.io";
+        var version = "latest";
+        var arguments = new[] { "run", "this", "command" };
+
+        _runtimeService.Setup(handler => handler.IsLinux).Returns(true);
+
+        _processService.Setup(handler =>
+          handler.RunAndCaptureAsync("id", "-u", null, null, true, null)
+        ).Returns(Task.FromResult(("50", "", 0)));
+
+        _processService.Setup(handler =>
+          handler.RunAndCaptureAsync("id", "-g", null, null, true, null)
+        ).Returns(Task.FromResult(("100", "", 0)));
+
+        _processService.Setup(handler =>
+            handler.RunAsync(
+                "docker",
+                $"run --rm -t -e USER_ID=50 -e GROUP_ID=100 -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
+                Directory.GetCurrentDirectory(),
+                new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
+                true
+            )
+        ).Returns(Task.CompletedTask);
+
+        // Act
+        await _dockerService.ExecuteCommandAsync(image, server, version, arguments);
+
+        // Assert
+        _processService.VerifyAll();
+    }
+
+    [Test]
     public void VerifyDockerRunningAsync_IsRunning_NoException()
     {
         // Arrange
@@ -396,7 +434,7 @@ public class DockerServiceTests
         ).Returns(Task.CompletedTask);
 
         // Act, Assert
-        Assert.DoesNotThrowAsync(() => _dockerService.VerifyImagePresentAsync(image, server, version));
+        Assert.DoesNotThrowAsync(() => _dockerService.VerifyImagePresentAsync(image, server, version, false));
         _processService.VerifyAll();
     }
 
@@ -419,7 +457,7 @@ public class DockerServiceTests
         ).ThrowsAsync(new Exception());
 
         // Act, Assert
-        Assert.ThrowsAsync<Exception>(() => _dockerService.VerifyImagePresentAsync(image, server, version));
+        Assert.ThrowsAsync<Exception>(() => _dockerService.VerifyImagePresentAsync(image, server, version, false));
         _processService.VerifyAll();
     }
 
@@ -427,13 +465,13 @@ public class DockerServiceTests
     public async Task GetCurrentImageDigest_ParsesDigestCorrectly()
     {
         // Arrange
-        var image = "actions-importer/cli";
+        var image = "actions-importer/cli:latest";
         var server = "ghcr.io";
 
         _processService.Setup(handler =>
             handler.RunAndCaptureAsync(
                 "docker",
-                $"image inspect --format={{{{.Id}}}} {server}/{image}:latest",
+                $"image inspect --format={{{{.Id}}}} {server}/{image}",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
                 It.IsAny<bool>(),
@@ -453,7 +491,7 @@ public class DockerServiceTests
     public async Task GetLatestImageDigest_ParsesDigestCorrectly()
     {
         // Arrange
-        var image = "actions-importer/cli";
+        var image = "actions-importer/cli:latest";
         var server = "ghcr.io";
         var manifestResult = @"
 {
@@ -516,7 +554,7 @@ public class DockerServiceTests
         _processService.Setup(handler =>
             handler.RunAndCaptureAsync(
                 "docker",
-                $"manifest inspect {server}/{image}:latest",
+                $"manifest inspect {server}/{image}",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
                 It.IsAny<bool>(),

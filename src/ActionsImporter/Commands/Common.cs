@@ -6,6 +6,12 @@ namespace ActionsImporter.Commands;
 public static class Common
 {
 
+    public static readonly Option<bool> Prerelease = new("--prerelease")
+    {
+        Description = "Use prerelease image for GitHub Actions Importer",
+        IsRequired = false,
+    };
+
     public static Command AppendTransformerOptions(this Command command)
     {
         ArgumentNullException.ThrowIfNull(command);
@@ -73,6 +79,15 @@ public static class Common
         return command;
     }
 
+    public static Command AppendPrereleaseOption(this Command command)
+    {
+        ArgumentNullException.ThrowIfNull(command);
+
+        command.AddGlobalOption(Prerelease);
+
+        return command;
+    }
+
     public static Command AppendGeneralOptions(this Command command)
     {
         ArgumentNullException.ThrowIfNull(command);
@@ -104,6 +119,8 @@ public static class Common
                 Description = "Disable caching of http responses."
             }
         );
+
+        command.AddGlobalOption(Prerelease);
 
         return command;
     }

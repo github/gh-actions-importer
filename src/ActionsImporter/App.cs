@@ -12,6 +12,12 @@ public class App
     private readonly IProcessService _processService;
     private readonly IConfigurationService _configurationService;
 
+    public bool IsPrerelease { get; set; }
+
+    private string ImageTag => IsPrerelease ? "pre" : "latest";
+
+    private string ImageName => $"{ActionsImporterImage}:{ImageTag}";
+
     public App(IDockerService dockerService, IProcessService processService, IConfigurationService configurationService)
     {
         _dockerService = dockerService;
@@ -37,7 +43,7 @@ public class App
         await _dockerService.UpdateImageAsync(
             ActionsImporterImage,
             ActionsImporterContainerRegistry,
-            "latest",
+            ImageTag,
             username,
             password,
             passwordStdin
@@ -52,13 +58,14 @@ public class App
         await _dockerService.VerifyImagePresentAsync(
             ActionsImporterImage,
             ActionsImporterContainerRegistry,
-            "latest"
+            ImageTag,
+            IsPrerelease
         ).ConfigureAwait(false);
 
         await _dockerService.ExecuteCommandAsync(
             ActionsImporterImage,
             ActionsImporterContainerRegistry,
-            "latest",
+            ImageTag,
             args.Select(x => x.EscapeIfNeeded()).ToArray()
         );
         return 0;
@@ -68,7 +75,7 @@ public class App
     {
         var (standardOutput, standardError, exitCode) = await _processService.RunAndCaptureAsync("gh", "version");
         var ghActionsImporterVersion = await _processService.RunAndCaptureAsync("gh", "extension list");
-        var actionsImporterVersion = await _processService.RunAndCaptureAsync("docker", $"run --rm {ActionsImporterContainerRegistry}/{ActionsImporterImage}:latest version", throwOnError: false);
+        var actionsImporterVersion = await _processService.RunAndCaptureAsync("docker", $"run --rm {ActionsImporterContainerRegistry}/{ImageName} version", throwOnError: false);
 
         var formattedGhVersion = standardOutput.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault();
         var formattedGhActionsImporterVersion = ghActionsImporterVersion.standardOutput.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
@@ -77,7 +84,7 @@ public class App
 
         Console.WriteLine(formattedGhVersion);
         Console.WriteLine(formattedGhActionsImporterVersion);
-        Console.WriteLine($"actions-importer/cli\t{formattedActionsImporterVersion}");
+        Console.WriteLine($"actions-importer/cli:{ImageTag}\t{formattedActionsImporterVersion}");
 
         return 0;
     }
@@ -86,8 +93,8 @@ public class App
     {
         try
         {
-            var latestImageDigestTask = _dockerService.GetLatestImageDigestAsync(ActionsImporterImage, ActionsImporterContainerRegistry);
-            var currentImageDigestTask = _dockerService.GetCurrentImageDigestAsync(ActionsImporterImage, ActionsImporterContainerRegistry);
+            var latestImageDigestTask = _dockerService.GetLatestImageDigestAsync(ImageName, ActionsImporterContainerRegistry);
+            var currentImageDigestTask = _dockerService.GetCurrentImageDigestAsync(ImageName, ActionsImporterContainerRegistry);
 
             await Task.WhenAll(latestImageDigestTask, currentImageDigestTask);
 
