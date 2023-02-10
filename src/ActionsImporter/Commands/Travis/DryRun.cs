@@ -19,6 +19,7 @@ public class DryRun : ContainerCommand
         Common.AccessToken,
         Common.SourceGitHubInstanceUrl,
         Common.SourceGitHubAccessToken,
-        Common.SourceFilePath
+        Common.SourceFilePath,
+        Common.ConfigFilePath
     );
 }
