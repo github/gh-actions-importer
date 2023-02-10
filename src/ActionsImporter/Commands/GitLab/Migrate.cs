@@ -17,6 +17,7 @@ public class Migrate : ContainerCommand
         Common.Project,
         Common.InstanceUrl,
         Common.AccessToken,
-        Common.SourceFilePath
+        Common.SourceFilePath,
+        Common.ConfigFilePath
     );
 }

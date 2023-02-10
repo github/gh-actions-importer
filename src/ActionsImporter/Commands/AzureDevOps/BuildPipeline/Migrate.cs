@@ -13,6 +13,7 @@ public class Migrate : ContainerCommand
     protected override string Description => "Target a designer or YAML pipeline";
     protected override ImmutableArray<Option> Options => ImmutableArray.Create<Option>(
         Common.SourceFilePath,
+        Common.ConfigFilePath,
         Common.PipelineIdNotRequired
     );
 }
