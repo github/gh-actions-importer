@@ -22,7 +22,8 @@ jobs:
       - name: install dotnet-format
         run: dotnet tool install -g dotnet-format --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json
       - name: lint
-        run: dotnet format src/ActionsImporter.sln --verify-no-changes
+        working-directory: src
+        run: dotnet format ActionsImporter.sln --verify-no-changes
 
   unit-test:
     runs-on: ubuntu-latest
