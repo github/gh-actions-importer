@@ -15,7 +15,11 @@ var app = new App(
     new ConfigurationService()
 );
 
-var command = new RootCommand("GitHub Actions Importer is a tool to help plan and automate your migration to Actions.")
+string welcomeMessage = @"GitHub Actions Importer helps you plan, test, and automate your migration to GitHub Actions.
+
+Please share your feedback @ https://gh.io/ghaimporterfeedback";
+
+var command = new RootCommand(welcomeMessage)
 {
     new Update().Command(app),
     new Version().Command(app),
@@ -31,8 +35,8 @@ var parser = new CommandLineBuilder(command)
     {
         ctx.HelpBuilder.CustomizeLayout(_ =>
             HelpBuilder.Default
-                .GetLayout()
-                .Skip(2)
+              .GetLayout()
+              .Where((_, i) => i != 1) // Remove the usage section (second item in the help layout)
             );
     })
     .UseEnvironmentVariableDirective()
