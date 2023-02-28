@@ -69,7 +69,7 @@ public class ConfigurationService : IConfigurationService
 
     public async Task WriteVariablesAsync(ImmutableDictionary<string, string> variables, string filePath = ".env.local")
     {
-        var lines = variables.Select(kvp => $"{kvp.Key}={kvp.Value}").ToList();
+        var lines = variables.OrderBy(kvp => kvp.Key).Select(kvp => $"{kvp.Key}={kvp.Value}").ToList();
         await File.WriteAllLinesAsync(filePath, lines);
     }
 }

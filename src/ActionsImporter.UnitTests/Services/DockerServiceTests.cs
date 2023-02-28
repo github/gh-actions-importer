@@ -58,94 +58,10 @@ public class DockerServiceTests
         await _dockerService.UpdateImageAsync(
             image,
             server,
-            version,
-            null,
-            null
+            version
         );
 
         // Assert
-        _processService.VerifyAll();
-    }
-
-    [Test]
-    public void UpdateImageAsync_InvalidScopes_ThrowsUnauthorized()
-    {
-        // Arrange
-        var image = "actions-importer/cli";
-        var server = "ghcr.io";
-        var version = "latest";
-        var username = "dwight";
-        var password = "assistant_regional_manager";
-
-        _processService.Setup(handler =>
-            handler.RunAndCaptureAsync(
-                "docker",
-                $"login {server} --username {username} --password-stdin",
-                It.IsAny<string?>(),
-                It.IsAny<IEnumerable<(string, string)>?>(),
-                false,
-                password
-            )
-        ).ReturnsAsync(("Login Successful", "", 0));
-
-        _processService.Setup(handler =>
-            handler.RunAndCaptureAsync(
-                "docker",
-                $"pull {server}/{image}:{version} --quiet",
-                It.IsAny<string?>(),
-                It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>(),
-                null
-            )
-        ).ReturnsAsync(("", "Error response from daemon: denied", 1));
-
-        // Act/Assert
-        Assert.ThrowsAsync<Exception>(() => _dockerService.UpdateImageAsync(
-            image,
-            server,
-            version,
-            username,
-            password
-        ),
-@"You are not authorized to access GitHub Actions Importer yet. Please ensure you've completed the following:
-- Requested access to GitHub Actions Importer and received onboarding instructions via email.
-- Accepted all of the repository invites sent after being onboarded.
-- The GitHub personal access token used above contains the 'read:packages' scope.");
-        _processService.VerifyAll();
-    }
-
-    [Test]
-    public void UpdateImageAsync_InvalidCredentialsProvided_ThrowsUnauthorized()
-    {
-        // Arrange
-        var image = "actions-importer/cli";
-        var server = "ghcr.io";
-        var version = "latest";
-        var username = "dwight";
-        var password = "assistant_to_the_regional_manager";
-
-        _processService.Setup(handler =>
-            handler.RunAndCaptureAsync(
-                "docker",
-                $"login {server} --username {username} --password-stdin",
-                It.IsAny<string?>(),
-                It.IsAny<IEnumerable<(string, string)>?>(),
-                false,
-                password
-            )
-        ).ReturnsAsync(("", $"Error response from daemon: Get \"https://{server}/v2/\": denied: denied", 1));
-
-        // Act/Assert
-        Assert.ThrowsAsync<Exception>(() => _dockerService.UpdateImageAsync(
-            image,
-            server,
-            version,
-            username,
-            password
-        ),
-@"You are not authorized to access GitHub Actions Importer yet. Please ensure you've completed the following:
-- Requested access toGitHub Actions Importer and received onboarding instructions via email.
-- Accepted all of the repository invites sent after being onboarded.");
         _processService.VerifyAll();
     }
 
@@ -172,91 +88,8 @@ public class DockerServiceTests
         Assert.ThrowsAsync<Exception>(() => _dockerService.UpdateImageAsync(
             image,
             server,
-            version,
-            null,
-            null
-        ),
-            @"You are not authorized to access GitHub Actions Importer yet. Please ensure you've completed the following:
-- Requested access to GitHub Actions Importer and received onboarding instructions via email.
-- Accepted all of the repository invites sent after being onboarded.
-- The GitHub personal access token used above contains the 'read:packages' scope.");
-        _processService.VerifyAll();
-    }
-
-    [Test]
-    public void UpdateImageAsync_InvalidCredentialsProvided_ThrowsUnknownError()
-    {
-        // Arrange
-        var image = "actions-importer/cli";
-        var server = "ghcr.io";
-        var version = "latest";
-        var username = "dwight";
-        var password = "assistant_to_the_regional_manager";
-
-        _processService.Setup(handler =>
-            handler.RunAndCaptureAsync(
-                "docker",
-                $"login {server} --username {username} --password-stdin",
-                It.IsAny<string?>(),
-                It.IsAny<IEnumerable<(string, string)>?>(),
-                false,
-                password
-            )
-        ).ReturnsAsync(("", "Unknown error", 1));
-
-        // Act/Assert
-        Assert.ThrowsAsync<Exception>(() => _dockerService.UpdateImageAsync(
-            image,
-            server,
-            version,
-            username,
-            password
-        ), $"There was an error authenticating with the {server} docker repository.\nError: Unknown error");
-        _processService.VerifyAll();
-    }
-
-    [Test]
-    public async Task UpdateImageAsync_ValidCredentialsProvided_ReturnsSuccessful()
-    {
-        // Arrange
-        var image = "actions-importer/cli";
-        var server = "ghcr.io";
-        var version = "latest";
-        var username = "dwight";
-        var password = "assistant_to_the_regional_manager";
-
-        _processService.Setup(handler =>
-            handler.RunAndCaptureAsync(
-                "docker",
-                $"login {server} --username {username} --password-stdin",
-                It.IsAny<string?>(),
-                It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>(),
-                password
-            )
-        ).ReturnsAsync(("Login Succeeded", "", 0));
-
-        _processService.Setup(handler =>
-            handler.RunAndCaptureAsync(
-                "docker",
-                $"pull {server}/{image}:{version} --quiet",
-                It.IsAny<string?>(),
-                It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>(),
-                null
-            )
-        ).ReturnsAsync(("", "", 0));
-
-        // Act
-        await _dockerService.UpdateImageAsync(
-            image,
-            server,
-            version,
-            username,
-            password
-        );
-
-        // Assert
+            version
+        ));
         _processService.VerifyAll();
     }
 
