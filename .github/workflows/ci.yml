@@ -27,6 +27,9 @@ jobs:
 
   unit-test:
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-dotnet@v2
@@ -39,7 +42,7 @@ jobs:
       - name: dotnet test
         run: dotnet test src/ActionsImporter.UnitTests/ActionsImporter.UnitTests.csproj --no-build --no-restore --logger "junit;LogFilePath=unit-tests.xml"
       - name: publish test results
-        uses: EnricoMi/publish-unit-test-result-action@v1
+        uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
           files: "**/*-tests.xml"
