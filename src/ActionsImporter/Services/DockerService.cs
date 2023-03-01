@@ -15,22 +15,9 @@ public class DockerService : IDockerService
         _runtimeService = runtimeService;
     }
 
-    public async Task UpdateImageAsync(string image, string server, string version, string? username, string? password, bool passwordStdin = false)
+    public Task UpdateImageAsync(string image, string server, string version)
     {
-        if (passwordStdin && Console.IsInputRedirected)
-        {
-            password = await Console.In.ReadToEndAsync();
-        }
-
-        if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
-        {
-            await DockerLoginAsync(server, username, password);
-        }
-        else
-        {
-            Console.WriteLine("INFO: using cached credentials because no GHCR credentials were provided.");
-        }
-        await DockerPullAsync(image, server, version);
+        return DockerPullAsync(image, server, version);
     }
 
     public async Task ExecuteCommandAsync(string image, string server, string version, params string[] arguments)
@@ -139,30 +126,6 @@ public class DockerService : IDockerService
         }
     }
 
-    private async Task DockerLoginAsync(string server, string username, string password)
-    {
-        var (standardOutput, standardError, exitCode) = await _processService.RunAndCaptureAsync(
-            "docker",
-            $"login {server} --username {username} --password-stdin",
-            throwOnError: false,
-            inputForStdIn: password
-        ).ConfigureAwait(false);
-
-        if (exitCode != 0)
-        {
-            string message = standardError.Trim();
-            string? errorMessage = message == $"Error response from daemon: Get \"https://{server}/v2/\": denied: denied"
-                ? @"You are not authorized to access GitHub Actions Importer yet. Please ensure you've completed the following:
-- Requested access to GitHub Actions Importer and received onboarding instructions via email.
-- Accepted all of the repository invites sent after being onboarded."
-                : $"There was an error authenticating with the {server} docker repository.\nError: {message}";
-
-            throw new Exception(errorMessage);
-        }
-
-        Console.WriteLine(standardOutput);
-    }
-
     private async Task DockerPullAsync(string image, string server, string version)
     {
         Console.WriteLine($"Updating {server}/{image}:{version}...");
@@ -176,15 +139,6 @@ public class DockerService : IDockerService
         {
             string message = standardError.Trim();
             string errorMessage = $"There was an error pulling the {server}/{image}:{version}.\nError: {message}";
-
-            if (message == "Error response from daemon: denied"
-                || message == $"Error response from daemon: Head \"https://{server}/v2/actions-importer/cli/manifests/latest\": unauthorized")
-            {
-                errorMessage = @"You are not authorized to access GitHub Actions Importer yet. Please ensure you've completed the following:
-- Requested access to GitHub Actions Importer and received onboarding instructions via email.
-- Accepted all of the repository invites sent after being onboarded.
-- The GitHub personal access token used above contains the 'read:packages' scope.";
-            }
 
             throw new Exception(errorMessage);
         }

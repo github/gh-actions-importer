@@ -25,28 +25,14 @@ public class App
         _configurationService = configurationService;
     }
 
-    public async Task<int> UpdateActionsImporterAsync(string? username = null, string? password = null, bool passwordStdin = false)
+    public async Task<int> UpdateActionsImporterAsync()
     {
         await _dockerService.VerifyDockerRunningAsync().ConfigureAwait(false);
-
-        var environmentVariables = await _configurationService.ReadCurrentVariablesAsync().ConfigureAwait(false);
-
-        username ??= Environment.GetEnvironmentVariable("GHCR_USERNAME");
-        password ??= Environment.GetEnvironmentVariable("GHCR_PASSWORD");
-
-        if (username == null)
-            environmentVariables.TryGetValue("GHCR_USERNAME", out username);
-
-        if (password == null)
-            environmentVariables.TryGetValue("GHCR_PASSWORD", out password);
 
         await _dockerService.UpdateImageAsync(
             ActionsImporterImage,
             ActionsImporterContainerRegistry,
-            ImageTag,
-            username,
-            password,
-            passwordStdin
+            ImageTag
         );
 
         return 0;
