@@ -26,6 +26,15 @@ public class DockerService : IDockerService
         {
             "run --rm -t"
         };
+
+        // Forward the GitHub user ID of the currently authenticated CLI user to the container
+        var (standardOutput, _, exitCode) = await _processService.RunAndCaptureAsync("gh", "api user --jq \".id\"");
+        if (exitCode == 0)
+        {
+            var formattedUserID = standardOutput?.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault();
+            actionsImporterArguments.Add($"-e {Constants.GITHUB_CLI_ACTOR_ID}={formattedUserID}");
+        }
+
         actionsImporterArguments.AddRange(GetEnvironmentVariableArguments());
 
         var dockerArgs = Environment.GetEnvironmentVariable("DOCKER_ARGS");

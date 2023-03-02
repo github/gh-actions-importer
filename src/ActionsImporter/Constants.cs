@@ -25,6 +25,8 @@ public static class Constants
         new Variable("TRAVIS_CI_ORGANIZATION", Provider.TravisCI, "Travis CI organization name")
     };
 
+    public static string GITHUB_CLI_ACTOR_ID = "GITHUB_CLI_ACTOR_ID";
+
     public static List<string> EnvironmentVariables
     {
         get

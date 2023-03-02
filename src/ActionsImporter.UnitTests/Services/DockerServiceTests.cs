@@ -33,6 +33,7 @@ public class DockerServiceTests
         Environment.SetEnvironmentVariable("GH_ACCESS_TOKEN", null);
         Environment.SetEnvironmentVariable("GH_INSTANCE_URL", null);
         Environment.SetEnvironmentVariable("JENKINS_ACCESS_TOKEN", null);
+        Environment.SetEnvironmentVariable(Constants.GITHUB_CLI_ACTOR_ID, null);
     }
 
     [Test]
@@ -101,10 +102,16 @@ public class DockerServiceTests
         var server = "ghcr.io";
         var version = "latest";
         var arguments = new[] { "run", "this", "command" };
+        var cliActorID = "42";
+
+        _processService.Setup(handler =>
+          handler.RunAndCaptureAsync("gh", "api user --jq \".id\"", null, null, true, null)
+        ).Returns(Task.FromResult((cliActorID, "", 0)));
+
         _processService.Setup(handler =>
             handler.RunAsync(
                 "docker",
-                $"run --rm -t -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
+                $"run --rm -t -e {Constants.GITHUB_CLI_ACTOR_ID}={cliActorID} -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
                 new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
                 true
@@ -126,15 +133,21 @@ public class DockerServiceTests
         var server = "ghcr.io";
         var version = "latest";
         var arguments = new[] { "run", "this", "command" };
+        var cliActorID = "42";
 
         Environment.SetEnvironmentVariable("GH_ACCESS_TOKEN", "foo");
         Environment.SetEnvironmentVariable("GH_INSTANCE_URL", "https://github.fabrikam.com");
         Environment.SetEnvironmentVariable("JENKINS_ACCESS_TOKEN", "bar");
 
         _processService.Setup(handler =>
+          handler.RunAndCaptureAsync("gh", "api user --jq \".id\"", null, null, true, null)
+        ).Returns(Task.FromResult((cliActorID, "", 0)));
+
+
+        _processService.Setup(handler =>
             handler.RunAsync(
                 "docker",
-                $"run --rm -t --env \"GITHUB_ACCESS_TOKEN=foo\" --env \"GITHUB_INSTANCE_URL=https://github.fabrikam.com\" --env \"JENKINS_ACCESS_TOKEN=bar\" -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
+                $"run --rm -t -e {Constants.GITHUB_CLI_ACTOR_ID}={cliActorID} --env \"GITHUB_ACCESS_TOKEN=foo\" --env \"GITHUB_INSTANCE_URL=https://github.fabrikam.com\" --env \"JENKINS_ACCESS_TOKEN=bar\" -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
                 new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
                 true
@@ -156,13 +169,18 @@ public class DockerServiceTests
         var server = "ghcr.io";
         var version = "latest";
         var arguments = new[] { "run", "this", "command" };
+        var cliActorID = "42";
+
+        _processService.Setup(handler =>
+          handler.RunAndCaptureAsync("gh", "api user --jq \".id\"", null, null, true, null)
+        ).Returns(Task.FromResult((cliActorID, "", 0)));
 
         Environment.SetEnvironmentVariable("DOCKER_ARGS", "--network=host");
 
         _processService.Setup(handler =>
             handler.RunAsync(
                 "docker",
-                $"run --rm -t --network=host -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
+                $"run --rm -t -e {Constants.GITHUB_CLI_ACTOR_ID}={cliActorID} --network=host -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
                 new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
                 true
@@ -184,6 +202,11 @@ public class DockerServiceTests
         var server = "ghcr.io";
         var version = "latest";
         var arguments = new[] { "run", "this", "command" };
+        var cliActorID = "42";
+
+        _processService.Setup(handler =>
+          handler.RunAndCaptureAsync("gh", "api user --jq \".id\"", null, null, true, null)
+        ).Returns(Task.FromResult((cliActorID, "", 0)));
 
         _runtimeService.Setup(handler => handler.IsLinux).Returns(true);
 
@@ -198,7 +221,7 @@ public class DockerServiceTests
         _processService.Setup(handler =>
             handler.RunAsync(
                 "docker",
-                $"run --rm -t -e USER_ID=50 -e GROUP_ID=100 -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
+                $"run --rm -t -e {Constants.GITHUB_CLI_ACTOR_ID}={cliActorID} -e USER_ID=50 -e GROUP_ID=100 -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
                 new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
                 true
