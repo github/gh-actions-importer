@@ -10,6 +10,10 @@
 - Jenkins
 - Travis CI
 
+## How to request support
+
+If you need assistance, you can file a support ticket [here](https://support.github.com).
+
 ## Getting started 
 
 GitHub Actions Importer is distributed as a Docker container and this extension to the official [GitHub CLI](https://cli.github.com) to interact with the Docker container.
@@ -78,6 +82,3 @@ To learn about new features coming to GitHub Actions Importer, see the [GitHub P
 ## How to offer feedback or make a feature request
 
 If you would like to offer feedback or make a feature request, please create a new discussion [here](https://github.com/github/gh-actions-importer/discussions/new/choose).
-
-## How to request support
-If you need further assistance, you can file a support ticket [here](https://support.github.com).
