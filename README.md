@@ -42,12 +42,6 @@ New versions of the GitHub Actions Importer are released on a regular basis. To 
 $ gh actions-importer update
 ```
 
-**Note**: You will need to be authenticated with the GitHub Container Registry for this command to be successful. Optionally, credentials can be provided to this command that will be used to authenticate on your behalf:
-
-```bash
-$ echo $GITHUB_TOKEN | gh actions-importer update --username $GITHUB_HANDLE --password-stdin
-```
-
 In order for GitHub Actions Importer to communicate with your current CI/CD server and GitHub, various credentials must be available for the command. These can be configured using environment variables or a `.env.local` file. These environment variables can be configured in an interactive prompt by running the following command:
 
 ```bash
