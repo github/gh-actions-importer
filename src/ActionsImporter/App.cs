@@ -6,7 +6,7 @@ namespace ActionsImporter;
 public class App
 {
     private const string ActionsImporterImage = "actions-importer/cli";
-    private const string ActionsImporterContainerRegistry = "ghcr.io";
+    private const string ActionsImporterContainerRegistry = "artifactory.aexp.com/ci-internal";
 
     private readonly IDockerService _dockerService;
     private readonly IProcessService _processService;
