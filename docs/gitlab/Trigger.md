@@ -8,7 +8,7 @@ trigger:
   - local: path/to/child-pipeline.yml
 ```
 
-### Transformed Github Action
+### Transformed GitHub action
 
 The job graph of the included files is merged with the job graph of the calling workflow.
 
@@ -19,7 +19,7 @@ trigger:
   "org/repo"
 ```
 
-### Transformed Github Action
+### Transformed GitHub action
 
 ```yml
 - name: Run downstream workflow
@@ -28,6 +28,6 @@ trigger:
     WORKFLOW_FILE: UPDATE_ME
 ```
 
-### Unsupported Options
+### Unsupported options
 
 None
