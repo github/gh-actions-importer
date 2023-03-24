@@ -12,6 +12,13 @@ public static class Common
         IsRequired = false,
     };
 
+    public static readonly Option<bool> Experimental = new("--experimental")
+    {
+        Description = "Enable experimental and unsupported features.",
+        IsRequired = false,
+        IsHidden = true
+    };
+
     public static Command AppendTransformerOptions(this Command command)
     {
         ArgumentNullException.ThrowIfNull(command);
@@ -119,6 +126,8 @@ public static class Common
                 Description = "Disable caching of http responses."
             }
         );
+
+        command.AddGlobalOption(Experimental);
 
         command.AddGlobalOption(Prerelease);
 
