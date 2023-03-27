@@ -4,6 +4,7 @@ using System.CommandLine.Help;
 using System.CommandLine.Parsing;
 using ActionsImporter;
 using ActionsImporter.Commands;
+using ActionsImporter.Models;
 using ActionsImporter.Services;
 using Version = ActionsImporter.Commands.Version;
 
@@ -47,8 +48,8 @@ var parser = new CommandLineBuilder(command)
     .CancelOnProcessTermination()
     .Build();
 
-
-app.IsPrerelease = parser.Parse(args).HasOption(Common.Prerelease);
+var parsedArguments = parser.Parse(args);
+app.IsPrerelease = parsedArguments.HasOption(Common.Prerelease);
 
 try
 {
@@ -56,7 +57,8 @@ try
     {
         await app.CheckForUpdatesAsync();
     }
-    await parser.InvokeAsync(args);
+
+    await parser.InvokeAsync(app, args, parsedArguments.HasOption(Common.Experimental));
     return 0;
 }
 catch (Exception e)
