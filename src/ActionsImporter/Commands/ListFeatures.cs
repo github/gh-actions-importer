@@ -10,7 +10,7 @@ public class ListFeatures : ContainerCommand
     }
 
     protected override string Name => "list-features";
-    protected override string Description => "List the available feature flags for Actions Importer.";
+    protected override string Description => "List the available feature flags for GitHub Actions Importer.";
 
     protected override ImmutableArray<Option> Options => ImmutableArray.Create<Option>();
 }
