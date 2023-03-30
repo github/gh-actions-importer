@@ -70,7 +70,7 @@ public static class Common
         command.AddGlobalOption(
             new Option<string[]>(new[] { "--enable-features" })
             {
-                Description = "A list of features by name to disable by name. Use `gh actions-importer list-features` to see available features.",
+                Description = "A list of features to enable by name. Use `gh actions-importer list-features` to see available features.",
                 IsRequired = false,
                 AllowMultipleArgumentsPerToken = true
             }
