@@ -28,7 +28,8 @@ var command = new RootCommand(welcomeMessage)
     new Audit(args).Command(app),
     new Forecast(args).Command(app),
     new DryRun(args).Command(app),
-    new Migrate(args).Command(app)
+    new Migrate(args).Command(app),
+    new ListFeatures(args).Command(app)
 };
 
 var parser = new CommandLineBuilder(command)
