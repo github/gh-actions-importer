@@ -212,6 +212,15 @@ public class DockerServiceTests
         _processService.VerifyAll();
     }
 
+    // TODO: Add tests for GetFeaturesAsync
+    // public async Task GetFeaturesAsync_ReturnsFeatures()
+    // {
+    // }
+
+    // public async Task GetFeaturesAsync_BadJSONReturnsEmptyList()
+    // {
+    // }
+
     [Test]
     public void VerifyDockerRunningAsync_IsRunning_NoException()
     {

@@ -102,7 +102,8 @@ public class App
     public async Task<int> ConfigureAsync()
     {
         var currentVariables = await _configurationService.ReadCurrentVariablesAsync().ConfigureAwait(false);
-        var newVariables = _configurationService.GetUserInput();
+        var availableFeatures = await _dockerService.GetFeaturesAsync(ActionsImporterImage, ActionsImporterContainerRegistry, ImageTag).ConfigureAwait(false);
+        var newVariables = _configurationService.GetUserInput(availableFeatures);
         var mergedVariables = _configurationService.MergeVariables(currentVariables, newVariables);
         await _configurationService.WriteVariablesAsync(mergedVariables);
 
