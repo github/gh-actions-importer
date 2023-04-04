@@ -73,7 +73,7 @@ public class DockerService : IDockerService
         catch (Exception)
         {
             // If unable to get the features from the container, return an empty list
-            // This will allow the customer to continue without configuring any features
+            // An empty list will result in a message being displayed to the user
             return new();
         }
     }

@@ -28,7 +28,30 @@ public class ConfigurationService : IConfigurationService
         return variables.ToImmutable();
     }
 
-    public ImmutableDictionary<string, string> GetUserInput(List<Feature> features)
+    public ImmutableDictionary<string, string> GetFeaturesInput(List<Feature> features)
+    {
+        if (features == null || features.Count < 1)
+        {
+            throw new Exception("No features were found. Please make sure you have the latest version of GitHub Actions Importer.");
+        }
+
+        var input = ImmutableDictionary.CreateBuilder<string, string>();
+        var featureIndices = Prompt.MultiSelect("Which features would you like to configure?", Enumerable.Range(0, features.Count).ToArray(), textSelector: i => features[i].Name);
+
+        foreach (var index in featureIndices)
+        {
+            var feature = features[index];
+            var choice = Prompt.Select($"{feature.Name} ({feature.EnabledMessage()})", new[] { true, false }, textSelector: x => x ? "Enable" : "Disable");
+
+            if (choice != feature.Enabled)
+            {
+                input[feature.EnvName] = choice ? "true" : "false";
+            }
+        }
+
+        return input.ToImmutable();
+    }
+    public ImmutableDictionary<string, string> GetUserInput()
     {
         var providers = Prompt.MultiSelect(
             "Which CI providers are you configuring?",
@@ -62,26 +85,6 @@ public class ConfigurationService : IConfigurationService
                 if (string.IsNullOrWhiteSpace(variableValue)) continue;
 
                 input[variable.Key] = variableValue;
-            }
-        }
-
-
-        // In case we didn't find any features, skip this step to let the customer continue configuration
-        if (features != null &&
-            features.Count > 0 &&
-            Prompt.Confirm("Configure optional features? For more information, run 'gh actions-importer list-features'"))
-        {
-            var featureIndices = Prompt.MultiSelect("Which features would you like to configure?", Enumerable.Range(0, features.Count).ToArray(), textSelector: i => features[i].Name);
-
-            foreach (var index in featureIndices)
-            {
-                var feature = features[index];
-                var choice = Prompt.Select($"{feature.Name} ({feature.EnabledMessage()})", new[] { true, false }, textSelector: x => x ? "Enable" : "Disable");
-
-                if (choice != feature.Enabled)
-                {
-                    input[feature.EnvName] = choice ? "true" : "false";
-                }
             }
         }
 

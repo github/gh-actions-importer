@@ -1,4 +1,5 @@
-﻿using ActionsImporter.Interfaces;
+﻿using System.Collections.Immutable;
+using ActionsImporter.Interfaces;
 using ActionsImporter.Models;
 
 namespace ActionsImporter;
@@ -99,11 +100,30 @@ public class App
         }
     }
 
-    public async Task<int> ConfigureAsync()
+    public async Task<int> ConfigureAsync(string[] args)
     {
         var currentVariables = await _configurationService.ReadCurrentVariablesAsync().ConfigureAwait(false);
-        var availableFeatures = await _dockerService.GetFeaturesAsync(ActionsImporterImage, ActionsImporterContainerRegistry, ImageTag).ConfigureAwait(false);
-        var newVariables = _configurationService.GetUserInput(availableFeatures);
+        ImmutableDictionary<string, string>? newVariables;
+
+        if (args.Contains($"--{Commands.Configure.OptionalFeaturesOption.Name}"))
+        {
+            await _dockerService.VerifyDockerRunningAsync().ConfigureAwait(false);
+            var availableFeatures = await _dockerService.GetFeaturesAsync(ActionsImporterImage, ActionsImporterContainerRegistry, ImageTag).ConfigureAwait(false);
+            try
+            {
+                newVariables = _configurationService.GetFeaturesInput(availableFeatures);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return 1;
+            }
+        }
+        else
+        {
+            newVariables = _configurationService.GetUserInput();
+        }
+
         var mergedVariables = _configurationService.MergeVariables(currentVariables, newVariables);
         await _configurationService.WriteVariablesAsync(mergedVariables);
 
