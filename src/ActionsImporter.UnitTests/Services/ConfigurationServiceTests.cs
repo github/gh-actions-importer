@@ -3,6 +3,7 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Threading.Tasks;
 using ActionsImporter.Interfaces;
+using ActionsImporter.Models;
 using ActionsImporter.Services;
 using NUnit.Framework;
 
@@ -71,9 +72,9 @@ public class ConfigurationServiceTests
         var filePath = Path.Combine(Path.GetTempPath(), "gh-actions-importer.tests", ".env.local");
         var directory = Path.GetDirectoryName(filePath)!;
 
-        var contents = @" 
+        var contents = @"
 USERNAME=mona
-PASSWORD=hunter2 
+PASSWORD=hunter2
 EMPTY=
 
 MALFORMED=TRUE=
@@ -96,5 +97,29 @@ WITH_QUOTES=""value""
 
         // Assert
         Assert.AreEqual(expectedResult, result);
+    }
+
+    [Test]
+    [Ignore("This test needs some sort of mock for Prompt")]
+    public Task GetFeaturesInput_ReturnsVariables()
+    {
+        // Arrange
+        var feature = new Feature
+        {
+            Name = "test",
+            EnvName = "FEATURE_TEST",
+            Enabled = false
+        };
+        var features = new List<Feature> { feature };
+
+        // Act
+        var result = _configurationService.GetFeaturesInput(features);
+
+        // Assert
+        ImmutableDictionary<string, string> expectedVars = ImmutableDictionary<string, string>.Empty
+            .Add("FEATURE_TEST", "true");
+        Assert.AreEqual(expectedVars, result);
+
+        return Task.CompletedTask;
     }
 }
