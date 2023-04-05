@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 using ActionsImporter.Interfaces;
+using ActionsImporter.Models;
 using ActionsImporter.Services;
 using Moq;
 using NUnit.Framework;
@@ -210,6 +212,79 @@ public class DockerServiceTests
 
         // Assert
         _processService.VerifyAll();
+    }
+
+    [Test]
+    public async Task GetFeaturesAsync_ReturnsFeatures()
+    {
+        // Arrange
+        var image = "actions-importer/cli";
+        var server = "ghcr.io";
+        var version = "latest";
+        var arguments = new[] { "list-features", "--json" };
+        var features = new List<Feature>
+      {
+        new Feature
+        {
+          Name = "actions/cache",
+          Description = "Control usage of actions/cache inside of workflows. Outputs a comment if not enabled.",
+          Enabled = false,
+          EnvName = "FEATURE_ACTIONS_CACHE",
+        },
+        new Feature
+        {
+          Name = "composite-actions",
+          Description = "Minimizes resulting workflow complexity through the use of composite actions. See https://docs.github.com/en/actions/creating-actions/creating-a-composite-action for more information.",
+          Enabled = true,
+          EnvName = "FEATURE_COMPOSITE_ACTIONS",
+        }
+      };
+        var featuresJSON = JsonSerializer.Serialize(features);
+
+        _processService.Setup(handler =>
+            handler.RunAndCaptureAsync(
+                "docker",
+                $"run --rm -t {server}/{image}:{version} {string.Join(' ', arguments)}",
+                null,
+                null,
+                false,
+                null
+            )
+        ).Returns(Task.FromResult((featuresJSON, "", 0)));
+
+        // Act
+        var featuresResult = await _dockerService.GetFeaturesAsync(image, server, version);
+        var featuresResultJSON = JsonSerializer.Serialize(featuresResult);
+
+        // Assert
+        Assert.AreEqual(featuresJSON, featuresResultJSON);
+    }
+
+    [Test]
+    public async Task GetFeaturesAsync_BadJSONReturnsEmptyList()
+    {
+        // Arrange
+        var image = "actions-importer/cli";
+        var server = "ghcr.io";
+        var version = "latest";
+        var arguments = new[] { "list-features", "--json" };
+
+        _processService.Setup(handler =>
+            handler.RunAndCaptureAsync(
+                "docker",
+                $"run --rm -t {server}/{image}:{version} {string.Join(' ', arguments)}",
+                null,
+                null,
+                false,
+                null
+            )
+        ).Returns(Task.FromResult(("", "", 0)));
+
+        // Act
+        var featuresResult = await _dockerService.GetFeaturesAsync(image, server, version);
+
+        // Assert
+        Assert.IsEmpty(featuresResult);
     }
 
     [Test]

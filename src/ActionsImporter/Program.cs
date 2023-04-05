@@ -24,7 +24,7 @@ var command = new RootCommand(welcomeMessage)
 {
     new Update().Command(app),
     new Version().Command(app),
-    new Configure().Command(app),
+    new Configure(args).Command(app),
     new Audit(args).Command(app),
     new Forecast(args).Command(app),
     new DryRun(args).Command(app),
