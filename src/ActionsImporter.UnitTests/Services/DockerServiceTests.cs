@@ -229,14 +229,14 @@ public class DockerServiceTests
           Name = "actions/cache",
           Description = "Control usage of actions/cache inside of workflows. Outputs a comment if not enabled.",
           Enabled = false,
-          EnvName = "FEATURE_ACTIONS_CACHE"
+          EnvName = "FEATURE_ACTIONS_CACHE",
         },
         new Feature
         {
           Name = "composite-actions",
           Description = "Minimizes resulting workflow complexity through the use of composite actions. See https://docs.github.com/en/actions/creating-actions/creating-a-composite-action for more information.",
           Enabled = true,
-          EnvName = "FEATURE_COMPOSITE_ACTIONS"
+          EnvName = "FEATURE_COMPOSITE_ACTIONS",
         }
       };
         var featuresJSON = JsonSerializer.Serialize(features);
@@ -259,7 +259,6 @@ public class DockerServiceTests
         // Assert
         Assert.AreEqual(featuresJSON, featuresResultJSON);
     }
-    // }
 
     [Test]
     public async Task GetFeaturesAsync_BadJSONReturnsEmptyList()

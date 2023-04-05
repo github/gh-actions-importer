@@ -30,10 +30,8 @@ public class ConfigurationService : IConfigurationService
 
     public ImmutableDictionary<string, string> GetFeaturesInput(List<Feature> features)
     {
-        if (features == null || features.Count < 1)
-        {
-            throw new Exception("No features were found. Please make sure you have the latest version of GitHub Actions Importer.");
-        }
+        ArgumentNullException.ThrowIfNull(features);
+        if (!features.Any()) throw new ArgumentException(message: "No features were found. Please make sure you have the latest version of GitHub Actions Importer.");
 
         var input = ImmutableDictionary.CreateBuilder<string, string>();
         var featureIndices = Prompt.MultiSelect("Which features would you like to configure?", Enumerable.Range(0, features.Count).ToArray(), textSelector: i => features[i].Name);
@@ -45,7 +43,7 @@ public class ConfigurationService : IConfigurationService
 
             if (choice != feature.Enabled)
             {
-                input[feature.EnvName] = choice ? "true" : "false";
+                input[feature.EnvName] = choice.ToString().ToUpperInvariant();
             }
         }
 
@@ -87,7 +85,6 @@ public class ConfigurationService : IConfigurationService
                 input[variable.Key] = variableValue;
             }
         }
-
 
         return input.ToImmutable();
     }

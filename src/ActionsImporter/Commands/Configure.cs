@@ -9,9 +9,9 @@ public class Configure : BaseCommand
     protected override string Name => "configure";
     protected override string Description => "Start an interactive prompt to configure credentials used to authenticate with your CI server(s).";
 
-    public static readonly Option<bool> OptionalFeaturesOption = new(new[] { "--optional-features" })
+    public static readonly Option<bool> OptionalFeaturesOption = new(new[] { "--features" })
     {
-        Description = "Configure features to customize your usage of GitHub Actions Importer"
+        Description = "Configure the feature flags for GitHub Actions Importer."
     };
 
     public Configure(string[] args)

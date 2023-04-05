@@ -115,7 +115,7 @@ public class App
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                await Console.Error.WriteLineAsync(e.Message);
                 return 1;
             }
         }
@@ -127,7 +127,7 @@ public class App
         var mergedVariables = _configurationService.MergeVariables(currentVariables, newVariables);
         await _configurationService.WriteVariablesAsync(mergedVariables);
 
-        Console.WriteLine("Environment variables successfully updated.");
+        await Console.Out.WriteLineAsync("Environment variables successfully updated.");
         return 0;
     }
 }

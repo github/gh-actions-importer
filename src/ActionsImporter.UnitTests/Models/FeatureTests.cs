@@ -21,8 +21,8 @@ public class FeatureTests
     [Test]
     public void Initialize()
     {
-        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-        Feature? feature = JsonSerializer.Deserialize<Feature>(featureResult, options);
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, };
+        var feature = JsonSerializer.Deserialize<Feature>(featureResult, options);
 
         Assert.AreEqual("actions/cache", feature?.Name);
         Assert.AreEqual("Control usage of actions/cache inside of workflows. Outputs a comment if not enabled.", feature?.Description);
@@ -35,7 +35,7 @@ public class FeatureTests
     {
         var enabledFeature = new Feature
         {
-            Enabled = true
+            Enabled = true,
         };
         Assert.AreEqual("enabled", enabledFeature.EnabledMessage());
     }
@@ -45,7 +45,7 @@ public class FeatureTests
     {
         var disabledFeature = new Feature
         {
-            Enabled = false
+            Enabled = false,
         };
         Assert.AreEqual("disabled", disabledFeature.EnabledMessage());
 

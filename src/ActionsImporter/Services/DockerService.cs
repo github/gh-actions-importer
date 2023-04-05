@@ -65,7 +65,7 @@ public class DockerService : IDockerService
 
         var (standardOutput, _, _) = await _processService.RunAndCaptureAsync("docker", string.Join(' ', actionsImporterArguments), throwOnError: false);
 
-        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, };
         try
         {
             return JsonSerializer.Deserialize<List<Feature>>(standardOutput, options) ?? new();
