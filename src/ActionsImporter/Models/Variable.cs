@@ -19,6 +19,7 @@ public readonly struct Variable
         Provider.GitLabCI => "GitLab CI",
         Provider.Jenkins => "Jenkins",
         Provider.TravisCI => "Travis CI",
+        Provider.Bamboo => "Bamboo",
         _ => throw new ArgumentOutOfRangeException()
     };
 
@@ -28,5 +29,5 @@ public readonly struct Variable
 
     public string? Placeholder => DefaultValue is not null && IsPassword ? $"({DefaultValue})" : null;
 
-    private Provider Provider { get; }
+    public Provider Provider { get; }
 }
