@@ -12,6 +12,8 @@ public static class Constants
         new Variable("AZURE_DEVOPS_INSTANCE_URL", Provider.AzureDevOps, "Base url of the Azure DevOps instance", "https://dev.azure.com"),
         new Variable("AZURE_DEVOPS_ORGANIZATION", Provider.AzureDevOps, "Azure DevOps organization name"),
         new Variable("AZURE_DEVOPS_PROJECT", Provider.AzureDevOps, "Azure DevOps project name"),
+        new Variable("BAMBOO_ACCESS_TOKEN", Provider.Bamboo, "Personal access token for Bamboo"),
+        new Variable("BAMBOO_INSTANCE_URL", Provider.Bamboo, "Base url of the Bamboo instance"),
         new Variable("CIRCLE_CI_ACCESS_TOKEN", Provider.CircleCI, "Personal access token for CircleCI"),
         new Variable("CIRCLE_CI_INSTANCE_URL", Provider.CircleCI, "Base url of the CircleCI instance", "https://circleci.com"),
         new Variable("CIRCLE_CI_ORGANIZATION", Provider.CircleCI, "CircleCI organization name"),
@@ -24,6 +26,8 @@ public static class Constants
         new Variable("TRAVIS_CI_INSTANCE_URL", Provider.TravisCI, "Base url of the Travis CI instance", "https://travis-ci.com"),
         new Variable("TRAVIS_CI_ORGANIZATION", Provider.TravisCI, "Travis CI organization name")
     };
+
+    public static List<string> ProviderNames => UserInputVariables.Where(v => v.Provider != Provider.GitHub).Select(v => v.ProviderName).Distinct().ToList();
 
     public static List<string> EnvironmentVariables
     {

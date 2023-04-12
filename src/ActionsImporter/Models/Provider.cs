@@ -7,5 +7,6 @@ public enum Provider
     CircleCI,
     GitLabCI,
     Jenkins,
-    TravisCI
+    TravisCI,
+    Bamboo
 }
