@@ -6,6 +6,19 @@ namespace ActionsImporter.Commands;
 public static class Common
 {
 
+    public static readonly Option<bool> Prerelease = new("--prerelease")
+    {
+        Description = "Use prerelease image for GitHub Actions Importer",
+        IsRequired = false,
+    };
+
+    public static readonly Option<bool> Experimental = new("--experimental")
+    {
+        Description = "Enable experimental and unsupported features.",
+        IsRequired = false,
+        IsHidden = true
+    };
+
     public static Command AppendTransformerOptions(this Command command)
     {
         ArgumentNullException.ThrowIfNull(command);
@@ -50,7 +63,25 @@ public static class Common
         command.AddGlobalOption(
             new Option<string>(new[] { "--features" })
             {
-                Description = "Features to enable in transformed workflows."
+                Description = "GHES features to enable in transformed workflows."
+            }
+        );
+
+        command.AddGlobalOption(
+            new Option<string[]>(new[] { "--enable-features" })
+            {
+                Description = "A list of features to enable by name. Use `gh actions-importer list-features` to see available features.",
+                IsRequired = false,
+                AllowMultipleArgumentsPerToken = true
+            }
+        );
+
+        command.AddGlobalOption(
+            new Option<string[]>(new[] { "--disable-features" })
+            {
+                Description = "A list of features to disable by name. Use `gh actions-importer list-features` to see available features.",
+                IsRequired = false,
+                AllowMultipleArgumentsPerToken = true
             }
         );
 
@@ -69,6 +100,15 @@ public static class Common
                 IsRequired = false
             }
         );
+
+        return command;
+    }
+
+    public static Command AppendPrereleaseOption(this Command command)
+    {
+        ArgumentNullException.ThrowIfNull(command);
+
+        command.AddGlobalOption(Prerelease);
 
         return command;
     }
@@ -104,6 +144,10 @@ public static class Common
                 Description = "Disable caching of http responses."
             }
         );
+
+        command.AddGlobalOption(Experimental);
+
+        command.AddGlobalOption(Prerelease);
 
         return command;
     }

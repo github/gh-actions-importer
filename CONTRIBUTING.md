@@ -8,14 +8,6 @@ Please note that this project is released with a [Contributor Code of Conduct](C
 
 Here's some helpful notes on how to contribute to this project, including details on how to get started working the codebase.
 
-## How to submit a bug or request a feature
-
-If you think you've found a bug or have a great idea for new functionality please create an issue in this repo.
-
-## How to provide feedback or ask for help
-
-Use the [Discussions](https://github.com/github/gh-actions-importer/discussions) tab in this repo for more general feedback or any questions/comments on this tooling.
-
 ## Configure your development environment
 
 To get started, you'll need [.NET Core 6.0](https://dotnet.microsoft.com/en-us/download) installed on your local machine.
@@ -37,7 +29,3 @@ Code linting can be run using the following command:
 ```bash
 $ dotnet format src/ActionsImporter.sln
 ```
-
-## Submitting a Pull Request
-
-Before submitting a Pull Request please first open an issue to get feedback on the change you intend to submit.

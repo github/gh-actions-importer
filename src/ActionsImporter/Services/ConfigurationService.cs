@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using ActionsImporter.Interfaces;
+using ActionsImporter.Models;
 using Sharprompt;
 
 namespace ActionsImporter.Services;
@@ -27,6 +28,27 @@ public class ConfigurationService : IConfigurationService
         return variables.ToImmutable();
     }
 
+    public ImmutableDictionary<string, string> GetFeaturesInput(List<Feature> features)
+    {
+        ArgumentNullException.ThrowIfNull(features);
+        if (!features.Any()) throw new ArgumentException(message: "No features were found. Please make sure you have the latest version of GitHub Actions Importer.");
+
+        var input = ImmutableDictionary.CreateBuilder<string, string>();
+        var featureIndices = Prompt.MultiSelect("Which features would you like to configure?", Enumerable.Range(0, features.Count).ToArray(), textSelector: i => features[i].Name);
+
+        foreach (var index in featureIndices)
+        {
+            var feature = features[index];
+            var choice = Prompt.Select($"{feature.Name} ({feature.EnabledMessage()})", new[] { true, false }, textSelector: x => x ? "Enable" : "Disable");
+
+            if (choice != feature.Enabled)
+            {
+                input[feature.EnvName] = choice.ToString().ToUpperInvariant();
+            }
+        }
+
+        return input.ToImmutable();
+    }
     public ImmutableDictionary<string, string> GetUserInput()
     {
         var providers = Prompt.MultiSelect(
@@ -69,7 +91,7 @@ public class ConfigurationService : IConfigurationService
 
     public async Task WriteVariablesAsync(ImmutableDictionary<string, string> variables, string filePath = ".env.local")
     {
-        var lines = variables.Select(kvp => $"{kvp.Key}={kvp.Value}").ToList();
+        var lines = variables.OrderBy(kvp => kvp.Key).Select(kvp => $"{kvp.Key}={kvp.Value}").ToList();
         await File.WriteAllLinesAsync(filePath, lines);
     }
 }

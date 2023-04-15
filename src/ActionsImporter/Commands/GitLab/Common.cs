@@ -34,4 +34,10 @@ public static class Common
         Description = "The GitLab project name.",
         IsRequired = true,
     };
+
+    public static readonly Option<FileInfo> ConfigFilePath = new("--config-file-path")
+    {
+        Description = "The file path to the GitHub Actions Importer configuration file.",
+        IsRequired = false,
+    };
 }

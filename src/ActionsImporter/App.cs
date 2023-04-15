@@ -1,4 +1,5 @@
-﻿using ActionsImporter.Interfaces;
+﻿using System.Collections.Immutable;
+using ActionsImporter.Interfaces;
 using ActionsImporter.Models;
 
 namespace ActionsImporter;
@@ -12,6 +13,12 @@ public class App
     private readonly IProcessService _processService;
     private readonly IConfigurationService _configurationService;
 
+    public bool IsPrerelease { get; set; }
+
+    private string ImageTag => IsPrerelease ? "pre" : "latest";
+
+    private string ImageName => $"{ActionsImporterImage}:{ImageTag}";
+
     public App(IDockerService dockerService, IProcessService processService, IConfigurationService configurationService)
     {
         _dockerService = dockerService;
@@ -19,28 +26,14 @@ public class App
         _configurationService = configurationService;
     }
 
-    public async Task<int> UpdateActionsImporterAsync(string? username = null, string? password = null, bool passwordStdin = false)
+    public async Task<int> UpdateActionsImporterAsync()
     {
         await _dockerService.VerifyDockerRunningAsync().ConfigureAwait(false);
-
-        var environmentVariables = await _configurationService.ReadCurrentVariablesAsync().ConfigureAwait(false);
-
-        username ??= Environment.GetEnvironmentVariable("GHCR_USERNAME");
-        password ??= Environment.GetEnvironmentVariable("GHCR_PASSWORD");
-
-        if (username == null)
-            environmentVariables.TryGetValue("GHCR_USERNAME", out username);
-
-        if (password == null)
-            environmentVariables.TryGetValue("GHCR_PASSWORD", out password);
 
         await _dockerService.UpdateImageAsync(
             ActionsImporterImage,
             ActionsImporterContainerRegistry,
-            "latest",
-            username,
-            password,
-            passwordStdin
+            ImageTag
         );
 
         return 0;
@@ -52,13 +45,14 @@ public class App
         await _dockerService.VerifyImagePresentAsync(
             ActionsImporterImage,
             ActionsImporterContainerRegistry,
-            "latest"
+            ImageTag,
+            IsPrerelease
         ).ConfigureAwait(false);
 
         await _dockerService.ExecuteCommandAsync(
             ActionsImporterImage,
             ActionsImporterContainerRegistry,
-            "latest",
+            ImageTag,
             args.Select(x => x.EscapeIfNeeded()).ToArray()
         );
         return 0;
@@ -68,7 +62,7 @@ public class App
     {
         var (standardOutput, standardError, exitCode) = await _processService.RunAndCaptureAsync("gh", "version");
         var ghActionsImporterVersion = await _processService.RunAndCaptureAsync("gh", "extension list");
-        var actionsImporterVersion = await _processService.RunAndCaptureAsync("docker", $"run --rm {ActionsImporterContainerRegistry}/{ActionsImporterImage}:latest version", throwOnError: false);
+        var actionsImporterVersion = await _processService.RunAndCaptureAsync("docker", $"run --rm {ActionsImporterContainerRegistry}/{ImageName} version", throwOnError: false);
 
         var formattedGhVersion = standardOutput.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault();
         var formattedGhActionsImporterVersion = ghActionsImporterVersion.standardOutput.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
@@ -77,7 +71,7 @@ public class App
 
         Console.WriteLine(formattedGhVersion);
         Console.WriteLine(formattedGhActionsImporterVersion);
-        Console.WriteLine($"actions-importer/cli\t{formattedActionsImporterVersion}");
+        Console.WriteLine($"actions-importer/cli:{ImageTag}\t{formattedActionsImporterVersion}");
 
         return 0;
     }
@@ -86,8 +80,8 @@ public class App
     {
         try
         {
-            var latestImageDigestTask = _dockerService.GetLatestImageDigestAsync(ActionsImporterImage, ActionsImporterContainerRegistry);
-            var currentImageDigestTask = _dockerService.GetCurrentImageDigestAsync(ActionsImporterImage, ActionsImporterContainerRegistry);
+            var latestImageDigestTask = _dockerService.GetLatestImageDigestAsync(ImageName, ActionsImporterContainerRegistry);
+            var currentImageDigestTask = _dockerService.GetCurrentImageDigestAsync(ImageName, ActionsImporterContainerRegistry);
 
             await Task.WhenAll(latestImageDigestTask, currentImageDigestTask);
 
@@ -106,14 +100,34 @@ public class App
         }
     }
 
-    public async Task<int> ConfigureAsync()
+    public async Task<int> ConfigureAsync(string[] args)
     {
         var currentVariables = await _configurationService.ReadCurrentVariablesAsync().ConfigureAwait(false);
-        var newVariables = _configurationService.GetUserInput();
+        ImmutableDictionary<string, string>? newVariables;
+
+        if (args.Contains($"--{Commands.Configure.OptionalFeaturesOption.Name}"))
+        {
+            await _dockerService.VerifyDockerRunningAsync().ConfigureAwait(false);
+            var availableFeatures = await _dockerService.GetFeaturesAsync(ActionsImporterImage, ActionsImporterContainerRegistry, ImageTag).ConfigureAwait(false);
+            try
+            {
+                newVariables = _configurationService.GetFeaturesInput(availableFeatures);
+            }
+            catch (Exception e)
+            {
+                await Console.Error.WriteLineAsync(e.Message);
+                return 1;
+            }
+        }
+        else
+        {
+            newVariables = _configurationService.GetUserInput();
+        }
+
         var mergedVariables = _configurationService.MergeVariables(currentVariables, newVariables);
         await _configurationService.WriteVariablesAsync(mergedVariables);
 
-        Console.WriteLine("Environment variables successfully updated.");
+        await Console.Out.WriteLineAsync("Environment variables successfully updated.");
         return 0;
     }
 }

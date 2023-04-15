@@ -18,7 +18,6 @@ public class Migrate : BaseCommand
     {
         var command = base.GenerateCommand(app);
 
-        command.AddGlobalOption(Common.PipelineId);
         command.AddGlobalOption(Common.InstanceUrl);
         command.AddGlobalOption(Common.Organization);
         command.AddGlobalOption(Common.Project);

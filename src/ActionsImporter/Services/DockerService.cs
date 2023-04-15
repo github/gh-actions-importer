@@ -1,37 +1,27 @@
 ﻿using System.Text.Json;
 using ActionsImporter.Interfaces;
 using ActionsImporter.Models.Docker;
+using ActionsImporter.Models;
 
 namespace ActionsImporter.Services;
 
 public class DockerService : IDockerService
 {
     private readonly IProcessService _processService;
+    private readonly IRuntimeService _runtimeService;
 
-    public DockerService(IProcessService processService)
+    public DockerService(IProcessService processService, IRuntimeService runtimeService)
     {
         _processService = processService;
+        _runtimeService = runtimeService;
     }
 
-    public async Task UpdateImageAsync(string image, string server, string version, string? username, string? password, bool passwordStdin = false)
+    public Task UpdateImageAsync(string image, string server, string version)
     {
-        if (passwordStdin && Console.IsInputRedirected)
-        {
-            password = await Console.In.ReadToEndAsync();
-        }
-
-        if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
-        {
-            await DockerLoginAsync(server, username, password);
-        }
-        else
-        {
-            Console.WriteLine("INFO: using cached credentials because no GHCR credentials were provided.");
-        }
-        await DockerPullAsync(image, server, version);
+        return DockerPullAsync(image, server, version);
     }
 
-    public Task ExecuteCommandAsync(string image, string server, string version, params string[] arguments)
+    public async Task ExecuteCommandAsync(string image, string server, string version, params string[] arguments)
     {
         var actionsImporterArguments = new List<string>
         {
@@ -45,16 +35,47 @@ public class DockerService : IDockerService
             actionsImporterArguments.Add(dockerArgs);
         }
 
+        // Forward the current user's UID/GID to the container
+        // to ensure the output files are owned by the current user
+        if (_runtimeService.IsLinux)
+        {
+            var (userId, _, _) = await _processService.RunAndCaptureAsync("id", "-u");
+            var (groupId, _, _) = await _processService.RunAndCaptureAsync("id", "-g");
+            actionsImporterArguments.Add($"-e USER_ID={userId.TrimEnd()}");
+            actionsImporterArguments.Add($"-e GROUP_ID={groupId.TrimEnd()}");
+        }
         actionsImporterArguments.Add($"-v \"{Directory.GetCurrentDirectory()}\":/data");
         actionsImporterArguments.Add($"{server}/{image}:{version}");
         actionsImporterArguments.AddRange(arguments);
 
-        return _processService.RunAsync(
+        await _processService.RunAsync(
             "docker",
             string.Join(' ', actionsImporterArguments),
             Directory.GetCurrentDirectory(),
             new[] { ("MSYS_NO_PATHCONV", "1") }
         );
+    }
+
+    public async Task<List<Feature>> GetFeaturesAsync(string image, string server, string version)
+    {
+        var actionsImporterArguments = new List<string> { "run --rm -t" };
+        actionsImporterArguments.AddRange(GetEnvironmentVariableArguments());
+        actionsImporterArguments.Add($"{server}/{image}:{version}");
+        actionsImporterArguments.AddRange(new[] { "list-features", "--json" });
+
+        var (standardOutput, _, _) = await _processService.RunAndCaptureAsync("docker", string.Join(' ', actionsImporterArguments), throwOnError: false);
+
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, };
+        try
+        {
+            return JsonSerializer.Deserialize<List<Feature>>(standardOutput, options) ?? new();
+        }
+        catch (Exception)
+        {
+            // If unable to get the features from the container, return an empty list
+            // An empty list will result in a message being displayed to the user
+            return new();
+        }
     }
 
     public async Task VerifyDockerRunningAsync()
@@ -73,8 +94,10 @@ public class DockerService : IDockerService
         }
     }
 
-    public async Task VerifyImagePresentAsync(string image, string server, string version)
+    public async Task VerifyImagePresentAsync(string image, string server, string version, bool isPrerelease)
     {
+        var imageName = $"{server}/{image}:{version}";
+        var preReleaseOption = isPrerelease ? " --prerelease" : string.Empty;
         try
         {
             await _processService.RunAsync(
@@ -83,15 +106,16 @@ public class DockerService : IDockerService
                 output: false
             );
         }
+
         catch (Exception)
         {
-            throw new Exception("Unable to locate GitHub Actions Importer image locally. Please run `gh actions-importer update` to fetch the latest image prior to running this command.");
+            throw new Exception($"Unable to locate {imageName} image locally. Please run `gh actions-importer update{preReleaseOption}` to fetch the latest image prior to running this command.");
         }
     }
 
     public async Task<string?> GetLatestImageDigestAsync(string image, string server)
     {
-        var (standardOutput, _, _) = await _processService.RunAndCaptureAsync("docker", $"manifest inspect {server}/{image}:latest");
+        var (standardOutput, _, _) = await _processService.RunAndCaptureAsync("docker", $"manifest inspect {server}/{image}");
         Manifest? manifest = JsonSerializer.Deserialize<Manifest>(standardOutput);
 
         return manifest?.GetDigest();
@@ -99,7 +123,7 @@ public class DockerService : IDockerService
 
     public async Task<string?> GetCurrentImageDigestAsync(string image, string server)
     {
-        var (standardOutput, _, _) = await _processService.RunAndCaptureAsync("docker", $"image inspect --format={{{{.Id}}}} {server}/{image}:latest");
+        var (standardOutput, _, _) = await _processService.RunAndCaptureAsync("docker", $"image inspect --format={{{{.Id}}}} {server}/{image}");
 
         return standardOutput.Split(":").ElementAtOrDefault(1)?.Trim();
     }
@@ -125,30 +149,6 @@ public class DockerService : IDockerService
         }
     }
 
-    private async Task DockerLoginAsync(string server, string username, string password)
-    {
-        var (standardOutput, standardError, exitCode) = await _processService.RunAndCaptureAsync(
-            "docker",
-            $"login {server} --username {username} --password-stdin",
-            throwOnError: false,
-            inputForStdIn: password
-        ).ConfigureAwait(false);
-
-        if (exitCode != 0)
-        {
-            string message = standardError.Trim();
-            string? errorMessage = message == $"Error response from daemon: Get \"https://{server}/v2/\": denied: denied"
-                ? @"You are not authorized to access GitHub Actions Importer yet. Please ensure you've completed the following:
-- Requested access to GitHub Actions Importer and received onboarding instructions via email.
-- Accepted all of the repository invites sent after being onboarded."
-                : $"There was an error authenticating with the {server} docker repository.\nError: {message}";
-
-            throw new Exception(errorMessage);
-        }
-
-        Console.WriteLine(standardOutput);
-    }
-
     private async Task DockerPullAsync(string image, string server, string version)
     {
         Console.WriteLine($"Updating {server}/{image}:{version}...");
@@ -162,15 +162,6 @@ public class DockerService : IDockerService
         {
             string message = standardError.Trim();
             string errorMessage = $"There was an error pulling the {server}/{image}:{version}.\nError: {message}";
-
-            if (message == "Error response from daemon: denied"
-                || message == $"Error response from daemon: Head \"https://{server}/v2/actions-importer/cli/manifests/latest\": unauthorized")
-            {
-                errorMessage = @"You are not authorized to access GitHub Actions Importer yet. Please ensure you've completed the following:
-- Requested access to GitHub Actions Importer and received onboarding instructions via email.
-- Accepted all of the repository invites sent after being onboarded.
-- The GitHub personal access token used above contains the 'read:packages' scope.";
-            }
 
             throw new Exception(errorMessage);
         }

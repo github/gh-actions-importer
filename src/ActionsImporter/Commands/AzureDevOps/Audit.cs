@@ -12,8 +12,8 @@ public class Audit : ContainerCommand
 
     protected override string Name => "azure-devops";
     protected override string Description => "An audit will output a list of data used in an Azure DevOps instance.";
-
     protected override ImmutableArray<Option> Options => ImmutableArray.Create<Option>(
+        Common.ConfigFilePath,
         Common.Organization,
         Common.Project,
         Common.InstanceUrl,

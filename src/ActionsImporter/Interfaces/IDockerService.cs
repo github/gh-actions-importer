@@ -1,14 +1,18 @@
-﻿namespace ActionsImporter.Interfaces;
+﻿using ActionsImporter.Models;
+
+namespace ActionsImporter.Interfaces;
 
 public interface IDockerService
 {
-    Task UpdateImageAsync(string image, string server, string version, string? username, string? password, bool passwordStdin = false);
+    Task UpdateImageAsync(string image, string server, string version);
 
     Task ExecuteCommandAsync(string image, string server, string version, params string[] arguments);
 
+    Task<List<Feature>> GetFeaturesAsync(string image, string server, string version);
+
     Task VerifyDockerRunningAsync();
 
-    Task VerifyImagePresentAsync(string image, string server, string version);
+    Task VerifyImagePresentAsync(string image, string server, string version, bool isPrerelease);
 
     Task<string?> GetLatestImageDigestAsync(string image, string server);
 

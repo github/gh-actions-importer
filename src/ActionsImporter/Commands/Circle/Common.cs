@@ -51,4 +51,11 @@ public static class Common
         Description = "The file path corresponding to the CircleCI workflow file.",
         IsRequired = false,
     };
+
+    public static readonly Option<FileInfo> ConfigFilePath = new("--config-file-path")
+    {
+        Description = "The file path to the GitHub Actions Importer configuration file.",
+        IsRequired = false,
+    };
+
 }

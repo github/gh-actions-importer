@@ -19,6 +19,7 @@ public class Migrate : ContainerCommand
         Common.AccessToken,
         Common.SourceGitHubInstanceUrl,
         Common.SourceGitHubAccessToken,
-        Common.SourceFilePath
+        Common.SourceFilePath,
+        Common.ConfigFilePath
     );
 }

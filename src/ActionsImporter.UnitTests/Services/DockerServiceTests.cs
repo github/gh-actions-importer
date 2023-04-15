@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 using ActionsImporter.Interfaces;
+using ActionsImporter.Models;
 using ActionsImporter.Services;
 using Moq;
 using NUnit.Framework;
@@ -15,13 +17,15 @@ public class DockerServiceTests
 #pragma warning disable CS8618
     private DockerService _dockerService;
     private Mock<IProcessService> _processService;
+    private Mock<IRuntimeService> _runtimeService;
 #pragma warning restore CS8618
 
     [SetUp]
     public void BeforeEachTest()
     {
         _processService = new Mock<IProcessService>();
-        _dockerService = new DockerService(_processService.Object);
+        _runtimeService = new Mock<IRuntimeService>();
+        _dockerService = new DockerService(_processService.Object, _runtimeService.Object);
     }
 
     [TearDown]
@@ -56,94 +60,10 @@ public class DockerServiceTests
         await _dockerService.UpdateImageAsync(
             image,
             server,
-            version,
-            null,
-            null
+            version
         );
 
         // Assert
-        _processService.VerifyAll();
-    }
-
-    [Test]
-    public void UpdateImageAsync_InvalidScopes_ThrowsUnauthorized()
-    {
-        // Arrange
-        var image = "actions-importer/cli";
-        var server = "ghcr.io";
-        var version = "latest";
-        var username = "dwight";
-        var password = "assistant_regional_manager";
-
-        _processService.Setup(handler =>
-            handler.RunAndCaptureAsync(
-                "docker",
-                $"login {server} --username {username} --password-stdin",
-                It.IsAny<string?>(),
-                It.IsAny<IEnumerable<(string, string)>?>(),
-                false,
-                password
-            )
-        ).ReturnsAsync(("Login Successful", "", 0));
-
-        _processService.Setup(handler =>
-            handler.RunAndCaptureAsync(
-                "docker",
-                $"pull {server}/{image}:{version} --quiet",
-                It.IsAny<string?>(),
-                It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>(),
-                null
-            )
-        ).ReturnsAsync(("", "Error response from daemon: denied", 1));
-
-        // Act/Assert
-        Assert.ThrowsAsync<Exception>(() => _dockerService.UpdateImageAsync(
-            image,
-            server,
-            version,
-            username,
-            password
-        ),
-@"You are not authorized to access GitHub Actions Importer yet. Please ensure you've completed the following:
-- Requested access to GitHub Actions Importer and received onboarding instructions via email.
-- Accepted all of the repository invites sent after being onboarded.
-- The GitHub personal access token used above contains the 'read:packages' scope.");
-        _processService.VerifyAll();
-    }
-
-    [Test]
-    public void UpdateImageAsync_InvalidCredentialsProvided_ThrowsUnauthorized()
-    {
-        // Arrange
-        var image = "actions-importer/cli";
-        var server = "ghcr.io";
-        var version = "latest";
-        var username = "dwight";
-        var password = "assistant_to_the_regional_manager";
-
-        _processService.Setup(handler =>
-            handler.RunAndCaptureAsync(
-                "docker",
-                $"login {server} --username {username} --password-stdin",
-                It.IsAny<string?>(),
-                It.IsAny<IEnumerable<(string, string)>?>(),
-                false,
-                password
-            )
-        ).ReturnsAsync(("", $"Error response from daemon: Get \"https://{server}/v2/\": denied: denied", 1));
-
-        // Act/Assert
-        Assert.ThrowsAsync<Exception>(() => _dockerService.UpdateImageAsync(
-            image,
-            server,
-            version,
-            username,
-            password
-        ),
-@"You are not authorized to access GitHub Actions Importer yet. Please ensure you've completed the following:
-- Requested access toGitHub Actions Importer and received onboarding instructions via email.
-- Accepted all of the repository invites sent after being onboarded.");
         _processService.VerifyAll();
     }
 
@@ -170,91 +90,8 @@ public class DockerServiceTests
         Assert.ThrowsAsync<Exception>(() => _dockerService.UpdateImageAsync(
             image,
             server,
-            version,
-            null,
-            null
-        ),
-            @"You are not authorized to access GitHub Actions Importer yet. Please ensure you've completed the following:
-- Requested access to GitHub Actions Importer and received onboarding instructions via email.
-- Accepted all of the repository invites sent after being onboarded.
-- The GitHub personal access token used above contains the 'read:packages' scope.");
-        _processService.VerifyAll();
-    }
-
-    [Test]
-    public void UpdateImageAsync_InvalidCredentialsProvided_ThrowsUnknownError()
-    {
-        // Arrange
-        var image = "actions-importer/cli";
-        var server = "ghcr.io";
-        var version = "latest";
-        var username = "dwight";
-        var password = "assistant_to_the_regional_manager";
-
-        _processService.Setup(handler =>
-            handler.RunAndCaptureAsync(
-                "docker",
-                $"login {server} --username {username} --password-stdin",
-                It.IsAny<string?>(),
-                It.IsAny<IEnumerable<(string, string)>?>(),
-                false,
-                password
-            )
-        ).ReturnsAsync(("", "Unknown error", 1));
-
-        // Act/Assert
-        Assert.ThrowsAsync<Exception>(() => _dockerService.UpdateImageAsync(
-            image,
-            server,
-            version,
-            username,
-            password
-        ), $"There was an error authenticating with the {server} docker repository.\nError: Unknown error");
-        _processService.VerifyAll();
-    }
-
-    [Test]
-    public async Task UpdateImageAsync_ValidCredentialsProvided_ReturnsSuccessful()
-    {
-        // Arrange
-        var image = "actions-importer/cli";
-        var server = "ghcr.io";
-        var version = "latest";
-        var username = "dwight";
-        var password = "assistant_to_the_regional_manager";
-
-        _processService.Setup(handler =>
-            handler.RunAndCaptureAsync(
-                "docker",
-                $"login {server} --username {username} --password-stdin",
-                It.IsAny<string?>(),
-                It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>(),
-                password
-            )
-        ).ReturnsAsync(("Login Succeeded", "", 0));
-
-        _processService.Setup(handler =>
-            handler.RunAndCaptureAsync(
-                "docker",
-                $"pull {server}/{image}:{version} --quiet",
-                It.IsAny<string?>(),
-                It.IsAny<IEnumerable<(string, string)>?>(),
-                It.IsAny<bool>(),
-                null
-            )
-        ).ReturnsAsync(("", "", 0));
-
-        // Act
-        await _dockerService.UpdateImageAsync(
-            image,
-            server,
-            version,
-            username,
-            password
-        );
-
-        // Assert
+            version
+        ));
         _processService.VerifyAll();
     }
 
@@ -342,6 +179,115 @@ public class DockerServiceTests
     }
 
     [Test]
+    public async Task ExecuteCommandAsync_InvokesDocker_OnLinuxOS_ReturnsTrue()
+    {
+        // Arrange
+        var image = "actions-importer/cli";
+        var server = "ghcr.io";
+        var version = "latest";
+        var arguments = new[] { "run", "this", "command" };
+
+        _runtimeService.Setup(handler => handler.IsLinux).Returns(true);
+
+        _processService.Setup(handler =>
+          handler.RunAndCaptureAsync("id", "-u", null, null, true, null)
+        ).Returns(Task.FromResult(("50", "", 0)));
+
+        _processService.Setup(handler =>
+          handler.RunAndCaptureAsync("id", "-g", null, null, true, null)
+        ).Returns(Task.FromResult(("100", "", 0)));
+
+        _processService.Setup(handler =>
+            handler.RunAsync(
+                "docker",
+                $"run --rm -t -e USER_ID=50 -e GROUP_ID=100 -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
+                Directory.GetCurrentDirectory(),
+                new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
+                true
+            )
+        ).Returns(Task.CompletedTask);
+
+        // Act
+        await _dockerService.ExecuteCommandAsync(image, server, version, arguments);
+
+        // Assert
+        _processService.VerifyAll();
+    }
+
+    [Test]
+    public async Task GetFeaturesAsync_ReturnsFeatures()
+    {
+        // Arrange
+        var image = "actions-importer/cli";
+        var server = "ghcr.io";
+        var version = "latest";
+        var arguments = new[] { "list-features", "--json" };
+        var features = new List<Feature>
+      {
+        new Feature
+        {
+          Name = "actions/cache",
+          Description = "Control usage of actions/cache inside of workflows. Outputs a comment if not enabled.",
+          Enabled = false,
+          EnvName = "FEATURE_ACTIONS_CACHE",
+        },
+        new Feature
+        {
+          Name = "composite-actions",
+          Description = "Minimizes resulting workflow complexity through the use of composite actions. See https://docs.github.com/en/actions/creating-actions/creating-a-composite-action for more information.",
+          Enabled = true,
+          EnvName = "FEATURE_COMPOSITE_ACTIONS",
+        }
+      };
+        var featuresJSON = JsonSerializer.Serialize(features);
+
+        _processService.Setup(handler =>
+            handler.RunAndCaptureAsync(
+                "docker",
+                $"run --rm -t {server}/{image}:{version} {string.Join(' ', arguments)}",
+                null,
+                null,
+                false,
+                null
+            )
+        ).Returns(Task.FromResult((featuresJSON, "", 0)));
+
+        // Act
+        var featuresResult = await _dockerService.GetFeaturesAsync(image, server, version);
+        var featuresResultJSON = JsonSerializer.Serialize(featuresResult);
+
+        // Assert
+        Assert.AreEqual(featuresJSON, featuresResultJSON);
+    }
+
+    [Test]
+    public async Task GetFeaturesAsync_BadJSONReturnsEmptyList()
+    {
+        // Arrange
+        var image = "actions-importer/cli";
+        var server = "ghcr.io";
+        var version = "latest";
+        var arguments = new[] { "list-features", "--json" };
+
+        _processService.Setup(handler =>
+            handler.RunAndCaptureAsync(
+                "docker",
+                $"run --rm -t {server}/{image}:{version} {string.Join(' ', arguments)}",
+                null,
+                null,
+                false,
+                null
+            )
+        ).Returns(Task.FromResult(("", "", 0)));
+
+        // Act
+        var featuresResult = await _dockerService.GetFeaturesAsync(image, server, version);
+
+        // Assert
+        Assert.IsEmpty(featuresResult);
+    }
+
+    [Test]
     public void VerifyDockerRunningAsync_IsRunning_NoException()
     {
         // Arrange
@@ -396,7 +342,7 @@ public class DockerServiceTests
         ).Returns(Task.CompletedTask);
 
         // Act, Assert
-        Assert.DoesNotThrowAsync(() => _dockerService.VerifyImagePresentAsync(image, server, version));
+        Assert.DoesNotThrowAsync(() => _dockerService.VerifyImagePresentAsync(image, server, version, false));
         _processService.VerifyAll();
     }
 
@@ -419,7 +365,7 @@ public class DockerServiceTests
         ).ThrowsAsync(new Exception());
 
         // Act, Assert
-        Assert.ThrowsAsync<Exception>(() => _dockerService.VerifyImagePresentAsync(image, server, version));
+        Assert.ThrowsAsync<Exception>(() => _dockerService.VerifyImagePresentAsync(image, server, version, false));
         _processService.VerifyAll();
     }
 
@@ -427,13 +373,13 @@ public class DockerServiceTests
     public async Task GetCurrentImageDigest_ParsesDigestCorrectly()
     {
         // Arrange
-        var image = "actions-importer/cli";
+        var image = "actions-importer/cli:latest";
         var server = "ghcr.io";
 
         _processService.Setup(handler =>
             handler.RunAndCaptureAsync(
                 "docker",
-                $"image inspect --format={{{{.Id}}}} {server}/{image}:latest",
+                $"image inspect --format={{{{.Id}}}} {server}/{image}",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
                 It.IsAny<bool>(),
@@ -453,7 +399,7 @@ public class DockerServiceTests
     public async Task GetLatestImageDigest_ParsesDigestCorrectly()
     {
         // Arrange
-        var image = "actions-importer/cli";
+        var image = "actions-importer/cli:latest";
         var server = "ghcr.io";
         var manifestResult = @"
 {
@@ -516,7 +462,7 @@ public class DockerServiceTests
         _processService.Setup(handler =>
             handler.RunAndCaptureAsync(
                 "docker",
-                $"manifest inspect {server}/{image}:latest",
+                $"manifest inspect {server}/{image}",
                 It.IsAny<string?>(),
                 It.IsAny<IEnumerable<(string, string)>?>(),
                 It.IsAny<bool>(),

@@ -11,13 +11,6 @@ public class Audit : ContainerCommand
 
     protected override string Name => "circle-ci";
     protected override string Description => "An audit will output a list of data used in a CircleCI instance.";
-
-    private static readonly Option<FileInfo> ConfigFilePath = new("--config-file-path")
-    {
-        Description = "The file path corresponding to the CircleCI configuration file.",
-        IsRequired = false,
-    };
-
     private static readonly Option<FileInfo> IncludeFrom = new("--include-from")
     {
         Description = "The file path containing a list of line-delimited repositories to include in the audit.",
@@ -30,7 +23,7 @@ public class Audit : ContainerCommand
         Common.Organization,
         Common.SourceGitHubAccessToken,
         Common.SourceGitHubInstanceUrl,
-        ConfigFilePath,
+        Common.ConfigFilePath,
         IncludeFrom
     );
 }
