@@ -1,0 +1,36 @@
+using System.CommandLine;
+
+namespace ActionsImporter.Commands.Bamboo;
+
+public static class Common
+{
+    public static readonly Option<string> AccessToken = new("--bamboo-access-token")
+    {
+        Description = "Access token for the Bamboo instance.",
+        IsRequired = false,
+    };
+
+    public static readonly Option<string> InstanceUrl = new("--bamboo-instance-url")
+    {
+        Description = "The URL of the Bamboo instance.",
+        IsRequired = false,
+    };
+
+    public static readonly Option<string> Project = new(new[] { "-p", "--project" })
+    {
+        Description = "The Bamboo project name.",
+        IsRequired = false,
+    };
+
+    public static readonly Option<FileInfo> ConfigFilePath = new("--config-file-path")
+    {
+        Description = "The file path to the GitHub Actions Importer configuration file.",
+        IsRequired = false,
+    };
+
+    public static readonly Option<FileInfo> IncludeFrom = new("--include-from")
+    {
+        Description = "The file path containing a list of line-delimited repositories to include in the audit.",
+        IsRequired = false,
+    };
+}
