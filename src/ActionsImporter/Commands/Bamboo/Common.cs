@@ -30,7 +30,7 @@ public static class Common
 
     public static readonly Option<FileInfo> SourceFilePath = new("--source-file-path")
     {
-        Description = "The file path corresponding to the Azure DevOps pipeline file.",
+        Description = "The file path corresponding to the Bamboo pipeline file.",
         IsRequired = false,
     };
 
