@@ -44,6 +44,7 @@ Click [here](https://plugins.jenkins.io/) to view the full listing of Jenkins Pl
 | [If](ConditionalBuilder.md)                                         | run if                                                     |
 | [Input](Input.md)                                                   | run                                                        |
 | [JUnit](JUnit.md)                                                   | EnricoMi/publish-unit-test-result-action@v2.4.1              |
+| [Kubernetes](Kubernetes.md)                                         | container                                                  |
 | [Maven](Maven.md)                                                   | run                                                        |
 | [MS Build Builder](MSBuildBuilder.md)                               | microsoft/setup-msbuild@v1.3.1, run                            |
 | [MS Build SQ Runner Begin](MSBuildSQRunnerBegin.md)                 | run                                                        |
