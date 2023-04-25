@@ -1,6 +1,6 @@
 # Macos
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 macos:

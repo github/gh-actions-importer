@@ -1,6 +1,6 @@
-# UsePythonVersion task
+# UsePythonVersion Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # Use Python version
@@ -22,6 +22,6 @@
     architecture: x64
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - addToPath (it is always added to PATH)

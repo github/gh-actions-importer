@@ -1,6 +1,6 @@
 # Release
 
-## Travis input
+## Travis Input
 
 ```yaml
 deploy:

@@ -1,6 +1,6 @@
-# Publish Test Results task
+# Publish Test Results Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: PublishTestResults@2
@@ -39,7 +39,7 @@
   working-directory: folder/path
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - testResultsFormat (VSTest, CTest)
 - mergeTestResults

@@ -1,6 +1,6 @@
 # Dotnet
 
-## Travis input
+## Travis Input
 
 ```yaml
 dotnet: 2.1.502

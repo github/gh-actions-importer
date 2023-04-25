@@ -1,6 +1,6 @@
 # CircleCI/AwsCli Default Executor
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

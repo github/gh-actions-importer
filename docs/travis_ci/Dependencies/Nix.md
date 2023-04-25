@@ -1,6 +1,6 @@
 # Nix
 
-## Travis input
+## Travis Input
 
 ```yaml
 nix: 2.3.6

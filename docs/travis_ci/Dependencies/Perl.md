@@ -1,6 +1,6 @@
 # Perl
 
-## Travis input
+## Travis Input
 
 ```yaml
 perl: 5.43

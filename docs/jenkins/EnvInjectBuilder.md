@@ -1,8 +1,8 @@
 # Environment Injector
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input for
+### Jenkins Input for
 
 _EnvInjectBuilder_
 ```xml
@@ -248,5 +248,5 @@ _EnvInjectJobProperty_
 - Additional classpath
 - Load script and properties files from the master
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 This plugin is not supported in pipelines.

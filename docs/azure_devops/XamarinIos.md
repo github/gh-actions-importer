@@ -1,6 +1,6 @@
-# Xamarin Ios task
+# Xamarin Ios Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: XamariniOS@2
@@ -31,4 +31,4 @@
     SOLUTION_PATH: UPDATE_ME
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases

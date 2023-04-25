@@ -1,6 +1,6 @@
 # CircleCI/Python Dist
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

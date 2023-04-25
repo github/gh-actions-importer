@@ -1,6 +1,6 @@
 # Pandoc Version
 
-## Travis input
+## Travis Input
 
 ```yaml
 pandoc_version: 2.7.3

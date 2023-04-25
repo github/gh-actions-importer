@@ -1,6 +1,6 @@
 # CircleCI/Node Install
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

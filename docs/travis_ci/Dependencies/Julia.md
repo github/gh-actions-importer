@@ -1,6 +1,6 @@
 # Julia
 
-## Travis input
+## Travis Input
 
 ```yaml
 julia: 1

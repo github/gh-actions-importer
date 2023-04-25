@@ -1,6 +1,6 @@
-# Yarn task
+# Yarn Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 #Execute yarn command with optional arguments and custom Azure DevOps registries and authentication
@@ -31,5 +31,5 @@
 
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 Authentication for custom registries aside from Azure DevOps

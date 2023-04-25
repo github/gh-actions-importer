@@ -1,6 +1,6 @@
-# Colins Replace Tokens task
+# Colins Replace Tokens Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: colinsalmcorner.colinsalmcorner-buildtasks.replace-tokens-task.ReplaceTokens@1
@@ -21,6 +21,6 @@
     tokenSuffix: __
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - Token Regex:  Only the prefix and suffix from the regex will be used. The group seletor will be ignored
 - secretTokens

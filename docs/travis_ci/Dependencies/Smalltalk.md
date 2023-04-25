@@ -1,6 +1,6 @@
 # Smalltalk
 
-## Travis input
+## Travis Input
 
 ```yaml
 smalltalk:

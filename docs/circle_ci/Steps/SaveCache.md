@@ -1,6 +1,6 @@
 # Save Cache
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 steps:

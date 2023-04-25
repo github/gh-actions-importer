@@ -1,8 +1,8 @@
 # Python
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.plugins.python.Python plugin="python@1.3">
@@ -28,6 +28,6 @@ run: |-
 
 - None
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-This plugin is not supported in Jenkinsfile pipelines.
+This plugin is not supported in Jenkinsfile Pipelines.

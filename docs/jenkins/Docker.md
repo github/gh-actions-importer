@@ -1,6 +1,6 @@
 # Docker
 
-## Designer pipeline
+## Designer Pipeline
 
 ```xml
 <com.nirima.jenkins.plugins.docker.DockerJobTemplateProperty plugin="docker-plugin@1.2.1">
@@ -57,9 +57,9 @@ container:
 - Pull timeout
 - Node properties
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 agent {

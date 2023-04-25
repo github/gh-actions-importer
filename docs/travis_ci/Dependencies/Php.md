@@ -1,6 +1,6 @@
 # Php
 
-## Travis input
+## Travis Input
 
 ```yaml
 php: 7.4

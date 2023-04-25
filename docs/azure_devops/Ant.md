@@ -1,6 +1,6 @@
-# Ant task
+# Ant Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: Ant@1
@@ -47,7 +47,7 @@
     ANT_HOME: ANT_HOME_DIR
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - codeCoverageToolOptions,            alias: codeCoverageTool
 - codeCoverageClassFilesDirectories,  alias: classFilesDirectories

@@ -1,6 +1,6 @@
-# dependencies
+# Dependencies
 
-## GitLab input
+## GitLab Input
 
 ```yaml
 dependencies:

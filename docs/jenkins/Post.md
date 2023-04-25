@@ -1,12 +1,12 @@
 # Post build actions
 
-## Designer pipeline
+## Designer Pipeline
 
 This plugin is implemented as `Post Build Actions`
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 #### Stages
 

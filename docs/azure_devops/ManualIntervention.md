@@ -1,6 +1,6 @@
-# Manual Intervention task
+# Manual Intervention Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: ManualIntervention@8
@@ -16,7 +16,7 @@ jobs:
       name: approval_required
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - instructions
 - emailRecipients
 - onTimeout

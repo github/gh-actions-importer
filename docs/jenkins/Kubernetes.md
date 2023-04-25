@@ -1,12 +1,12 @@
 # Kubernetes
 
-## Designer pipeline
+## Designer Pipeline
 
-This plugin is not available on Designer pipelines.
+This plugin is not available on Designer Pipelines.
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 agent {

@@ -1,6 +1,6 @@
 # Docker
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 docker:

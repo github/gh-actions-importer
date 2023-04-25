@@ -1,6 +1,6 @@
 # CircleCI/Ruby Rubocop Check
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

@@ -1,6 +1,6 @@
 # SSH Known Hosts
 
-## Travis input
+## Travis Input
 
 ```yaml
 addons:

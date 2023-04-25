@@ -1,8 +1,8 @@
 # Post Build Task
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.plugins.postbuildtask.PostbuildTask plugin="postbuild-task@1.9">
@@ -40,6 +40,6 @@ if: always()
 - logText
 - EscalateStatus
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-This plugin is not supported in Jenkinsfile pipelines.
+This plugin is not supported in Jenkinsfile Pipelines.

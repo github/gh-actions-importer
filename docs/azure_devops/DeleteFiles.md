@@ -1,6 +1,6 @@
-# Delete Files task
+# Delete Files Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: DeleteFiles@1
@@ -47,5 +47,5 @@
       }
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - Contents: Does not support entries that contain brace expansion and extglob style patterns

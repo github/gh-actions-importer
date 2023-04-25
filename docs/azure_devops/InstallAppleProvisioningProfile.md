@@ -1,6 +1,6 @@
-# Install Apple Provisioning Profile task
+# Install Apple Provisioning Profile Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: InstallAppleProvisioningProfile@1
@@ -25,5 +25,5 @@
   if: always()
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 None

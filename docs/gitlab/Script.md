@@ -1,6 +1,6 @@
-# script
+# Script
 
-## GitLab input
+## GitLab Input
 
 ```yaml
 script:

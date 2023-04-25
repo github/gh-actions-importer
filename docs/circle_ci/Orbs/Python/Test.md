@@ -1,6 +1,6 @@
 # CircleCI/Python Test
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

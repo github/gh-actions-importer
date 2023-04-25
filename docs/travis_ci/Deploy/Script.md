@@ -1,6 +1,6 @@
 # Script
 
-## Travis input
+## Travis Input
 
 ```yaml
 deploy:

@@ -1,6 +1,6 @@
-# Azure Rm Web App Deployment task
+# Azure Rm Web App Deployment Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: AzureRmWebAppDeployment@4
@@ -74,7 +74,7 @@
 
 ```
 
-### Unsupported inputs and aliases
+### Unsupported Inputs and Aliases
 
 #### Multiple versions (2,3, and 4)
 

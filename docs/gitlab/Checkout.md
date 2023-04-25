@@ -1,6 +1,6 @@
-# checkout
+# Checkout
 
-## GitLab input
+## GitLab Input
 
 - Checking out source code is done implicitly.
 - In variables, you can set `GIT_STRATEGY: none` or `GIT_CHECKOUT: "false"` to skip checking out source code.

@@ -1,6 +1,6 @@
 # Slack Notification
 
-## Designer pipeline
+## Designer Pipeline
 
 ```xml
 <jenkins.plugins.slack.SlackNotifier plugin="slack@631.v40deea_40323b">
@@ -59,9 +59,9 @@ The following options are only supported if you use the deprecated [Incoming Web
 - customMessageNotBuilt
 - customMessageUnstable
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
     slackSend channel: '#general',

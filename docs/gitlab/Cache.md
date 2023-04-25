@@ -1,6 +1,6 @@
-# cache
+# Cache
 
-## GitLab input
+## GitLab Input
 
 ```yaml
 cache:

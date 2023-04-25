@@ -1,6 +1,6 @@
 # Replace Tokens
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 steps:
@@ -22,7 +22,7 @@ steps:
     files: '["**/*.config","**/*.json"]'
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - rootDirectory
 - encoding

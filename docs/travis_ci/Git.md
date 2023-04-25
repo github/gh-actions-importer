@@ -1,6 +1,6 @@
 # Git
 
-## Travis input
+## Travis Input
 
 ```yaml
 git:

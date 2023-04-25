@@ -1,6 +1,6 @@
-# Azure App Service Manage task
+# Azure App Service Manage Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # Azure App Service manage
@@ -49,7 +49,7 @@
       done
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - Enable Continuous Monitoring(Action)
 - Install Extensions(Action)

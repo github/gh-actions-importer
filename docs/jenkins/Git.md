@@ -1,12 +1,12 @@
 # Git Builder
 
-## Designer pipeline
+## Designer Pipeline
 
-This plugin is not mapped to a GitHub Actions equivalent for a Designer pipeline.
+This plugin is not mapped to a GitHub Actions equivalent for a Designer Pipeline.
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 steps {

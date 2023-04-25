@@ -1,8 +1,8 @@
 # AntExec Builder
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.plugins.antexec.AntExec plugin="antexec@1.11">

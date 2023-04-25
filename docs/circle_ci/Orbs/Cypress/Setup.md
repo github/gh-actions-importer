@@ -1,6 +1,6 @@
 # CypressIo/Cypress Setup
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

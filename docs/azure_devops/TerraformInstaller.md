@@ -1,6 +1,6 @@
-# Setup Terraform task
+# Setup Terraform Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 steps:
@@ -17,4 +17,4 @@ steps:
   uses: hashicorp/setup-terraform@v2
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases

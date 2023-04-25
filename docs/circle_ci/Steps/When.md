@@ -1,6 +1,6 @@
 # When
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 when:

@@ -1,8 +1,8 @@
 # Archive Artifacts
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.tasks.ArtifactArchiver>
@@ -72,9 +72,9 @@
 - Fingerprint (fingerprint)
 - Follow system links (followSymlinks)
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 steps {

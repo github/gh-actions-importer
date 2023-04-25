@@ -1,8 +1,8 @@
 # SSH
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <buildWrappers>

@@ -1,9 +1,9 @@
-# after_script
+# After Script
 
-## GitLab input
+## GitLab Input
 
 ```yaml
-before_script:
+after_script:
   - echo "Execute this command after any `script:` commands."
 ```
 

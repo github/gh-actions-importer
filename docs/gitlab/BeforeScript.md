@@ -1,6 +1,6 @@
-# before_script
+# Before Script
 
-## GitLab input
+## GitLab Input
 
 ```yaml
 before_script:

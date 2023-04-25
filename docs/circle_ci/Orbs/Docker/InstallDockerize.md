@@ -1,6 +1,6 @@
 # CircleCI/Docker Install Dockerize
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

@@ -1,6 +1,6 @@
-# Helm Installer task
+# Helm Installer Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: HelmInstaller@1
@@ -29,5 +29,5 @@
     version: v1.9.0
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 none

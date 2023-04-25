@@ -1,6 +1,6 @@
-# Nuget Authenticate task
+# Nuget Authenticate Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: NuGetAuthenticate@0
@@ -21,6 +21,6 @@
     source-url: "${{ env.NUGET_FEED_URL }}"
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 
 - forceReinstallCredentialProvider

@@ -1,6 +1,6 @@
-# DotNetCoreCLI task
+# DotNetCoreCLI Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # .NET Core
@@ -52,7 +52,7 @@
 - run: dotnet build
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - publishWebProjects
 - testRunTitle

@@ -1,6 +1,6 @@
-# Windows Machine File Copy task
+# Windows Machine File Copy Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: WindowsMachineFileCopy@2
@@ -63,6 +63,6 @@
     CLEAN_DESTINATION: true
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - Copy Files in Parallel
 - Machine Name Filter (only available in version 1)

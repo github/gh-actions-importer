@@ -1,6 +1,6 @@
 # Build Timeout
 
-## Jenkins input
+## Jenkins Input
 
 ```xml
 <buildWrappers>

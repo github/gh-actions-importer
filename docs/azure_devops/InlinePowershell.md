@@ -1,6 +1,6 @@
-# Inline Powershell task
+# Inline Powershell Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: InlinePowershell@1
@@ -34,5 +34,5 @@
     Invoke-Expression "$func $params"
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - none

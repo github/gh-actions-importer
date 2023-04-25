@@ -1,6 +1,6 @@
 # MSTest Builder
 
-## Jenkins input
+## Jenkins Input
 
 ```xml
 <org.jenkinsci.plugins.MsTestBuilder plugin="mstestrunner@1.3.0">
@@ -28,6 +28,6 @@
 
 - None
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-This plugin is not supported in Jenkinsfile pipelines.
+This plugin is not supported in Jenkinsfile Pipelines.

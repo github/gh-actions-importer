@@ -1,6 +1,6 @@
 # CircleCI/Docker Executors
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

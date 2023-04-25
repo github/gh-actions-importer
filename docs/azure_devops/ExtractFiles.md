@@ -1,6 +1,6 @@
-# Extract Files task
+# Extract Files Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: ExtractFiles@1
@@ -38,5 +38,5 @@
       }
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - pathToSevenZipTool

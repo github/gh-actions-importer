@@ -1,8 +1,8 @@
 # MsBuild Builder
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.plugins.msbuild.MsBuildBuilder plugin="msbuild@1.29">
@@ -32,6 +32,6 @@
 - If warnings set the build to Unstable
 - Do not use chcp command
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-This plugin is not supported in Jenkinsfile pipelines.
+This plugin is not supported in Jenkinsfile Pipelines.

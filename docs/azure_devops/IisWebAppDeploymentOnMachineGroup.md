@@ -1,6 +1,6 @@
-# I I S Web App Deployment On Machine Group task
+# I I S Web App Deployment On Machine Group Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: IISWebAppDeploymentOnMachineGroup@0
@@ -25,7 +25,7 @@
     takeAppOfflineFlag: true
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 
 - VirtualApplication
 - XmlTransformation

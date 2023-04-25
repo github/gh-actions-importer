@@ -1,6 +1,6 @@
 # CircleCI/Ruby Install Deps
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

@@ -1,6 +1,6 @@
 # CircleCI/Heroku Check Authentication
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

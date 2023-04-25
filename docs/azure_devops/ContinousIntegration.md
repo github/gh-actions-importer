@@ -1,6 +1,6 @@
-# ContinuousIntegration trigger
+# ContinuousIntegration Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 trigger:
@@ -34,6 +34,6 @@ on:
       - "!**/*.csproj"
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - batch

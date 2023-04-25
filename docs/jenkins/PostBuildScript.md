@@ -1,8 +1,8 @@
 # Post Build Script
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <builders>
@@ -165,5 +165,5 @@
 - Execution is limited to
 - Stop processing, if any build step fails
 
-## Jenkinsfile pipeline
-This plugin is not supported in Designer pipelines.
+## Jenkinsfile Pipeline
+This plugin is not supported in Designer Pipelines.

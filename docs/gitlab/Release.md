@@ -1,6 +1,6 @@
-# release
+# Release
 
-## GitLab input
+## GitLab Input
 
 ```yaml
 release_job:

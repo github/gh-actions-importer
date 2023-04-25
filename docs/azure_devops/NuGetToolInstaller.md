@@ -1,6 +1,6 @@
-# NuGetToolInstaller task
+# NuGetToolInstaller Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # NuGet tool installer
@@ -21,6 +21,6 @@
     nuget-version: '4.3.0'
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - checkLatest

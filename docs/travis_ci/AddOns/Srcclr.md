@@ -1,6 +1,6 @@
 # Srcclr
 
-## Travis input
+## Travis Input
 
 ```yaml
 srcclr: true

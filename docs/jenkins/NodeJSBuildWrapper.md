@@ -1,8 +1,8 @@
 # Node JS Build Wrapper
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <buildWrappers>
@@ -21,6 +21,6 @@ None. A manual task will be surfaced to ensure `NodeJs` is available on the runn
 
 - None
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-This plugin is not mapped to a GitHub Actions equivalent for a Jenkinsfile pipeline.
+This plugin is not mapped to a GitHub Actions equivalent for a Jenkinsfile Pipeline.

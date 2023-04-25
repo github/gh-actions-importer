@@ -1,8 +1,8 @@
 # Doxygen Builder
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.plugins.doxygen.DoxygenBuilder plugin="doxygen@0.18">
@@ -29,6 +29,6 @@ continue-on-error: true
 
 - If warnings set the build to Unstable
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-This plugin is not supported in Jenkinsfile pipelines.
+This plugin is not supported in Jenkinsfile Pipelines.

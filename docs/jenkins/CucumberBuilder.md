@@ -1,8 +1,8 @@
 # Cucumber Builder
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <net.masterthought.jenkins.CucumberReportPublisher plugin="cucumber-reports@5.5.0">
@@ -69,9 +69,9 @@
 - skipEmptyJSONFiles
 - expandAllSteps
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 pipeline {

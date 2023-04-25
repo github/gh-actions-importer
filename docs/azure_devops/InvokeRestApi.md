@@ -1,6 +1,6 @@
-# Invoke RestApi task
+# Invoke RestApi Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: InvokeRESTAPI@1
@@ -28,5 +28,5 @@
     --headers Content-Type="application/json"
 ```
 
-## Unsupported inputs
+## Unsupported Inputs
 - Completion Event type Callback (waitForCompletion == true)

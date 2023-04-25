@@ -1,8 +1,8 @@
 # Copy Artifact
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.45.1">
@@ -54,9 +54,9 @@
   - Specified by a build parameter
   - Result variable suffix
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 steps {

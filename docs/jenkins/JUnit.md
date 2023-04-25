@@ -1,8 +1,8 @@
 # JUnit
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.37">
@@ -30,9 +30,9 @@
 - allowEmptyResults
 - AggregatedTestResultPublisher
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 steps {

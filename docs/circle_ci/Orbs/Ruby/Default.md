@@ -1,6 +1,6 @@
 # CircleCI/Ruby Default Executor
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

@@ -1,8 +1,8 @@
 # NUnit
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.plugins.nunit.NUnitPublisher plugin="nunit@0.27">
@@ -16,9 +16,9 @@
 </hudson.plugins.nunit.NUnitPublisher>
 ```
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
   steps {

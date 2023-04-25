@@ -1,6 +1,6 @@
 # CircleCI/Aws-Ecs RunTask
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

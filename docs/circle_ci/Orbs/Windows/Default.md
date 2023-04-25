@@ -1,6 +1,6 @@
 # CircleCI/Windows Default Executor
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

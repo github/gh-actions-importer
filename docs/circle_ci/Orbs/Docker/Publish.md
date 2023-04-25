@@ -1,6 +1,6 @@
 # CircleCI/Docker Publish
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

@@ -1,6 +1,6 @@
-# Yarn Installer task
+# Yarn Installer Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # Install specified version of yarn
@@ -17,7 +17,7 @@
 - run: npm install yarn@"1.22.*"
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 
 - checkLatest
 - includePrerelease

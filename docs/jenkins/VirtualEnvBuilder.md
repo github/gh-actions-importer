@@ -1,8 +1,8 @@
 # Virtual Env Builder
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <jenkins.plugins.shiningpanda.builders.VirtualenvBuilder plugin="shiningpanda@0.24">
@@ -33,9 +33,9 @@
 - clear
 - systemSitePackages
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
   stage('build') {

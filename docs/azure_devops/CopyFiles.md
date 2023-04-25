@@ -1,6 +1,6 @@
 # CopyFiles task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # Copy files
@@ -51,7 +51,7 @@
           }
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - preserveTimestamp
 - retryCount

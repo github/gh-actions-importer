@@ -1,8 +1,8 @@
 # GitHub Push Request Trigger
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <scm class="hudson.plugins.git.GitSCM" plugin="git@4.4.4">
@@ -53,9 +53,9 @@ on:
 - Repository browser
 - Additional Behaviours (all)
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 triggers {

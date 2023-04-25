@@ -1,6 +1,6 @@
 # Osx Image
 
-## Travis input
+## Travis Input
 
 ```yaml
 osx_image: xcode12.4

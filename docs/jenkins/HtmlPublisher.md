@@ -1,8 +1,8 @@
 # HTML Publisher
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <htmlpublisher.HtmlPublisher plugin="htmlpublisher@1.25">
@@ -42,9 +42,9 @@ with:
 - Always link to last build
 - Escape underscores in report title
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 stage('Example Deploy') {

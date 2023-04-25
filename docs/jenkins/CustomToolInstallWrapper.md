@@ -1,8 +1,8 @@
 # Custom Tool Install Wrapper
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <com.cloudbees.jenkins.plugins.customtools.CustomToolInstallWrapper plugin="custom-tools-plugin@0.7">
@@ -33,6 +33,6 @@ The following run conditions are not supported:
 - Don't install tools at the master job
 - Convert #ToolName_HOME variables to the upper-case
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-This plugin is not supported in Jenkinsfile pipelines.
+This plugin is not supported in Jenkinsfile Pipelines.

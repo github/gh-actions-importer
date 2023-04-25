@@ -1,6 +1,6 @@
-# NPM task
+# NPM Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # npm task
@@ -27,7 +27,7 @@
     run: npm install
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - verbose
 - customRegistry

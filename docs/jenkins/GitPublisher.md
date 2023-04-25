@@ -1,6 +1,6 @@
-# Designer pipeline
+# Designer Pipeline
 
-## Jenkins input
+## Jenkins Input
 
 ```xml
 <publishers>
@@ -60,11 +60,11 @@
   if: success()
 ```
 
-## Unsupported options
+## Unsupported Options
 
 - `pushMerge`
 - `branchesToPush`
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-Jenkinsfile pipelines do not support the GitPublisher plugin.
+Jenkinsfile Pipelines do not support the GitPublisher plugin.

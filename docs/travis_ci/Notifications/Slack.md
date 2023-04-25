@@ -1,6 +1,6 @@
 # Slack
 
-## Travis input
+## Travis Input
 
 ```yaml
 notifications:

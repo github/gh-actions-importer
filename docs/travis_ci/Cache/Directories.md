@@ -1,6 +1,6 @@
 # Directories
 
-## Travis input
+## Travis Input
 
 ```yaml
 cache:

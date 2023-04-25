@@ -1,6 +1,6 @@
 # Browserstack
 
-## Travis input
+## Travis Input
 
 ```yaml
 browserstack: true

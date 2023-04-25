@@ -1,6 +1,6 @@
 # CircleCI/Slack Notify
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:
