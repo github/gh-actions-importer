@@ -1,6 +1,6 @@
 # Kubernetes
 
-## Designer pipleline
+## Designer pipeline
 
 This plugin is not available on Designer pipelines.
 

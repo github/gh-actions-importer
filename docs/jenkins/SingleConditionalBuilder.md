@@ -49,6 +49,6 @@ The following options are not supported
 
 - On evaluation failure
 
-## Jenkinsile pipleines
+## Jenkinsile pipeline
 
 This plugin is not supported in Jenkinsfile pipelines.
