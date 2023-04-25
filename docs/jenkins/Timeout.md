@@ -1,6 +1,6 @@
 # Timeout
 
-## Designer pipleline
+## Designer pipeline
 
 This plugin is not supported in Designer pipelines.
 
