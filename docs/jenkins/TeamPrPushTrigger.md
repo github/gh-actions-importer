@@ -1,8 +1,8 @@
 # Team PR Push Trigger
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.plugins.tfs.TeamPRPushTrigger plugin="tfs@5.157.1">
@@ -24,6 +24,6 @@ pull_request:
 
 - Job Context
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-This plugin is not supported in Jenkinsfile pipelines.
+This plugin is not supported in Jenkinsfile Pipelines.

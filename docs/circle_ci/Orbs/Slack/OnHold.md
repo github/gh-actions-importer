@@ -1,6 +1,6 @@
 # CircleCI/Slack On Hold
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

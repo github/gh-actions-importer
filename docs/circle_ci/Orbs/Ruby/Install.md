@@ -1,6 +1,6 @@
 # CircleCI/Ruby Install
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

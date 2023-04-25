@@ -1,6 +1,6 @@
 # CircleCI/Docker Install Docker Credential Helper
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

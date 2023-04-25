@@ -1,8 +1,8 @@
 # Terraform Build Wrapper
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <org.jenkinsci.plugins.terraform.TerraformBuildWrapper plugin="terraform@1.0.10">

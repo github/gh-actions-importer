@@ -1,8 +1,8 @@
 # JsLint Builder
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <com.boxuk.jenkins.jslint.JSLintBuilder plugin="jslint@0.8.2">
@@ -27,6 +27,6 @@
 - Exclude pattern
 - Log file
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-- This plugin is not supported in Jenkinsfile pipelines.
+- This plugin is not supported in Jenkinsfile Pipelines.

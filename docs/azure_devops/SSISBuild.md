@@ -1,6 +1,6 @@
-# Sql Azure Dacpac Deployment task
+# Sql Azure Dacpac Deployment Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: SSISBuild@1

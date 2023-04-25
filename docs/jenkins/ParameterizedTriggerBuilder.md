@@ -1,8 +1,8 @@
 # Parameterized Trigger
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.plugins.parameterizedtrigger.TriggerBuilder plugin="parameterized-trigger@2.39">
@@ -130,9 +130,9 @@ Parameter Factories
 - For every property fie, invoke one build
 - Invoke i=0..N builds
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 steps {

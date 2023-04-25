@@ -1,8 +1,8 @@
 # Ant
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.tasks.Ant plugin="ant@1.11">
@@ -33,9 +33,9 @@
 - Ant Version
 - JDK Version
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 steps{

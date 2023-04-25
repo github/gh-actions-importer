@@ -1,6 +1,6 @@
 # Postgresql
 
-## Travis input
+## Travis Input
 
 ```yaml
 services:

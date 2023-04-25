@@ -1,6 +1,6 @@
-# artifacts
+# Artifacts
 
-## GitLab input
+## GitLab Input
 
 ```yaml
 artifacts:

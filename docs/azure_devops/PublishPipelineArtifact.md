@@ -1,6 +1,6 @@
-# PublishPipelineArtifact task
+# PublishPipelineArtifact Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # Publish (upload) a file or directory as a named artifact for the current run
@@ -33,7 +33,7 @@ steps:
     path: artifact.zip
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - artifactType
 - fileSharePath

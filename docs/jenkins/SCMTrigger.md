@@ -1,8 +1,8 @@
 # SCM Trigger
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.triggers.SCMTrigger>
@@ -23,9 +23,9 @@ on:
 
 - None
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 triggers { pollSCM 'H */4 * * 1-5' }

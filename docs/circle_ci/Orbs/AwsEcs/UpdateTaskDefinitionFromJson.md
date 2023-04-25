@@ -1,6 +1,6 @@
 # CircleCI/Aws-Ecs UpdateTaskDefinitionFromJson
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

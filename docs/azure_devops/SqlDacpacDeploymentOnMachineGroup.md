@@ -1,6 +1,6 @@
-# Sql Dacpac Deployment On Machine Group task
+# Sql Dacpac Deployment On Machine Group Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: SqlDacpacDeploymentOnMachineGroup@0
@@ -32,7 +32,7 @@
     SQL_PASSWORD: "${{ secrets.SQL_DEPLOY_PASSWORD }}"
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - Execute within a Transaction
 - Acquire an exclusive app lock while executing script(s)
 - App Lock Name

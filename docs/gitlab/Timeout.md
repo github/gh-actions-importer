@@ -1,6 +1,6 @@
-# timeout
+# Timeout
 
-## GitLab input
+## GitLab Input
 
 - Timeout can be configured in either general pipeline settings or in the pipeline yaml.
 - Pipeline timeout overrides the general configuration `build_timeout`.

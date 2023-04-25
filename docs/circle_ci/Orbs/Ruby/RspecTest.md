@@ -1,6 +1,6 @@
 # CircleCI/Ruby Rspec Test
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

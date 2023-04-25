@@ -1,6 +1,6 @@
-# image
+# Image
 
-## GitLab input
+## GitLab Input
 
 ```yaml
 # String configuration

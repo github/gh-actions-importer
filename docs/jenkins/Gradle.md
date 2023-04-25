@@ -1,8 +1,8 @@
 # Gradle
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.plugins.gradle.Gradle plugin="gradle@1.36">

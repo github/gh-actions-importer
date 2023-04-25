@@ -1,6 +1,6 @@
-# Xamarin Android task
+# Xamarin Android Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: XamarinAndroid@1
@@ -37,6 +37,6 @@
     PROJECT_PATH: UPDATE_ME
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - msbuildVersion (On macos runners)
 - msbuildArchitecture

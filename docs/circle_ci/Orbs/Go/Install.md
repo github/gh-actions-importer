@@ -1,6 +1,6 @@
 # CircleCI/Go Install
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

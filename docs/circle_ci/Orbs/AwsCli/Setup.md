@@ -1,6 +1,6 @@
 # CircleCI/AwsCli Setup
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

@@ -1,6 +1,6 @@
 # Haxe
 
-## Travis input
+## Travis Input
 
 ```yaml
 haxe:

@@ -1,6 +1,6 @@
-# Azure Web App Container task
+# Azure Web App Container Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: AzureWebApp@1
@@ -38,7 +38,7 @@
     general-settings-json: '{"rubyVersion":"1.6"}'
 ```
 
-### Unsupported inputs and aliases
+### Unsupported Inputs and Aliases
 
 - azureSubscription
 - resourceGroupName

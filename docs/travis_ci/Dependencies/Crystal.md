@@ -1,6 +1,6 @@
 # Crystal
 
-## Travis input
+## Travis Input
 
 ```yaml
 crystal: latest

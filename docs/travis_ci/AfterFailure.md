@@ -1,6 +1,6 @@
 # After Failure
 
-## Travis input
+## Travis Input
 
 ```yaml
 after_failure:

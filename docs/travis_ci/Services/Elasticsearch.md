@@ -1,6 +1,6 @@
 # Elasticsearch
 
-## Travis input
+## Travis Input
 
 ```yaml
 services:

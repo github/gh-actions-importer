@@ -1,6 +1,6 @@
 # SonarCloud
 
-## Travis input - Other(for JS YS, Go, Python, PHP...)
+## Travis Input - Other(for JS YS, Go, Python, PHP...)
 
 ```yaml
 addons:
@@ -30,7 +30,7 @@ script:
       -Dsonar.login=${{ env.SONAR_TOKEN }}/`
 ```
 
-## Travis input - C, C++, or ObjC
+## Travis Input - C, C++, or ObjC
 
 ```yaml
 addons:
@@ -75,7 +75,7 @@ script:
     -Dsonar.login=${{ env.SONAR_TOKEN }}/`
 ```
 
-## Travis input - Gradle
+## Travis Input - Gradle
 
 ```yaml
 addons:
@@ -107,7 +107,7 @@ script:
     -Dsonar.login=${{ env.SONAR_TOKEN }}/`
 ```
 
-## Travis input - Maven
+## Travis Input - Maven
 
 ```yaml
 addons:
@@ -139,7 +139,7 @@ script:
     -Dsonar.login=${{ env.SONAR_TOKEN }}/`
 ```
 
-## Travis input - DotNet
+## Travis Input - DotNet
 
 ```yaml
 addons:

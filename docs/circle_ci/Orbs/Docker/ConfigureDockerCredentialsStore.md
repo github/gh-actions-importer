@@ -1,6 +1,6 @@
 # CircleCI/Docker Configure Docker Credentials Store
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

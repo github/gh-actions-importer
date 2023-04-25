@@ -1,6 +1,6 @@
 # CircleCI/Python Install Packages
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

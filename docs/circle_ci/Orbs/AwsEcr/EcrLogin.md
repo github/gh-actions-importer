@@ -1,6 +1,6 @@
 # CircleCI/AwsEcr Ecr Login
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

@@ -1,6 +1,6 @@
 # CircleCI/Go Mod Download
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

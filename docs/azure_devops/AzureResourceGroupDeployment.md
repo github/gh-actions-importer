@@ -1,8 +1,8 @@
-# AzureResourceGroupDeployment@2 task
+# AzureResourceGroupDeployment@2 Task
 
 Also supports the [AzureResourceManagerTemplateDeployment@3 task](https://github.com/microsoft/azure-pipelines-tasks/tree/master/Tasks/AzureResourceManagerTemplateDeploymentV3).
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # Azure resource group deployment
@@ -45,7 +45,7 @@ Also supports the [AzureResourceManagerTemplateDeployment@3 task](https://github
     az deployment group create --resource-group "foo" --no-prompt true --subscription "bar" --template-file "template.json"
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - action (when not `create Or Update Resource Group` or `deleteRG`)
 - enableDeploymentPrerequisites

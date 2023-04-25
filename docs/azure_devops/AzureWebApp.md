@@ -1,6 +1,6 @@
-# Azure Web App task
+# Azure Web App Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: AzureWebApp@1
@@ -39,7 +39,7 @@
     general-settings-json: '{"phpVersion":"5.6"}'
 ```
 
-### Unsupported inputs and aliases
+### Unsupported Inputs and Aliases
 
 - appType
 - azureSubscription

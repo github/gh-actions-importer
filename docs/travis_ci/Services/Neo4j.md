@@ -1,6 +1,6 @@
 # Neo4j
 
-## Travis input
+## Travis Input
 
 ```yaml
 services:

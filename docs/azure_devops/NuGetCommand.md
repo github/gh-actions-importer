@@ -1,8 +1,8 @@
-# NUGetInstaller/NuGetCommand task
+# NUGetInstaller/NuGetCommand Task
 
 ## NuGetCommand task
 
-### Azure DevOps input
+### Azure DevOps Input
 
 ```yaml
 # NuGet
@@ -51,7 +51,7 @@
 - run: nuget restore
 ```
 
-#### Unsupported inputs
+#### Unsupported Inputs
 
 - publishPackageMetadata
 - allowPackageConflicts
@@ -63,7 +63,7 @@ Use this task to install and update NuGet package dependencies.
 - Restore will restore the packages a solution depends upon, and is generally what you want.
 - Install will install packages from a packages.config file. Use this option if you want to install a standalone tool package.
 
-### Azure DevOps input
+### Azure DevOps Input
 
 ```YAML
 -task: NuGetInstaller@0

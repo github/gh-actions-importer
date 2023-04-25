@@ -1,8 +1,8 @@
 # Sonar Runner Builder
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.plugins.sonar.SonarRunnerBuilder plugin="sonar@2.12">
@@ -36,6 +36,6 @@ with:
 - SonarQube Scanner (transformed into a secret to be configured and manual task is added to the PR)
 - Task to run
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-This plugin is not supported in Jenkinsfile pipelines.
+This plugin is not supported in Jenkinsfile Pipelines.

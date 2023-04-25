@@ -1,6 +1,6 @@
 # R
 
-## Travis input
+## Travis Input
 
 ```yaml
 r: 3.5.3

@@ -1,6 +1,6 @@
 # CircleCI/Node Default Executor
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

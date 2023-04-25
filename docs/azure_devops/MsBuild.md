@@ -1,6 +1,6 @@
-# MS Build task
+# MS Build Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: MSBuild@1
@@ -42,7 +42,7 @@
   run: msbuild **/*.sln
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 
 - msbuildVersion
 - logProjectEvents

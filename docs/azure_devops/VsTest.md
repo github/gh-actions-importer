@@ -1,6 +1,6 @@
-# VSTest task
+# VSTest Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: VSTest@2
@@ -38,7 +38,7 @@
     platform: x64
 ```
 
-### Unsupported inputs and aliases
+### Unsupported Inputs and Aliases
 
 -testSelector:  Unsupported Options: testPlan, testRun
 -testPlan: # Required when testSelector == TestPlan

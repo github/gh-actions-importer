@@ -1,6 +1,6 @@
-# CmdLine task
+# CmdLine Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # Command line
@@ -36,7 +36,7 @@ steps:
   #working-directory:
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - failOnStderr
 - target

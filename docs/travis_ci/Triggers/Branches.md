@@ -1,6 +1,6 @@
 # Branches
 
-## Travis input
+## Travis Input
 
 ```yaml
 branches:

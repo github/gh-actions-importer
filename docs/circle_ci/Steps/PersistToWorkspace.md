@@ -1,6 +1,6 @@
 # Persist To Workspace
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 steps:

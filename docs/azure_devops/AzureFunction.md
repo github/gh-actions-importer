@@ -1,6 +1,6 @@
-# AzureFunction task
+# AzureFunction Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: AzureFunction@1
@@ -26,6 +26,6 @@
     SUCCESS_CRITERIA: UPDATE_ME
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - Completion Event type Callback (waitForCompletion == true)

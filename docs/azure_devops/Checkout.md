@@ -1,6 +1,6 @@
-# Checkout task
+# Checkout Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - checkout: self | none | repository name # self represents the repo where the initial Pipelines YAML file was found
@@ -21,6 +21,6 @@
     token: "${{ secrets.CHECKOUT_TOKEN }}"
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 This action only supports checking out GitHub repositories.

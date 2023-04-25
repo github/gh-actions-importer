@@ -1,6 +1,6 @@
 # CircleCI/Node With Cache
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

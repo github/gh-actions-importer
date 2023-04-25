@@ -1,6 +1,6 @@
-# UseDotnet task
+# UseDotnet Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: UseDotNet@2
@@ -22,7 +22,7 @@
       dotnet-version: 2.2.203
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - packageType
 - useGlobalJson

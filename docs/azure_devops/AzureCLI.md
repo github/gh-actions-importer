@@ -1,6 +1,6 @@
-# AzureCLI task
+# AzureCLI Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: AzureCLI@2
@@ -27,7 +27,7 @@
   shell: powershell
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - azureSubscription
 - addSpnToEnvironment

@@ -1,6 +1,6 @@
 # CircleCI/Go Test
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

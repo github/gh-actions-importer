@@ -1,6 +1,6 @@
 # Code Climate
 
-## Travis input
+## Travis Input
 
 ```yaml
 code_climate:

@@ -1,6 +1,6 @@
 # Run
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 steps:

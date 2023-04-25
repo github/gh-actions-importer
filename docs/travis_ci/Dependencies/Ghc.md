@@ -1,6 +1,6 @@
 # Ghc
 
-## Travis input
+## Travis Input
 
 ```yaml
 ghc: 8.6.4

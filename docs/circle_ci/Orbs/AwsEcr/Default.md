@@ -1,6 +1,6 @@
 # CircleCI/aws-ecr Default Executor
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

@@ -1,6 +1,6 @@
-# AzureFileCopy task
+# AzureFileCopy Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # Azure file copy
@@ -37,7 +37,7 @@
 - run: az storage blob upload-batch --auth-mode login --account-name "" --destination "" --source "" --subscription ""
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - resourceGroup
 - resourceFilteringMethod

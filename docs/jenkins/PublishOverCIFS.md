@@ -1,8 +1,8 @@
 # Publish Over CIFS
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 #### Builder
 ```xml

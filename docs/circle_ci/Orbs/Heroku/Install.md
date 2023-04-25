@@ -1,6 +1,6 @@
 # CircleCI/Heroku Install
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

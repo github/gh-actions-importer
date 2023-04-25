@@ -1,8 +1,8 @@
 # Android Emulator
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.plugins.android__emulator.AndroidEmulator plugin="android-emulator@3.1.2">

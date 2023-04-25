@@ -1,8 +1,8 @@
 # Xcode
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins inputs
+### Jenkins Inputs
 #### Xcode
 ```xml
 <builders>
@@ -273,9 +273,9 @@ The following options are assumed to be set in plist file located at ExportOptio
 - copyProvisioningProfile
 
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 #### xcodeBuild
 ```groovy

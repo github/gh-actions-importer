@@ -1,8 +1,8 @@
 # Parameter Definitions Property
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
    <parameterDefinitions>
@@ -151,9 +151,9 @@ on:
 - String Parameter
 - Tool Version
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 parameters {

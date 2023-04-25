@@ -1,6 +1,6 @@
 # Scala
 
-## Travis input
+## Travis Input
 
 ```yaml
 scala:

@@ -1,6 +1,6 @@
 # Cocoapods
 
-## Travis input
+## Travis Input
 
 ```yaml
 cache:

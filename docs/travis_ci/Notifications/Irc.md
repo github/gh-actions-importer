@@ -1,6 +1,6 @@
 # IRC
 
-## Travis input
+## Travis Input
 
 ```yaml
 notifications:

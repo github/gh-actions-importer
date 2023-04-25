@@ -1,6 +1,6 @@
 # Homebrew
 
-## Travis input
+## Travis Input
 
 ```yaml
 homebrew:

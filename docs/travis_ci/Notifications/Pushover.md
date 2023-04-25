@@ -1,6 +1,6 @@
 # Pushover
 
-## Travis input
+## Travis Input
 
 ```yaml
 notifications:

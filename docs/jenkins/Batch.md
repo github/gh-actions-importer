@@ -1,8 +1,8 @@
 # Batch Builder
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <builders>
@@ -33,9 +33,9 @@ shell: cmd
 - Environment filters (configuredLocalRules)
 - ERRORLEVEL to set build unstable (unstableReturn)
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 steps {

@@ -1,6 +1,6 @@
 # Apt
 
-## Travis input
+## Travis Input
 
 ```yaml
 apt:

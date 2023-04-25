@@ -1,8 +1,8 @@
 # Checkout
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <scm class="hudson.plugins.git.GitSCM" plugin="git@4.4.4">
@@ -42,9 +42,9 @@
 - submoduleCfg
 - extensions
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 steps {

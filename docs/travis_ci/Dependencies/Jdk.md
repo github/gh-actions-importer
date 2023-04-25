@@ -1,6 +1,6 @@
 # JDK
 
-## Travis input
+## Travis Input
 
 ```yaml
 jdk: 8

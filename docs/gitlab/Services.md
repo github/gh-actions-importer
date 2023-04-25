@@ -1,6 +1,6 @@
-# services
+# Services
 
-## GitLab input
+## GitLab Input
 
 ```yaml
 # Services can be configured at the top level, in defaults, or at the job level

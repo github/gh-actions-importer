@@ -1,6 +1,6 @@
 # CircleCI/Heroku Deploy Via Git
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

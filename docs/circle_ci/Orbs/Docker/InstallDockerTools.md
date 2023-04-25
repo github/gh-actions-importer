@@ -1,6 +1,6 @@
 # CircleCI/Docker Install Docker Tools
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

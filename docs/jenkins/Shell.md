@@ -1,8 +1,8 @@
 # Shell Builder
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.tasks.Shell>
@@ -26,9 +26,9 @@ The following options are not supported:
 - Exit code to set build unstable
 - Environment filters
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 steps {

@@ -1,6 +1,6 @@
 # CircleCI/Aws-Ecs Update Service
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

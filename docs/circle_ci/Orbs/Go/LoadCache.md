@@ -1,6 +1,6 @@
 # CircleCI/Go Load Cache
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

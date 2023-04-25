@@ -1,6 +1,6 @@
 # Add Ssh Keys
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 steps:

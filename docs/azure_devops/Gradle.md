@@ -1,6 +1,6 @@
-# Gradle task
+# Gradle Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: Gradle@2
@@ -48,7 +48,7 @@
     files: "*/test-file*.xml"
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - codeCoverageToolOptions,            alias: codeCoverageTool
 - codeCoverageClassFilesDirectories,  alias: classFilesDirectories

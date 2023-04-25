@@ -1,6 +1,6 @@
 # Dart
 
-## Travis input
+## Travis Input
 
 ```yaml
 dart:

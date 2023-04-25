@@ -1,6 +1,6 @@
-# Xcode task
+# Xcode Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: Xcode@5
@@ -39,7 +39,7 @@
     ARCHIVE_PATH: UPDATE_ME
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - publishJUnitResults
 - testRunTitle
 - exportOptions: Options `auto` and `specify` are not support. A export plist file is required if packaging

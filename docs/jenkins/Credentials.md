@@ -1,8 +1,8 @@
 # Credentials
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper plugin="credentials-binding@1.23">
@@ -58,9 +58,9 @@ env:
 - Secret File (org.jenkinsci.plugins.credentialsbinding.impl.FileBinding)
 - Kubeconfig File (com.microsoft.jenkins.kubernetes.credentials.KubeconfigFileCredentialsBinding)
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 withCredentials([

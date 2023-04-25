@@ -1,6 +1,6 @@
 # Lein
 
-## Travis input
+## Travis Input
 
 ```yaml
 lein: 2.1

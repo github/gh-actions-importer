@@ -1,8 +1,8 @@
 # Maven
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.tasks.Maven>
@@ -39,9 +39,9 @@ property1=value</properties>
 - Global Settings (only supports `Global settings file on filesystem`)
 - Settings File (Only supports `Settings in filesystem`)
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 

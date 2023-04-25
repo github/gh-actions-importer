@@ -1,8 +1,8 @@
 # Workspace Cleanup
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <publishers>
@@ -86,9 +86,9 @@
 - Cleanup matrix parent (cleanupMatrixParent)
 - Skip when failed (skipWhenFailed)
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 steps {

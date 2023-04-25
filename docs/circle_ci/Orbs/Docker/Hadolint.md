@@ -1,6 +1,6 @@
 # CircleCI/Docker Hadolint
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

@@ -1,6 +1,6 @@
-# UseRubyVersion task
+# UseRubyVersion Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # Use Ruby version
@@ -19,7 +19,7 @@
     ruby-version: '3.7'
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - addToPath (it is always added to PATH)
 

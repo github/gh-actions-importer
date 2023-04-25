@@ -1,6 +1,6 @@
-# Kubernetes task
+# Kubernetes Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: Kubernetes@1
@@ -34,7 +34,7 @@
   run: kubectl get nodes -o json
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - useClusterAdmin
 - Force update secret
 - Force update configmap

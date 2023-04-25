@@ -1,6 +1,6 @@
 # Env
 
-## Travis input
+## Travis Input
 
 ```yaml
 env:

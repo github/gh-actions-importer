@@ -1,8 +1,8 @@
 # Nant Builder
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.plugins.nant.NantBuilder plugin="nant@1.4.3">
@@ -25,6 +25,6 @@ run: NAnt -D:property1=value1 -D:property2=value2 -buildfile:path\to\config.xml.
 
 - None
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-This plugin is not supported in Jenkinsfile pipelines.
+This plugin is not supported in Jenkinsfile Pipelines.

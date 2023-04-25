@@ -1,6 +1,6 @@
-# Terraform task
+# Terraform Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: TerraformTaskV3@3
@@ -28,5 +28,5 @@
     ARM_CLIENT_SECRET: "{{ secrets.ARM_CLIENT_SECRET }}"
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 

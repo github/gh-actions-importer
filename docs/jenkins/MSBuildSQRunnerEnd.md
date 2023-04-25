@@ -1,8 +1,8 @@
 # MSBuild SQ Runner End
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.plugins.sonar.MsBuildSQRunnerEnd plugin="sonar@2.12"/>
@@ -49,6 +49,6 @@ jobs:
 
 - None
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-This plugin is not supported in Jenkinsfile pipelines.
+This plugin is not supported in Jenkinsfile Pipelines.

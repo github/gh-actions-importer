@@ -1,6 +1,6 @@
-# DownloadBuildArtifacts task
+# DownloadBuildArtifacts Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # Download files that were saved as artifacts of a completed build
@@ -49,7 +49,7 @@ steps:
     path: out
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - source (specific)
 - project

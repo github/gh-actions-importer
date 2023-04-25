@@ -1,6 +1,6 @@
-# Sql Dacpac Deploy task
+# Sql Dacpac Deploy Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: SqlDacpacDeploy@1
@@ -27,7 +27,7 @@
     action: publish
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - PublishProfile
 - DeployInParallel
 

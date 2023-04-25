@@ -1,6 +1,6 @@
 # Unless
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 unless:

@@ -1,6 +1,6 @@
 # CircleCI/Docker Check
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

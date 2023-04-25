@@ -1,8 +1,8 @@
 # Timer Trigger
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <triggers>
@@ -24,9 +24,9 @@ on:
 
 - TimeZone
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 triggers {

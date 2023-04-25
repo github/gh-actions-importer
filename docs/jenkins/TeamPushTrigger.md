@@ -1,8 +1,8 @@
 # Team Push Trigger (Azure DevOps)
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <scm class="hudson.plugins.git.GitSCM" plugin="git@4.4.4">
@@ -46,6 +46,6 @@ on:
 
 - jobContext
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-This plugin is not supported in Jenkinsfile pipelines.
+This plugin is not supported in Jenkinsfile Pipelines.

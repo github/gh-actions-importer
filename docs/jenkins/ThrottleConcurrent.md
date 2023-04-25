@@ -1,8 +1,8 @@
 # Throttle Concurrent Builds
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <hudson.plugins.throttleconcurrents.ThrottleJobProperty plugin="throttle-concurrents@2.3">
@@ -34,9 +34,9 @@ The following options are not supported:
 - Maximum Concurrent Builds Per Node
 - Prevent multiple jobs with identical parameters from running concurrently
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 pipeline {

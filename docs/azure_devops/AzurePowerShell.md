@@ -1,6 +1,6 @@
-# Azure Power Shell task
+# Azure Power Shell Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ### AzurePowerShell (v1 - v5) Task using Inline script
 
@@ -139,7 +139,7 @@
 
 - workingDirectory
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 
 - pwsh
 - RestrictContextToCurrentTask
