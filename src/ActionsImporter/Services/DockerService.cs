@@ -25,7 +25,7 @@ public class DockerService : IDockerService
     {
         var actionsImporterArguments = new List<string>
         {
-            "run --rm -t"
+            "run --rm -t --network=host"
         };
         actionsImporterArguments.AddRange(GetEnvironmentVariableArguments());
 
