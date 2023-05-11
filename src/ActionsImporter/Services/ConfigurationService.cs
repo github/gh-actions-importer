@@ -53,8 +53,7 @@ public class ConfigurationService : IConfigurationService
     {
         var providers = Prompt.MultiSelect(
             "Which CI providers are you configuring?",
-            new[] { "Azure DevOps", "CircleCI", "GitLab CI", "Jenkins", "Travis CI" },
-            pageSize: 5
+            Constants.ProviderNames
         );
 
         var input = ImmutableDictionary.CreateBuilder<string, string>();
