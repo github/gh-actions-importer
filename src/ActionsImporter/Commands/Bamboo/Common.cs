@@ -34,12 +34,6 @@ public static class Common
         IsRequired = false,
     };
 
-    public static readonly Option<FileInfo> IncludeFrom = new("--include-from")
-    {
-        Description = "The file path containing a list of line-delimited repositories to include in the audit.",
-        IsRequired = false,
-    };
-
     public static readonly Option<string> PlanSlug = new(new[] { "-p", "--plan-slug" })
     {
         Description = "The project and plan key in the format 'ProjectKey-PlanKey'.",
