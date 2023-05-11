@@ -38,8 +38,12 @@
 
 | Bamboo CI                                                          | GitHub                                        |
 | :----------------------------------------------------------------- | :-------------------------------------------- |
+| [Build Success](triggers/BuildSuccess.md)                          | workflow_dispatch                             |
+| [Cron](triggers/Cron.md)                                           | schedule                                      |
+| [Environment Success](triggers/EnvironmentSuccess.md)              | workflow_dispatch                             |
 | [Remote](triggers/Remote.md)                                       | push                                          |
-| [Repository polling trigger](triggers/RepositoryPollingTrigger.md) | schedule                                      |
+| [Repository Polling Trigger](triggers/RepositoryPollingTrigger.md) | schedule                                      |
+| [Stage Success](triggers/StageSuccess.md)                          | workflow_dispatch                             |
 | [Tag](triggers/Tag.md)                                             | push                                          |
 
 ### Unsupported

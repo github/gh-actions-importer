@@ -1,4 +1,4 @@
-# Repository polling trigger
+# Repository Polling Trigger
 
 ## Bamboo input
 
