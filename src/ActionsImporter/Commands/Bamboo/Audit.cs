@@ -16,7 +16,6 @@ public class Audit : ContainerCommand
         Common.AccessToken,
         Common.InstanceUrl,
         Common.Project,
-        Common.ConfigFilePath,
-        Common.IncludeFrom
+        Common.ConfigFilePath
     );
 }
