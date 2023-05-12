@@ -5,6 +5,7 @@
 [GitHub Actions Importer](https://docs.github.com/en/actions/migrating-to-github-actions/automating-migration-with-github-actions-importer) helps plan, test, and automate your migration to GitHub Actions from the following platforms:
 
 - Azure DevOps
+- Bamboo (currently in beta)
 - CircleCI
 - GitLab
 - Jenkins
