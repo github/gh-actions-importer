@@ -1,4 +1,4 @@
-# SSH
+# Ssh
 
 ## Bamboo input
 
