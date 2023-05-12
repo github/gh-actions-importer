@@ -28,7 +28,7 @@
 | [Repository Push](plugins/RepositoryPush.md)     | run                                                               |
 | [Repository Tag](plugins/RepositoryTag.md)       | run                                                               |
 | [Scp](plugins/Scp.md)                            | appleboy/scp-action                                               |
-| [Ssh](plugins/Ssh.md)                            | shimataro/ssh-key-action, run                                     |
+| [ssh](plugins/ssh.md)                            | shimataro/ssh-key-action, run                                     |
 | [Stop Job](plugins/StopJob.md)                   | run                                                               |
 | [TestNG](plugins/TestNG.md)                      | scacap/action-surefire-report                                     |
 | [Unlock Keychain](plugins/UnlockKeychain.md)     | run                                                               |
