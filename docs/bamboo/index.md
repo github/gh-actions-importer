@@ -34,7 +34,7 @@
 | [Unlock Keychain](plugins/UnlockKeychain.md)     | run                                                               |
 | [Visual Studio](plugins/VisualStudio.md)        | seanmiddleditch/gha-setup-vsdevenv, run                           |
 
-## Trigger Mappings
+# Trigger Mappings
 
 | Bamboo CI                                                          | GitHub                                        |
 | :----------------------------------------------------------------- | :-------------------------------------------- |
