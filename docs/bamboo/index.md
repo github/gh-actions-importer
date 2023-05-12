@@ -32,7 +32,7 @@
 | [Stop Job](plugins/StopJob.md)                   | run                                                               |
 | [TestNG](plugins/TestNG.md)                      | scacap/action-surefire-report                                     |
 | [Unlock Keychain](plugins/UnlockKeychain.md)     | run                                                               |
-| [Visual Studio](plugins/Visual Studio.md)        | seanmiddleditch/gha-setup-vsdevenv, run                           |
+| [Visual Studio](plugins/VisualStudio.md)        | seanmiddleditch/gha-setup-vsdevenv, run                           |
 
 ## Trigger Mappings
 
