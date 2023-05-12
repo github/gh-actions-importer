@@ -18,7 +18,7 @@
 | [Maven](plugins/Maven.md)                        | actions/setup-java                                                |
 | [Mocha](plugins/Mocha.md)                        | EnricoMi/publish-unit-test-result-action                          |
 | [Ms Build](plugins/MsBuild.md)                   | run                                                               |
-| [MS Test](plugins/MSTest.md)                     | EnricoMi/publish-unit-test-result-action                          |
+| [MS Test](plugins/MsTest.md)                     | EnricoMi/publish-unit-test-result-action                          |
 | [Node](plugins/Node.md)                          | run                                                               |
 | [Npm](plugins/Npm.md)                            | actions/setup-node, run                                           |
 | [NUnit Parser](plugins/NunitParser.md)           | EnricoMi/publish-unit-test-result-action                          |
