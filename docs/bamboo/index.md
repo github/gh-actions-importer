@@ -10,7 +10,7 @@
 | [Command](plugins/Command.md)                    | run                                                               |
 | [Docker CLI](plugins/Dockercli.md)               | run                                                               |
 | [Fastlane](plugins/Fastlane.md)                  | ruby/setup-ruby, run                                              |
-| [Grails](plugins/Grails.md)                      | actions/setup-java, run, EnricoMi publish-unit-test-result-action |
+| [Grails](plugins/Grails.md)                      | actions/setup-java, run, EnricoMi/publish-unit-test-result-action |
 | [Grunt](plugins/Grunt.md)                        | actions/setup-node, run                                           |
 | [Gulp](plugins/Gulp.md)                          | actions/setup-node, run                                           |
 | [Inject Variables](plugins/InjectVariables.md)   | run                                                               |
