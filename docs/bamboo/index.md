@@ -3,7 +3,8 @@
 | Bamboo CI                                        | GitHub                                                            |
 | :----------------------------------------------- | :---------------------------------------------------------------- |
 | [Ant](plugins/Ant.md)                            | actions/setup-java, run                                           |
-| [Artifact Download](plugins/ArtifactDownload.md)  | actions/download-artifact                                        |
+| [Artifact Download](plugins/ArtifactDownload.md) | actions/download-artifact                                         |
+| [AWS Code Deploy](plugins/AWSCodeDeploy.md)      | aws-actions/configure-aws-credentials, run                        |
 | [Bower](plugins/Bower.md)                        | actions/setup-node, run                                           |
 | [Checkout](plugins/Checkout.md)                  | actions/checkout                                                  |
 | [Clean](plugins/Clean.md)                        | run                                                               |
