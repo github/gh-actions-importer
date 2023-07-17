@@ -9,7 +9,7 @@ triggers:
 
 ## Transformed Github Action
 
-**Note:** Follow the instructions described in the [repository_dispatch](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#repository_dispatch) documentation to setup the webhook event.
+**Note:** Follow the instructions described in the [repository_dispatch](https://gh.io/actions-repository-dispatch) documentation to setup the webhook event.
 
 ```yaml
 on:
