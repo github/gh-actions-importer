@@ -21,12 +21,18 @@ public class DockerService : IDockerService
         return DockerPullAsync(image, server, version);
     }
 
-    public async Task ExecuteCommandAsync(string image, string server, string version, params string[] arguments)
+    public async Task ExecuteCommandAsync(string image, string server, string version, bool noHostNetwork, params string[] arguments)
     {
         var actionsImporterArguments = new List<string>
         {
-            "run --rm -t --network=host"
+            "run --rm -t"
         };
+
+        if (!noHostNetwork)
+        {
+            actionsImporterArguments.Add("--network=host");
+        }
+
         actionsImporterArguments.AddRange(GetEnvironmentVariableArguments());
 
         var dockerArgs = Environment.GetEnvironmentVariable("DOCKER_ARGS");
