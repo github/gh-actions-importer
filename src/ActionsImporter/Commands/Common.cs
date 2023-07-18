@@ -21,7 +21,7 @@ public static class Common
 
     public static readonly Option<bool> NoHostNetwork = new("--no-host-network")
     {
-        Description = "Disable using host network.",
+        Description = "Use docker's default bridge network instead of the host machine's network.",
         IsRequired = false,
     };
 
