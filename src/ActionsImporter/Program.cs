@@ -51,7 +51,6 @@ var parser = new CommandLineBuilder(command)
 
 var parsedArguments = parser.Parse(args);
 app.IsPrerelease = parsedArguments.HasOption(Common.Prerelease);
-app.NoHostNetwork = parsedArguments.HasOption(Common.NoHostNetwork);
 
 var testCommandOnly = Environment.GetEnvironmentVariable("TEST_COMMAND_ONLY");
 if (testCommandOnly != null && testCommandOnly.ToUpperInvariant() == "TRUE")

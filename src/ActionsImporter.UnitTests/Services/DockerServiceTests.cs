@@ -103,8 +103,6 @@ public class DockerServiceTests
         var server = "ghcr.io";
         var version = "latest";
         var arguments = new[] { "run", "this", "command" };
-        var noHostNetwork = false;
-
         _processService.Setup(handler =>
             handler.RunAsync(
                 "docker",
@@ -116,7 +114,7 @@ public class DockerServiceTests
         ).Returns(Task.CompletedTask);
 
         // Act
-        await _dockerService.ExecuteCommandAsync(image, server, version, noHostNetwork, arguments);
+        await _dockerService.ExecuteCommandAsync(image, server, version, arguments);
 
         // Assert
         _processService.VerifyAll();
@@ -129,7 +127,6 @@ public class DockerServiceTests
         var image = "actions-importer/cli";
         var server = "ghcr.io";
         var version = "latest";
-        var noHostNetwork = false;
         var arguments = new[] { "run", "this", "command" };
 
         Environment.SetEnvironmentVariable("GH_ACCESS_TOKEN", "foo");
@@ -147,7 +144,7 @@ public class DockerServiceTests
         ).Returns(Task.CompletedTask);
 
         // Act
-        await _dockerService.ExecuteCommandAsync(image, server, version, noHostNetwork, arguments);
+        await _dockerService.ExecuteCommandAsync(image, server, version, arguments);
 
         // Assert
         _processService.VerifyAll();
@@ -160,7 +157,6 @@ public class DockerServiceTests
         var image = "actions-importer/cli";
         var server = "ghcr.io";
         var version = "latest";
-        var noHostNetwork = false;
         var arguments = new[] { "run", "this", "command" };
 
         Environment.SetEnvironmentVariable("DOCKER_ARGS", "--network=host");
@@ -176,7 +172,7 @@ public class DockerServiceTests
         ).Returns(Task.CompletedTask);
 
         // Act
-        await _dockerService.ExecuteCommandAsync(image, server, version, noHostNetwork, arguments);
+        await _dockerService.ExecuteCommandAsync(image, server, version, arguments);
 
         // Assert
         _processService.VerifyAll();
@@ -189,7 +185,6 @@ public class DockerServiceTests
         var image = "actions-importer/cli";
         var server = "ghcr.io";
         var version = "latest";
-        var noHostNetwork = true;
         var arguments = new[] { "run", "this", "command" };
 
         _runtimeService.Setup(handler => handler.IsLinux).Returns(true);
@@ -205,7 +200,7 @@ public class DockerServiceTests
         _processService.Setup(handler =>
             handler.RunAsync(
                 "docker",
-                $"run --rm -t -e USER_ID=50 -e GROUP_ID=100 -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
+                $"run --rm -t --network=host -e USER_ID=50 -e GROUP_ID=100 -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
                 new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
                 true
@@ -213,7 +208,7 @@ public class DockerServiceTests
         ).Returns(Task.CompletedTask);
 
         // Act
-        await _dockerService.ExecuteCommandAsync(image, server, version, noHostNetwork, arguments);
+        await _dockerService.ExecuteCommandAsync(image, server, version, arguments);
 
         // Assert
         _processService.VerifyAll();
