@@ -36,6 +36,12 @@ public class Forecast : ContainerCommand
         IsRequired = false,
     };
 
+    private static readonly Option<FileInfo> IncludeFrom = new("--include-from")
+    {
+        Description = "The file path containing a list of line-delimited repository names to include in the forecast.",
+        IsRequired = false,
+    };
+
     private static readonly Option<FileInfo[]> SourceFilePath = new("--source-file-path")
     {
         Description = "The file path(s) to existing jobs data.",
@@ -48,6 +54,7 @@ public class Forecast : ContainerCommand
         AccessToken,
         Organization,
         Repository,
+        IncludeFrom,
         SourceFilePath
     );
 }
