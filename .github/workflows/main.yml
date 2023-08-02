@@ -1,0 +1,79 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - dev
+      - qa
+      - main
+
+env:
+  DOTNET_VERSION: "6.0.x"
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    # ... (your existing lint job configuration)
+
+  unit-test:
+    # ... (your existing unit-test job configuration)
+
+  build:
+    # ... (your existing build job configuration)
+
+  deploy-dev:
+    runs-on: ubuntu-latest
+    needs: [unit-test, build]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Deploy to Dev Server
+        env:
+          ENV_FILE: .env.dev
+          SERVER: "dev"
+        run: |
+          if [ -f "$ENV_FILE" ]; then
+            export $(cat "$ENV_FILE" | xargs)
+          fi
+          # Add your deployment commands here based on the server
+          # Example: scp or rsync commands to copy files to the dev server
+
+  deploy-qa:
+    runs-on: ubuntu-latest
+    needs: [unit-test, build]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Deploy to QA Server
+        env:
+          ENV_FILE: .env.qa
+          SERVER: "qa"
+        run: |
+          if [ -f "$ENV_FILE" ]; then
+            export $(cat "$ENV_FILE" | xargs)
+          fi
+          # Add your deployment commands here based on the server
+          # Example: scp or rsync commands to copy files to the QA server
+
+  deploy-prod:
+    runs-on: ubuntu-latest
+    needs: [unit-test, build]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Deploy to Prod Server
+        env:
+          ENV_FILE: .env.prod
+          SERVER: "prod"
+        run: |
+          if [ -f "$ENV_FILE" ]; then
+            export $(cat "$ENV_FILE" | xargs)
+          fi
+          # Add your deployment commands here based on the server
+          # Example: scp or rsync commands to copy files to the production server
