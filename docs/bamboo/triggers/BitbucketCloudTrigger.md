@@ -7,7 +7,7 @@ triggers:
 - bitbucket-cloud-trigger
 ```
 
-## Transformed Github Action
+## Transformed GitHub Action
 
 **Note:** Follow the instructions described in the [repository_dispatch](https://gh.io/actions-repository-dispatch) documentation to setup the webhook event.
 
