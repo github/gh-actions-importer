@@ -40,6 +40,7 @@
 
 | Bamboo CI                                                          | GitHub                                        |
 | :----------------------------------------------------------------- | :-------------------------------------------- |
+| [Bitbucket Cloud Trigger](triggers/BitbucketCloudTrigger.md)       | repository_dispatch                           |
 | [Build Success](triggers/BuildSuccess.md)                          | workflow_dispatch                             |
 | [Cron](triggers/Cron.md)                                           | schedule                                      |
 | [Environment Success](triggers/EnvironmentSuccess.md)              | workflow_dispatch                             |
