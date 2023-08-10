@@ -19,6 +19,12 @@ public static class Common
         IsHidden = true
     };
 
+    public static readonly Option<bool> NoHostNetwork = new("--no-host-network")
+    {
+        Description = "Use docker's default bridge network instead of the host machine's network.",
+        IsRequired = false,
+    };
+
     public static Command AppendTransformerOptions(this Command command)
     {
         ArgumentNullException.ThrowIfNull(command);
@@ -148,6 +154,8 @@ public static class Common
         command.AddGlobalOption(Experimental);
 
         command.AddGlobalOption(Prerelease);
+
+        command.AddGlobalOption(NoHostNetwork);
 
         return command;
     }

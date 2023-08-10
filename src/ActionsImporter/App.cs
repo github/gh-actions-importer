@@ -14,6 +14,7 @@ public class App
     private readonly IConfigurationService _configurationService;
 
     public bool IsPrerelease { get; set; }
+    public bool NoHostNetwork { get; set; }
 
     private string ImageTag => IsPrerelease ? "pre" : "latest";
 
@@ -53,6 +54,7 @@ public class App
             ActionsImporterImage,
             ActionsImporterContainerRegistry,
             ImageTag,
+            NoHostNetwork,
             args.Select(x => x.EscapeIfNeeded()).ToArray()
         );
         return 0;
