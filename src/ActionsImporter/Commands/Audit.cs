@@ -29,6 +29,7 @@ public class Audit : BaseCommand
         command.AddGlobalOption(FoldersOption);
         command.AddCommand(new AzureDevOps.Audit(_args).Command(app));
         command.AddCommand(new Bamboo.Audit(_args).Command(app));
+        command.AddCommand(new Bitbucket.Audit(_args).Command(app));
         command.AddCommand(new Circle.Audit(_args).Command(app));
         command.AddCommand(new GitLab.Audit(_args).Command(app));
         command.AddCommand(new Jenkins.Audit(_args).Command(app));

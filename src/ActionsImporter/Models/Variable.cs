@@ -20,6 +20,7 @@ public readonly struct Variable
         Provider.Jenkins => "Jenkins",
         Provider.TravisCI => "Travis CI",
         Provider.Bamboo => "Bamboo",
+        Provider.Bitbucket => "Bitbucket",
         _ => throw new ArgumentOutOfRangeException()
     };
 
