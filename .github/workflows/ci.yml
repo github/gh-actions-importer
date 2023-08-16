@@ -79,6 +79,32 @@ jobs:
           name: executables
           path: ${{ runner.temp }}/staging/*
 
+  cli_integration:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    needs: build
+    steps:
+      # - uses: actions/checkout@v2
+      #   with:
+      #     repository: github/valet
+      # - uses: ruby/setup-ruby@v1
+      #   with:
+      #     bundler-cache: true
+      - name: download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: executables
+          path: gh-actions-importer
+      - name: install new gh executable
+        working-directory: gh-actions-importer
+        run: |-
+          ls -alh
+          gh extension install .
+          ls -alh /home/runner/.local/share/gh/extensions
+      - name: test gh cli installed
+        run: gh actions-importer dry-run -h
+
   publish:
     runs-on: ubuntu-latest
     needs: build
