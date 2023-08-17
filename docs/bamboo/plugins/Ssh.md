@@ -44,4 +44,4 @@ run: |-
 
 ## Unsupported Options
 
-* description
+- description
