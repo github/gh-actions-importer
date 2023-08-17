@@ -24,7 +24,9 @@ public static class Constants
         new Variable("JENKINS_INSTANCE_URL", Provider.Jenkins, "Base url of the Jenkins instance"),
         new Variable("TRAVIS_CI_ACCESS_TOKEN", Provider.TravisCI, "Personal access token for Travis CI"),
         new Variable("TRAVIS_CI_INSTANCE_URL", Provider.TravisCI, "Base url of the Travis CI instance", "https://travis-ci.com"),
-        new Variable("TRAVIS_CI_ORGANIZATION", Provider.TravisCI, "Travis CI organization name")
+        new Variable("TRAVIS_CI_ORGANIZATION", Provider.TravisCI, "Travis CI organization name"),
+        new Variable("BITBUCKET_ACCESS_TOKEN", Provider.Bitbucket, "Personal access token for Bitbucket"),
+
     };
 
     public static List<string> ProviderNames => UserInputVariables.Where(v => v.Provider != Provider.GitHub).Select(v => v.ProviderName).Distinct().ToList();
