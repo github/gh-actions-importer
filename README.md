@@ -15,7 +15,7 @@
 
 If you need assistance, you can file a support ticket [here](https://support.github.com).
 
-## Getting started 
+## Getting started
 
 GitHub Actions Importer is distributed as a Docker container and this extension to the official [GitHub CLI](https://cli.github.com) to interact with the Docker container.
 
@@ -40,7 +40,7 @@ $ gh extension install github/gh-actions-importer
 New versions of the GitHub Actions Importer are released on a regular basis. To ensure you're up to date, run the following command:
 
 ```bash
-$ gh actions-importer update
+gh actions-importer update
 ```
 
 In order for GitHub Actions Importer to communicate with your current CI/CD server and GitHub, various credentials must be available for the command. These can be configured using environment variables or a `.env.local` file. These environment variables can be configured in an interactive prompt by running the following command:
