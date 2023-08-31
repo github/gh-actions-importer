@@ -18,8 +18,8 @@ public class ProcessService : IProcessService
         using var process = GetProcess(filename, arguments, cwd, environmentVariables);
         process.Start();
 
-        ReadStream(process.StandardOutput, output, cts.Token);
-        ReadStream(process.StandardError, output, cts.Token);
+        await ReadStream(process.StandardOutput, output, cts.Token);
+        await ReadStream(process.StandardError, output, cts.Token);
 
         await process.WaitForExitAsync(cts.Token);
 
@@ -90,9 +90,9 @@ public class ProcessService : IProcessService
         };
     }
 
-    private static void ReadStream(StreamReader reader, bool output, CancellationToken ctx)
+    private static async Task ReadStream(StreamReader reader, bool output, CancellationToken ctx)
     {
-        Task.Run(() =>
+        await Task.Run(() =>
         {
             while (!ctx.IsCancellationRequested)
             {

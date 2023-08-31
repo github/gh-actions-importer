@@ -16,9 +16,9 @@ public class DockerService : IDockerService
         _runtimeService = runtimeService;
     }
 
-    public Task UpdateImageAsync(string image, string server, string version)
+    public async Task UpdateImageAsync(string image, string server, string version)
     {
-        return DockerPullAsync(image, server, version);
+        await DockerPullAsync(image, server, version);
     }
 
     public async Task ExecuteCommandAsync(string image, string server, string version, bool noHostNetwork, params string[] arguments)
