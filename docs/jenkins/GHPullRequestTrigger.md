@@ -1,8 +1,8 @@
 # GitHub Pull Request Trigger
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
   <org.jenkinsci.plugins.ghprb.GhprbTrigger>
@@ -80,6 +80,6 @@
 - Comment file
 - Update commit status during build
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-This plugin is not supported in Jenkinsfile pipelines.
+This plugin is not supported in Jenkinsfile Pipelines.

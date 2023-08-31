@@ -1,6 +1,6 @@
 # CypressIo/Cypress Write Workspace
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

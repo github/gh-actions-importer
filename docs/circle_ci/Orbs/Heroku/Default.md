@@ -1,6 +1,6 @@
 # CircleCI/Heroku Default Executor
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

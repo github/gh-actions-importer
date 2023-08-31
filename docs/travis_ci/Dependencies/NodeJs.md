@@ -1,6 +1,6 @@
 # Node Js
 
-## Travis input
+## Travis Input
 
 ```yaml
 node_js: 7

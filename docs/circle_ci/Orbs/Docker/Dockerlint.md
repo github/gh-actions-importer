@@ -1,6 +1,6 @@
 # CircleCI/Docker Dockerlint
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

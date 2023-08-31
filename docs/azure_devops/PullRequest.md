@@ -1,6 +1,6 @@
 # PullRequest trigger
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 trigger:
@@ -29,7 +29,7 @@ on:
       - "!**/*.csproj"
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - autoCancel
 - drafts

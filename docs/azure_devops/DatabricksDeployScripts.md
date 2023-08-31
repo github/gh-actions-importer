@@ -1,6 +1,6 @@
-# Databricks Deploy Scripts task
+# Databricks Deploy Scripts Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: databricksDeployScripts@0
@@ -25,7 +25,7 @@
     remote-path: "/Shared/Notebooks"
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - authMethod
 - bearerToken
 - applicationId

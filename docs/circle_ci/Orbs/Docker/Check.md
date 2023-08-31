@@ -1,6 +1,6 @@
 # CircleCI/Docker Check
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:
@@ -47,7 +47,7 @@ runs:
   - id: release_tag
     run: |-
       RELEASE_VERSION=$(curl -Ls --fail --retry 3 -o /dev/null -w %{url_effective} 'https://github.com/docker/docker-credential-helpers/releases/latest' | sed 's:.*/::')
-      echo ::set-output name=release_tag::$RELEASE_VERSION
+      echo "release_tag=$RELEASE_VERSION" >> $GITHUB_OUTPUT
     if: "${{ fromJSON(inputs.use-docker-credentials-store) }}"
     shell: bash
   - run: |-
@@ -117,7 +117,7 @@ jobs:
     - id: release_tag
       run: |-
         RELEASE_VERSION=$(curl -Ls --fail --retry 3 -o /dev/null -w %{url_effective} 'https://github.com/docker/docker-credential-helpers/releases/latest' | sed 's:.*/::')
-        echo ::set-output name=release_tag::$RELEASE_VERSION
+        echo "release_tag=$RELEASE_VERSION" >> $GITHUB_OUTPUT
     - run: |-
         HELPER_FILENAME="docker-credential-${{ env.HELPER_NAME }}"
         if which "$HELPER_FILENAME" > /dev/null 2>&1; then

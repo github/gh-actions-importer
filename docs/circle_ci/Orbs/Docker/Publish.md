@@ -1,6 +1,6 @@
 # CircleCI/Docker Publish
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:
@@ -44,7 +44,7 @@ workflows:
 - id: release_tag
   run: |-
     RELEASE_VERSION=$(curl -Ls --fail --retry 3 -o /dev/null -w %<url_effective>s 'https://github.com/docker/docker-credential-helpers/releases/latest' | sed 's:.*/::')
-    echo ::set-output name=release_tag::$RELEASE_VERSION
+    echo "release_tag=$RELEASE_VERSION" >> $GITHUB_OUTPUT
 - run: |-
     curl -L -o '${{ env.HELPER_FILENAME }}_archive' 'https://github.com/docker/docker-credential-helpers/releases/download/${{ env.RELEASE_TAG }}/${{ env.HELPER_FILENAME }}-${{ env.RELEASE_TAG }}-amd64.tar.gz'
     tar xvf './${{ env.HELPER_FILENAME }}_archive'

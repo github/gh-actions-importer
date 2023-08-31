@@ -27,12 +27,14 @@ jobs:
         run: |
           dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r win10-x64 --self-contained -o dist/win-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
           dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r osx-x64 --self-contained -o dist/osx-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
+          dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r osx-arm64 --self-contained -o dist/osx-arm64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
           dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r linux-x64 --self-contained -o dist/linux-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
       - name: prepare staging
         run: |
           mkdir -p ${{ runner.temp }}/staging
           cp dist/win-x64/gh-actions-importer.exe ${{ runner.temp }}/staging/actions-importer-windows-amd64.exe
           cp dist/osx-x64/gh-actions-importer ${{ runner.temp }}/staging/actions-importer-darwin-amd64
+          cp dist/osx-arm64/gh-actions-importer ${{ runner.temp }}/staging/actions-importer-darwin-arm64
           cp dist/linux-x64/gh-actions-importer ${{ runner.temp }}/staging/actions-importer-linux-amd64
 
       - name: publish artifacts
@@ -76,4 +78,5 @@ jobs:
           files: |
             ${{ runner.temp }}/dist/actions-importer-windows-amd64.exe
             ${{ runner.temp }}/dist/actions-importer-linux-amd64
+            ${{ runner.temp }}/dist/actions-importer-darwin-arm64
             ${{ runner.temp }}/dist/actions-importer-darwin-amd64

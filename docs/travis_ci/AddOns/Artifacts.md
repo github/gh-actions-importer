@@ -1,6 +1,6 @@
 # Artifacts
 
-## Travis input
+## Travis Input
 
 ```yaml
 artifacts:

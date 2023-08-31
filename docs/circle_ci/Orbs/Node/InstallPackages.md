@@ -1,6 +1,6 @@
 # CircleCI/Node Install Packages
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:
@@ -21,7 +21,7 @@ jobs:
 
 ```yaml
 - id: yarn-cache-dir-path
-  run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+  run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
 - uses: actions/cache@v2
   with:
     path: "${{ steps.yarn-cache-dir-path.outputs.dir }}"

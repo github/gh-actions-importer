@@ -1,6 +1,6 @@
-# PythonScript task
+# PythonScript Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # Python script
@@ -30,6 +30,6 @@
   run: python cleese.py one two three
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - failOnStderr

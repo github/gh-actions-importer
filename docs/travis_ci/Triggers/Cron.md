@@ -1,6 +1,6 @@
 # Cron
 
-## Travis input
+## Travis Input
 
 ```json
 {

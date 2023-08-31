@@ -1,6 +1,6 @@
 # Yarn
 
-## Travis input
+## Travis Input
 
 ```yaml
 cache:
@@ -12,7 +12,7 @@ cache:
 ```yaml
 - name: Get yarn cache directory path
   id: yarn-cache-dir-path
-  run: echo '::set-output name=dir::$(yarn cache dir)'
+  run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 - name: Set up yarn cache
   uses: actions/cache@v2
   with:

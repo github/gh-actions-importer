@@ -1,6 +1,6 @@
 # CircleCI/Python Install Packages
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:
@@ -25,7 +25,7 @@ jobs:
 ```yaml
 - name: Get python version
   id: python-version
-  run: echo '::set-output name=python-version::$(python -v)'
+  run: echo "python-version=$(python -v)" >> $GITHUB_OUTPUT
 - uses: actions/cache@v2
   with:
     key: "${{ runner.os }}-${{ github.ref }}-python-${{ steps.python-version.outputs.python-version }}-pipenv-${{ hashFiles('Pipfile.lock') }}"

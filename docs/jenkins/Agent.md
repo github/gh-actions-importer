@@ -1,8 +1,8 @@
 # Agent
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 Label:
 ```xml
@@ -31,9 +31,9 @@ jobs:
 - dockerfile agent
 - kubernetes agent
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 Top level agent:
 ```groovy

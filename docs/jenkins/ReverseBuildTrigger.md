@@ -1,10 +1,10 @@
 # Reverse Build Trigger
 
-## Designer pipeline
+## Designer Pipeline
 
 Visible on the UI as `Build after other projects are built`
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
     <jenkins.triggers.ReverseBuildTrigger>
@@ -35,6 +35,6 @@ on:
 
 - threshold (when `Trigger even if the build is unstable`)
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-This plugin is not supported in Jenkinsfile pipelines.
+This plugin is not supported in Jenkinsfile Pipelines.

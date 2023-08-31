@@ -1,6 +1,6 @@
 # Store Artifacts
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 steps:

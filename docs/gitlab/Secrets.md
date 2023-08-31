@@ -1,6 +1,6 @@
-# secrets
+# Secrets
 
-## GitLab input
+## GitLab Input
 
 ```yaml
 secrets:

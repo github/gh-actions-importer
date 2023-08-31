@@ -1,12 +1,12 @@
 # Post build actions
 
-## Designer pipeline
+## Designer Pipeline
 
 This plugin is implemented as `Post Build Actions`
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 #### Stages
 
@@ -67,7 +67,7 @@ jobs:
     steps:
       ...
       - name: snapshot post build job status
-        run: echo "::set-output name=aborted=${{ job.status == 'cancelled' }}"
+        run: echo "aborted=${{ job.status == 'cancelled' }}" >> $GITHUB_OUTPUT
         id: __post_build
       - name: powershell
         shell: powershell
@@ -100,7 +100,7 @@ jobs:
     steps:
       - name: snapshot post build workflow status
         run: |-
-          echo "::set-output name=aborted=${{ contains(needs.*.result,'cancelled') }}"
+          echo "aborted=${{ contains(needs.*.result,'cancelled') }}" >> $GITHUB_OUTPUT
         id: __post_build
       - name: echo message
         run: echo I will run if worfklow was aborted

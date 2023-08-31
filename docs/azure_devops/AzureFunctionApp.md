@@ -1,6 +1,6 @@
-# Azure Function App task
+# Azure Function App Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: AzureFunctionApp@1
@@ -38,7 +38,7 @@
     general-settings-json: '{"phpVersion":"5.6"}'
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - appType
 - azureSubscription

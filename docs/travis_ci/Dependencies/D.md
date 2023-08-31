@@ -1,6 +1,6 @@
 # D
 
-## Travis input
+## Travis Input
 
 ```yaml
 d: dmd-2.089.1

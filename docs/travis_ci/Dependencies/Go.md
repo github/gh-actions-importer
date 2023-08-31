@@ -1,6 +1,6 @@
 # Go
 
-## Travis input
+## Travis Input
 
 ```yaml
 go: 1.11.x

@@ -1,6 +1,6 @@
 # Store Test Results
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 steps:

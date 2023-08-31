@@ -1,6 +1,6 @@
-# Toggle Adf Trigger task
+# Toggle Adf Trigger Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: toggle-adf-trigger@2
@@ -34,6 +34,6 @@
         }
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - azureSubscription
 - TriggerFilter

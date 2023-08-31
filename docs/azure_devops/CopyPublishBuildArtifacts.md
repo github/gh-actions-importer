@@ -1,6 +1,6 @@
-# Copy Publish Build Artifacts task
+# Copy Publish Build Artifacts Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 task: CopyPublishBuildArtifacts@1
@@ -46,6 +46,6 @@ task: CopyPublishBuildArtifacts@1
         path: "${{ runner.temp }}/${{ github.run_id }}_publishartifact"
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - artifactType
 - fileSharePath

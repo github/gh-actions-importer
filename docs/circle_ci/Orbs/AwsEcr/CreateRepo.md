@@ -1,6 +1,6 @@
 # CircleCI/AwsEcr Create Repo
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

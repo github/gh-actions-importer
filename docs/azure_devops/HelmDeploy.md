@@ -1,6 +1,6 @@
-# Helm Deploy task
+# Helm Deploy Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: HelmDeploy@0
@@ -26,7 +26,7 @@
   run: helm ls --namespace default
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - Enable TLS.  This is only applicable to Helm 2 installs
 - Publish pipeline metadata
 

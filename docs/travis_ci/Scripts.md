@@ -11,7 +11,7 @@ The scripts transformer includes the following jobs:
 - Before Deploy
 - After Deploy
 
-## Travis input
+## Travis Input
 
 ```yaml
 script: npm run lint

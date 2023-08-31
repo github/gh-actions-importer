@@ -1,6 +1,6 @@
-# NodeTool task
+# NodeTool Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # Node.js tool installer
@@ -23,6 +23,6 @@
 
 > force32bit: true sets architecture to x86
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - checkLatest

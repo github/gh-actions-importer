@@ -1,6 +1,6 @@
-# Publish Code Coverage Results task
+# Publish Code Coverage Results Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: PublishCodeCoverageResults@1
@@ -35,5 +35,5 @@
     path: "${{ github.workspace }}/**/results.xml"
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - reportDirectory

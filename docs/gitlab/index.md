@@ -17,6 +17,7 @@
 | [Services](Services.md)         | services                                   |
 | [Tags](Tags.md)                 | runs-on                                    |
 | [Timeout](Timeout.md)           | timeout-minutes                            |
+| [Trigger](Trigger.md)           | run                                        |
 
 The following constructs do not have an equivalent in GitHub Actions:
 

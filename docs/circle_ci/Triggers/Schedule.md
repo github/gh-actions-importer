@@ -1,6 +1,6 @@
 # Schedule
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 triggers: # use the triggers key to indicate a scheduled build

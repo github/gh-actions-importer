@@ -1,6 +1,6 @@
-# Bash task
+# Bash Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 steps:
@@ -52,7 +52,7 @@ steps:
   shell: bash
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - failOnStderr
 - target

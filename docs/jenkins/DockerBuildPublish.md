@@ -1,8 +1,8 @@
 # Docker Build and Publish
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <com.cloudbees.dockerpublish.DockerBuilder plugin="docker-build-publish@1.3.2">

@@ -1,6 +1,6 @@
 # CircleCI/Docker Build
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

@@ -1,6 +1,6 @@
 # Rust
 
-## Travis input
+## Travis Input
 
 ```yaml
 rust: nightly

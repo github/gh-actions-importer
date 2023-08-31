@@ -1,6 +1,6 @@
 # CircleCI/Node Run
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:
@@ -22,7 +22,7 @@ workflows:
 ```yaml
 - uses: actions/checkout@v2
 - id: npm-cache-dir
-  run: echo '::set-output name=dir::$(npm config get cache)'
+  run: echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
 - uses: actions/cache@v2
   with:
     path: "${{ steps.npm-cache-dir.outputs.dir }}"

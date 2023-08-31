@@ -1,6 +1,6 @@
 # Snaps
 
-## Travis input
+## Travis Input
 
 ```yaml
 snaps:

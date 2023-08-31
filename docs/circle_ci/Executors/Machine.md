@@ -1,6 +1,6 @@
 # Machine
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 machine:

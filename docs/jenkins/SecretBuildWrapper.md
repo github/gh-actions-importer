@@ -1,8 +1,8 @@
 # SecretBuildWrapper
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
    <org.jenkinsci.plugins.credentialsbinding.impl.SecretBuildWrapper>
@@ -81,9 +81,9 @@ env:
 - Username and password (conjoined)
 - Username and password (separated)
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 environment {

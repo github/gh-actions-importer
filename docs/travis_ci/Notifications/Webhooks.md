@@ -1,6 +1,6 @@
 # Webhooks
 
-## Travis input
+## Travis Input
 
 ```yaml
 notifications:

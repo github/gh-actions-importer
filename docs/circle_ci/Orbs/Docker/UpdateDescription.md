@@ -1,6 +1,6 @@
 # CircleCI/Docker Update Description
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

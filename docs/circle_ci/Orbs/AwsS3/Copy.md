@@ -1,6 +1,6 @@
 # CircleCI/AwsS3 Setup
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

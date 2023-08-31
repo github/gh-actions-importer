@@ -1,6 +1,6 @@
 # Matlab
 
-## Travis input
+## Travis Input
 
 ```yaml
 matlab: latest

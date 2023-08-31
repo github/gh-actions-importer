@@ -1,6 +1,6 @@
 # CircleCI/Docker Install Dockerize
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:
@@ -37,7 +37,7 @@ runs:
   - id: version
     run: |-
       DOCKERIZE_VERSION=$(curl --fail --retry 3 -Ls -o /dev/null -w %{url_effective} 'https://github.com/jwilder/dockerize/releases/latest' | sed 's:.*/::')
-      echo ::set-output name=version::$DOCKERIZE_VERSION
+      echo "version=$DOCKERIZE_VERSION" >> $GITHUB_OUTPUT
     shell: bash
   - run: |-
       if [[ $VERSION == "latest" ]]; then VERSION="${{ steps.version.outputs.version }}"; fi
@@ -58,7 +58,7 @@ steps:
 - id: version
   run: |-
     DOCKERIZE_VERSION=$(curl --fail --retry 3 -Ls -o /dev/null -w %{url_effective} 'https://github.com/jwilder/dockerize/releases/latest' | sed 's:.*/::')
-    echo ::set-output name=version::$DOCKERIZE_VERSION
+    echo "version=$DOCKERIZE_VERSION" >> $GITHUB_OUTPUT
 - run: |-
     if [[ $VERSION == "latest" ]]; then VERSION="${{ steps.version.outputs.version }}"; fi
     curl -O --silent --show-error --location --fail --retry 3 "https://github.com/jwilder/dockerize/releases/download/$VERSION/dockerize-linux-amd64-$VERSION.tar.gz"

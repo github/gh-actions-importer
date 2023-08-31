@@ -1,6 +1,6 @@
 # Python
 
-## Travis input
+## Travis Input
 
 ```yaml
 python: 7

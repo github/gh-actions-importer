@@ -1,6 +1,6 @@
-# DownloadPipelineArtifact task
+# DownloadPipelineArtifact Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # Download build and pipeline artifacts
@@ -46,7 +46,7 @@ steps:
     path: out
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - source (specific)
 - project

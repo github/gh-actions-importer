@@ -1,6 +1,6 @@
-# ArchiveFiles task
+# ArchiveFiles Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 steps:
@@ -42,7 +42,7 @@ Note:
   run: 7z u -mx=9 archive_file $(Build.BinariesDirectory)
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - archiveType (wim)
 - quiet

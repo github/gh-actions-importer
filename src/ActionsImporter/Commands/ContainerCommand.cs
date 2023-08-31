@@ -10,8 +10,8 @@ public abstract class ContainerCommand : BaseCommand
 
     protected ContainerCommand(string[] args)
     {
-        // Don't forward the --prerelease flag to GitHub Actions Importer image
-        _args = args.Where(arg => !arg.Contains(Common.Prerelease.Name, StringComparison.Ordinal)).ToArray();
+        // Don't forward the --prerelease or --no-host-network flag to GitHub Actions Importer image
+        _args = args.Where(arg => !arg.Contains(Common.Prerelease.Name, StringComparison.Ordinal) && !arg.Contains(Common.NoHostNetwork.Name, StringComparison.Ordinal)).ToArray();
     }
 
     protected abstract ImmutableArray<Option> Options { get; }

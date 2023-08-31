@@ -1,6 +1,6 @@
 # Npm
 
-## Travis input
+## Travis Input
 
 ```yaml
 deploy:

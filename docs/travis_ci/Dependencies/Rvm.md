@@ -1,6 +1,6 @@
 # RVM
 
-## Travis input
+## Travis Input
 
 ```yaml
 rvm: 2.5

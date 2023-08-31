@@ -1,6 +1,6 @@
-# CmdLine task
+# CmdLine Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # Command line
@@ -21,7 +21,7 @@
   shell: cmd
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - failOnStderr
 - modifyEnvironment

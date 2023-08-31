@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 using ActionsImporter.Interfaces;
+using ActionsImporter.Models;
 using ActionsImporter.Services;
 using Moq;
 using NUnit.Framework;
@@ -101,63 +103,7 @@ public class DockerServiceTests
         var server = "ghcr.io";
         var version = "latest";
         var arguments = new[] { "run", "this", "command" };
-        _processService.Setup(handler =>
-            handler.RunAsync(
-                "docker",
-                $"run --rm -t -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
-                Directory.GetCurrentDirectory(),
-                new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
-                true
-            )
-        ).Returns(Task.CompletedTask);
-
-        // Act
-        await _dockerService.ExecuteCommandAsync(image, server, version, arguments);
-
-        // Assert
-        _processService.VerifyAll();
-    }
-
-    [Test]
-    public async Task ExecuteCommandAsync_InvokesDocker_WithEnvironmentVariables_ReturnsTrue()
-    {
-        // Arrange
-        var image = "actions-importer/cli";
-        var server = "ghcr.io";
-        var version = "latest";
-        var arguments = new[] { "run", "this", "command" };
-
-        Environment.SetEnvironmentVariable("GH_ACCESS_TOKEN", "foo");
-        Environment.SetEnvironmentVariable("GH_INSTANCE_URL", "https://github.fabrikam.com");
-        Environment.SetEnvironmentVariable("JENKINS_ACCESS_TOKEN", "bar");
-
-        _processService.Setup(handler =>
-            handler.RunAsync(
-                "docker",
-                $"run --rm -t --env \"GITHUB_ACCESS_TOKEN=foo\" --env \"GITHUB_INSTANCE_URL=https://github.fabrikam.com\" --env \"JENKINS_ACCESS_TOKEN=bar\" -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
-                Directory.GetCurrentDirectory(),
-                new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
-                true
-            )
-        ).Returns(Task.CompletedTask);
-
-        // Act
-        await _dockerService.ExecuteCommandAsync(image, server, version, arguments);
-
-        // Assert
-        _processService.VerifyAll();
-    }
-
-    [Test]
-    public async Task ExecuteCommandAsync_InvokesDocker_WithAdditionalDockerArguments_ReturnsTrue()
-    {
-        // Arrange
-        var image = "actions-importer/cli";
-        var server = "ghcr.io";
-        var version = "latest";
-        var arguments = new[] { "run", "this", "command" };
-
-        Environment.SetEnvironmentVariable("DOCKER_ARGS", "--network=host");
+        var noHostNetwork = false;
 
         _processService.Setup(handler =>
             handler.RunAsync(
@@ -170,7 +116,67 @@ public class DockerServiceTests
         ).Returns(Task.CompletedTask);
 
         // Act
-        await _dockerService.ExecuteCommandAsync(image, server, version, arguments);
+        await _dockerService.ExecuteCommandAsync(image, server, version, noHostNetwork, arguments);
+
+        // Assert
+        _processService.VerifyAll();
+    }
+
+    [Test]
+    public async Task ExecuteCommandAsync_InvokesDocker_WithEnvironmentVariables_ReturnsTrue()
+    {
+        // Arrange
+        var image = "actions-importer/cli";
+        var server = "ghcr.io";
+        var version = "latest";
+        var noHostNetwork = false;
+        var arguments = new[] { "run", "this", "command" };
+
+        Environment.SetEnvironmentVariable("GH_ACCESS_TOKEN", "foo");
+        Environment.SetEnvironmentVariable("GH_INSTANCE_URL", "https://github.fabrikam.com");
+        Environment.SetEnvironmentVariable("JENKINS_ACCESS_TOKEN", "bar");
+
+        _processService.Setup(handler =>
+            handler.RunAsync(
+                "docker",
+                $"run --rm -t --network=host --env \"GITHUB_ACCESS_TOKEN=foo\" --env \"GITHUB_INSTANCE_URL=https://github.fabrikam.com\" --env \"JENKINS_ACCESS_TOKEN=bar\" -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
+                Directory.GetCurrentDirectory(),
+                new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
+                true
+            )
+        ).Returns(Task.CompletedTask);
+
+        // Act
+        await _dockerService.ExecuteCommandAsync(image, server, version, noHostNetwork, arguments);
+
+        // Assert
+        _processService.VerifyAll();
+    }
+
+    [Test]
+    public async Task ExecuteCommandAsync_InvokesDocker_WithAdditionalDockerArguments_ReturnsTrue()
+    {
+        // Arrange
+        var image = "actions-importer/cli";
+        var server = "ghcr.io";
+        var version = "latest";
+        var noHostNetwork = false;
+        var arguments = new[] { "run", "this", "command" };
+
+        Environment.SetEnvironmentVariable("DOCKER_ARGS", "--network=host");
+
+        _processService.Setup(handler =>
+            handler.RunAsync(
+                "docker",
+                $"run --rm -t --network=host --network=host -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
+                Directory.GetCurrentDirectory(),
+                new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
+                true
+            )
+        ).Returns(Task.CompletedTask);
+
+        // Act
+        await _dockerService.ExecuteCommandAsync(image, server, version, noHostNetwork, arguments);
 
         // Assert
         _processService.VerifyAll();
@@ -183,6 +189,7 @@ public class DockerServiceTests
         var image = "actions-importer/cli";
         var server = "ghcr.io";
         var version = "latest";
+        var noHostNetwork = true;
         var arguments = new[] { "run", "this", "command" };
 
         _runtimeService.Setup(handler => handler.IsLinux).Returns(true);
@@ -206,10 +213,83 @@ public class DockerServiceTests
         ).Returns(Task.CompletedTask);
 
         // Act
-        await _dockerService.ExecuteCommandAsync(image, server, version, arguments);
+        await _dockerService.ExecuteCommandAsync(image, server, version, noHostNetwork, arguments);
 
         // Assert
         _processService.VerifyAll();
+    }
+
+    [Test]
+    public async Task GetFeaturesAsync_ReturnsFeatures()
+    {
+        // Arrange
+        var image = "actions-importer/cli";
+        var server = "ghcr.io";
+        var version = "latest";
+        var arguments = new[] { "list-features", "--json" };
+        var features = new List<Feature>
+      {
+        new Feature
+        {
+          Name = "actions/cache",
+          Description = "Control usage of actions/cache inside of workflows. Outputs a comment if not enabled.",
+          Enabled = false,
+          EnvName = "FEATURE_ACTIONS_CACHE",
+        },
+        new Feature
+        {
+          Name = "composite-actions",
+          Description = "Minimizes resulting workflow complexity through the use of composite actions. See https://docs.github.com/en/actions/creating-actions/creating-a-composite-action for more information.",
+          Enabled = true,
+          EnvName = "FEATURE_COMPOSITE_ACTIONS",
+        }
+      };
+        var featuresJSON = JsonSerializer.Serialize(features);
+
+        _processService.Setup(handler =>
+            handler.RunAndCaptureAsync(
+                "docker",
+                $"run --rm -t {server}/{image}:{version} {string.Join(' ', arguments)}",
+                null,
+                null,
+                false,
+                null
+            )
+        ).Returns(Task.FromResult((featuresJSON, "", 0)));
+
+        // Act
+        var featuresResult = await _dockerService.GetFeaturesAsync(image, server, version);
+        var featuresResultJSON = JsonSerializer.Serialize(featuresResult);
+
+        // Assert
+        Assert.AreEqual(featuresJSON, featuresResultJSON);
+    }
+
+    [Test]
+    public async Task GetFeaturesAsync_BadJSONReturnsEmptyList()
+    {
+        // Arrange
+        var image = "actions-importer/cli";
+        var server = "ghcr.io";
+        var version = "latest";
+        var arguments = new[] { "list-features", "--json" };
+
+        _processService.Setup(handler =>
+            handler.RunAndCaptureAsync(
+                "docker",
+                $"run --rm -t {server}/{image}:{version} {string.Join(' ', arguments)}",
+                null,
+                null,
+                false,
+                null
+            )
+        ).Returns(Task.FromResult(("", "", 0)));
+
+        // Act
+        var featuresResult = await _dockerService.GetFeaturesAsync(image, server, version);
+
+        // Assert
+        Assert.IsEmpty(featuresResult);
     }
 
     [Test]

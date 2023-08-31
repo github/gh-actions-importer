@@ -1,6 +1,6 @@
 # Cassandra
 
-## Travis input
+## Travis Input
 
 ```yaml
 services:

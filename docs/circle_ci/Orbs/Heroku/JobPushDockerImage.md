@@ -1,6 +1,6 @@
 # CircleCI/Heroku Job Push Docker Image
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

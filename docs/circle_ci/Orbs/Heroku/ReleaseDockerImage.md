@@ -1,6 +1,6 @@
 # CircleCI/Heroku Release Docker Image
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

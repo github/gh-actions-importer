@@ -1,6 +1,6 @@
 # AWS Cloudformation
 
-## Travis input
+## Travis Input
 
 ```yaml
 deploy:

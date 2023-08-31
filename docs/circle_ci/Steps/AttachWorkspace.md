@@ -1,6 +1,6 @@
 # Attach Workspace
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 steps:

@@ -1,6 +1,6 @@
-# Publish Symbols task
+# Publish Symbols Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 steps:
@@ -27,7 +27,7 @@ steps:
     ARTIFACT_SERVICE_URL: "'https://artifacts.dev.azure.com"
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - symbolServerType: only `TeamServices` type supported
 - indexSources
 - publishSymbols: `false` is not a supported value

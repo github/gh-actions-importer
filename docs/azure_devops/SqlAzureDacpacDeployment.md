@@ -1,6 +1,6 @@
-# Sql Azure Dacpac Deployment task
+# Sql Azure Dacpac Deployment Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: SqlAzureDacpacDeployment@1
@@ -30,7 +30,7 @@
     action: Publish
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - deploymentAction: Extract, Export, Import
 - publishProfile
 - authenticationType: server, aadAuthenticationPassword, aadAuthenticationIntegrated, and servicePrincipal

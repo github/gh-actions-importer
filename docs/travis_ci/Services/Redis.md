@@ -1,6 +1,6 @@
 # Redis
 
-## Travis input
+## Travis Input
 
 ```yaml
 services:

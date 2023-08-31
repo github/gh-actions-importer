@@ -1,4 +1,5 @@
-﻿using ActionsImporter.Interfaces;
+﻿using System.Collections.Immutable;
+using ActionsImporter.Interfaces;
 using ActionsImporter.Models;
 
 namespace ActionsImporter;
@@ -13,6 +14,7 @@ public class App
     private readonly IConfigurationService _configurationService;
 
     public bool IsPrerelease { get; set; }
+    public bool NoHostNetwork { get; set; }
 
     private string ImageTag => IsPrerelease ? "pre" : "latest";
 
@@ -52,6 +54,7 @@ public class App
             ActionsImporterImage,
             ActionsImporterContainerRegistry,
             ImageTag,
+            NoHostNetwork,
             args.Select(x => x.EscapeIfNeeded()).ToArray()
         );
         return 0;
@@ -99,14 +102,34 @@ public class App
         }
     }
 
-    public async Task<int> ConfigureAsync()
+    public async Task<int> ConfigureAsync(string[] args)
     {
         var currentVariables = await _configurationService.ReadCurrentVariablesAsync().ConfigureAwait(false);
-        var newVariables = _configurationService.GetUserInput();
+        ImmutableDictionary<string, string>? newVariables;
+
+        if (args.Contains($"--{Commands.Configure.OptionalFeaturesOption.Name}"))
+        {
+            await _dockerService.VerifyDockerRunningAsync().ConfigureAwait(false);
+            var availableFeatures = await _dockerService.GetFeaturesAsync(ActionsImporterImage, ActionsImporterContainerRegistry, ImageTag).ConfigureAwait(false);
+            try
+            {
+                newVariables = _configurationService.GetFeaturesInput(availableFeatures);
+            }
+            catch (Exception e)
+            {
+                await Console.Error.WriteLineAsync(e.Message);
+                return 1;
+            }
+        }
+        else
+        {
+            newVariables = _configurationService.GetUserInput();
+        }
+
         var mergedVariables = _configurationService.MergeVariables(currentVariables, newVariables);
         await _configurationService.WriteVariablesAsync(mergedVariables);
 
-        Console.WriteLine("Environment variables successfully updated.");
+        await Console.Out.WriteLineAsync("Environment variables successfully updated.");
         return 0;
     }
 }

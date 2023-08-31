@@ -1,6 +1,6 @@
 # CircleCI/AwsEcr Push Image
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

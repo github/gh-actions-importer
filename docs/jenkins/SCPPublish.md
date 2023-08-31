@@ -1,8 +1,8 @@
 # SCP Publish
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <publishers>

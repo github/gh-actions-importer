@@ -1,6 +1,6 @@
-# Tokenizer task
+# Tokenizer Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: Tokenizer@2
@@ -68,5 +68,5 @@
     REPLACE_UNDEFINED_WITH_EMPTY: true
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - None

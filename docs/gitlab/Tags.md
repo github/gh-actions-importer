@@ -1,6 +1,6 @@
-# tags
+# Tags
 
-## GitLab input
+## GitLab Input
 
 ```yaml
 tags:

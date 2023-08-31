@@ -1,6 +1,6 @@
 # Rabbitmq
 
-## Travis input
+## Travis Input
 
 ```yaml
 services:

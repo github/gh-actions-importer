@@ -1,6 +1,6 @@
-# pages
+# Pages
 
-## GitLab input
+## GitLab Input
 
 ```yaml
 pages:

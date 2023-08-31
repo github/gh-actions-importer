@@ -1,6 +1,6 @@
 # CircleCI/Docker Install Goss
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

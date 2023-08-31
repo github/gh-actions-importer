@@ -1,6 +1,6 @@
-# Deploy Adf Json task
+# Deploy Adf Json Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 task: deploy-adf-json@2
@@ -49,7 +49,7 @@ task: deploy-adf-json@2
         Set-AzDataFactoryV2Trigger -ResourceGroupName $env:RESOURCE_GROUP_NAME -DataFactoryName $env:DATA_FACTORY_NAME -Name $linked_service_name -DefinitionFile td
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - azureSubscription
 - Continue
 - Sorting

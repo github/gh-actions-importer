@@ -1,6 +1,6 @@
-# Power Shell On Target Machines task
+# Power Shell On Target Machines Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 steps:
@@ -74,7 +74,7 @@ jobs:
       azPSVersion: latest
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - AuthenticationMechanism
 - SessionVariables

@@ -1,6 +1,6 @@
 # Conditions
 
-## Travis input
+## Travis Input
 
 ```yaml
 if: "branch = master AND type = cron OR tag = bar"

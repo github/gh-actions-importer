@@ -1,8 +1,8 @@
 # File Operations
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <builders>
@@ -187,9 +187,9 @@ steps:
   - sourceCaptureExpression
   - targetNameExpression
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 steps {

@@ -1,6 +1,6 @@
 # Ansible Playbook
 
-## Designer pipeline
+## Designer Pipeline
 
 ```xml
 <org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder plugin="ansible@1.1">
@@ -50,9 +50,9 @@ env:
   PYTHONUNBUFFERED: true
 ```
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 steps {

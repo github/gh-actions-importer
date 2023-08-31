@@ -1,6 +1,6 @@
 # Azure Key Vault
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: AzureKeyVault@2
@@ -27,7 +27,7 @@
     done
 ```
 
-### Unsupported inputs and aliases
+### Unsupported Inputs and Aliases
 
 - azureSubscription
 - ConnectedServiceName

@@ -1,6 +1,6 @@
-# Install Apple Certificate task
+# Install Apple Certificate Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: InstallAppleCertificate@2
@@ -33,7 +33,7 @@
     security list-keychain -d user -s $KEYCHAIN_PATH
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 None
 
 ## Addition Notes

@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using ActionsImporter.Interfaces;
 using ActionsImporter.Models.Docker;
+using ActionsImporter.Models;
 
 namespace ActionsImporter.Services;
 
@@ -20,12 +21,18 @@ public class DockerService : IDockerService
         return DockerPullAsync(image, server, version);
     }
 
-    public async Task ExecuteCommandAsync(string image, string server, string version, params string[] arguments)
+    public async Task ExecuteCommandAsync(string image, string server, string version, bool noHostNetwork, params string[] arguments)
     {
         var actionsImporterArguments = new List<string>
         {
             "run --rm -t"
         };
+
+        if (!noHostNetwork)
+        {
+            actionsImporterArguments.Add("--network=host");
+        }
+
         actionsImporterArguments.AddRange(GetEnvironmentVariableArguments());
 
         var dockerArgs = Environment.GetEnvironmentVariable("DOCKER_ARGS");
@@ -53,6 +60,28 @@ public class DockerService : IDockerService
             Directory.GetCurrentDirectory(),
             new[] { ("MSYS_NO_PATHCONV", "1") }
         );
+    }
+
+    public async Task<List<Feature>> GetFeaturesAsync(string image, string server, string version)
+    {
+        var actionsImporterArguments = new List<string> { "run --rm -t" };
+        actionsImporterArguments.AddRange(GetEnvironmentVariableArguments());
+        actionsImporterArguments.Add($"{server}/{image}:{version}");
+        actionsImporterArguments.AddRange(new[] { "list-features", "--json" });
+
+        var (standardOutput, _, _) = await _processService.RunAndCaptureAsync("docker", string.Join(' ', actionsImporterArguments), throwOnError: false);
+
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, };
+        try
+        {
+            return JsonSerializer.Deserialize<List<Feature>>(standardOutput, options) ?? new();
+        }
+        catch (Exception)
+        {
+            // If unable to get the features from the container, return an empty list
+            // An empty list will result in a message being displayed to the user
+            return new();
+        }
     }
 
     public async Task VerifyDockerRunningAsync()

@@ -12,6 +12,19 @@ public static class Common
         IsRequired = false,
     };
 
+    public static readonly Option<bool> Experimental = new("--experimental")
+    {
+        Description = "Enable experimental and unsupported features.",
+        IsRequired = false,
+        IsHidden = true
+    };
+
+    public static readonly Option<bool> NoHostNetwork = new("--no-host-network")
+    {
+        Description = "Use docker's default bridge network instead of the host machine's network.",
+        IsRequired = false,
+    };
+
     public static Command AppendTransformerOptions(this Command command)
     {
         ArgumentNullException.ThrowIfNull(command);
@@ -56,7 +69,25 @@ public static class Common
         command.AddGlobalOption(
             new Option<string>(new[] { "--features" })
             {
-                Description = "Features to enable in transformed workflows."
+                Description = "GHES features to enable in transformed workflows."
+            }
+        );
+
+        command.AddGlobalOption(
+            new Option<string[]>(new[] { "--enable-features" })
+            {
+                Description = "A list of features to enable by name. Use `gh actions-importer list-features` to see available features.",
+                IsRequired = false,
+                AllowMultipleArgumentsPerToken = true
+            }
+        );
+
+        command.AddGlobalOption(
+            new Option<string[]>(new[] { "--disable-features" })
+            {
+                Description = "A list of features to disable by name. Use `gh actions-importer list-features` to see available features.",
+                IsRequired = false,
+                AllowMultipleArgumentsPerToken = true
             }
         );
 
@@ -120,7 +151,11 @@ public static class Common
             }
         );
 
+        command.AddGlobalOption(Experimental);
+
         command.AddGlobalOption(Prerelease);
+
+        command.AddGlobalOption(NoHostNetwork);
 
         return command;
     }

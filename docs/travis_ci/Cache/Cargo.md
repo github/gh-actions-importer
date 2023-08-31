@@ -1,6 +1,6 @@
 # Cargo
 
-## Travis input
+## Travis Input
 
 ```yaml
 cache:

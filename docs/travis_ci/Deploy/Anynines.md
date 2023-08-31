@@ -1,6 +1,6 @@
 # Anynines
 
-## Travis input
+## Travis Input
 
 ```yaml
 deploy:

@@ -1,6 +1,6 @@
-# Azure Services Security Status task
+# Azure Services Security Status Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: AzSKSVTs@4
@@ -53,7 +53,7 @@
     }
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - Send events to Log Analytics
 - Aggregate control status
 - Do not auto-update AzSK

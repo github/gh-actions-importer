@@ -1,6 +1,6 @@
 # CircleCI/Python Default Executor
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:

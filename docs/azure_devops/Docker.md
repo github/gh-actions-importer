@@ -1,6 +1,6 @@
-# Docker task
+# Docker Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ### Login
 
@@ -323,7 +323,7 @@ run: docker run -d --name mycontainer-p 80:80 --restart no image:295
 
 Not Supported
 
-### Unsupported inputs
+### Unsupported Inputs
 
 Docker registries defined with a URL (only hostnames are supported)
 

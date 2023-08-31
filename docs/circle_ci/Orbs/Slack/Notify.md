@@ -1,6 +1,6 @@
 # CircleCI/Slack Notify
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 orbs:
@@ -55,7 +55,7 @@ runs:
     shell: bash
     run: |-
       if [[ '${{ env.VALUE_TO_MATCH }}' =~ ${{ env.BRANCH_PATTERN }} ]]; then
-        echo ::set-output name=match::true
+        echo "match=true" >> $GITHUB_OUTPUT
       fi
     env:
       VALUE_TO_MATCH: "${{ github.ref }}"
@@ -64,7 +64,7 @@ runs:
     shell: bash
     run: |-
       if [[ '${{ env.VALUE_TO_MATCH }}' =~ ${{ env.TAG_PATTERN }} ]]; then
-        echo ::set-output name=match::true
+        echo "match=true" >> $GITHUB_OUTPUT
       fi
     env:
       VALUE_TO_MATCH: "${{ github.ref }}"
@@ -83,7 +83,7 @@ steps:
   shell: bash
   run: |-
     if [[ '${{ env.VALUE_TO_MATCH }}' =~ ${{ env.BRANCH_PATTERN }} ]]; then
-      echo ::set-output name=match::true
+      echo "match=true" >> $GITHUB_OUTPUT
     fi
   env:
     VALUE_TO_MATCH: "${{ github.ref }}"
@@ -92,7 +92,7 @@ steps:
   shell: bash
   run: |-
     if [[ '${{ env.VALUE_TO_MATCH }}' =~ ${{ env.TAG_PATTERN }} ]]; then
-      echo ::set-output name=match::true
+      echo "match=true" >> $GITHUB_OUTPUT
     fi
   env:
     VALUE_TO_MATCH: "${{ github.ref }}"

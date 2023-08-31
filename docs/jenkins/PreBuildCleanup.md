@@ -1,8 +1,8 @@
 # PreBuild Cleanup
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <buildWrappers>
@@ -54,6 +54,6 @@ run: |-
 - External Deletion Command (externalDelete)
 - Disable deferred wipeout (disableDeferredWipeout)
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-This plugin is not supported in Jenkinsfile pipelines.
+This plugin is not supported in Jenkinsfile Pipelines.

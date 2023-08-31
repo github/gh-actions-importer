@@ -1,6 +1,6 @@
-# environment
+# Environment
 
-## GitLab input
+## GitLab Input
 
 ```yaml
 environment: deploy_environment

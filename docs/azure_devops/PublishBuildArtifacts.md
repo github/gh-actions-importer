@@ -1,6 +1,6 @@
-# PublishBuildArtifacts task
+# PublishBuildArtifacts Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # Publish build artifacts to Azure Pipelines or a Windows file share
@@ -24,7 +24,7 @@
     path: artifact.zip
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - publishLocation
 - targetPath

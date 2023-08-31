@@ -1,8 +1,8 @@
 # Docker Build Step
 
-## "Create/build image" Designer pipeline
+## "Create/build image" Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@2.5">
@@ -30,9 +30,9 @@
 
 None
 
-## "Pull image" Designer pipeline
+## "Pull image" Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@2.5">
@@ -61,9 +61,9 @@ None
 
 None
 
-## "Push image" Designer pipeline
+## "Push image" Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@2.5">
@@ -92,9 +92,9 @@ None
 
 None
 
-## "Tag image" Designer pipeline
+## "Tag image" Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@2.5">
@@ -119,9 +119,9 @@ None
 
 - withForce
 
-## "Create container" Designer pipeline
+## "Create container" Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@2.5">
@@ -183,9 +183,9 @@ None
 
 None
 
-## "Save image" Designer pipeline
+## "Save image" Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.SaveImageCommand">
@@ -212,9 +212,9 @@ None
 
 None
 
-## "Commit container" Designer pipeline
+## "Commit container" Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@2.5">
@@ -238,9 +238,9 @@ None
 
 None
 
-## "Stop all containers" Designer pipeline
+## "Stop all containers" Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@2.5">
@@ -260,9 +260,9 @@ None
 
 None
 
-## "Stop container(s)" Designer pipeline
+## "Stop container(s)" Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@2.5">
@@ -283,9 +283,9 @@ None
 
 None
 
-## "Stop container(s) by image ID" Designer pipeline
+## "Stop container(s) by image ID" Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@2.5">
@@ -307,9 +307,9 @@ None
 
 None
 
-## "Kill container(s)" Designer pipeline
+## "Kill container(s)" Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@2.5">
@@ -330,9 +330,9 @@ None
 
 None
 
-## "Restart container(s)" Designer pipeline
+## "Restart container(s)" Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.RestartCommand">
@@ -353,9 +353,9 @@ None
 
 None
 
-## "Start container(s)" Designer pipeline
+## "Start container(s)" Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@2.5">
@@ -379,9 +379,9 @@ None
 - containerIdsLogging
 - waitPorts
 
-## "Start container(s) by image ID" Designer pipeline
+## "Start container(s) by image ID" Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@2.5">
@@ -403,9 +403,9 @@ None
 
 None
 
-## "Create and start exec instance in container(s)" Designer pipeline
+## "Create and start exec instance in container(s)" Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.ExecCreateAndStartCommand">
@@ -428,6 +428,6 @@ None
 
 None
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-This plugin is not mapped to a GitHub Actions equivalent for a Jenkinsfile pipeline.
+This plugin is not mapped to a GitHub Actions equivalent for a Jenkinsfile Pipeline.

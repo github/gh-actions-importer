@@ -1,6 +1,6 @@
-# Maven task
+# Maven Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 steps:
@@ -67,7 +67,7 @@ with:
   path: "**/surefire-reports/TEST-*.xml"
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - testRunTitle
 - codeCoverageToolOption

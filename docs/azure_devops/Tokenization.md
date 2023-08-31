@@ -1,6 +1,6 @@
-# Tokenization task
+# Tokenization Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 - task: Tokenization@2
@@ -23,7 +23,7 @@
     files: '["path/to/file/**/file1.json", "path/to/file/**/*.config"]'
 ```
 
-## Unsupported inputs and aliases
+## Unsupported Inputs and Aliases
 - RequireVariable
 
 ## Additional Information

@@ -1,6 +1,6 @@
 # After Success
 
-## Travis input
+## Travis Input
 
 ```yaml
 after_success:

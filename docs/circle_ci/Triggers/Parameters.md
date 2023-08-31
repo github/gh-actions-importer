@@ -1,6 +1,6 @@
 # Parameters
 
-## CircleCI input
+## CircleCI Input
 
 ```yaml
 parameters:

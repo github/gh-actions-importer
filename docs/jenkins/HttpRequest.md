@@ -1,8 +1,8 @@
 # Http Request
 
-## Designer pipeline
+## Designer Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```xml
 <jenkins.plugins.http__request.HttpRequest plugin="http_request@1.8.26">
@@ -57,9 +57,9 @@ env:
 - wrapAsMultipart
 - useSystemProperties
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 stage('Example Deploy') {

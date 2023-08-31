@@ -1,12 +1,12 @@
 # Dir
 
-## Designer pipeline
+## Designer Pipeline
 
-This plugin is not supported in Designer pipelines.
+This plugin is not supported in Designer Pipelines.
 
-## Jenkinsfile pipeline
+## Jenkinsfile Pipeline
 
-### Jenkins input
+### Jenkins Input
 
 ```groovy
 steps {

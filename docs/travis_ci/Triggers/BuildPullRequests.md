@@ -1,6 +1,6 @@
 # Build Pull Requests
 
-## Travis input
+## Travis Input
 
 ```json
 {

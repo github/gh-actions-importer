@@ -1,6 +1,6 @@
-# Powershell task
+# Powershell Task
 
-## Azure DevOps input
+## Azure DevOps Input
 
 ```yaml
 # Run a PowerShell script on Linux, macOS, or Windows
@@ -52,7 +52,7 @@
   shell: powershell
 ```
 
-### Unsupported inputs
+### Unsupported Inputs
 
 - failOnStderr
 - warningPreference
