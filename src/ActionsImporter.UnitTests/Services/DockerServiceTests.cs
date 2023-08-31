@@ -205,7 +205,7 @@ public class DockerServiceTests
         _processService.Setup(handler =>
             handler.RunAsync(
                 "docker",
-                $"run --rm -t --network=host -e USER_ID=50 -e GROUP_ID=100 -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
+                $"run --rm -t -e USER_ID=50 -e GROUP_ID=100 -v \"{Directory.GetCurrentDirectory()}\":/data {server}/{image}:{version} {string.Join(' ', arguments)}",
                 Directory.GetCurrentDirectory(),
                 new[] { new ValueTuple<string, string>("MSYS_NO_PATHCONV", "1") },
                 true
