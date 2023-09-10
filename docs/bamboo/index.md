@@ -3,7 +3,8 @@
 | Bamboo CI                                        | GitHub                                                            |
 | :----------------------------------------------- | :---------------------------------------------------------------- |
 | [Ant](plugins/Ant.md)                            | actions/setup-java, run                                           |
-| [Artifact Download](plugins/ArtifactDownload.md)  | actions/download-artifact                                        |
+| [Artifact Download](plugins/ArtifactDownload.md) | actions/download-artifact                                         |
+| [AWS Code Deploy](plugins/AWSCodeDeploy.md)      | aws-actions/configure-aws-credentials, run                        |
 | [Bower](plugins/Bower.md)                        | actions/setup-node, run                                           |
 | [Checkout](plugins/Checkout.md)                  | actions/checkout                                                  |
 | [Clean](plugins/Clean.md)                        | run                                                               |
@@ -20,6 +21,7 @@
 | [Ms Build](plugins/MsBuild.md)                   | run                                                               |
 | [MS Test](plugins/MsTest.md)                     | EnricoMi/publish-unit-test-result-action                          |
 | [Node](plugins/Node.md)                          | run                                                               |
+| [Nodeunit](plugins/Nodeunit.md)                  | actions/setup-node, run, EnricoMi/publish-unit-test-result-action |
 | [Npm](plugins/Npm.md)                            | actions/setup-node, run                                           |
 | [NUnit Parser](plugins/NunitParser.md)           | EnricoMi/publish-unit-test-result-action                          |
 | [NUnit Runner](plugins/NUnitRunner.md)           | microsoft/vstest-action, EnricoMi/publish-unit-test-result-action |
@@ -32,12 +34,13 @@
 | [Stop Job](plugins/StopJob.md)                   | run                                                               |
 | [TestNG](plugins/TestNG.md)                      | scacap/action-surefire-report                                     |
 | [Unlock Keychain](plugins/UnlockKeychain.md)     | run                                                               |
-| [Visual Studio](plugins/VisualStudio.md)        | seanmiddleditch/gha-setup-vsdevenv, run                           |
+| [Visual Studio](plugins/VisualStudio.md)         | seanmiddleditch/gha-setup-vsdevenv, run                           |
 
 ## Trigger Mappings
 
 | Bamboo CI                                                          | GitHub                                        |
 | :----------------------------------------------------------------- | :-------------------------------------------- |
+| [Bitbucket Cloud Trigger](triggers/BitbucketCloudTrigger.md)       | repository_dispatch                           |
 | [Build Success](triggers/BuildSuccess.md)                          | workflow_dispatch                             |
 | [Cron](triggers/Cron.md)                                           | schedule                                      |
 | [Environment Success](triggers/EnvironmentSuccess.md)              | workflow_dispatch                             |
