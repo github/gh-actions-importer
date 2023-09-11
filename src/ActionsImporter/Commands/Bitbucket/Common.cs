@@ -4,18 +4,7 @@ namespace ActionsImporter.Commands.Bitbucket;
 
 public static class Common
 {
-    public static readonly Option<string> InstanceUrl = new("--bitbucket-instance-url")
-    {
-        Description = "The URL of the Bitbucket instance.",
-        IsRequired = false,
-    };
 
-    public static readonly Option<string[]> Namespace = new(new[] { "--namespace", "-n" })
-    {
-        Description = "The Bitbucket namespace(s).",
-        IsRequired = false,
-        AllowMultipleArgumentsPerToken = true
-    };
 
     public static readonly Option<string> AccessToken = new("--bitbucket-access-token")
     {
@@ -23,19 +12,19 @@ public static class Common
         IsRequired = false,
     };
 
-    public static readonly Option<string> Workspace = new("--workspace")
+    public static readonly Option<string> Workspace = new(new[] { "--workspace", "-w" })
     {
         Description = "The Bitbucket workspace name.",
         IsRequired = true,
     };
 
-    public static readonly Option<string> Project = new("--project")
+    public static readonly Option<string> Project = new(new[] { "--project-key", "-p" })
     {
-        Description = "The Bitbucket project name.",
+        Description = "The Bitbucket project key.",
         IsRequired = false,
     };
 
-    public static readonly Option<string> Repository = new("--repository")
+    public static readonly Option<string> Repository = new(new[] { "--repository", "-r" })
     {
         Description = "The Bitbucket repository name.",
         IsRequired = true,

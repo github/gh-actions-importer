@@ -12,7 +12,6 @@ public class Audit : ContainerCommand
     protected override string Name => "bitbucket";
     protected override string Description => "An audit will output a list of data used in a Bitbucket instance.";
     protected override ImmutableArray<Option> Options => ImmutableArray.Create<Option>(
-        Common.InstanceUrl,
         Common.AccessToken,
         Common.Workspace,
         Common.Project,
