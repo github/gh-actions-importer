@@ -29,9 +29,9 @@ public static class Common
         IsRequired = true,
     };
 
-    public static readonly Option<string> Project = new("--project")
+    public static readonly Option<string> Project = new(new[] { "--project-key", "-p" })
     {
-        Description = "The Bitbucket project name.",
+        Description = "The Bitbucket project key.",
         IsRequired = false,
     };
 
