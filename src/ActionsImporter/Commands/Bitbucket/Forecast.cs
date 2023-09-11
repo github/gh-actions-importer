@@ -19,10 +19,17 @@ public class Forecast : ContainerCommand
         AllowMultipleArgumentsPerToken = true,
     };
 
+    private static readonly Option<FileInfo> IncludeFrom = new("--include-from")
+    {
+        Description = "The file path containing a list of line-delimited repository names to include in the forecast.",
+        IsRequired = false,
+    };
+
     protected override ImmutableArray<Option> Options => ImmutableArray.Create<Option>(
         Common.Project,
         Common.Workspace,
         Common.AccessToken,
-        SourceFilePath
+        SourceFilePath,
+        IncludeFrom
     );
 }
