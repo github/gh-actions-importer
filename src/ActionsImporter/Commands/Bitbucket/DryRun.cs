@@ -15,7 +15,6 @@ public class DryRun : ContainerCommand
     protected override ImmutableArray<Option> Options => ImmutableArray.Create<Option>(
         Common.Workspace,
         Common.Repository,
-        Common.InstanceUrl,
         Common.AccessToken,
         Common.SourceFilePath,
         Common.ConfigFilePath
