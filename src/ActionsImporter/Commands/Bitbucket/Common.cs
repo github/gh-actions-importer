@@ -23,7 +23,7 @@ public static class Common
         IsRequired = false,
     };
 
-    public static readonly Option<string> Workspace = new("--workspace")
+    public static readonly Option<string> Workspace = new(new[] { "--workspace", "-w" })
     {
         Description = "The Bitbucket workspace name.",
         IsRequired = true,
