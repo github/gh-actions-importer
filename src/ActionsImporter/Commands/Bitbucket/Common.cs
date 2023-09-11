@@ -5,12 +5,6 @@ namespace ActionsImporter.Commands.Bitbucket;
 public static class Common
 {
 
-    public static readonly Option<string[]> Namespace = new(new[] { "--namespace", "-n" })
-    {
-        Description = "The Bitbucket namespace(s).",
-        IsRequired = false,
-        AllowMultipleArgumentsPerToken = true
-    };
 
     public static readonly Option<string> AccessToken = new("--bitbucket-access-token")
     {
