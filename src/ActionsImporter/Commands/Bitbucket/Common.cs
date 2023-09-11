@@ -4,11 +4,6 @@ namespace ActionsImporter.Commands.Bitbucket;
 
 public static class Common
 {
-    public static readonly Option<string> InstanceUrl = new("--bitbucket-instance-url")
-    {
-        Description = "The URL of the Bitbucket instance.",
-        IsRequired = false,
-    };
 
     public static readonly Option<string[]> Namespace = new(new[] { "--namespace", "-n" })
     {
