@@ -35,7 +35,7 @@ public static class Common
         IsRequired = false,
     };
 
-    public static readonly Option<string> Repository = new("--repository")
+    public static readonly Option<string> Repository = new(new[] { "--repository", "-r" })
     {
         Description = "The Bitbucket repository name.",
         IsRequired = true,
