@@ -5,7 +5,8 @@
 [GitHub Actions Importer](https://docs.github.com/en/actions/migrating-to-github-actions/automating-migration-with-github-actions-importer) helps plan, test, and automate your migration to GitHub Actions from the following platforms:
 
 - Azure DevOps
-- Bamboo (currently in beta)
+- Bamboo
+- Bitbucket
 - CircleCI
 - GitLab
 - Jenkins
@@ -15,7 +16,7 @@
 
 If you need assistance, you can file a support ticket [here](https://support.github.com).
 
-## Getting started 
+## Getting started
 
 GitHub Actions Importer is distributed as a Docker container and this extension to the official [GitHub CLI](https://cli.github.com) to interact with the Docker container.
 
@@ -32,7 +33,7 @@ The following requirements must be met to be able to use the GitHub Actions Impo
 Next, the GitHub Actions Importer CLI extension can be installed via this command:
 
 ```bash
-$ gh extension install github/gh-actions-importer
+gh extension install github/gh-actions-importer
 ```
 
 ### Configuration
@@ -40,7 +41,7 @@ $ gh extension install github/gh-actions-importer
 New versions of the GitHub Actions Importer are released on a regular basis. To ensure you're up to date, run the following command:
 
 ```bash
-$ gh actions-importer update
+gh actions-importer update
 ```
 
 In order for GitHub Actions Importer to communicate with your current CI/CD server and GitHub, various credentials must be available for the command. These can be configured using environment variables or a `.env.local` file. These environment variables can be configured in an interactive prompt by running the following command:
@@ -60,11 +61,12 @@ Detailed information about how to use GitHub Actions Importer can be found in th
 ### Recordings
 
 You can access recorded demos of GitHub Actions Importer performing migrations to Actions from the following CI/CD platforms:
-  - [Azure DevOps](https://youtu.be/gG-2bkmBRlI)
-  - [CircleCI](https://youtu.be/YkFnNEyM9Hg)
-  - [GitLab](https://youtu.be/3t5ywu0_qk4)
-  - [Jenkins](https://youtu.be/WqiGP6h4fa0)
-  - [Travis CI](https://youtu.be/ndc-FNa_X3c)
+
+- [Azure DevOps](https://youtu.be/gG-2bkmBRlI)
+- [CircleCI](https://youtu.be/YkFnNEyM9Hg)
+- [GitLab](https://youtu.be/3t5ywu0_qk4)
+- [Jenkins](https://youtu.be/WqiGP6h4fa0)
+- [Travis CI](https://youtu.be/ndc-FNa_X3c)
 
 ### Self-guided learning
 
