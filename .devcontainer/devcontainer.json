@@ -1,0 +1,13 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {"ghcr.io/devcontainers/features/anaconda:1": {}"ghcr.io/itsmechlark/features/1password:1": {}
+    "ghcr.io/wxw-matt/devcontainer-features/script_runner:0": {} "ghcr.io/devcontainers-contrib/features/autoenv:1": {} "ghcr.io/devcontainers-contrib/features/wget-apt-get:1": {} "ghcr.io/akhildevelops/devcontainer-features/pip:0": {} "ghcr.io/devcontainers/features/dotnet:2": {} "ghcr.io/devcontainers-community/npm-features/typescript:1": {} "ghcr.io/devcontainers-contrib/features/toolkit-sdkman:2": {}
+  "ghcr.io/devcontainers-contrib/features/express-generator:2": {} "ghcr.io/devcontainers-contrib/features/localtunnel-npm:1": {} "ghcr.io/roost-io/features/roost:1": {} "ghcr.io/eliises/devcontainer-features/bash-profile:1": {} "ghcr.io/devcontainers-contrib/features/yamllint:2": {} "ghcr.io/devcontainers-contrib/features/gitomatic:1": {} "ghcr.io/marcozac/devcontainer-features/buf:1": {} 
+"ghcr.io/devcontainers-contrib/features/envoy:1": {} "ghcr.io/akhildevelops/devcontainer-features/apt:0": {} 
+  } "ghcr.io/devcontainers-contrib/features/eget:1": {} "ghcr.io/devcontainers-contrib/features/apt-get-packages:1": {} 
+}"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": {},
+			"extensions": [],
