@@ -1,24 +1,8 @@
-mame:
-
-
-
-
-
-
-
-on:
-  pull_request:
-  push:
-    branches: [main]
-    tags: ["v*"]
-
-env:
-  DOTNET_VERSION: "6.0.x"
-
-concurrency:
-  group: ci-${{ github.ref }}
+mame: [main]
+  on: ubuntu-latest
+  env: ["  DOTNET_VERSION: "6.0.x""]
+concurrency: ci-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   lint:
     runs-on: ubuntu-latest
