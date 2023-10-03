@@ -7,7 +7,6 @@ namespace ActionsImporter;
 public class App
 {
     private const string ActionsImporterImage = "actions-importer/cli";
-    private const string ActionsImporterContainerRegistry = "ghcr.io";
 
     private readonly IDockerService _dockerService;
     private readonly IProcessService _processService;
@@ -16,15 +15,19 @@ public class App
     public bool IsPrerelease { get; set; }
     public bool NoHostNetwork { get; set; }
 
+    private readonly ImmutableDictionary<string, string> _environmentVariables;
     private string ImageTag => IsPrerelease ? "pre" : "latest";
 
     private string ImageName => $"{ActionsImporterImage}:{ImageTag}";
+    private readonly string ActionsImporterContainerRegistry;
 
-    public App(IDockerService dockerService, IProcessService processService, IConfigurationService configurationService)
+    public App(IDockerService dockerService, IProcessService processService, IConfigurationService configurationService, ImmutableDictionary<string, string> environmentVariables)
     {
         _dockerService = dockerService;
         _processService = processService;
         _configurationService = configurationService;
+        _environmentVariables = environmentVariables;
+        ActionsImporterContainerRegistry = _environmentVariables.TryGetValue("CONTAINER_REGISTRY", out var registry) ? registry : "ghcr.io";
     }
 
     public async Task<int> UpdateActionsImporterAsync()
@@ -104,7 +107,6 @@ public class App
 
     public async Task<int> ConfigureAsync(string[] args)
     {
-        var currentVariables = await _configurationService.ReadCurrentVariablesAsync().ConfigureAwait(false);
         ImmutableDictionary<string, string>? newVariables;
 
         if (args.Contains($"--{Commands.Configure.OptionalFeaturesOption.Name}"))
@@ -126,7 +128,7 @@ public class App
             newVariables = _configurationService.GetUserInput();
         }
 
-        var mergedVariables = _configurationService.MergeVariables(currentVariables, newVariables);
+        var mergedVariables = _configurationService.MergeVariables(_environmentVariables, newVariables);
         await _configurationService.WriteVariablesAsync(mergedVariables);
 
         await Console.Out.WriteLineAsync("Environment variables successfully updated.");
