@@ -9,11 +9,13 @@ using ActionsImporter.Services;
 using Version = ActionsImporter.Commands.Version;
 
 var processService = new ProcessService();
+var configurationService = new ConfigurationService();
 
 var app = new App(
     new DockerService(processService, new RuntimeService()),
     processService,
-    new ConfigurationService()
+    new ConfigurationService(),
+    await configurationService.ReadCurrentVariablesAsync()
 );
 
 string welcomeMessage = @"GitHub Actions Importer helps you plan, test, and automate your migration to GitHub Actions.
