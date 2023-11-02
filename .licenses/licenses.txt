@@ -3,7 +3,7 @@
 
 https://github.com/shibayan/Sharprompt
 
-Licensed under MIT
+Licensed under XXX
 
 Available at https://licenses.nuget.org/MIT
 
