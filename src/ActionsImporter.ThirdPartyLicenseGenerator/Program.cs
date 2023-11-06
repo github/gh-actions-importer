@@ -26,9 +26,14 @@ async Task<List<LicenseInfo>> GetDotNetLicenses(string licensesFilePath)
 {
     var licenseInfos = new List<LicenseInfo>();
     var licenseInfo = new LicenseInfo();
-    foreach (var line in File.ReadAllLines(licensesFilePath).Where(l => !string.IsNullOrWhiteSpace(l)))
+    var lines = File.ReadAllLines(licensesFilePath).Where(l => !string.IsNullOrWhiteSpace(l)).ToArray();
+    var index = 0;
+    foreach (var line in lines)
     {
-        if (line.StartsWith("License notice for", StringComparison.OrdinalIgnoreCase))
+        index++;
+        var isLastLine = index >= lines.Length;
+
+        if (line.StartsWith("License notice for", StringComparison.OrdinalIgnoreCase) || isLastLine)
         {
             if (!string.IsNullOrEmpty(licenseInfo.Name))
             {
