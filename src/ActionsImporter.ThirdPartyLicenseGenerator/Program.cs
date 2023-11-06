@@ -50,7 +50,7 @@ async Task<List<LicenseInfo>> GetDotNetLicenses(string licensesFilePath)
                 }
                 else
                 {
-                    (licenseInfo.Text, var type) = await DownloadLicenseFromGitHub(licenseInfo.RepoUrl);
+                    (licenseInfo.Text, var type) = await DownloadLicenseTextFromGitHub(licenseInfo.RepoUrl);
                     licenseInfo.Type ??= type;
                 }
 
@@ -75,20 +75,20 @@ async Task<List<LicenseInfo>> GetDotNetLicenses(string licensesFilePath)
 
         if (line.StartsWith("https://github.com", StringComparison.OrdinalIgnoreCase))
         {
-            licenseInfo.RepoUrl = line.Split(" ").First();
+            licenseInfo.RepoUrl ??= line.Split(" ").First();
             continue;
         }
 
         if (line.StartsWith("Licensed under", StringComparison.OrdinalIgnoreCase))
         {
-            licenseInfo.Type = GetLicenseType(line);
+            licenseInfo.Type ??= GetLicenseType(line);
         }
     }
 
     return licenseInfos;
 }
 
-async Task<(string? Text, string? Type)> DownloadLicenseFromGitHub(string repoUrl)
+async Task<(string? Text, string? Type)> DownloadLicenseTextFromGitHub(string repoUrl)
 {
     const string baseUrl = "https://api.github.com";
     var (owner, repo) = GetRepoOwnerAndName(repoUrl);
@@ -113,9 +113,15 @@ async Task<(string? Text, string? Type)> DownloadLicenseFromGitHub(string repoUr
 
 (string Owner, string Repo) GetRepoOwnerAndName(string repoUrl)
 {
-    var regex = "https://github.com/(.+)/(.+)";
+    var regex = @"https:\/\/github.com\/(.+)\/(.+)";
     var match = Regex.Match(repoUrl, regex);
-    return (match.Groups[1].Value, match.Groups[2].Value);
+    var owner = match.Groups[1].Value;
+    var repo = match.Groups[2].Value;
+    if (repo.EndsWith(".git", StringComparison.OrdinalIgnoreCase))
+    {
+        repo = repo[..repo.LastIndexOf(".git", StringComparison.OrdinalIgnoreCase)];
+    }
+    return (owner, repo);
 }
 
 (string Name, string Version) GetPackageNameAndVersion(string line)
