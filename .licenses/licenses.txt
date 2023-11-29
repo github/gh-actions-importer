@@ -76,14 +76,14 @@ Licensed under BSD-3-Clause
 Available at https://licenses.nuget.org/BSD-3-Clause
 
 
-License notice for NUnit (v3.13.3)
+License notice for NUnit (v3.14.0)
 ------------------------------------
 
 https://github.com/nunit/nunit
 
 https://nunit.org/
 
-Copyright (c) 2022 Charlie Poole, Rob Prouse
+Copyright (c) 2023 Charlie Poole, Rob Prouse
 
 Available at https://aka.ms/deprecateLicenseUrl
 

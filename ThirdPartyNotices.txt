@@ -198,7 +198,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ---------------------------------------------------------
 
-NUnit 3.13.3 - MIT
+NUnit 3.14.0 - MIT
 https://github.com/nunit/nunit
 
 Copyright (c) 2023 Charlie Poole, Rob Prouse
@@ -847,7 +847,7 @@ limitations under the License.
 
 ---------------------------------------------------------
 
-sorbet-runtime 0.5.10648 - apache-2.0
+sorbet-runtime 0.5.11108 - apache-2.0
 https://sorbet.org
 
                                  Apache License
@@ -1395,7 +1395,7 @@ THE SOFTWARE.
 
 ---------------------------------------------------------
 
-rake 13.0.6 - mit
+rake 13.1.0 - mit
 https://github.com/ruby/rake
 
 Copyright (c) Jim Weirich
