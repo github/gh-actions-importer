@@ -48,11 +48,20 @@ In order for GitHub Actions Importer to communicate with your current CI/CD serv
 
 ```bash
 $ gh actions-importer configure
-? Enter value for 'GITHUB_ACCESS_TOKEN' (leave empty to skip): 
+? Enter value for 'GITHUB_ACCESS_TOKEN' (leave empty to skip):
 ...
 ```
 
 You can find detailed information about using environment variables in the platform-specific documentation.
+
+#### Using a custom Docker registry
+
+We highly recommend using the [official GitHub Container Registry to pull the GitHub Actions Importer Docker image](https://github.com/actions-importer/preview/pkgs/container/cli/). However, if you need to use a custom Docker registry, you can configure GitHub Actions Importer to use a custom Docker registry by setting the `CONTAINER_REGISTRY` environment variable in your `.env.local` file.
+
+```bash
+# .env.local
+CONTAINER_REGISTRY=my-custom-registry.com
+```
 
 ### Documentation
 
@@ -70,7 +79,7 @@ You can access recorded demos of GitHub Actions Importer performing migrations t
 
 ### Self-guided learning
 
-The GitHub Actions Importer labs repository contains platform-specific learning paths that teach you how to use GitHub Actions Importer and how to approach migrations to GitHub Actions. To learn more, see the [GitHub Actions Importer labs repository](https://github.com/actions/importer-labs/tree/main#readme).  
+The GitHub Actions Importer labs repository contains platform-specific learning paths that teach you how to use GitHub Actions Importer and how to approach migrations to GitHub Actions. To learn more, see the [GitHub Actions Importer labs repository](https://github.com/actions/importer-labs/tree/main#readme).
 
 ## Product roadmap
 

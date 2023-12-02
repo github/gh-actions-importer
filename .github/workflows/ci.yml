@@ -59,6 +59,11 @@ jobs:
         run: dotnet restore src/ActionsImporter.sln
       - name: dotnet build
         run: dotnet build src/ActionsImporter.sln
+      - name: Validate licenses
+        run: |
+          dotnet tool install --global ThirdLicense
+          thirdlicense --project src/ActionsImporter.sln --output .licenses/new-licenses.txt
+          diff -u .licenses/new-licenses.txt .licenses/licenses.txt
       - name: dotnet publish
         run: |
           dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r win10-x64 --self-contained -o dist/win-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
