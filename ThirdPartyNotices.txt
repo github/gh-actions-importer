@@ -636,7 +636,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ---------------------------------------------------------
 
-addressable 2.8.5 - apache-2.0
+addressable 2.8.6 - apache-2.0
 https://github.com/sporkmonger/addressable
 
 
