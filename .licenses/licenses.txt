@@ -52,16 +52,16 @@ License notice for JUnitTestLogger (v1.1.0)
 https://github.com/syncromatics/JUnitTestLogger
 
 
-License notice for Microsoft.NET.Test.Sdk (v17.8.0)
+License notice for Microsoft.NET.Test.Sdk (v17.7.2)
 ------------------------------------
 
-https://github.com/microsoft/vstest at cf7d549fc0197abaabec19d61d2c20d7a7b089f8
+https://github.com/microsoft/vstest at 604e7beeb3abe7e351a7bb5e507bea66d76a5888
 
 Copyright © Microsoft Corporation. All rights reserved.
 
 Available at https://aka.ms/deprecateLicenseUrl
 
-LICENSE_MIT.txt
+LICENSE_NET.txt
 
 
 License notice for Moq (v4.20.69)
@@ -118,16 +118,16 @@ Licensed under Apache-2.0
 Available at https://licenses.nuget.org/Apache-2.0
 
 
-License notice for Microsoft.CodeCoverage (v17.8.0)
+License notice for Microsoft.CodeCoverage (v17.7.2)
 ------------------------------------
 
-https://github.com/microsoft/vstest at cf7d549fc0197abaabec19d61d2c20d7a7b089f8
+https://github.com/microsoft/vstest at 604e7beeb3abe7e351a7bb5e507bea66d76a5888
 
 Copyright © Microsoft Corporation. All rights reserved.
 
 Available at https://aka.ms/deprecateLicenseUrl
 
-LICENSE_MIT.txt
+LICENSE_NET.txt
 
 
 License notice for Microsoft.NETCore.Platforms (v1.1.0)
@@ -140,28 +140,28 @@ Copyright © Microsoft Corporation.  All rights reserved.
 License available at http://go.microsoft.com/fwlink/?LinkId=329770
 
 
-License notice for Microsoft.TestPlatform.ObjectModel (v17.8.0)
+License notice for Microsoft.TestPlatform.ObjectModel (v17.7.2)
 ------------------------------------
 
-https://github.com/microsoft/vstest at cf7d549fc0197abaabec19d61d2c20d7a7b089f8
+https://github.com/microsoft/vstest at 604e7beeb3abe7e351a7bb5e507bea66d76a5888
 
 Copyright © Microsoft Corporation. All rights reserved.
 
 Available at https://aka.ms/deprecateLicenseUrl
 
-LICENSE_MIT.txt
+LICENSE_NET.txt
 
 
-License notice for Microsoft.TestPlatform.TestHost (v17.8.0)
+License notice for Microsoft.TestPlatform.TestHost (v17.7.2)
 ------------------------------------
 
-https://github.com/microsoft/vstest at cf7d549fc0197abaabec19d61d2c20d7a7b089f8
+https://github.com/microsoft/vstest at 604e7beeb3abe7e351a7bb5e507bea66d76a5888
 
 Copyright © Microsoft Corporation. All rights reserved.
 
 Available at https://aka.ms/deprecateLicenseUrl
 
-LICENSE_MIT.txt
+LICENSE_NET.txt
 
 
 License notice for NETStandard.Library (v2.0.0)
