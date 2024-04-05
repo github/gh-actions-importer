@@ -13,7 +13,7 @@ Deploy:
         credentialsId: '10092545'
         region: US_WEST_1
         applicationName: AppECS-begona_cluster-alt_service
-        s3Bucket: elasticbeanstalk-us-west-1-778232459879
+        s3Bucket: FA
 ```
 
 ## Transformed Github Action
@@ -26,7 +26,7 @@ Deploy:
         aws-secret-access-key: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
    - run: |-
         commit_hash=$(git rev-parse --short ${{ env.GITHUB_SHA }})
-        aws deploy create-deployment --application-name AppECS-begona_cluster-alt_service --deployment-group-name DgpECS-begona_cluster-alt_service --s3-location bucket=elasticbeanstalk-us-west-1-778232459879,key=${{ secrets.AWS_S3_BUCKET_KEY }},bundleType={{ env.BUNDLE_TYPE }} --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
+        aws deploy create-deployment --application-name AppECS-begona_cluster-alt_service --deployment-group-name DgpECS-begona_cluster-alt_service --s3-location bucket=FA,key=${{ secrets.AWS_S3_BUCKET_KEY }},bundleType={{ env.BUNDLE_TYPE }} --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
 ```
 
 ## Unsupported Options
