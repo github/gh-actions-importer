@@ -13,7 +13,7 @@ Deploy:
         credentialsId: '10092545'
         region: US_WEST_1
         applicationName: AppECS-begona_cluster-alt_service
-        s3Bucket: elasticbeanstalk-us-west-1-778232459879
+        s3Bucket: very-fake-bucket-678499440
 ```
 
 ## Transformed Github Action
