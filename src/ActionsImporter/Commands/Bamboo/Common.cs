@@ -18,7 +18,7 @@ public static class Common
 
     public static readonly Option<string> Project = new(new[] { "-p", "--project" })
     {
-        Description = "The Bamboo project name.",
+        Description = "The Bamboo project key.",
         IsRequired = false,
     };
 

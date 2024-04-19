@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Immutable;
 using System.IO;
 using System.Threading.Tasks;
 using ActionsImporter.Interfaces;
@@ -24,7 +25,7 @@ public class AppTests
         _dockerService = new Mock<IDockerService>();
         _processService = new Mock<IProcessService>();
         _configurationService = new Mock<IConfigurationService>();
-        _app = new App(_dockerService.Object, _processService.Object, _configurationService.Object);
+        _app = new App(_dockerService.Object, _processService.Object, _configurationService.Object, ImmutableDictionary<string, string>.Empty);
         _out = Console.Out;
     }
 

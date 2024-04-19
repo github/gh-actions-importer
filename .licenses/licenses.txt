@@ -1,0 +1,240 @@
+﻿License notice for Sharprompt (v2.4.5)
+------------------------------------
+
+https://github.com/shibayan/Sharprompt
+
+Licensed under MIT
+
+Available at https://licenses.nuget.org/MIT
+
+
+License notice for System.CommandLine (v2.0.0-beta4.22272.1)
+------------------------------------
+
+https://github.com/dotnet/command-line-api at 209b724a3c843253d3071e8348c353b297b0b8b5
+
+Copyright © Microsoft Corporation. All rights reserved.
+
+Licensed under MIT
+
+Available at https://licenses.nuget.org/MIT
+
+
+License notice for System.CommandLine.NamingConventionBinder (v2.0.0-beta4.22272.1)
+------------------------------------
+
+https://github.com/dotnet/command-line-api at 209b724a3c843253d3071e8348c353b297b0b8b5
+
+Copyright © Microsoft Corporation. All rights reserved.
+
+Licensed under MIT
+
+Available at https://licenses.nuget.org/MIT
+
+
+License notice for System.ComponentModel.Annotations (v5.0.0)
+------------------------------------
+
+git://github.com/dotnet/runtime at cf258a14b70ad9069470a108f13765e0e5988f51
+
+https://github.com/dotnet/runtime
+
+Copyright © Microsoft Corporation. All rights reserved.
+
+Licensed under MIT
+
+Available at https://licenses.nuget.org/MIT
+
+
+License notice for JUnitTestLogger (v1.1.0)
+------------------------------------
+
+https://github.com/syncromatics/JUnitTestLogger
+
+
+License notice for Microsoft.NET.Test.Sdk (v17.8.0)
+------------------------------------
+
+https://github.com/microsoft/vstest at cf7d549fc0197abaabec19d61d2c20d7a7b089f8
+
+Copyright © Microsoft Corporation. All rights reserved.
+
+Available at https://aka.ms/deprecateLicenseUrl
+
+LICENSE_MIT.txt
+
+
+License notice for Moq (v4.20.69)
+------------------------------------
+
+https://github.com/moq/moq at b5be390fdc625f7453e09956e079c6375d7905ef
+
+Copyright (c) 2007, Clarius Consulting, Manas Technology Solutions, InSTEDD, and Contributors. All rights reserved.
+
+Licensed under BSD-3-Clause
+
+Available at https://licenses.nuget.org/BSD-3-Clause
+
+
+License notice for NUnit (v3.14.0)
+------------------------------------
+
+https://github.com/nunit/nunit
+
+https://nunit.org/
+
+Copyright (c) 2023 Charlie Poole, Rob Prouse
+
+Available at https://aka.ms/deprecateLicenseUrl
+
+LICENSE.txt
+
+
+License notice for NUnit3TestAdapter (v4.5.0)
+------------------------------------
+
+https://github.com/nunit/nunit3-vs-adapter
+
+https://docs.nunit.org/articles/vs-test-adapter/Index.html
+
+Copyright (c) 2011-2021 Charlie Poole, 2014-2023 Terje Sandstrom
+
+Licensed under MIT
+
+Available at https://licenses.nuget.org/MIT
+
+
+License notice for Castle.Core (v5.1.1)
+------------------------------------
+
+https://github.com/castleproject/Core
+
+http://www.castleproject.org/
+
+Copyright (c) 2004-2022 Castle Project - http://www.castleproject.org/
+
+Licensed under Apache-2.0
+
+Available at https://licenses.nuget.org/Apache-2.0
+
+
+License notice for Microsoft.CodeCoverage (v17.8.0)
+------------------------------------
+
+https://github.com/microsoft/vstest at cf7d549fc0197abaabec19d61d2c20d7a7b089f8
+
+Copyright © Microsoft Corporation. All rights reserved.
+
+Available at https://aka.ms/deprecateLicenseUrl
+
+LICENSE_MIT.txt
+
+
+License notice for Microsoft.NETCore.Platforms (v1.1.0)
+------------------------------------
+
+https://dot.net/
+
+Copyright © Microsoft Corporation.  All rights reserved.
+
+License available at http://go.microsoft.com/fwlink/?LinkId=329770
+
+
+License notice for Microsoft.TestPlatform.ObjectModel (v17.8.0)
+------------------------------------
+
+https://github.com/microsoft/vstest at cf7d549fc0197abaabec19d61d2c20d7a7b089f8
+
+Copyright © Microsoft Corporation. All rights reserved.
+
+Available at https://aka.ms/deprecateLicenseUrl
+
+LICENSE_MIT.txt
+
+
+License notice for Microsoft.TestPlatform.TestHost (v17.8.0)
+------------------------------------
+
+https://github.com/microsoft/vstest at cf7d549fc0197abaabec19d61d2c20d7a7b089f8
+
+Copyright © Microsoft Corporation. All rights reserved.
+
+Available at https://aka.ms/deprecateLicenseUrl
+
+LICENSE_MIT.txt
+
+
+License notice for NETStandard.Library (v2.0.0)
+------------------------------------
+
+https://dot.net/
+
+.NET Foundation and Contributors
+
+License available at https://github.com/dotnet/standard/blob/master/LICENSE.TXT
+
+
+License notice for Newtonsoft.Json (v13.0.1)
+------------------------------------
+
+https://github.com/JamesNK/Newtonsoft.Json at ae9fe44e1323e91bcbd185ca1a14099fba7c021f
+
+https://www.newtonsoft.com/json
+
+Copyright © James Newton-King 2008
+
+Licensed under MIT
+
+Available at https://licenses.nuget.org/MIT
+
+
+License notice for NuGet.Frameworks (v6.5.0)
+------------------------------------
+
+https://github.com/NuGet/NuGet.Client at 069970c727b254636c1ad29c5a7a767081482a9a
+
+https://aka.ms/nugetprj
+
+Copyright © Microsoft Corporation. All rights reserved.
+
+Licensed under Apache-2.0
+
+Available at https://licenses.nuget.org/Apache-2.0
+
+
+License notice for System.Diagnostics.EventLog (v6.0.0)
+------------------------------------
+
+https://github.com/dotnet/runtime at 4822e3c3aa77eb82b2fb33c9321f923cf11ddde6
+
+https://dot.net/
+
+Copyright © Microsoft Corporation. All rights reserved.
+
+Licensed under MIT
+
+Available at https://licenses.nuget.org/MIT
+
+
+License notice for System.Reflection.Metadata (v1.6.0)
+------------------------------------
+
+https://dot.net/
+
+Copyright © Microsoft Corporation.  All rights reserved.
+
+License available at https://github.com/dotnet/corefx/blob/master/LICENSE.TXT
+
+
+License notice for YamlDotNet (v13.7.1)
+------------------------------------
+
+https://github.com/aaubry/YamlDotNet.git
+
+https://github.com/aaubry/YamlDotNet/wiki
+
+Available at https://aka.ms/deprecateLicenseUrl
+
+LICENSE.txt
+
+

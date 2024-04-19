@@ -8,5 +8,6 @@ public enum Provider
     GitLabCI,
     Jenkins,
     TravisCI,
-    Bamboo
+    Bamboo,
+    Bitbucket
 }
