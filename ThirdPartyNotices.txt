@@ -160,7 +160,7 @@ SOFTWARE.
 
 ---------------------------------------------------------
 
-Moq 4.20.69 - BSD-3-Clause
+Moq 4.20.70 - BSD-3-Clause
 https://github.com/moq/moq
 
 BSD 3-Clause License
