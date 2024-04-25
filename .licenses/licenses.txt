@@ -64,10 +64,10 @@ Available at https://aka.ms/deprecateLicenseUrl
 LICENSE_MIT.txt
 
 
-License notice for Moq (v4.20.69)
+License notice for Moq (v4.20.70)
 ------------------------------------
 
-https://github.com/moq/moq at b5be390fdc625f7453e09956e079c6375d7905ef
+https://github.com/moq/moq at 2b556597ddc4638d4b6235df6f83580ce2be6a56
 
 Copyright (c) 2007, Clarius Consulting, Manas Technology Solutions, InSTEDD, and Contributors. All rights reserved.
 
