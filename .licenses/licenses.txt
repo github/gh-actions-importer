@@ -212,7 +212,7 @@ Copyright © Microsoft Corporation.  All rights reserved.
 License available at https://github.com/dotnet/corefx/blob/master/LICENSE.TXT
 
 
-License notice for YamlDotNet (v13.7.1)
+License notice for YamlDotNet (v15.1.2)
 ------------------------------------
 
 https://github.com/aaubry/YamlDotNet.git
