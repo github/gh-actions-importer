@@ -74,7 +74,7 @@ public class DockerServiceTests
         var image = "actions-importer/cli";
         var server = "ghcr.io";
         var version = "latest";
-
+    
         _processService.Setup(handler =>
             handler.RunAndCaptureAsync(
                 "docker",
@@ -85,15 +85,17 @@ public class DockerServiceTests
                 null
             )
         ).ReturnsAsync(("", $"Error response from daemon: Head \"https://{server}/v2/actions-importer/cli/manifests/latest\": unauthorized", 1));
-
+    
         // Act/Assert
-        Assert.ThrowsAsync<Exception>(() => _dockerService.UpdateImageAsync(
+        var exception = Assert.ThrowsAsync<DockerUnauthorizedException>(() => _dockerService.UpdateImageAsync(
             image,
             server,
             version
         ));
+        Assert.AreEqual("Unauthorized: Authentication failed.", exception.Message);
         _processService.VerifyAll();
     }
+
 
     [Test]
     public async Task ExecuteCommandAsync_InvokesDocker_ReturnsTrue()
