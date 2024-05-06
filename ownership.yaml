@@ -1,7 +1,7 @@
 ---
 version: 1
 ownership:
-- name: GitHub Actions Importer
+- name: gh-actions-importer
   long_name: GitHub Actions Importer
   description: GitHub Actions Importer helps you plan, test, and automatically migrate from Azure DevOps, Bamboo, Bitbucket CI, CircleCI, GitLab CI, Jenkins, and Travis CI to GitHub Actions.
   kind: artifact
