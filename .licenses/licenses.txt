@@ -52,10 +52,10 @@ License notice for JUnitTestLogger (v1.1.0)
 https://github.com/syncromatics/JUnitTestLogger
 
 
-License notice for Microsoft.NET.Test.Sdk (v17.8.0)
+License notice for Microsoft.NET.Test.Sdk (v17.9.0)
 ------------------------------------
 
-https://github.com/microsoft/vstest at cf7d549fc0197abaabec19d61d2c20d7a7b089f8
+https://github.com/microsoft/vstest at a77b8d5b4aa89504bbff10e2880c27fd55adc55b
 
 Copyright © Microsoft Corporation. All rights reserved.
 
@@ -64,10 +64,10 @@ Available at https://aka.ms/deprecateLicenseUrl
 LICENSE_MIT.txt
 
 
-License notice for Moq (v4.20.69)
+License notice for Moq (v4.20.70)
 ------------------------------------
 
-https://github.com/moq/moq at b5be390fdc625f7453e09956e079c6375d7905ef
+https://github.com/moq/moq at 2b556597ddc4638d4b6235df6f83580ce2be6a56
 
 Copyright (c) 2007, Clarius Consulting, Manas Technology Solutions, InSTEDD, and Contributors. All rights reserved.
 
@@ -118,10 +118,10 @@ Licensed under Apache-2.0
 Available at https://licenses.nuget.org/Apache-2.0
 
 
-License notice for Microsoft.CodeCoverage (v17.8.0)
+License notice for Microsoft.CodeCoverage (v17.9.0)
 ------------------------------------
 
-https://github.com/microsoft/vstest at cf7d549fc0197abaabec19d61d2c20d7a7b089f8
+https://github.com/microsoft/vstest at a77b8d5b4aa89504bbff10e2880c27fd55adc55b
 
 Copyright © Microsoft Corporation. All rights reserved.
 
@@ -140,10 +140,10 @@ Copyright © Microsoft Corporation.  All rights reserved.
 License available at http://go.microsoft.com/fwlink/?LinkId=329770
 
 
-License notice for Microsoft.TestPlatform.ObjectModel (v17.8.0)
+License notice for Microsoft.TestPlatform.ObjectModel (v17.9.0)
 ------------------------------------
 
-https://github.com/microsoft/vstest at cf7d549fc0197abaabec19d61d2c20d7a7b089f8
+https://github.com/microsoft/vstest at a77b8d5b4aa89504bbff10e2880c27fd55adc55b
 
 Copyright © Microsoft Corporation. All rights reserved.
 
@@ -152,10 +152,10 @@ Available at https://aka.ms/deprecateLicenseUrl
 LICENSE_MIT.txt
 
 
-License notice for Microsoft.TestPlatform.TestHost (v17.8.0)
+License notice for Microsoft.TestPlatform.TestHost (v17.9.0)
 ------------------------------------
 
-https://github.com/microsoft/vstest at cf7d549fc0197abaabec19d61d2c20d7a7b089f8
+https://github.com/microsoft/vstest at a77b8d5b4aa89504bbff10e2880c27fd55adc55b
 
 Copyright © Microsoft Corporation. All rights reserved.
 
@@ -188,20 +188,6 @@ Licensed under MIT
 Available at https://licenses.nuget.org/MIT
 
 
-License notice for NuGet.Frameworks (v6.5.0)
-------------------------------------
-
-https://github.com/NuGet/NuGet.Client at 069970c727b254636c1ad29c5a7a767081482a9a
-
-https://aka.ms/nugetprj
-
-Copyright © Microsoft Corporation. All rights reserved.
-
-Licensed under Apache-2.0
-
-Available at https://licenses.nuget.org/Apache-2.0
-
-
 License notice for System.Diagnostics.EventLog (v6.0.0)
 ------------------------------------
 
@@ -226,7 +212,7 @@ Copyright © Microsoft Corporation.  All rights reserved.
 License available at https://github.com/dotnet/corefx/blob/master/LICENSE.TXT
 
 
-License notice for YamlDotNet (v13.7.1)
+License notice for YamlDotNet (v15.1.2)
 ------------------------------------
 
 https://github.com/aaubry/YamlDotNet.git
