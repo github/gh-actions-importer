@@ -58,7 +58,7 @@ You can find detailed information about using environment variables in the platf
 
 We highly recommend using the [official GitHub Container Registry to pull the GitHub Actions Importer Docker image](https://github.com/actions-importer/preview/pkgs/container/cli/). However, if you need to use a custom Docker registry, you can configure GitHub Actions Importer to use a custom Docker registry by setting the `CONTAINER_REGISTRY` environment variable in your `.env.local` file.
 
-```bash
+```.env
 # .env.local
 CONTAINER_REGISTRY=my-custom-registry.com
 ```
