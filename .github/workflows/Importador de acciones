@@ -1,0 +1,123 @@
+on:
+  pull_request:
+  push:
+    branches: [main]
+    tags: ["v*"]
+
+env:
+  DOTNET_VERSION: "6.0.x"
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: install dotnet-format
+        run: dotnet tool install -g dotnet-format --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json
+      - name: lint
+        working-directory: src
+        run: dotnet format ActionsImporter.sln --verify-no-changes
+
+  unit-test:
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: dotnet restore
+        run: dotnet restore src/ActionsImporter.sln
+      - name: dotnet build
+        run: dotnet build src/ActionsImporter.sln
+      - name: dotnet test
+        run: dotnet test src/ActionsImporter.UnitTests/ActionsImporter.UnitTests.csproj --no-build --no-restore --logger "junit;LogFilePath=unit-tests.xml"
+      - name: publish test results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: "**/*-tests.xml"
+          check_name: "Unit Test Results"
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: dotnet restore
+        run: dotnet restore src/ActionsImporter.sln
+      - name: dotnet build
+        run: dotnet build src/ActionsImporter.sln
+      - name: Validate licenses
+        run: |
+          dotnet tool install --global ThirdLicense
+          thirdlicense --project src/ActionsImporter.sln --output .licenses/new-licenses.txt
+          diff -u .licenses/new-licenses.txt .licenses/licenses.txt
+      - name: dotnet publish
+        run: |
+          dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r win10-x64 --self-contained -o dist/win-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
+          dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r osx-x64 --self-contained -o dist/osx-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
+          dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r osx-arm64 --self-contained -o dist/osx-arm64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
+          dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r linux-x64 --self-contained -o dist/linux-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
+      - name: prepare staging
+        run: |
+          mkdir -p ${{ runner.temp }}/staging
+          cp dist/win-x64/gh-actions-importer.exe ${{ runner.temp }}/staging/actions-importer-windows-amd64.exe
+          cp dist/osx-x64/gh-actions-importer ${{ runner.temp }}/staging/actions-importer-darwin-amd64
+          cp dist/osx-arm64/gh-actions-importer ${{ runner.temp }}/staging/actions-importer-darwin-arm64
+          cp dist/linux-x64/gh-actions-importer ${{ runner.temp }}/staging/actions-importer-linux-amd64
+
+      - name: publish artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: executables
+          path: ${{ runner.temp }}/staging/*
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    environment: create_release
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: validate tag on main
+        shell: pwsh
+        run: |
+          git checkout main
+          $mainsha = $(git show-ref refs/heads/main --hash)
+          $tagsha = $(git show-ref ${{ github.ref }} --hash)
+          Write-Output "refs/heads/main: $mainsha"
+          Write-Output "${{ github.ref }}: $tagsha"
+          if ($mainsha -ne $tagsha) {
+            Write-Error "tag must match HEAD of main"
+            exit 1
+          }
+      - name: download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: executables
+          path: ${{ runner.temp }}/dist
+      - name: create release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: true
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          files: |
+            ${{ runner.temp }}/dist/actions-importer-windows-amd64.exe
+            ${{ runner.temp }}/dist/actions-importer-linux-amd64
+            ${{ runner.temp }}/dist/actions-importer-darwin-arm64
+            ${{ runner.temp }}/dist/actions-importer-darwin-amd64
