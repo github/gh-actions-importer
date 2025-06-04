@@ -1,4 +1,3 @@
----
 version: 1
 ownership:
 - name: gh-actions-importer
@@ -11,7 +10,7 @@ ownership:
   team: github/migration-tools
   maintainer: jessicaliu100
   exec_sponsor: whitneyimura
-  product_manager: boylejj
+  product_manager: kubu
   dependencies:
   - central
   tier: 3
