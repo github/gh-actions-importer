@@ -81,7 +81,7 @@ jobs:
       - name: publish artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: executables
+          name: actions-importer-artifacts
           path: ${{ runner.temp }}/staging/*
 
   publish:
