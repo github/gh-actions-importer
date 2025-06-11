@@ -79,7 +79,7 @@ jobs:
           cp dist/linux-x64/gh-actions-importer ${{ runner.temp }}/staging/actions-importer-linux-amd64
 
       - name: publish artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: actions-importer-${{ github.run_id }}
           path: ${{ runner.temp }}/staging/*
@@ -106,7 +106,7 @@ jobs:
             exit 1
           }
       - name: download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: actions-importer-${{ github.run_id }}
           path: ${{ runner.temp }}/dist
