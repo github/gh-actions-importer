@@ -24,12 +24,6 @@ jobs:
       - name: lint
         working-directory: src
         run: dotnet format ActionsImporter.sln --verify-no-changes
-      - name: Print environment
-        run: |
-          echo "Runner OS: $RUNNER_OS"
-          echo "Runner Name: $RUNNER_NAME"
-          echo "GitHub Server URL: $GITHUB_SERVER_URL"
-          echo "Workflow: $GITHUB_WORKFLOW"
 
   unit-test:
     runs-on: ubuntu-latest
@@ -65,6 +59,12 @@ jobs:
         run: dotnet restore src/ActionsImporter.sln
       - name: dotnet build
         run: dotnet build src/ActionsImporter.sln
+      - name: Print environment
+        run: |
+          echo "Runner OS: $RUNNER_OS"
+          echo "Runner Name: $RUNNER_NAME"
+          echo "GitHub Server URL: $GITHUB_SERVER_URL"
+          echo "Workflow: $GITHUB_WORKFLOW"
       - name: Validate licenses
         run: |
           dotnet tool install --global ThirdLicense --version 1.2.0
