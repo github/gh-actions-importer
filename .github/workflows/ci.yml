@@ -5,7 +5,7 @@ on:
     tags: ["v*"]
 
 env:
-  DOTNET_VERSION: "8.0.x"
+  DOTNET_VERSION: "6.0.x"
 
 concurrency:
   group: ci-${{ github.ref }}
