@@ -24,6 +24,12 @@ jobs:
       - name: lint
         working-directory: src
         run: dotnet format ActionsImporter.sln --verify-no-changes
+      - name: Print environment
+        run: |
+          echo "Runner OS: $RUNNER_OS"
+          echo "Runner Name: $RUNNER_NAME"
+          echo "GitHub Server URL: $GITHUB_SERVER_URL"
+          echo "Workflow: $GITHUB_WORKFLOW"
 
   unit-test:
     runs-on: ubuntu-latest
