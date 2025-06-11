@@ -23,7 +23,7 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       - name: install dotnet-format
-        run: dotnet tool install -g dotnet-format --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json
+        run: dotnet tool install -g dotnet-format --version 5.1.225507
       - name: lint
         working-directory: src
         run: dotnet format ActionsImporter.sln --verify-no-changes
@@ -64,7 +64,7 @@ jobs:
         run: dotnet build src/ActionsImporter.sln
       - name: Validate licenses
         run: |
-          dotnet tool install --global ThirdLicense
+          dotnet tool install --global ThirdLicense --version 1.2.0
           thirdlicense --project src/ActionsImporter.sln --output .licenses/new-licenses.txt
           diff -u .licenses/new-licenses.txt .licenses/licenses.txt
       - name: dotnet publish
@@ -82,9 +82,9 @@ jobs:
           cp dist/linux-x64/gh-actions-importer ${{ runner.temp }}/staging/actions-importer-linux-amd64
 
       - name: publish artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: executables
+          name: actions-importer-${{ github.run_id }}
           path: ${{ runner.temp }}/staging/*
 
   publish:
@@ -111,9 +111,9 @@ jobs:
             exit 1
           }
       - name: download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
-          name: executables
+          name: actions-importer-${{ github.run_id }}
           path: ${{ runner.temp }}/dist
       - name: create release
         uses: softprops/action-gh-release@v1
