@@ -59,12 +59,6 @@ jobs:
         run: dotnet restore src/ActionsImporter.sln
       - name: dotnet build
         run: dotnet build src/ActionsImporter.sln
-      - name: Print environment
-        run: |
-          echo "Runner OS: $RUNNER_OS"
-          echo "Runner Name: $RUNNER_NAME"
-          echo "GitHub Server URL: $GITHUB_SERVER_URL"
-          echo "Workflow: $GITHUB_WORKFLOW"
       - name: Validate licenses
         run: |
           dotnet tool install --global ThirdLicense --version 1.2.0
@@ -87,7 +81,7 @@ jobs:
       - name: publish artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: actions-importer-artifacts
+          name: actions-importer-${{ github.run_id }}
           path: ${{ runner.temp }}/staging/*
 
   publish:
@@ -114,7 +108,7 @@ jobs:
       - name: download artifacts
         uses: actions/download-artifact@v3
         with:
-          name: actions-importer-artifacts
+          name: actions-importer-${{ github.run_id }}
           path: ${{ runner.temp }}/dist
       - name: create release
         uses: softprops/action-gh-release@v1
