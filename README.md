@@ -1,4 +1,4 @@
-# GitHub Actions Importer
+# GitHub Actions Importer 1.3.7
 
 [![.github/workflows/ci.yml](https://github.com/github/gh-actions-importer/actions/workflows/ci.yml/badge.svg)](https://github.com/github/gh-actions-importer/actions/workflows/ci.yml)
 
