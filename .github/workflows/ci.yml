@@ -5,7 +5,7 @@ on:
     tags: ["v*"]
 
 env:
-  DOTNET_VERSION: "6.0.x"
+  DOTNET_VERSION: "10.0.202"
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -62,6 +62,8 @@ jobs:
         run: dotnet restore src/ActionsImporter.sln
       - name: dotnet build
         run: dotnet build src/ActionsImporter.sln
+      - name: dotnet build win-arm64
+        run: dotnet build src/ActionsImporter/ActionsImporter.csproj -c Release -r win-arm64 --no-restore
       - name: Validate licenses
         run: |
           dotnet tool install --global ThirdLicense --version 1.2.0
@@ -69,17 +71,21 @@ jobs:
           diff -u .licenses/new-licenses.txt .licenses/licenses.txt
       - name: dotnet publish
         run: |
-          dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r win10-x64 --self-contained -o dist/win-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
+          dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r win-x64 --self-contained -o dist/win-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
+          dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r win-arm64 --self-contained -o dist/win-arm64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
           dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r osx-x64 --self-contained -o dist/osx-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
           dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r osx-arm64 --self-contained -o dist/osx-arm64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
           dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r linux-x64 --self-contained -o dist/linux-x64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
+          dotnet publish src/ActionsImporter/ActionsImporter.csproj -c Release -r linux-arm64 --self-contained -o dist/linux-arm64 --no-restore -p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
       - name: prepare staging
         run: |
           mkdir -p ${{ runner.temp }}/staging
           cp dist/win-x64/gh-actions-importer.exe ${{ runner.temp }}/staging/actions-importer-windows-amd64.exe
+          cp dist/win-arm64/gh-actions-importer.exe ${{ runner.temp }}/staging/actions-importer-windows-arm64.exe
           cp dist/osx-x64/gh-actions-importer ${{ runner.temp }}/staging/actions-importer-darwin-amd64
           cp dist/osx-arm64/gh-actions-importer ${{ runner.temp }}/staging/actions-importer-darwin-arm64
           cp dist/linux-x64/gh-actions-importer ${{ runner.temp }}/staging/actions-importer-linux-amd64
+          cp dist/linux-arm64/gh-actions-importer ${{ runner.temp }}/staging/actions-importer-linux-arm64
 
       - name: publish artifacts
         uses: actions/upload-artifact@v4
@@ -123,6 +129,8 @@ jobs:
           fail_on_unmatched_files: true
           files: |
             ${{ runner.temp }}/dist/actions-importer-windows-amd64.exe
+            ${{ runner.temp }}/dist/actions-importer-windows-arm64.exe
             ${{ runner.temp }}/dist/actions-importer-linux-amd64
+            ${{ runner.temp }}/dist/actions-importer-linux-arm64
             ${{ runner.temp }}/dist/actions-importer-darwin-arm64
             ${{ runner.temp }}/dist/actions-importer-darwin-amd64
