@@ -49,6 +49,7 @@ public class ConfigurationService : IConfigurationService
 
         return input.ToImmutable();
     }
+
     public ImmutableDictionary<string, string> GetUserInput()
     {
         var providers = Prompt.MultiSelect(

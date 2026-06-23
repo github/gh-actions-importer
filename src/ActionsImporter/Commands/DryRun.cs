@@ -14,9 +14,15 @@ public class DryRun : BaseCommand
     protected override string Name => "dry-run";
     protected override string Description => "Convert a pipeline to a GitHub Actions workflow and output its yaml file.";
 
+    public static readonly Option<bool> AiAssistedOption = new(new[] { "--ai-assisted" })
+    {
+        Description = "Use AI-assisted conversion with an LLM to convert workflows to GitHub Actions format."
+    };
+
     protected override Command GenerateCommand(App app)
     {
         var command = base.GenerateCommand(app);
+        command.AddGlobalOption(AiAssistedOption);
         command.AppendCommonOptions();
 
         command.AddCommand(new AzureDevOps.DryRun(_args).Command(app));

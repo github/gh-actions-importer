@@ -1,0 +1,60 @@
+version: '3.9'
+
+services:
+  # Ollama service - runs the LLM locally
+  ollama:
+    image: ollama/ollama:latest
+    container_name: gh-actions-importer-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      # Mount for persistent model storage
+      - ollama_data:/root/.ollama
+    environment:
+      # Optional: Enable GPU support (adjust based on your setup)
+      # CUDA_VISIBLE_DEVICES: 0
+      - OLLAMA_HOST=0.0.0.0:11434
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - migration-network
+
+  # Migration agent - the main CLI tool
+  migration-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gh-actions-importer-agent
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      # Point to Ollama service for LLM access
+      - OLLAMA_API_ENDPOINT=http://ollama:11434
+      # Default Ollama model to use
+      - OLLAMA_MODEL=gemma4:e4b
+      # Optional: GitHub credentials
+      # - GITHUB_ACCESS_TOKEN=
+      # - GITHUB_INSTANCE_URL=https://github.com
+    volumes:
+      # Mount Docker socket for nested Docker calls (if needed)
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Mount current directory for input/output
+      - .:/workspace
+      # Mount .env.local for credentials
+      - .env.local:/app/.env.local:ro
+    working_dir: /workspace
+    networks:
+      - migration-network
+    command: ["--help"]
+
+networks:
+  migration-network:
+    driver: bridge
+
+volumes:
+  ollama_data:
+    driver: local

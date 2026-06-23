@@ -32,6 +32,11 @@ public class Migrate : BaseCommand
         IsRequired = false
     };
 
+    public static readonly Option<bool> AiAssistedOption = new(new[] { "--ai-assisted" })
+    {
+        Description = "Use AI-assisted conversion with an LLM to convert workflows to GitHub Actions format."
+    };
+
     protected override Command GenerateCommand(App app)
     {
         var command = base.GenerateCommand(app);
@@ -40,6 +45,7 @@ public class Migrate : BaseCommand
         command.AddGlobalOption(TargetUrl);
         command.AddGlobalOption(WorkflowFilePrefix);
         command.AddGlobalOption(CommitMessage);
+        command.AddGlobalOption(AiAssistedOption);
 
         command.AddCommand(new AzureDevOps.Migrate(_args).Command(app));
         command.AddCommand(new Bamboo.Migrate(_args).Command(app));
