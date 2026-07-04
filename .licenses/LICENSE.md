@@ -222,5 +222,3 @@ https://github.com/aaubry/YamlDotNet/wiki
 Available at https://aka.ms/deprecateLicenseUrl
 
 LICENSE.txt
-
-
