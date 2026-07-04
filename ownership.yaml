@@ -1,0 +1,27 @@
+---
+version: 1
+ownership:
+- name: gh-actions-importer
+  long_name: GitHub Actions Importer
+  description: GitHub Actions Importer helps you plan, test, and automatically migrate from Azure DevOps, Bamboo, Bitbucket CI, CircleCI, GitLab CI, Jenkins, and Travis CI to GitHub Actions.
+  kind: artifact
+  repo: https://github.com/github/valet
+  qos: maintenance
+  team_slack: octoshift
+  team: github/migration-tools
+  maintainer: jessicaliu100
+  exec_sponsor: whitneyimura
+  product_manager: boylejj
+  dependencies:
+  - central
+  tier: 3
+  sev1:
+    issue: https://github.com/github/migration-friction/issues/new?template=friction.yml
+    tta: 3 business days
+  sev2:
+    issue: https://github.com/github/migration-friction/issues/new?template=friction.yml
+    tta: 5 business day
+  sev3:
+    alert_slack: octoshift-ops
+    issue: https://github.com/github/migration-friction/issues/new?template=friction.yml
+    tta: 10 business days
