@@ -18,8 +18,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-dotnet@v3
+      - uses: actions/checkout@a37ce9120846195fa4ece8f58b268e6043cb2f26 # v3.7.0
+      - uses: actions/setup-dotnet@55ec9447dda3d1cf6bd587150f3262f30ee10815 # v3.4.2
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       - name: install dotnet-format
@@ -34,8 +34,8 @@ jobs:
       checks: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-dotnet@v2
+      - uses: actions/checkout@a37ce9120846195fa4ece8f58b268e6043cb2f26 # v3.7.0
+      - uses: actions/setup-dotnet@8e6bd2905eef86446227f003dda1deb3916c4aaf # v2.2.1
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       - name: dotnet restore
@@ -45,7 +45,7 @@ jobs:
       - name: dotnet test
         run: dotnet test src/ActionsImporter.UnitTests/ActionsImporter.UnitTests.csproj --no-build --no-restore --logger "junit;LogFilePath=unit-tests.xml"
       - name: publish test results
-        uses: EnricoMi/publish-unit-test-result-action@v2
+        uses: EnricoMi/publish-unit-test-result-action@d0a4676d0e0b938bc201470d88276b7c74c712b3 # v2.24.0
         if: always()
         with:
           files: "**/*-tests.xml"
@@ -54,8 +54,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-dotnet@v3
+      - uses: actions/checkout@a37ce9120846195fa4ece8f58b268e6043cb2f26 # v3.7.0
+      - uses: actions/setup-dotnet@55ec9447dda3d1cf6bd587150f3262f30ee10815 # v3.4.2
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       - name: dotnet restore
@@ -82,7 +82,7 @@ jobs:
           cp dist/linux-x64/gh-actions-importer ${{ runner.temp }}/staging/actions-importer-linux-amd64
 
       - name: publish artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: actions-importer-${{ github.run_id }}
           path: ${{ runner.temp }}/staging/*
@@ -95,7 +95,7 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v')
     environment: create_release
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
         with:
           fetch-depth: 0
       - name: validate tag on main
@@ -111,12 +111,12 @@ jobs:
             exit 1
           }
       - name: download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: actions-importer-${{ github.run_id }}
           path: ${{ runner.temp }}/dist
       - name: create release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844 # v1
         with:
           draft: true
           generate_release_notes: true
